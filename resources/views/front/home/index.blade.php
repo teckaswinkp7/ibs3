@@ -5,7 +5,7 @@
         <div class="container">
           <div class="row align-items-center">
             <div class="col-lg-12 mx-auto text-center" data-aos="fade-up">
-              <h1>Academics University</h1>
+              <h1>Academics Universityfsdfrsd</h1>
             </div>
           </div>
         </div>
