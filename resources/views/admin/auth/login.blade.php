@@ -2,7 +2,9 @@
 @section('content')
 <div class="login-box">
   <div class="card card-outline card-primary">
-                  <div class="card-header text-center"> <a class="h1"><b>Login</b></a></div>
+                  <div class="card-header text-center"> 
+                    <img src="{{asset('assets/admin/img/IBS-Logo.png')}}">
+                  </div>
                   <div class="card-body">
                   <p class="login-box-msg">Sign in to start your session</p>
                       <form action="{{ route('admin/login.post') }}" method="POST">

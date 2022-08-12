@@ -1,7 +1,8 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Session;
 use App\Models\Role;
 use Illuminate\Http\Request;
 class RoleController extends Controller
@@ -13,8 +14,8 @@ class RoleController extends Controller
     */
     public function index()
     {
-    $data['role'] = Role::orderBy('id','desc')->paginate(5);
-    return view('admin\role.index', $data);
+    $data['role'] = Role::all();
+            return view('admin\role.index', $data);
     }
     /**
     * Show the form for creating a new resource.
@@ -25,7 +26,9 @@ class RoleController extends Controller
     {
         //$categories = Category::where('parent_id', null)->orderby('name', 'asc')->get();
         //return view('categories.create', compact('categories'));
-        return view('admin\role.create');
+        
+            return view('admin\role.create');
+       
     }
     /**
     * Store a newly created resource in storage.
@@ -42,8 +45,10 @@ class RoleController extends Controller
         $role = new Role;
         $role->name = $request->name;
         $role->save();
-        return redirect()->route('admin\role.index')
+        
+        return redirect()->route('role.index')
         ->with('success','Role has been created successfully.');
+    
     }
     /**
     * Display the specified resource.
@@ -51,9 +56,11 @@ class RoleController extends Controller
     * @param  \App\company  $company
     * @return \Illuminate\Http\Response
     */
-    public function show(Category $category)
+    public function show(Role $role)
     {
-    return view('admin\category.show',compact('category'));
+     
+            return view('admin/role.show',compact('role',$role));
+       
     } 
     /**
     * Show the form for editing the specified resource.
@@ -64,9 +71,10 @@ class RoleController extends Controller
     public function edit($id)
     {
         $roles = Role::findOrFail($id);    
-        return view('admin\role.edit', compact('roles',));
+        return view('admin/role.edit', compact('roles',$roles));
     }
-           
+
+    
     /**
     * Update the specified resource in storage.
     *
@@ -84,7 +92,7 @@ class RoleController extends Controller
     $roles = Role::findOrFail($id);
     $roles->name = $request->name;
     $roles->save();
-    return redirect()->route('admin\role.index')
+    return redirect()->route('role.index')
     ->with('success','Role Has Been updated successfully');   
     }
     /**
@@ -95,8 +103,8 @@ class RoleController extends Controller
     */
     public function destroy($id)
     {
-    $products = Role::destroy($id);    
-    return redirect()->route('admin\role.index')
+    $roles = Role::destroy($id);    
+    return redirect()->route('role.index')
     ->with('success','Role has been deleted successfully');
     }
 

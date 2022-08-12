@@ -1,6 +1,6 @@
-@extends('header')  
+@extends('admin/header')  
 @section('content')
-@include('leftsidebar') 
+@include('admin/leftsidebar') 
  <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -8,11 +8,11 @@
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <a class="btn btn-primary" href="{{ route('categories.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('role.index') }}"> Back</a>
               </div>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
+                  <li class="breadcrumb-item"><a href="{{route('admin-dashboard')}}">Home</a></li>
                   <li class="breadcrumb-item active">Update Role</li>
                 </ol>
               </div>
@@ -64,7 +64,7 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-@include('footer')
+@include('admin/footer')
 @endsection
 </body>
 </html>   

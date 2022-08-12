@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ProductCRUDController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Front\WelcomeController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +20,7 @@ use App\Http\Controllers\Admin\RoleController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Auth::routes();
 Route::get('/',[WelcomeController::class, 'index'])->middleware('cors');;
 //Route::resource('/', WelcomeController::class);
 //Route::get('/', [WelcomeController::class]);
@@ -29,14 +30,21 @@ Route::post('admin/post-login', [AuthController::class, 'postLogin'])->name('adm
 Route::get('login', [AuthControllers::class, 'index'])->name('login');
 Route::post('post-login', [AuthControllers::class, 'postLogin'])->name('login.post'); 
 //Route::get('registration', [AuthController::class, 'registration'])->name('register');
-Route::post('post-registration', [AuthControllers::class, 'postRegistration'])->name('register.post'); 
+Route::post('admin/post-registration', [AuthController::class, 'postRegistration'])->name('admin/register.post'); 
 Route::get('admin/dashboard', [AuthController::class, 'dashboard'])->name('admin-dashboard'); 
 Route::get('admin/logout', [AuthController::class, 'logout'])->name('admin/logout');
 Route::get('dashboard', [AuthControllers::class, 'dashboard'])->name('dashboard'); 
 Route::get('logout', [AuthControllers::class, 'logout'])->name('logout');
 Route::resource('admin/courses', CoursesController::class);
 Route::resource('admin/categories', CategoryController::class);
-Route::resource('admin/role', RoleController::class);
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('admin/role', RoleController::class);
+});
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('admin/user', UserController::class);
+});
 //Route::resource('product', ProductCRUDController::class);
 //Route::resource('product','App\Http\Controllers\ProductCRUDController')->names('product');
 Route::post('admin/subcat', 'App\Http\Controllers\CoursesController@subCat')->name('subcat');
+//Route::post('admin/role.store', 'App\Http\Controllers\Admin\RoleController@store')->name('role.store');
+//Route::post('admin/role.index', 'App\Http\Controllers\Admin\RoleController@index')->name('role');

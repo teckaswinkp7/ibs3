@@ -12,7 +12,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{route('admin-dashboard')}}">Home</a></li>
               <li class="breadcrumb-item active">Manage Role</li>
             </ol>
           </div>
@@ -48,7 +48,10 @@
                       <td>{{ $roles->name }}</td>
                       <td>
                         <form action="{{ route('role.destroy',$roles->id) }}" method="Post">
-                          <i class="fa-brands fa-readme"></i>
+                          <a  href="{{ route('role.show',$roles->id) }}">   
+                            <i class="fa-solid  fa-eye"></i>
+                          </a>
+                          &nbsp;
                           <a  href="{{ route('role.edit',$roles->id) }}"> 
                             <i class="fa-solid fa-pen-to-square"></i>
                           </a>
@@ -71,6 +74,7 @@
                   </tr>
                   </tfoot>
                 </table>
+                
               </div>
               <!-- /.card-body -->
             </div>
@@ -84,7 +88,7 @@
     </section>
     <!-- /.content -->
   </div>
-  @include('admin\footer')  
-@endsection
+  @include('admin\footer') 
+  @endsection
 </body>
 </html>  

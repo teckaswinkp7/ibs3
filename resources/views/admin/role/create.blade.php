@@ -1,6 +1,6 @@
-@extends('header')  
+@extends('admin/header')  
 @section('content')
-@include('leftsidebar') 
+@include('admin/leftsidebar') 
  <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper" style="min-height:1545px !important;">
         <!-- Content Header (Page header) -->
@@ -12,7 +12,7 @@
               </div>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
+                  <li class="breadcrumb-item"><a href="{{route('admin-dashboard')}}">Home</a></li>
                   <li class="breadcrumb-item active">Add Role</li>
                 </ol>
               </div>
@@ -63,7 +63,7 @@
         <!-- /.content -->
       </div>
       <!-- /.content-wrapper -->
-@include('footer')
+@include('admin/footer')
 @endsection
 </body>
 </html>   

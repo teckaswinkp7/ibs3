@@ -1,9 +1,6 @@
 <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+    <strong>Copyright &copy;2021 <a href="#">IBS</a></strong>
     All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.2.0
-    </div>
   </footer>
 </div>
 <!-- ./wrapper -->
@@ -51,8 +48,8 @@
 <script>
   $(function () {
     $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      //"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      "responsive": true, "lengthChange": false, "autoWidth": false,"pageLength": 5, "paging": true,
+      /*"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]*/
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
       "paging": true,
@@ -63,8 +60,8 @@
       "autoWidth": false,
       "responsive": true,
     });
-  }); 
-</script>
+  });
+</script> 
 <script type="text/javascript">
     $(function() {
        //$('.ckeditor').ckeditor();

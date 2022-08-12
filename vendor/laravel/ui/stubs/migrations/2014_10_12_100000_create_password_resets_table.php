@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddSubcatIdToCoursesTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class AddSubcatIdToCoursesTable extends Migration
      */
     public function up()
     {
-        Schema::table('courses', function (Blueprint $table) {
-            //
-            $table->string('subcat_id')->after('cat_id');
+        Schema::create('password_resets', function (Blueprint $table) {
+            $table->string('email')->index();
+            $table->string('token');
+            $table->timestamp('created_at')->nullable();
         });
     }
 
@@ -26,9 +27,6 @@ class AddSubcatIdToCoursesTable extends Migration
      */
     public function down()
     {
-        Schema::table('courses', function (Blueprint $table) {
-            //
-            $table->dropColumn('subcat_id');
-        });
+        Schema::dropIfExists('password_resets');
     }
-}
+};

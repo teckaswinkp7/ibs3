@@ -40,7 +40,7 @@
 
             <div class="feature-1 border">
               <div class="icon-wrapper bg-primary">
-                <span class="flaticon-mortarboard text-white"></span>
+              <i class='fa fa-mortar-board' style="margin-left:25px;color:#ffff;font-size:40px;"></i>
               </div>
               <div class="feature-1-content">
                 <h2>Personalize Learning</h2>
@@ -52,7 +52,7 @@
           <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
             <div class="feature-1 border">
               <div class="icon-wrapper bg-primary">
-                <span class="flaticon-school-material text-white"></span>
+              <i class="fa-solid fa-school" style="margin-left:25px;color:#ffff;font-size:40px;"></i>
               </div>
               <div class="feature-1-content">
                 <h2>Trusted Courses</h2>
@@ -64,7 +64,7 @@
           <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
             <div class="feature-1 border">
               <div class="icon-wrapper bg-primary">
-                <span class="flaticon-library text-white"></span>
+              <i class="fas fa-book-open" style="margin-left:25px;color:#ffff;font-size:40px;"></i>
               </div>
               <div class="feature-1-content">
                 <h2>Tools for Students</h2>
@@ -103,14 +103,14 @@
                     <div class="course-1-content pb-4">
                       <h2>How To Create Mobile Apps Using Ionic</h2>
                       <div class="rating text-center mb-3">
-                        <span class="icon-star2 text-warning"></span>
-                        <span class="icon-star2 text-warning"></span>
-                        <span class="icon-star2 text-warning"></span>
-                        <span class="icon-star2 text-warning"></span>
-                        <span class="icon-star2 text-warning"></span>
+                      <i class="fas fa-star checked"></i>
+                      <i class="fas fa-star checked"></i>
+                      <i class="fas fa-star checked"></i>
+                      <i class="fas fa-star checked"></i>
+                      <i class="fas fa-star checked"></i>
                       </div>
                       <p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-                      <p><a href="course-single.html" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a></p>
+                      <p><a href="#" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a></p>
                     </div>
                   </div>
       
@@ -123,14 +123,14 @@
                     <div class="course-1-content pb-4">
                       <h2>How To Create Mobile Apps Using Ionic</h2>
                       <div class="rating text-center mb-3">
-                        <span class="icon-star2 text-warning"></span>
-                        <span class="icon-star2 text-warning"></span>
-                        <span class="icon-star2 text-warning"></span>
-                        <span class="icon-star2 text-warning"></span>
-                        <span class="icon-star2 text-warning"></span>
+                      <i class="fas fa-star checked"></i>
+                      <i class="fas fa-star checked"></i>
+                      <i class="fas fa-star checked"></i>
+                      <i class="fas fa-star checked"></i>
+                      <i class="fas fa-star checked"></i>
                       </div>
                       <p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-                      <p><a href="course-single.html" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a></p>
+                      <p><a href="#" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a></p>
                     </div>
                   </div>
       
@@ -143,14 +143,14 @@
                     <div class="course-1-content pb-4">
                       <h2>How To Create Mobile Apps Using Ionic</h2>
                       <div class="rating text-center mb-3">
-                        <span class="icon-star2 text-warning"></span>
-                        <span class="icon-star2 text-warning"></span>
-                        <span class="icon-star2 text-warning"></span>
-                        <span class="icon-star2 text-warning"></span>
-                        <span class="icon-star2 text-warning"></span>
+                      <i class="fas fa-star checked"></i>
+                      <i class="fas fa-star checked"></i>
+                      <i class="fas fa-star checked"></i>
+                      <i class="fas fa-star checked"></i>
+                      <i class="fas fa-star checked"></i>
                       </div>
                       <p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-                      <p><a href="courses-single.html" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a></p>
+                      <p><a href="#" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a></p>
                     </div>
                   </div>
 
@@ -163,14 +163,14 @@
                     <div class="course-1-content pb-4">
                       <h2>How To Create Mobile Apps Using Ionic</h2>
                       <div class="rating text-center mb-3">
-                        <span class="icon-star2 text-warning"></span>
-                        <span class="icon-star2 text-warning"></span>
-                        <span class="icon-star2 text-warning"></span>
-                        <span class="icon-star2 text-warning"></span>
-                        <span class="icon-star2 text-warning"></span>
+                      <i class="fas fa-star checked"></i>
+                      <i class="fas fa-star checked"></i>
+                      <i class="fas fa-star checked"></i>
+                      <i class="fas fa-star checked"></i>
+                      <i class="fas fa-star checked"></i>
                       </div>
                       <p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-                      <p><a href="course-single.html" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a></p>
+                      <p><a href="#" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a></p>
                     </div>
                   </div>
       
@@ -183,14 +183,14 @@
                     <div class="course-1-content pb-4">
                       <h2>How To Create Mobile Apps Using Ionic</h2>
                       <div class="rating text-center mb-3">
-                        <span class="icon-star2 text-warning"></span>
-                        <span class="icon-star2 text-warning"></span>
-                        <span class="icon-star2 text-warning"></span>
-                        <span class="icon-star2 text-warning"></span>
-                        <span class="icon-star2 text-warning"></span>
+                      <i class="fas fa-star checked"></i>
+                      <i class="fas fa-star checked"></i>
+                      <i class="fas fa-star checked"></i>
+                      <i class="fas fa-star checked"></i>
+                      <i class="fas fa-star checked"></i>
                       </div>
                       <p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-                      <p><a href="course-single.html" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a></p>
+                      <p><a href="#" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a></p>
                     </div>
                   </div>
       
@@ -203,14 +203,14 @@
                     <div class="course-1-content pb-4">
                       <h2>How To Create Mobile Apps Using Ionic</h2>
                       <div class="rating text-center mb-3">
-                        <span class="icon-star2 text-warning"></span>
-                        <span class="icon-star2 text-warning"></span>
-                        <span class="icon-star2 text-warning"></span>
-                        <span class="icon-star2 text-warning"></span>
-                        <span class="icon-star2 text-warning"></span>
+                      <i class="fas fa-star checked"></i>
+                      <i class="fas fa-star checked"></i>
+                      <i class="fas fa-star checked"></i>
+                      <i class="fas fa-star checked"></i>
+                      <i class="fas fa-star checked"></i>
                       </div>
                       <p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-                      <p><a href="course-single.html" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a></p>
+                      <p><a href="#" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a></p>
                     </div>
                   </div>
       
@@ -346,18 +346,18 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
-            <span class="icon flaticon-mortarboard"></span>
+          <i class='fa fa-mortar-board' style="margin-left:25px;color:#51be78;font-size:40px;"></i>
             <h3>Our Philosphy</h3>
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reiciendis recusandae, iure repellat quis delectus ea? Dolore, amet reprehenderit.</p>
           </div>
           <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
-            <span class="icon flaticon-school-material"></span>
+          <i class='fa-solid fa-school' style="margin-left:25px;color:#51be78;font-size:40px;"></i>
             <h3>Academics Principle</h3>
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reiciendis recusandae, iure repellat quis delectus ea?
               Dolore, amet reprehenderit.</p>
           </div>
           <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
-            <span class="icon flaticon-library"></span>
+          <i class="fas fa-book-open" style="margin-left:25px;color:#51be78;font-size:40px;"></i>
             <h3>Key of Success</h3>
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reiciendis recusandae, iure repellat quis delectus ea?
               Dolore, amet reprehenderit.</p>

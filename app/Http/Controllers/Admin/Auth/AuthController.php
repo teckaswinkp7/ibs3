@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers\Admin\Auth;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +28,7 @@ class AuthController extends Controller
     public function registration()
     {
         $role=Role::all();
-        return view('auth.registration')->with('role',$role);
+        return view('admin\auth.registration')->with('role',$role);
     }
       
     /**
@@ -110,7 +108,6 @@ class AuthController extends Controller
     public function logout() {
         Session::flush();
         Auth::logout();
-  
         return Redirect('admin\login');
     }
 }
