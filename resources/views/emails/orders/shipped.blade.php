@@ -1,6 +1,4 @@
-@php
-dd($data) 
-@endphp
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +6,7 @@ dd($data)
 </head>
 <body>
     <h1>fbfbgf</h1>
-    <p>test</p>
+    <p>{{ $data['otp'] }}</p>
    
     <p>Thank youdffdgfgfdgdf</p>
 </body>
