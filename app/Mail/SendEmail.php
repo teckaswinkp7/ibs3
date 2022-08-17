@@ -16,8 +16,10 @@ class SendEmail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    private $data;
+    public function __construct($req)
     {
+        $this->data=$req;
         //
     }
 
@@ -26,9 +28,9 @@ class SendEmail extends Mailable
      *
      * @return $this
      */
+
     public function build()
     {
-       return $this->subject('Registered User')
-            ->markdown('emails.orders.shipped');
+        return $this->from('info@supertyreguy.com')->view('emails.orders.shipped',['data'=>$this->data]);
     }
 }

@@ -78,12 +78,9 @@ class AuthControllers extends Controller
 
         /*if($user){*/
 
-        $mail_details = [
-            'subject' => 'Testing Application OTP',
-            'body' => 'Your OTP is : '. $otp
-        ];
+        $data = array('otp' => $otp);
        
-        Mail::to($request->email)->send(new SendEmail($mail_details));
+        Mail::to($request->email)->send(new SendEmail($data));
        
         //return response(["status" => 200, "message" => "OTP sent successfully"]);
         /*}
