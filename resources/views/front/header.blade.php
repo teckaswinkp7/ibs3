@@ -41,10 +41,11 @@
           </div>
           <div class="col-lg-3 text-right">
           @if ( Auth::check() )
+          <a class="small mr-3">Hi <strong>{{ Auth::user()->uid }}</strong></a>
           <a href="{{ route('logout') }}" class="small mr-3">Logout</a>
           @else 
             <a href="{{ route('login') }}" class="small mr-3"><i class="fa fa-unlock" aria-hidden="true"></i> Log In</a>
-            <a href="#" class="small btn btn-primary px-4 py-2 rounded-0"><i class="fa fa-users" aria-hidden="true"></i> Register</a>
+            <a href="{{ route('register') }}" class="small btn btn-primary px-4 py-2 rounded-0"><i class="fa fa-users" aria-hidden="true"></i> Register</a>
           @endif  
   
           </div>

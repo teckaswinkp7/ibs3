@@ -24,7 +24,11 @@ Auth::routes();
 Route::get('/',[WelcomeController::class, 'index'])->middleware('cors');;
 //Route::resource('/', WelcomeController::class);
 //Route::get('/', [WelcomeController::class]);
+//Route::any('request_otp', 'API\AuthController@requestOtp');
+//Route::post('verify_otp', 'API\AuthController@verifyOtp');
+Route::get('send-mail', 'App\Http\Controllers\MailController@sendMail')->name('send.mail');
 Route::get('registration', [AuthControllers::class, 'registration'])->name('register');
+Route::post('post-registration', [AuthControllers::class, 'postRegistration'])->name('register.post'); 
 Route::get('admin/login', [AuthController::class, 'index'])->name('admin_login');
 Route::post('admin/post-login', [AuthController::class, 'postLogin'])->name('admin/login.post'); 
 Route::get('login', [AuthControllers::class, 'index'])->name('login');
@@ -34,7 +38,7 @@ Route::post('admin/post-registration', [AuthController::class, 'postRegistration
 Route::get('admin/dashboard', [AuthController::class, 'dashboard'])->name('admin-dashboard'); 
 Route::get('admin/logout', [AuthController::class, 'logout'])->name('admin/logout');
 Route::get('dashboard', [AuthControllers::class, 'dashboard'])->name('dashboard'); 
-Route::get('logout', [AuthControllers::class, 'logout'])->name('logout');
+Route::get('logout', [AuthControllers::class, 'logout'])->name('logout.front');
 Route::resource('admin/courses', CoursesController::class);
 Route::resource('admin/categories', CategoryController::class);
 Route::group(['middleware' => 'auth'], function () {

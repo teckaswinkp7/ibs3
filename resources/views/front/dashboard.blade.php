@@ -1,33 +1,19 @@
 @extends('front/header')  
 @section('content') 
-@include('front/leftsidebar') 
-<!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0">Dashboard</h1>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
+<div class="site-section">
+  <div class="container">
+    <div class="row justify-content-center">
+    <div class="col-md-12">
+      <h1 class="mt-5">Dashboard</h1>
+      @if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
     </div>
-    <!-- /.content-header -->
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <!-- Small boxes (Stat box) -->
-        <div class="row">
-         
-        </div>
-        <!-- /.row -->
-        </div>
-        <!-- /.row (main row) -->
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
+@endif
+    </div>
+    </div>  
   </div>
+</div>
 @include('front/footer')  
 @endsection
 </body>
