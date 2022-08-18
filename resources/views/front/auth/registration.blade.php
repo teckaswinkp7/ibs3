@@ -25,28 +25,28 @@
       <form action="{{ route('register.post') }}" method="POST">
       @csrf
       <div class="col-md-12 form-group">
-        <label for="name">Name</label>
+        <label for="name">Name<span style="color:red !important;font-weight:7 00;">*</span></label>
         <input type="text" id="id" class="form-control form-control-lg" name="name" placeholder="Name" required autofocus>
       </div>
       @if ($errors->has('name'))
        <div class="input-group mb-3"> <span class="text-danger">{{ $errors->first('name') }}</span></div>
       @endif
       <div class="col-md-12 form-group">
-      <label for="phone">Phone</label>
+      <label for="phone">Phone<span style="color:red !important;font-weight:700;">*</span></label>
         <input type="phone" id="phone" class="form-control form-control-lg" name="phone" placeholder="Phone" required>
       </div>
       @if ($errors->has('phone'))
        <div class="input-group mb-3"> <span class="text-danger">{{ $errors->first('phone') }}</span></div>
       @endif
       <div class="col-md-12 form-group">
-        <label for="email">Email</label>
+        <label for="email">Email<span style="color:red !important;font-weight:700;">*</span></label>
         <input type="text" id="email_address" class="form-control form-control-lg" name="email" placeholder="Email" required autofocus>
       </div>
       @if ($errors->has('email'))
        <div class="input-group mb-3"> <span class="text-danger">{{ $errors->first('email') }}</span></div>
       @endif
       <div class="col-md-12 form-group">
-      <label for="password">Password</label>
+      <label for="password">Password<span style="color:red !important;font-weight:700;">*</span></label>
         <input type="password" id="password" class="form-control form-control-lg" name="password" placeholder="Password" required>
       </div>
       @if ($errors->has('password'))
