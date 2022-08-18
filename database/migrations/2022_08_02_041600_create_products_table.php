@@ -23,11 +23,6 @@ class CreateProductsTable extends Migration
             $table->string('sale_price');
             $table->string('regular_price');
             $table->timestamps();
-            $table->integer('cat_id');
-            $table->integer('subcat_id');
-            $table->integer('is_featured');
-            $table->integer('stock');
-            $table->string('slug');
         });
     }
 

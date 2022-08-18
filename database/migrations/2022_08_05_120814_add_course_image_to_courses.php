@@ -15,7 +15,7 @@ class AddCourseImageToCourses extends Migration
     {
         Schema::table('courses', function (Blueprint $table) {
             //
-            $table->string('course_image');
+         $table->string('course_image');
         });
     }
 
