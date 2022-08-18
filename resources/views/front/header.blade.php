@@ -36,12 +36,12 @@
       <div class="container">
         <div class="row align-items-center">
           <div class="col-lg-9 d-none d-lg-block"> 
-            <a href="#" class="small mr-3"><i class="fa fa-phone" aria-hidden="true"></i>10 20 123 456</a> 
-            <a href="#" class="small mr-3"><i class="fa fa-envelope" aria-hidden="true"></i> &nbsp;info@mydomain.com</a> 
+            <a href="#" class="small mr-3"><i class="fa fa-phone" aria-hidden="true"></i>(675) 74114100</a> 
+            <a href="#" class="small mr-3"><i class="fa fa-envelope" aria-hidden="true"></i> &nbsp;ask@ibs.ac.pg</a> 
           </div>
           <div class="col-lg-3 text-right">
-          @if ( Auth::check() )
-          <a class="small mr-3">Hi <strong>{{ Auth::user()->uid }}</strong></a>
+          @if (( Auth::check())&&(Auth::user()->is_email_verified == 1))
+          <a class="small mr-3">Hi <strong>{{ Auth::user()->name }}</strong></a>
           <a href="{{ route('logout') }}" class="small mr-3">Logout</a>
           @else 
             <a href="{{ route('login') }}" class="small mr-3"><i class="fa fa-unlock" aria-hidden="true"></i> Log In</a>
@@ -66,18 +66,17 @@
                 <li class="active">
                   <a href="{{ URL::to('/'); }}" class="nav-link text-left">Home</a>
                 </li>
-                <li class="has-children">
+                <li>
                   <a href="#" class="nav-link text-left">About Us</a>
-                  <ul class="dropdown">
-                    <li><a href="#">Our Teachers</a></li>
-                    <li><a href="#">Our School</a></li>
-                  </ul>
                 </li>
                 <li>
-                  <a href="#" class="nav-link text-left">Admissions</a>
+                  <a href="#" class="nav-link text-left">Academic</a>
                 </li>
                 <li>
-                  <a href="#" class="nav-link text-left">Courses</a>
+                  <a href="#" class="nav-link text-left">Research</a>
+                </li>
+                <li>
+                  <a href="#" class="nav-link text-left">Industry</a>
                 </li>
                 <li>
                     <a href="#" class="nav-link text-left">Contact</a>

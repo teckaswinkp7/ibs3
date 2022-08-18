@@ -5,9 +5,10 @@
     <title>fdsff</title>
 </head>
 <body>
-    <h1>fbfbgf</h1>
-    <p>{{ $data['otp'] }}</p>
+    <h1>Hello</h1>
+    <p>Please verify your OTP</P>
+    <p>Your OTP is:{{ $data['otp'] }}</p>
    
-    <p>Thank youdffdgfgfdgdf</p>
+    <p>Thank you</p>
 </body>
 </html>

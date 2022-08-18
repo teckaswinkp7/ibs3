@@ -25,11 +25,18 @@
       <form action="{{ route('register.post') }}" method="POST">
       @csrf
       <div class="col-md-12 form-group">
-        <label for="id">ID</label>
-        <input type="text" id="id" class="form-control form-control-lg" name="uid" placeholder="ID" required autofocus>
+        <label for="name">Name</label>
+        <input type="text" id="id" class="form-control form-control-lg" name="name" placeholder="Name" required autofocus>
       </div>
-      @if ($errors->has('uid'))
-       <div class="input-group mb-3"> <span class="text-danger">{{ $errors->first('uid') }}</span></div>
+      @if ($errors->has('name'))
+       <div class="input-group mb-3"> <span class="text-danger">{{ $errors->first('name') }}</span></div>
+      @endif
+      <div class="col-md-12 form-group">
+      <label for="phone">Phone</label>
+        <input type="phone" id="phone" class="form-control form-control-lg" name="phone" placeholder="Phone" required>
+      </div>
+      @if ($errors->has('phone'))
+       <div class="input-group mb-3"> <span class="text-danger">{{ $errors->first('phone') }}</span></div>
       @endif
       <div class="col-md-12 form-group">
         <label for="email">Email</label>

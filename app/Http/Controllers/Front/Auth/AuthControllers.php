@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Mail;
 use Hash;
 class AuthControllers extends Controller
 {
-    //
     /**
      * Write code on Method
      *
@@ -31,7 +30,6 @@ class AuthControllers extends Controller
      */
     public function registration()
     {
-        //$role=Role::all();
         return view('front\auth.registration');
     }
       
@@ -46,11 +44,14 @@ class AuthControllers extends Controller
             'email' => 'required',
             'password' => 'required',
         ]);
-   
+        
         $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials)) {
-            return redirect()->intended('dashboard')
-                        ->with('success','Great! You have Successfully loggedin');
+        if (Auth::attempt($credentials)) {  
+            if(Auth::user()->is_email_verified != 1){
+                return redirect("login")->with('Oppes! You have entered invalid credentials');
+            }    
+                return redirect("dashboard")->with('Oppes! You have entered invalid credentials'); 
+                
         }
   
         return redirect("login")->with('Oppes! You have entered invalid credentials');
@@ -64,7 +65,8 @@ class AuthControllers extends Controller
     public function postRegistration(Request $request)
     {  
         $request->validate([
-            'uid' => 'required|unique:users',
+            'name' => 'required',
+            'phone'=> 'required|unique:users',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
         ]);
@@ -73,23 +75,44 @@ class AuthControllers extends Controller
         $check = $this->create($data);
         $subject="Registered User";
         $otp = rand(1000,9999);
-        //Log::info("otp = ".$otp);
-        //$user = User::where('email','=',$request->email)->update(['otp' => $otp]);
+        $user = User::where('email','=',$request->email)->update(['otp' => $otp]);
 
-        /*if($user){*/
-
-        $data = array('otp' => $otp);
-       
-        Mail::to($request->email)->send(new SendEmail($data));
-       
-        //return response(["status" => 200, "message" => "OTP sent successfully"]);
-        /*}
+        if($user){
+            $data = array('otp' => $otp,'email' =>$request->email);
+            Mail::to($request->email)->send(new SendEmail($data));
+            return view('front/verifyotp')->with($data);
+        }
         else{
             return response(["status" => 401, 'message' => 'Invalid']);
-        }*/
-        //Mail::to($data['email'])->send(new OrderShipped());
-        //Auth::login($check);
-        //return redirect("dashboard")->with('success','Great! You have Successfully loggedin');
+        }
+    }
+
+    public function validateOtp(Request $request){
+        
+        $otp = $request->input('otp');
+        $user  = User::where([['email','=',$request->email],['otp','=',$request->otp]])->first();
+        if($user){
+
+           $verified=date("Y-m-d H:i:s", strtotime('now'));
+           $users= User::where('email','=',$request->email)->update(['email_verified_at' =>$verified,'is_email_verified' => 1]);
+           return redirect("login");
+        }
+        else{
+            return response(["status" => 401, 'message' => 'Invalid']);
+        }
+    }
+    public function resendOtp(Request $request)
+    {
+        $otp = rand(1000,9999);
+        $user = User::where('email','=',$request->email)->update(['otp' => $otp]);
+        if($user){
+            $data = array('otp' => $otp,'email' =>$request->email);
+            Mail::to($request->email)->send(new SendEmail($data));
+            return view('front/verifyotp')->with($data);
+        }
+        else{
+            return response(["status" => 401, 'message' => 'Invalid']);
+        }
     }
     
     /**
@@ -100,7 +123,9 @@ class AuthControllers extends Controller
     public function dashboard()
     {
         if(Auth::check()){
+            if(Auth::user()->is_email_verified == 1){
             return view('front/dashboard');
+            }
         }
   
         return redirect("login")->withSuccess('Opps! You do not have access');
@@ -114,7 +139,8 @@ class AuthControllers extends Controller
     public function create(array $data)
     {
       return User::create([
-        'uid' => $data['uid'],
+        'name' => $data['name'],
+        'phone' => $data['phone'],
         'user_role' => '28',
         'email' => $data['email'],
         'password' => Hash::make($data['password'])

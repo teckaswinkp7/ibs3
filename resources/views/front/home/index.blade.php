@@ -1,21 +1,23 @@
 @extends('front/header')  
 @section('content') 
     <div class="hero-slide owl-carousel site-blocks-cover">
-      <div class="intro-section" style="background-image:url({{asset('assets/front/images/hero_1.jpg')}});">
+      <div class="intro-section" style="background-image:url({{asset('assets/front/images/campus-1.jpg')}});">
         <div class="container">
           <div class="row align-items-center">
             <div class="col-lg-12 mx-auto text-center" data-aos="fade-up">
-              <h1>Academics University</h1>
+              <h1>PROFESSIONAL LEARNING </h1>
+              <p class="text-center" style="fone-size:0.1em;color:#fff;font-weight:700;max-width:1200px !important;">PROFESSIONAL DEVELOPMENT PROGRAMS TO HARNESS THE HIDDEN TALENTS IN YOUR TEAM </p>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="intro-section" style="background-image:url({{asset('assets/front/images/hero_1.jpg')}});">
+      <div class="intro-section" style="background-image:url({{asset('assets/front/images/graduate.png')}});">
         <div class="container">
           <div class="row align-items-center">
             <div class="col-lg-12 mx-auto text-center" data-aos="fade-up">
-              <h1>You Can Learn Anything</h1>
+            <h1>Your Future</h1>
+            <p class="text-center" style="fone-size:0.1em;color:#fff;font-weight:900;max-width:1200px !important;">ACCELERATED PATHWAY FOR GRADE 10 LEAVERS TO BECOME DEGREE HOLDERS </p>
             </div>
           </div>
         </div>
@@ -43,8 +45,8 @@
               <i class='fa fa-mortar-board' style="margin-left:25px;color:#ffff;font-size:40px;"></i>
               </div>
               <div class="feature-1-content">
-                <h2>Personalize Learning</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit morbi hendrerit elit</p>
+                <h2>COURSES</h2>
+                <p>Accredited courses in accounting and business.</p>
                 <p><a href="#" class="btn btn-primary px-4 rounded-0">Learn More</a></p>
               </div>
             </div>
@@ -55,8 +57,8 @@
               <i class="fa-solid fa-school" style="margin-left:25px;color:#ffff;font-size:40px;"></i>
               </div>
               <div class="feature-1-content">
-                <h2>Trusted Courses</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit morbi hendrerit elit</p>
+                <h2>TRAINING</h2>
+                <p>Team building courses to bring out the best in your staff.</p>
                 <p><a href="#" class="btn btn-primary px-4 rounded-0">Learn More</a></p>
               </div>
             </div> 
@@ -67,8 +69,8 @@
               <i class="fas fa-book-open" style="margin-left:25px;color:#ffff;font-size:40px;"></i>
               </div>
               <div class="feature-1-content">
-                <h2>Tools for Students</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit morbi hendrerit elit</p>
+                <h2>ACCREDITATION</h2>
+                <p>Quality education and training with real career outcomes.</p>
                 <p><a href="#" class="btn btn-primary px-4 rounded-0">Learn More</a></p>
               </div>
             </div> 
@@ -97,122 +99,33 @@
                   <div class="course-1-item">
                     <figure class="thumnail">
                       <a href="course-single.html"><img src="{{asset('assets/front/images/course_1.jpg')}}" alt="Image" class="img-fluid"></a>
-                      <div class="price">$99.00</div>
-                      <div class="category"><h3>Mobile Application</h3></div>  
+                      <div class="category"><h3>ACCOUNTING & FINANCE</h3></div>  
                     </figure>
                     <div class="course-1-content pb-4">
-                      <h2>How To Create Mobile Apps Using Ionic</h2>
-                      <div class="rating text-center mb-3">
-                      <i class="fas fa-star checked"></i>
-                      <i class="fas fa-star checked"></i>
-                      <i class="fas fa-star checked"></i>
-                      <i class="fas fa-star checked"></i>
-                      <i class="fas fa-star checked"></i>
-                      </div>
-                      <p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-                      <p><a href="#" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a></p>
+                      <p><a href="#" class="btn btn-primary rounded-0 px-4">Start Here</a></p>
                     </div>
                   </div>
       
                   <div class="course-1-item">
                     <figure class="thumnail">
                       <a href="course-single.html"><img src="{{asset('assets/front/images/course_2.jpg')}}" alt="Image" class="img-fluid"></a>
-                      <div class="price">$99.00</div>
-                      <div class="category"><h3>Web Design</h3></div>  
+                      <div class="category"><h3>BUSINESS & ECONOMICS</h3></div>  
                     </figure>
                     <div class="course-1-content pb-4">
-                      <h2>How To Create Mobile Apps Using Ionic</h2>
-                      <div class="rating text-center mb-3">
-                      <i class="fas fa-star checked"></i>
-                      <i class="fas fa-star checked"></i>
-                      <i class="fas fa-star checked"></i>
-                      <i class="fas fa-star checked"></i>
-                      <i class="fas fa-star checked"></i>
-                      </div>
-                      <p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-                      <p><a href="#" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a></p>
+                      <p><a href="#" class="btn btn-primary rounded-0 px-4">Start Here</a></p>
                     </div>
                   </div>
       
                   <div class="course-1-item">
                     <figure class="thumnail">
                       <a href="course-single.html"><img src="{{asset('assets/front/images/course_3.jpg')}}" alt="Image" class="img-fluid"></a>
-                      <div class="price">$99.00</div>
-                      <div class="category"><h3>Arithmetic</h3></div>  
+                      <div class="category"><h3>INFORMATION TECHNOLOGY</h3></div>  
                     </figure>
                     <div class="course-1-content pb-4">
-                      <h2>How To Create Mobile Apps Using Ionic</h2>
-                      <div class="rating text-center mb-3">
-                      <i class="fas fa-star checked"></i>
-                      <i class="fas fa-star checked"></i>
-                      <i class="fas fa-star checked"></i>
-                      <i class="fas fa-star checked"></i>
-                      <i class="fas fa-star checked"></i>
-                      </div>
-                      <p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-                      <p><a href="#" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a></p>
+                      <p><a href="#" class="btn btn-primary rounded-0 px-4">Start Here</a></p>
                     </div>
                   </div>
 
-                  <div class="course-1-item">
-                    <figure class="thumnail">
-                        <a href="course-single.html"><img src="{{asset('assets/front/images/course_4.jpg')}}" alt="Image" class="img-fluid"></a>
-                      <div class="price">$99.00</div>
-                      <div class="category"><h3>Mobile Application</h3></div>  
-                    </figure>
-                    <div class="course-1-content pb-4">
-                      <h2>How To Create Mobile Apps Using Ionic</h2>
-                      <div class="rating text-center mb-3">
-                      <i class="fas fa-star checked"></i>
-                      <i class="fas fa-star checked"></i>
-                      <i class="fas fa-star checked"></i>
-                      <i class="fas fa-star checked"></i>
-                      <i class="fas fa-star checked"></i>
-                      </div>
-                      <p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-                      <p><a href="#" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a></p>
-                    </div>
-                  </div>
-      
-                  <div class="course-1-item">
-                    <figure class="thumnail">
-                        <a href="course-single.html"><img src="{{asset('assets/front/images/course_5.jpg')}}" alt="Image" class="img-fluid"></a>
-                      <div class="price">$99.00</div>
-                      <div class="category"><h3>Web Design</h3></div>  
-                    </figure>
-                    <div class="course-1-content pb-4">
-                      <h2>How To Create Mobile Apps Using Ionic</h2>
-                      <div class="rating text-center mb-3">
-                      <i class="fas fa-star checked"></i>
-                      <i class="fas fa-star checked"></i>
-                      <i class="fas fa-star checked"></i>
-                      <i class="fas fa-star checked"></i>
-                      <i class="fas fa-star checked"></i>
-                      </div>
-                      <p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-                      <p><a href="#" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a></p>
-                    </div>
-                  </div>
-      
-                  <div class="course-1-item">
-                    <figure class="thumnail">
-                        <a href="course-single.html"><img src="{{asset('assets/front/images/course_6.jpg')}}" alt="Image" class="img-fluid"></a>
-                      <div class="price">$99.00</div>
-                      <div class="category"><h3>Mobile Application</h3></div>  
-                    </figure>
-                    <div class="course-1-content pb-4">
-                      <h2>How To Create Mobile Apps Using Ionic</h2>
-                      <div class="rating text-center mb-3">
-                      <i class="fas fa-star checked"></i>
-                      <i class="fas fa-star checked"></i>
-                      <i class="fas fa-star checked"></i>
-                      <i class="fas fa-star checked"></i>
-                      <i class="fas fa-star checked"></i>
-                      </div>
-                      <p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-                      <p><a href="#" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a></p>
-                    </div>
-                  </div>
       
               </div>
       
@@ -227,18 +140,12 @@
     
 
 
-    <div class="section-bg style-1" style="background-image:url({{asset('assets/front/images/blog_2.jpg')}});">
+    <div class="section-bg style-1" style="background-image:url({{asset('assets/front/images/blog_2.jpg')}});height:400px;">
       <div class="container">
         <div class="row">
-          <div class="col-lg-4">
-            <h2 class="section-title-underline style-2">
-              <span>About Our University</span>
-            </h2>
-          </div>
-          <div class="col-lg-8">
-            <p class="lead">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rem nesciunt quaerat ad reiciendis perferendis voluptate fugiat sunt fuga error totam.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus assumenda omnis tempora ullam alias amet eveniet voluptas, incidunt quasi aut officiis porro ad, expedita saepe necessitatibus rem debitis architecto dolore? Nam omnis sapiente placeat blanditiis voluptas dignissimos, itaque fugit a laudantium adipisci dolorem enim ipsum cum molestias? Quod quae molestias modi fugiat quisquam. Eligendi recusandae officiis debitis quas beatae aliquam?</p>
-            <p><a href="#">Read more</a></p>
+          <div class="col-lg-12">
+            <p class="text-center" style="max-width:1200px !important;color:#ffff;font-weight:700;margin-top:60px;">YOUR FUTURE STARTS HERE</p>
+            <p class="text-center" style="max-width:1200px !important;"><a href="#">Read more</a></p>
           </div>
         </div>
       </div>
@@ -250,7 +157,7 @@
         <div class="row mb-5">
           <div class="col-lg-4">
             <h2 class="section-title-underline">
-              <span>Testimonials</span>
+              <span>I would like to achieve...</span>
             </h2>
           </div>
         </div>
@@ -262,12 +169,11 @@
             <div class="ftco-testimonial-vcard d-flex align-items-center mb-4">
               <img src="{{asset('assets/front/images/person_1.jpg')}}" alt="Image" class="img-fluid mr-3">
               <div>
-                <h3>Allison Holmes</h3>
-                <span>Designer</span>
+                <h3>DEGREE</h3>
               </div>
             </div>
             <div>
-              <p>&ldquo;Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque, mollitia. Possimus mollitia nobis libero quidem aut tempore dolore iure maiores, perferendis, provident numquam illum nisi amet necessitatibus. A, provident aperiam!&rdquo;</p>
+              <p>&ldquo;IBS focuses on the success of every student along their learning journey with programs ranging from certificate courses to Australian degrees.&rdquo;</p>
             </div>
           </div>
 
@@ -275,25 +181,11 @@
             <div class="ftco-testimonial-vcard d-flex align-items-center mb-4">
               <img src="{{asset('assets/front/images/person_2.jpg')}}" alt="Image" class="img-fluid mr-3">
               <div>
-                <h3>Allison Holmes</h3>
-                <span>Designer</span>
+                <h3>AUSTRALIAN DEGREE</h3>
               </div>
             </div>
             <div>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque, mollitia. Possimus mollitia nobis libero quidem aut tempore dolore iure maiores, perferendis, provident numquam illum nisi amet necessitatibus. A, provident aperiam!</p>
-            </div>
-          </div>
-
-          <div class="ftco-testimonial-1">
-            <div class="ftco-testimonial-vcard d-flex align-items-center mb-4">
-              <img src="{{asset('assets/front/images/person_4.jpg')}}" alt="Image" class="img-fluid mr-3">
-              <div>
-                <h3>Allison Holmes</h3>
-                <span>Designer</span>
-              </div>
-            </div>
-            <div>
-              <p>&ldquo;Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque, mollitia. Possimus mollitia nobis libero quidem aut tempore dolore iure maiores, perferendis, provident numquam illum nisi amet necessitatibus. A, provident aperiam!&rdquo;</p>
+              <p>Run in partnership with Southern Cross University, IBS offers degrees in Accounting, Human Resource Management, Information Technology and Marketing.</p>
             </div>
           </div>
 
@@ -301,25 +193,11 @@
             <div class="ftco-testimonial-vcard d-flex align-items-center mb-4">
               <img src="{{asset('assets/front/images/person_3.jpg')}}" alt="Image" class="img-fluid mr-3">
               <div>
-                <h3>Allison Holmes</h3>
-                <span>Designer</span>
+                <h3>DIPLOMA</h3>
               </div>
             </div>
             <div>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque, mollitia. Possimus mollitia nobis libero quidem aut tempore dolore iure maiores, perferendis, provident numquam illum nisi amet necessitatibus. A, provident aperiam!</p>
-            </div>
-          </div>
-
-          <div class="ftco-testimonial-1">
-            <div class="ftco-testimonial-vcard d-flex align-items-center mb-4">
-              <img src="{{asset('assets/front/images/person_2.jpg')}}" alt="Image" class="img-fluid mr-3">
-              <div>
-                <h3>Allison Holmes</h3>
-                <span>Designer</span>
-              </div>
-            </div>
-            <div>
-              <p>&ldquo;Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque, mollitia. Possimus mollitia nobis libero quidem aut tempore dolore iure maiores, perferendis, provident numquam illum nisi amet necessitatibus. A, provident aperiam!&rdquo;</p>
+              <p>IBS provides Diplomas in Technical and Vocational Education and Training in the fields of Accounting and Business.</p>
             </div>
           </div>
 
@@ -327,17 +205,14 @@
             <div class="ftco-testimonial-vcard d-flex align-items-center mb-4">
               <img src="{{asset('assets/front/images/person_4.jpg')}}" alt="Image" class="img-fluid mr-3">
               <div>
-                <h3>Allison Holmes</h3>
-                <span>Designer</span>
+                <h3>CERTIFICATE</h3>
               </div>
             </div>
             <div>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque, mollitia. Possimus mollitia nobis libero quidem aut tempore dolore iure maiores, perferendis, provident numquam illum nisi amet necessitatibus. A, provident aperiam!</p>
+              <p>&ldquo;IBS provides Technical and Vocational Education and Training in Accounting. We provide a pathway for year 10 leavers to attain undergraduate degrees.&rdquo;</p>
             </div>
           </div>
-
         </div>
-        
       </div>
     </div>
     

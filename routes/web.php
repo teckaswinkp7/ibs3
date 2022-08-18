@@ -21,18 +21,21 @@ use App\Http\Controllers\Admin\UserController;
 |
 */
 Auth::routes();
+//Auth::routes(['verify' => true]);
 Route::get('/',[WelcomeController::class, 'index'])->middleware('cors');;
 //Route::resource('/', WelcomeController::class);
 //Route::get('/', [WelcomeController::class]);
 //Route::any('request_otp', 'API\AuthController@requestOtp');
 //Route::post('verify_otp', 'API\AuthController@verifyOtp');
 Route::get('send-mail', 'App\Http\Controllers\MailController@sendMail')->name('send.mail');
+Route::post('otp-validate', [AuthControllers::class, 'validateOtp'])->name('validateOtp');
+Route::post('otp-resend', [AuthControllers::class, 'resendOtp'])->name('resendOtp');
 Route::get('registration', [AuthControllers::class, 'registration'])->name('register');
 Route::post('post-registration', [AuthControllers::class, 'postRegistration'])->name('register.post'); 
 Route::get('admin/login', [AuthController::class, 'index'])->name('admin_login');
 Route::post('admin/post-login', [AuthController::class, 'postLogin'])->name('admin/login.post'); 
 Route::get('login', [AuthControllers::class, 'index'])->name('login');
-Route::post('post-login', [AuthControllers::class, 'postLogin'])->name('login.post'); 
+Route::post('post-login', [AuthControllers::class, 'postLogin'])->name('login.post');
 //Route::get('registration', [AuthController::class, 'registration'])->name('register');
 Route::post('admin/post-registration', [AuthController::class, 'postRegistration'])->name('admin/register.post'); 
 Route::get('admin/dashboard', [AuthController::class, 'dashboard'])->name('admin-dashboard'); 
