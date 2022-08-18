@@ -45,7 +45,7 @@
           <a href="{{ route('logout') }}" class="small mr-3">Logout</a>
           @else 
             <a href="{{ route('login') }}" class="small mr-3"><i class="fa fa-unlock" aria-hidden="true"></i> Log In</a>
-            <a href="{{ route('register') }}" class="small btn btn-primary px-4 py-2 rounded-0"><i class="fa fa-users" aria-hidden="true"></i> Register</a>
+            <a href="{{ route('registers') }}" class="small btn btn-primary px-4 py-2 rounded-0"><i class="fa fa-users" aria-hidden="true"></i> Register</a>
           @endif  
   
           </div>

@@ -30,7 +30,7 @@ Route::get('/',[WelcomeController::class, 'index'])->middleware('cors');;
 Route::get('send-mail', 'App\Http\Controllers\MailController@sendMail')->name('send.mail');
 Route::post('otp-validate', [AuthControllers::class, 'validateOtp'])->name('validateOtp');
 Route::post('otp-resend', [AuthControllers::class, 'resendOtp'])->name('resendOtp');
-Route::get('registration', [AuthControllers::class, 'registration'])->name('register');
+Route::get('registration', [AuthControllers::class, 'registration'])->name('registers');
 Route::post('post-registration', [AuthControllers::class, 'postRegistration'])->name('register.post'); 
 Route::get('admin/login', [AuthController::class, 'index'])->name('admin_login');
 Route::post('admin/post-login', [AuthController::class, 'postLogin'])->name('admin/login.post'); 

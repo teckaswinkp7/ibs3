@@ -46,12 +46,10 @@ class AuthControllers extends Controller
         ]);
         
         $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials)) {  
-            if(Auth::user()->is_email_verified != 1){
-                return redirect("login")->with('Oppes! You have entered invalid credentials');
-            }    
-                return redirect("dashboard")->with('Oppes! You have entered invalid credentials'); 
-                
+        if ((Auth::attempt($credentials))&&(Auth::user()->is_email_verified == 1)) {  
+            
+            return redirect("dashboard")->with('Oppes! You have entered invalid credentials');  
+                    
         }
   
         return redirect("login")->with('Oppes! You have entered invalid credentials');
