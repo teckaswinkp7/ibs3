@@ -15,7 +15,7 @@ class AddPhoneToUsers extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->integer('phone');
+            $table->string('phone', 255);
         });
     }
 
