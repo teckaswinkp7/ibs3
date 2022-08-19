@@ -125,8 +125,14 @@ class AuthControllers extends Controller
             return view('front/dashboard');
             }
         }
-  
         return redirect("login")->withSuccess('Opps! You do not have access');
+    }
+
+    public function profile()
+    {
+        
+        return view('front/profile');
+            
     }
     
     /**

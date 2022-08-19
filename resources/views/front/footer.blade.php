@@ -62,6 +62,7 @@
   <script src="{{asset('assets/front/js/jquery.fancybox.min.js')}}"></script>
   <script src="{{asset('assets/front/js/jquery.sticky.js')}}"></script>
   <script src="{{asset('assets/front/js/jquery.mb.YTPlayer.min.js')}}"></script>
+  <script src="{{asset('assets/front/js/cloneData.js')}}"></script>
   <script src="{{asset('assets/front/js/main.js')}}"></script>
   <script src="{{asset('assets/front/js/timer.js')}}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/js/all.min.js"></script>

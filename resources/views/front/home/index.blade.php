@@ -1,22 +1,22 @@
 @extends('front/header')  
 @section('content') 
     <div class="hero-slide owl-carousel site-blocks-cover">
-      <div class="intro-section" style="background-image:url({{asset('assets/front/images/campus-1.jpg')}}); min-height:560px !important;height:560px !important;">
+      <div class="intro-section" style="background-image:url({{asset('assets/front/images/campus-1.jpg')}}); min-height:410px !important;height:410px !important;">
         <div class="container">
           <div class="row align-items-center">
-            <div class="col-lg-12 mx-auto text-center" data-aos="fade-up" style="margin-top:-260px !important;">
-              <h1>PROFESSIONAL LEARNING </h1>
+            <div class="col-lg-12 mx-auto text-center" data-aos="fade-up" style="margin-top:-457px !important;">
+              <h1 style="font-size:6rem !important;">PROFESSIONAL LEARNING </h1>
               <p class="text-center" style="fone-size:0.1em;color:#fff;font-weight:600;max-width:1200px !important;">PROFESSIONAL DEVELOPMENT PROGRAMS TO HARNESS THE HIDDEN TALENTS IN YOUR TEAM </p>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="intro-section" style="background-image:url({{asset('assets/front/images/graduate.png')}}); min-height:560px !important;height:560px !important;">
+      <div class="intro-section" style="background-image:url({{asset('assets/front/images/graduate.png')}}); min-height:410px !important;height:410px !important;">
         <div class="container">
           <div class="row align-items-center">
-            <div class="col-lg-12 mx-auto text-center" data-aos="fade-up" style="margin-top:-260px !important;">
-            <h1>Your Future</h1>
+            <div class="col-lg-12 mx-auto text-center" data-aos="fade-up" style="margin-top:-457px !important;">
+            <h1 style="font-size:6rem !important;">Your Future</h1>
             <p class="text-center" style="fone-size:0.1em;color:#fff;font-weight:600;max-width:1200px !important;">ACCELERATED PATHWAY FOR GRADE 10 LEAVERS TO BECOME DEGREE HOLDERS </p>
             </div>
           </div>
@@ -28,7 +28,7 @@
 
     <div></div>
 
-    <div class="site-section">
+    <div class="site-section pt-5">
       <div class="container">
         <div class="row mb-5 justify-content-center text-center">
           <div class="col-lg-4 mb-5">

@@ -145,7 +145,7 @@ jQuery(document).ready(function($) {
 				autoplay: true,
 				nav: true,
 				dots: true,
-				navText: ['<span class="icon-arrow_back">', '<span class="icon-arrow_forward">'],
+				navText: ['<i class="fa fa-angle-left" aria-hidden="true"></i>', '<i class="fa fa-angle-right" aria-hidden="true"></i>'],
 				smartSpeed: 1000
 			});
 		}
@@ -161,7 +161,7 @@ jQuery(document).ready(function($) {
 				smartSpeed: 500,
 				nav: true,
 				dots: true,
-				navText: ['<span class="icon-arrow_back">', '<span class="icon-arrow_forward">'],
+				navText: ['<span class="icon-arrow_back">', '<i class="fa fa-arrow-right" aria-hidden="true">'],
 				responsive:{
 					600:{
 						items: 2
@@ -185,7 +185,7 @@ jQuery(document).ready(function($) {
 		    margin: 30,
 		    autoplay: true,
 		    nav: true,
-				navText: ['<span class="icon-arrow_back">', '<span class="icon-arrow_forward">'],
+				navText: ['<span class="icon-arrow_back">', '<i class="fa fa-arrow-right" aria-hidden="true">'],
 		    responsive:{
 	        600:{
 	        	
@@ -218,7 +218,7 @@ jQuery(document).ready(function($) {
 		    margin: 0,
 		    autoplay: true,
 		    nav: true,
-				navText: ['<span class="icon-arrow_back">', '<span class="icon-arrow_forward">'],
+				navText: ['<span class="icon-arrow_back">', '<i class="fa fa-arrow-right" aria-hidden="true">'],
 		    responsive:{
 	        600:{
 	        	margin: 20,
@@ -250,7 +250,7 @@ jQuery(document).ready(function($) {
 			autoplay: true,
 			pauseOnHover: false,
 			nav: true,
-			navText: ['<span class="icon-keyboard_arrow_left">', '<span class="icon-keyboard_arrow_right">']
+			navText: ['<span class="icon-keyboard_arrow_left">', '<i class="fa fa-arrow-right" aria-hidden="true">']
 		});
 	};
 	siteCarousel();
@@ -338,3 +338,100 @@ jQuery(document).ready(function($) {
 	});
 
 });
+
+/*Multi Step Form */    
+	var current_fs, next_fs, previous_fs; //fieldsets
+	var opacity;
+	
+	$(".next").click(function(){
+		
+		current_fs = $(this).parent();
+		next_fs = $(this).parent().next();
+		
+		//Add Class Active
+		$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+		
+		//show the next fieldset
+		next_fs.show(); 
+		//hide the current fieldset with style
+		current_fs.animate({opacity: 0}, {
+			step: function(now) {
+				// for making fielset appear animation
+				opacity = 1 - now;
+	
+				current_fs.css({
+					'display': 'none',
+					'position': 'relative'
+				});
+				next_fs.css({'opacity': opacity});
+			}, 
+			duration: 600
+		});
+	});
+	
+	$(".previous").click(function(){
+		
+		current_fs = $(this).parent();
+		previous_fs = $(this).parent().prev();
+		
+		//Remove class active
+		$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+		
+		//show the previous fieldset
+		previous_fs.show();
+	
+		//hide the current fieldset with style
+		current_fs.animate({opacity: 0}, {
+			step: function(now) {
+				// for making fielset appear animation
+				opacity = 1 - now;
+	
+				current_fs.css({
+					'display': 'none',
+					'position': 'relative'
+				});
+				previous_fs.css({'opacity': opacity});
+			}, 
+			duration: 600
+		});
+	});
+	
+	$('.radio-group .radio').click(function(){
+		$(this).parent().find('.radio').removeClass('selected');
+		$(this).addClass('selected');
+	});
+	
+	$(".submit").click(function(){
+		return false;
+	})
+
+	$('a#add-more').cloneData({
+        mainContainerId: 'main-container', // Main container Should be ID
+        cloneContainer: 'container-item', // Which you want to clone
+        removeButtonClass: 'remove-item', // Remove button for remove cloned HTML
+        removeConfirm: true, // default true confirm before delete clone item
+        removeConfirmMessage: 'Are you sure want to delete?', // confirm delete message
+        //append: '<a href="javascript:void(0)" class="remove-item btn btn-sm btn-danger remove-social-media">Remove</a>', // Set extra HTML append to clone HTML
+        minLimit: 1, // Default 1 set minimum clone HTML required
+        maxLimit: 5, // Default unlimited or set maximum limit of clone HTML
+        defaultRender: 1,
+        init: function () {
+            console.info(':: Initialize Plugin ::');
+        },
+        beforeRender: function () {
+            console.info(':: Before rendered callback called');
+        },
+        afterRender: function () {
+            console.info(':: After rendered callback called');
+            //$(".selectpicker").selectpicker('refresh');
+        },
+        afterRemove: function () {
+            console.warn(':: After remove callback called');
+        },
+        beforeRemove: function () {
+            console.warn(':: Before remove callback called');
+        }
+
+    });
+
+		
