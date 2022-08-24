@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Front\WelcomeController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Front\EducationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,4 +48,17 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('admin/user', UserController::class);
 });
 Route::post('admin/subcat', 'App\Http\Controllers\CoursesController@subCat')->name('subcat');
+Route::get('education-profile', [EducationController::class, 'index']);
+Route::post('edit-profile', [EducationController::class, 'store']);
+Route::get('products', 'ProductController@index')->name('products.index');
+
+Route::get('education/create-step-one',[EducationController::class, 'createStepOne'])->name('education.create.step.one');
+Route::post('education/create-step-one',[EducationController::class, 'postCreateStepOne'])->name('education.create.step.one.post');
+
+Route::get('education/create-step-two',  [EducationController::class, 'createStepTwo'])->name('education.create.step.two');
+Route::post('education/create-step-two', [EducationController::class, 'postCreateStepTwo'])->name('education.create.step.two.post');
+
+Route::get('education/create-step-three', 'EducationController@createStepThree')->name('products.create.step.three');
+Route::post('education/create-step-three', 'EducationController@postCreateStepThree')->name('products.create.step.three.post');
+
 

@@ -35,7 +35,7 @@
         <div class="card-body">
           <ul class="list-group">
           <li class="list-group-item"><a href="{{ route('dashboard') }}"><i class="fa fa-eye"></i> View Profile</a></li> 
-          <li class="list-group-item"><a href="{{ route('update-profile') }}"><i class="fa fa-pencil"></i> Edit Profile</a></li>
+          <li class="list-group-item"><a href="{{ route('education.create.step.one') }}"><i class="fa fa-pencil"></i> Edit Profile</a></li>
           </ul>
         </div>
       </div>

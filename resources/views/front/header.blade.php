@@ -19,7 +19,7 @@
       <link rel="stylesheet" href="{{asset('assets/front/css/aos.css')}}">
       <link href="{{asset('assets/front/css/jquery.mb.YTPlayer.min.css')}}" media="all" rel="stylesheet" type="text/css">
       <link rel="stylesheet" href="{{asset('assets/front/css/style.css')}}">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"/>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"/>  
       <meta name="csrf-token" content="{{ csrf_token() }}" />
     </head>
     <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">

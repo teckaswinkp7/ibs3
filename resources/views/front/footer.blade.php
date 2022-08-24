@@ -49,6 +49,7 @@
   </div>
   <!-- .site-wrap -->
   <script src="{{asset('assets/front/js/jquery-3.3.1.min.js')}}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="{{asset('assets/front/js/jquery-migrate-3.0.1.min.js')}}"></script>
   <script src="{{asset('assets/front/js/jquery-ui.js')}}"></script>
   <script src="{{asset('assets/front/js/popper.min.js')}}"></script>
@@ -66,5 +67,6 @@
   <script src="{{asset('assets/front/js/main.js')}}"></script>
   <script src="{{asset('assets/front/js/timer.js')}}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/js/all.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
   </body>
 </html>
