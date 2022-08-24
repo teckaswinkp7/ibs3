@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Session;
 use App\Models\User;
+use App\Models\Education;
 use App\Models\Role;
 use Hash;
 class UserController extends Controller
@@ -64,8 +65,10 @@ class UserController extends Controller
     */
     public function show(User $user)
     {
-    $role = Role::all();         
-    return view('admin/user.show',compact('user','role'));
+    //$role = Role::all();
+    $id = Auth::user()->id;
+    $student_edu = Education::where('stu_id',$id)->get();          
+    return view('admin/user.show',compact('user','student_edu'));
     } 
     /**
     * Show the form for editing the specified resource.

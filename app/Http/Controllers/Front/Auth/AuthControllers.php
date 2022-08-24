@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Education;
 use App\Mail\SendEmail;
 use Illuminate\Support\Facades\Mail;
 use Hash;
@@ -122,7 +123,13 @@ class AuthControllers extends Controller
     {
         if(Auth::check()){
             if(Auth::user()->is_email_verified == 1){
-            return view('front/dashboard');
+            //$id=2;    
+            //$edu = Education::findOrFail($id);  
+            //dd($edu);   
+            $id = Auth::user()->id;
+         
+            $student_edu = Education::where('stu_id',$id)->get();                       
+            return view('front/dashboard')->with('student_edu',$student_edu);
             }
         }
         return redirect("login")->withSuccess('Opps! You do not have access');
@@ -145,7 +152,7 @@ class AuthControllers extends Controller
       return User::create([
         'name' => $data['name'],
         'phone' => $data['phone'],
-        'user_role' => '28',
+        'user_role' => '1',
         'email' => $data['email'],
         'password' => Hash::make($data['password'])
       ]);

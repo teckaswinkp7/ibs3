@@ -13,7 +13,7 @@
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                   <li class="breadcrumb-item"><a href="{{route('admin-dashboard')}}">Home</a></li>
-                  <li class="breadcrumb-item active">Update Role</li>
+                  <li class="breadcrumb-item active">Update User</li>
                 </ol>
               </div>
             </div>
@@ -36,11 +36,11 @@
                             {{ session('status') }}
                             </div>
                         @endif
-                        <div class="row">
-                            <div class="col-md-12">
+                        <div class="row"> 
+                        <div class="col-md-12">
                               <div class="form-group">
-                                <label>User Id</label>
-                                <input type="text" value="{{ $user->uid }}" name="name"  class="form-control" readonly>
+                                <label>Name</label>
+                                <input type="text" value="{{ $user->name }}" name="name" class="form-control"  readonly>
                               </div>
                             </div> 
                             <div class="col-md-12">
@@ -50,23 +50,44 @@
                               </div>
                             </div> 
                             <div class="col-md-12">
-                                <div class="form-group">
-                                  <label>User Role</label>
-                                   <select name="user_role" id="user_role" class="form-control" disabled>
-                                    @foreach($role as $key=>$cat_data)
-                                    @foreach ($user->role as $cat)
-                                    @if($cat_data->id==$cat->id)
-                                    <option value='{{$cat_data->id}}'>{{$cat_data->name}}</option>
-                                    @else
-                                    <option value='{{$cat_data->id}}'>{{$cat_data->name}}</option>
-                                    @endif  
-                                    @endforeach
-                                    @endforeach
-                                    </select>
-                                </div>
-                              </div>  
-                            </div>
-                            <!-- /.row -->
+                              <div class="form-group">
+                                <label>Phone</label>
+                                <input type="text" value="{{ $user->phone }}" name="phone" class="form-control"  readonly>
+                              </div>
+                            </div> 
+                            <table  class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                  <th>Sl.No.</th>
+                  <th>Qualification</th>
+                  <th>Board</th>
+                  <th>Percentage</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <?php $_SESSION['i'] = 0; ?>                        
+                  @foreach ($student_edu as $user)
+                  <?php $_SESSION['i']=$_SESSION['i']+1; ?>
+                    <tr>
+                      <?php $dash=''; ?>
+                      <td>{{$_SESSION['i']}}</td>
+                      <td>{{ $user->qualification }}</td>
+                      <td>{{ $user->board }}</td>
+                      <td>{{ $user->percentage }}</td>
+                      
+                    </tr> 
+                  @endforeach
+                  <?php unset($_SESSION['i']); ?>    
+                  </tbody>
+                  <tfoot>
+                  <tr>
+                  <th>Sl.No.</th>
+                  <th>Qualification</th>
+                  <th>Board</th>
+                  <th>Percentage</th>
+                  </tr>
+                  </tfoot>
+                </table>
                         </div>
                     </div>
                     <!-- /.card-body -->
