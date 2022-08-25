@@ -1,10 +1,9 @@
 <?php
-
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 use App\Models\Courses;
 use App\Models\Category;
 use Illuminate\Http\Request;
-
 
 class CoursesController extends Controller
 {
@@ -16,7 +15,7 @@ class CoursesController extends Controller
     public function index()
     {
         $data['courses'] = Courses::orderBy('id','desc')->paginate(5);
-        return view('courses.index', $data);
+        return view('admin\courses.index', $data);
         //return view('categories.index', compact('categories'));
     }
     /**
@@ -28,7 +27,7 @@ class CoursesController extends Controller
     {
        $category=Category::where('parent_id', null)->orderby('name', 'asc')->get();
        $subcategory=Category::whereNotNull('parent_id')->get();
-       return view('courses.create')->with('category',$category)->with('subcategory',$subcategory);
+       return view('admin\courses.create')->with('category',$category)->with('subcategory',$subcategory);
         //return view('categories.create');
     }
     public function subCat(Request $request)

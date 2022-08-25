@@ -1,6 +1,6 @@
-@extends('admin\header')  
+@extends('admin/header')  
 @section('content')
-@include('admin\leftsidebar') 
+@include('admin/leftsidebar') 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -8,12 +8,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1><a class="btn btn-success" href="{{ route('user.create') }}"> Create User</a></h1>
+            <h1><a class="btn btn-success" href="{{ route('courses.create') }}"> Create Course</a></h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{route('admin-dashboard')}}">Home</a></li>
-              <li class="breadcrumb-item active">Manage User</li>
+              <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
+              <li class="breadcrumb-item active">Manage Course</li>
             </ol>
           </div>
         </div>
@@ -26,7 +26,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Manage User</h3>
+                <h3 class="card-title">Manage Course</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -34,35 +34,24 @@
                   <thead>
                   <tr>
                   <th>Sl.No.</th>
-                  <th>Email</th>
-                  <th>Role</th>
+                  <th>Course Name</th>
+                  <th>Description</th>
                   <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
                   <?php $_SESSION['i'] = 0; ?>                        
-                  @foreach ($users as $user)
+                  @foreach ($courses as $course)
                   <?php $_SESSION['i']=$_SESSION['i']+1; ?>
                     <tr>
                       <?php $dash=''; ?>
                       <td>{{$_SESSION['i']}}</td>
-                      <td>{{ $user->email }}</td>
+                      <td>{{ $course->name }}</td>
+                      <td>{{ strip_tags(Str::limit($course->description,30,'...')) }}</td>
                       <td>
-                      @foreach($role as $key=>$cat_data)
-                      @foreach ($user->role as $cat)
-                      @if($cat_data->id==$cat->id)
-                      {{$cat_data->name}}
-                      @endif 
-                      @endforeach
-                      @endforeach
-                      </td>
-                      <td>
-                        <form action="{{ route('user.destroy',$user->id) }}" method="Post">
-                          <a  href="{{ route('user.show',$user->id) }}">   
-                            <i class="fa-solid  fa-eye"></i>
-                          </a>
-                          &nbsp;
-                          <a  href="{{ route('user.edit',$user->id) }}"> 
+                        <form action="{{ route('courses.destroy',$course->id) }}" method="Post">
+                          <i class="fa-brands fa-readme"></i>
+                          <a  href="{{ route('courses.edit',$course->id) }}"> 
                             <i class="fa-solid fa-pen-to-square"></i>
                           </a>
                           @csrf
@@ -79,13 +68,12 @@
                   <tfoot>
                   <tr>
                   <th>Sl.No.</th>
-                  <th>Email</th>
-                  <th>Role</th>
+                  <th>Category Name</th>
+                  <th>Description</th>
                   <th>Action</th>
                   </tr>
                   </tfoot>
                 </table>
-                
               </div>
               <!-- /.card-body -->
             </div>
@@ -99,7 +87,7 @@
     </section>
     <!-- /.content -->
   </div>
-  @include('admin\footer') 
-  @endsection
+  @include('admin/footer')  
+@endsection
 </body>
 </html>  

@@ -13,7 +13,7 @@
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                   <li class="breadcrumb-item"><a href="{{route('admin-dashboard')}}">Home</a></li>
-                  <li class="breadcrumb-item active">Update User</li>
+                  <li class="breadcrumb-item active">Course Selection</li>
                 </ol>
               </div>
             </div>
@@ -25,7 +25,7 @@
             <!-- SELECT2 EXAMPLE -->
             <div class="card card-default">
               <div class="card-header">
-                <h3 class="card-title">View User</h3>
+                <h3 class="card-title">Course Selection</h3>
               </div>
                <!-- /.card-header -->
                 @csrf
@@ -55,44 +55,22 @@
                                 <input type="text" value="{{ $user->phone }}" name="phone" class="form-control"  readonly>
                               </div>
                             </div> 
-                            <table  class="table table-bordered table-striped">
-                  <thead>
-                  <tr>
-                  <th>Sl.No.</th>
-                  <th>Qualification</th>
-                  <th>Board</th>
-                  <th>Percentage</th>
-                  <th>Document</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <?php $_SESSION['i'] = 0; ?>                        
-                  @foreach ($student_edu as $user)
-                  <?php $_SESSION['i']=$_SESSION['i']+1; ?>
-                    <tr>
-                      <?php $dash=''; ?>
-                      <td>{{$_SESSION['i']}}</td>
-                      <td>{{ $user->qualification }}</td>
-                      <td>{{ $user->board }}</td>
-                      <td>{{ $user->percentage }}</td>
-                      <td><a href="{{Url('public/Image')}}/{{ $user->document }}" target="_blank"><img src="{{Url('public/Image')}}/{{ $user->document }}" style="width:100px;height:100px;"></a></td>
-                    </tr> 
-                  @endforeach
-                  <?php unset($_SESSION['i']); ?>    
-                  </tbody>
-                  <tfoot>
-                  <tr>
-                  <th>Sl.No.</th>
-                  <th>Qualification</th>
-                  <th>Board</th>
-                  <th>Percentage</th>
-                  <th>Document</th>
-                  </tr>
-                  </tfoot>
-                </table>
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <label>Please Select Course</label><br/>
+                                @foreach ($course as $courses)
+                                <input type="checkbox" name="is_name">
+                                <label class="check">&nbsp;{{ $courses->name }}</label><br/>
+                                @endforeach  
+                              </div>
+                            </div> 
+                            
                         </div>
                     </div>
                     <!-- /.card-body -->
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
             </div>
             <!-- /.card -->
           </div>

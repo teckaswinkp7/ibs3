@@ -161,7 +161,24 @@
                   </li>
                 </ul>
             </li>
-           
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-edit"></i>
+                  <p>
+                    Course Selection &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <!--<i class="fas fa-angle-left right"></i>-->
+                    <i class="fas fa-angle-down"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{route('screening.index')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Manage Course Selection</p>
+                    </a>
+                  </li>
+                </ul>
+            </li>
         </ul>
     </nav>
     <!-- /.sidebar-menu -->

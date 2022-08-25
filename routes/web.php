@@ -10,6 +10,7 @@ use App\Http\Controllers\Front\WelcomeController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Front\EducationController;
+use App\Http\Controllers\Admin\ScreeningController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,7 +48,8 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('admin/user', UserController::class);
 });
-Route::post('admin/subcat', 'App\Http\Controllers\CoursesController@subCat')->name('subcat');
+Route::get('admin/screening', 'App\Http\Controllers\Admin\ScreeningController@index')->name('screening.index');
+Route::post('admin/subcat', 'App\Http\Controllers\Admin\CoursesController@subCat')->name('subcat');
 Route::get('education-profile', [EducationController::class, 'index']);
 Route::post('edit-profile', [EducationController::class, 'store']);
 Route::get('products', 'ProductController@index')->name('products.index');

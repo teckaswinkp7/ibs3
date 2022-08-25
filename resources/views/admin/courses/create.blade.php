@@ -1,6 +1,6 @@
-@extends('header')  
+@extends('admin\header')  
 @section('content')
-@include('leftsidebar') 
+@include('admin\leftsidebar') 
  <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper" style="min-height:1545px !important;">
         <!-- Content Header (Page header) -->
@@ -138,7 +138,7 @@
         <!-- /.content -->
       </div>
       <!-- /.content-wrapper -->
-@include('footer')
+@include('admin\footer')
 <script type="text/javascript">
     $.ajaxSetup({
     headers: {

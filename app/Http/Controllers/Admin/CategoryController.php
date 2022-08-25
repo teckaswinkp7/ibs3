@@ -1,6 +1,6 @@
 <?php
-
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 class CategoryController extends Controller
@@ -13,7 +13,7 @@ class CategoryController extends Controller
     public function index()
     {
     $data['categories'] = Category::orderBy('id','desc')->paginate(5);
-    return view('categories.index', $data);
+    return view('admin\categories.index', $data);
     //return view('categories.index', compact('categories'));
     }
     /**
@@ -24,7 +24,7 @@ class CategoryController extends Controller
     public function create(Request $request)
     {
         $categories = Category::where('parent_id', null)->orderby('name', 'asc')->get();
-        return view('categories.create', compact('categories'));
+        return view('admin\categories.create', compact('categories'));
         
         //return view('categories.create');
     }
@@ -80,7 +80,7 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);    
         //$categories = Category::where('parent_id', null)->where('id', '!=', $category->id); 
         $categories = Category::where('parent_id', null)->where('id', '!=', $category->id)->orderby('name', 'asc')->get();
-        return view('categories.edit', compact('category', 'categories'));
+        return view('admin\categories.edit', compact('category', 'categories'));
     }
            
     /**
