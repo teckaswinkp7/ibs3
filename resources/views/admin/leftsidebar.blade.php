@@ -161,16 +161,23 @@
                   </li>
                 </ul>
             </li>
+            
             <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon fas fa-edit"></i>
                   <p>
-                    Course Selection &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                   Enrollment Officer &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <!--<i class="fas fa-angle-left right"></i>-->
                     <i class="fas fa-angle-down"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{route('enrollment.index')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Document Verification</p>
+                    </a>
+                  </li>
                   <li class="nav-item">
                     <a href="{{route('screening.index')}}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>

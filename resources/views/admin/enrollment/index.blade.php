@@ -13,7 +13,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{route('admin-dashboard')}}">Home</a></li>
-              <li class="breadcrumb-item active">Manage Course Selection</li>
+              <li class="breadcrumb-item active">Manage Document Verification</li>
             </ol>
           </div>
         </div>
@@ -26,7 +26,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Manage Course Selection</h3>
+                <h3 class="card-title">Manage Document Verification</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -43,20 +43,20 @@
                   <?php $_SESSION['i'] = 0; ?>                        
                   @foreach ($users as $user)
                   @foreach ($educat as $edu)
-                  @if($edu->status == 1)
+                  @if($edu->status == 0)
                   <?php $_SESSION['i']=$_SESSION['i']+1; ?>
                     <tr>
                       <?php $dash=''; ?>
                       <td>{{$_SESSION['i']}}</td>
                       <td>{{ $user->email }}</td>
                       <td>
-                      @if($edu->status == 1)
-                      <p style="color:green;font-weight:bold;">Verified</p>
+                      @if($edu->status == 0)
+                      <p style="color:red;font-weight:bold;">Not Verified</p>
                       @endif
                       </td>
                       <td>
                         <form action="{{ route('user.destroy',$user->id) }}" method="Post">
-                          <a  href="{{ route('screening.course',$user->id) }}">   
+                          <a  href="{{ route('enroll.verify',$user->id) }}">   
                             <i class="fa-solid  fa-eye"></i>
                           </a>
                           &nbsp;
@@ -66,7 +66,6 @@
                       </td>
                     </tr>
                   @endif 
-                
                   @endforeach
                   @endforeach
                   <?php unset($_SESSION['i']); ?>    

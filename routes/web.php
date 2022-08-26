@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Front\EducationController;
 use App\Http\Controllers\Admin\ScreeningController;
+use App\Http\Controllers\Admin\DocumentVerificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,11 +50,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('admin/user', UserController::class);
 });
 Route::get('admin/screening', 'App\Http\Controllers\Admin\ScreeningController@index')->name('screening.index');
+Route::get('admin/enrollment/', 'App\Http\Controllers\Admin\DocumentVerificationController@index')->name('enrollment.index');
+Route::get('admin/enrollment/verify/{id}', 'App\Http\Controllers\Admin\DocumentVerificationController@verify')->name('enroll.verify');
+Route::post('admin/enrollment/store', [DocumentVerificationController::class, 'store'])->name('enrollment.store');
+Route::post('admin/screening/store', [ScreeningController::class, 'store'])->name('screening.store');
+Route::get('admin/screening/course/{id}', [ScreeningController::class, 'course'])->name('screening.course');
 Route::post('admin/subcat', 'App\Http\Controllers\Admin\CoursesController@subCat')->name('subcat');
 Route::get('education-profile', [EducationController::class, 'index']);
 Route::post('edit-profile', [EducationController::class, 'store']);
 Route::get('products', 'ProductController@index')->name('products.index');
-
 Route::get('education/create-step-one',[EducationController::class, 'createStepOne'])->name('education.create.step.one');
 Route::post('education/create-step-one',[EducationController::class, 'postCreateStepOne'])->name('education.create.step.one.post');
 
