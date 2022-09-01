@@ -8,8 +8,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Courses;
 use App\Models\Education;
+use App\Models\Courseselection;
 use App\Mail\SendEmail;
+use App\Models\Studentcourse;
 use Illuminate\Support\Facades\Mail;
 use Hash;
 class AuthControllers extends Controller
@@ -114,6 +117,7 @@ class AuthControllers extends Controller
         }
     }
     
+
     /**
      * Write code on Method
      *
@@ -122,15 +126,18 @@ class AuthControllers extends Controller
     public function dashboard()
     {
         if(Auth::check()){
-            if(Auth::user()->is_email_verified == 1){
-            //$id=2;    
-            //$edu = Education::findOrFail($id);  
-            //dd($edu);   
+            if(Auth::user()->is_email_verified == 1){  
             $id = Auth::user()->id;
-         
-            $student_edu = Education::where('stu_id',$id)->get();                       
-            return view('front/dashboard')->with('student_edu',$student_edu);
-            }
+            $student_edu = Education::where('stu_id',$id)->get(); 
+            $course_select = Courseselection::where('stu_id',$id)->pluck('course_id');
+            $course_selects=$course_select[0];
+            $course_sel=json_decode($course_selects);
+            foreach ($course_sel as $key => $value) {
+                $course_final_select[] = Courses::where('id',$value)->pluck('name');
+            } 
+            
+            return view('front/dashboard',compact('student_edu','course_final_select','course_sel'));
+        }
         }
         return redirect("login")->withSuccess('Opps! You do not have access');
     }
@@ -140,6 +147,19 @@ class AuthControllers extends Controller
         
         return view('front/profile');
             
+    }
+    public function studentCoursestore(Request $request)
+    {
+
+        $docum = new Studentcourse;
+        $course = $request->all();
+        $test=Studentcourse::create([
+            'stu_id'         => $request->stu_id,
+            'student_course_id'    => json_encode($request->student_course_id),
+        ]);
+
+        return redirect()->route('dashboard')
+        ->with('success','created successfully.');
     }
     
     /**

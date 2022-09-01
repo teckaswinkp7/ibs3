@@ -61,6 +61,7 @@ return array(
     'App\\Models\\Education' => $baseDir . '/app/Models/Education.php',
     'App\\Models\\Products' => $baseDir . '/app/Models/Products.php',
     'App\\Models\\Role' => $baseDir . '/app/Models/Role.php',
+    'App\\Models\\Studentcourse' => $baseDir . '/app/Models/Studentcourse.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',

@@ -157,4 +157,5 @@ class EducationController extends Controller
 
         return redirect()->route('education.index');
     }
+    
 }

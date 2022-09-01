@@ -58,6 +58,7 @@ Route::get('admin/screening/course/{id}', [ScreeningController::class, 'course']
 Route::post('admin/subcat', 'App\Http\Controllers\Admin\CoursesController@subCat')->name('subcat');
 Route::get('education-profile', [EducationController::class, 'index']);
 Route::post('edit-profile', [EducationController::class, 'store']);
+Route::post('student-course', [AuthControllers::class, 'studentCoursestore'])->name('student.course');
 Route::get('products', 'ProductController@index')->name('products.index');
 Route::get('education/create-step-one',[EducationController::class, 'createStepOne'])->name('education.create.step.one');
 Route::post('education/create-step-one',[EducationController::class, 'postCreateStepOne'])->name('education.create.step.one.post');
