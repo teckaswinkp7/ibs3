@@ -69,7 +69,7 @@
                 <a href="#" class="nav-link">
                   <i class="nav-icon fas fa-edit"></i>
                   <p>
-                    Role Management &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    Role Management 
                     <!--<i class="fas fa-angle-left right"></i>-->
                     <i class="fas fa-angle-down"></i>
                   </p>
@@ -93,8 +93,8 @@
                 <a href="#" class="nav-link">
                   <i class="nav-icon fas fa-edit"></i>
                   <p>
-                    User Management &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <!--<i class="fas fa-angle-left right"></i>-->
+                    User Management 
+                   
                     <i class="fas fa-angle-down"></i>
                   </p>
                 </a>
@@ -118,7 +118,6 @@
                   <i class="nav-icon fas fa-edit"></i>
                   <p>
                     Category Management
-                    <!--<i class="fas fa-angle-left right"></i>-->
                     <i class="fas fa-angle-down"></i>
                   </p>
                 </a>
@@ -142,7 +141,6 @@
                   <i class="nav-icon fas fa-edit"></i>
                   <p>
                     Course Management &nbsp;&nbsp;&nbsp;
-                    <!--<i class="fas fa-angle-left right"></i>-->
                     <i class="fas fa-angle-down"></i>
                   </p>
                 </a>
@@ -166,8 +164,7 @@
                 <a href="#" class="nav-link">
                   <i class="nav-icon fas fa-edit"></i>
                   <p>
-                   Enrollment Officer &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <!--<i class="fas fa-angle-left right"></i>-->
+                   Enrollment Officer 
                     <i class="fas fa-angle-down"></i>
                   </p>
                 </a>
@@ -182,6 +179,12 @@
                     <a href="{{route('screening.index')}}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Manage Course Selection</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('studentcourse.index')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Student Course Selection</p>
                     </a>
                   </li>
                 </ul>

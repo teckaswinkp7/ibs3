@@ -59,19 +59,24 @@
   </div>
   <div class="row">
     <h5>Course Details</h5>
-    <form action="{{ route('student.course') }}" method="POST">
-    @csrf  
     <div class="col-md-12">
-    <input type="hidden" value="{{ Auth::user()->id }}" name="stu_id" class="form-control"  readonly>
-      <ul>
-        @foreach ($course_final_select as $key => $cselect)
-        <input type="checkbox" id="student_course_id" name="student_course_id[]" value="{{$course_sel[$key]}}">
-        <label for="{{$cselect[0]}}">{{$cselect[0]}}</label><br>
-        @endforeach
-      </ul>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+      <form action="{{ route('student.course') }}" method="POST">
+       @csrf  
+        <input type="hidden" value="{{ Auth::user()->id }}" name="stu_id" class="form-control"  readonly>
+        <div class="form-group row">
+          <label for="username" class="col-4 col-form-label">Name*</label> 
+          <div class="col-8">
+            <select name="student_course_id" id="student_course_id" class="form-control">
+              @foreach ($course_final_select as $key => $cselect)
+              <option value="{{$course_sel[$key]}}">{{$cselect[0]}}</option>
+              @endforeach
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>  
+    </div>  
+   
   </div> 
 </div>
 </div>

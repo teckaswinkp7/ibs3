@@ -155,7 +155,7 @@ class AuthControllers extends Controller
         $course = $request->all();
         $test=Studentcourse::create([
             'stu_id'         => $request->stu_id,
-            'student_course_id'    => json_encode($request->student_course_id),
+            'student_course_id'    => $request->student_course_id,
         ]);
 
         return redirect()->route('dashboard')
