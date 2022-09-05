@@ -35,26 +35,18 @@
                   <tr>
                   <th>Sl.No.</th>
                   <th>Email</th>
-                  <th>Status</th>
                   <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <?php $_SESSION['i'] = 0; ?>                     
+                  <?php $_SESSION['i'] = 0; ?>                 
                   @foreach ($users as $user)
-                  @if($user->status == 1)
-                  @foreach ($educat as $edu)
-                  @if($edu->status == 1)
                   <?php $_SESSION['i']=$_SESSION['i']+1; ?>
                     <tr>
                       <?php $dash=''; ?>
                       <td>{{$_SESSION['i']}}</td>
                       <td>{{ $user->email }}</td>
-                      <td>
-                      @if($edu->status == 1)
-                      <p style="color:green;font-weight:bold;">Verified</p>
-                      @endif
-                      </td>
+                     
                       <td>
                         <form action="{{ route('user.destroy',$user->id) }}" method="Post">
                           <a  href="{{ route('screening.course',$user->id) }}">   
@@ -66,9 +58,6 @@
                         </form>
                       </td>
                     </tr>
-                  @endif 
-                  @endforeach
-                  @endif 
                   @endforeach
                   <?php unset($_SESSION['i']); ?>    
                  
@@ -77,7 +66,6 @@
                   <tr>
                   <th>Sl.No.</th>
                   <th>Email</th>
-                  <th>Role</th>
                   <th>Action</th>
                   </tr>
                   </tfoot>

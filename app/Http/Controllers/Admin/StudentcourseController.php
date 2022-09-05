@@ -18,13 +18,15 @@ class StudentcourseController extends Controller
     public function index()
     {
         $id = Auth::user()->id; 
-        $users = User::where('id',$id) ->get();
+        //$users = User::where('id',$id) ->get();
+        $users = User::where('user_role',2)->where('status',5)->get();
+        $uid=$users[0]->id;
         $student_course= Studentcourse::select(
             "studentcourses.student_course_id", 
             "studentcourses.stu_id", 
             "courses.name as courses_name"
         )
-        ->join("courses", "courses.id", "=", "studentcourses.student_course_id")
+        ->join("courses", "courses.id", "=", "studentcourses.student_course_id")->where('studentcourses.stu_id','=',$uid)
         ->get();      
     return view('admin\stucourse.index',compact('student_course','users'));
     }
@@ -54,6 +56,8 @@ class StudentcourseController extends Controller
             'offer_course_id'    => $request->offer_course_id,
             'course_offer_description'    => $request->course_offer_description,
         ]);
+        $id=$request->stu_id;
+        $status = User::where('id', $id)->update(array('status' => 6));
         $data = array('offer_desc'=>"$request->course_offer_description",'offer'=> $offer);  
         Mail::to($request->stu_email)->send(new OfferEmail($data));
         return redirect()->route('screening.index')

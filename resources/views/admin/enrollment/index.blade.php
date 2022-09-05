@@ -35,25 +35,17 @@
                   <tr>
                   <th>Sl.No.</th>
                   <th>Email</th>
-                  <th>Status</th>
-                  <th>Action</th>
+                  <th>Verify</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <?php $_SESSION['i'] = 0; ?>                        
+                  <?php $_SESSION['i'] = 0; ?>                       
                   @foreach ($users as $user)
-                  @foreach ($educat as $edu)
-                  @if($edu->status == 0)
                   <?php $_SESSION['i']=$_SESSION['i']+1; ?>
                     <tr>
                       <?php $dash=''; ?>
                       <td>{{$_SESSION['i']}}</td>
                       <td>{{ $user->email }}</td>
-                      <td>
-                      @if($edu->status == 0)
-                      <p style="color:red;font-weight:bold;">Not Verified</p>
-                      @endif
-                      </td>
                       <td>
                         <form action="{{ route('user.destroy',$user->id) }}" method="Post">
                           <a  href="{{ route('enroll.verify',$user->id) }}">   
@@ -65,16 +57,14 @@
                         </form>
                       </td>
                     </tr>
-                  @endif 
                   @endforeach
-                  @endforeach
+                 
                   <?php unset($_SESSION['i']); ?>    
                   </tbody>
                   <tfoot>
                   <tr>
                   <th>Sl.No.</th>
                   <th>Email</th>
-                  <th>Role</th>
                   <th>Action</th>
                   </tr>
                   </tfoot>

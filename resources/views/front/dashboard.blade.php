@@ -44,7 +44,7 @@
           <th>Percentage</th>
           </tr>
           </thead>
-          <tbody>
+          <tbody> 
           @foreach ($student_edu as $cat)
           <tr>
           <td>{{ $cat->qualification }}</td>
@@ -83,10 +83,29 @@
         <button type="submit" class="btn btn-primary">Submit</button>
         @endif
       </form>  
+</div>
+@if($studentcourse[0]->status == 1)
+    <div class="col-md-12" style="display:none;">
+      <form action="{{ route('student.course') }}" method="POST">
+       @csrf  
+        <input type="hidden" value="{{ Auth::user()->id }}" name="stu_id" class="form-control">
+        <div class="form-group row">
+          <label for="username" class="col-4 col-form-label">Name*</label> 
+          <div class="col-8">
+            <select name="student_course_id" id="student_course_id" class="form-control">
+              @foreach ($course_final_select as $key => $cselect)
+              <option value="{{$course_sel[$key]}}">{{$cselect[0]}}</option>
+              @endforeach
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>  
     
     </div>  
-   
+  @endif  
   </div> 
+  
   <div class="row">
     <h5>Course Offer Details</h5>
     <div class="col-md-12">
@@ -108,7 +127,6 @@
         <p>Not Approved</p>
         @endif
     </div>  
-   
   </div> 
 </div>
 </div>

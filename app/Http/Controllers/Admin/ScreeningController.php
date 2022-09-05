@@ -15,11 +15,9 @@ class ScreeningController extends Controller
     //
     public function index()
     {
-    $id = Auth::user()->id; 
-    $users = User::where('user_role',2) ->get();
-    $educat = Document::all();
-    $courseselect = Courseselection::where('stu_id', $id);          
-    return view('admin\screening.index',compact('users','educat','courseselect'));
+    $users = User::where('user_role',2)->where('status',3)->get();
+    $educat = Document::where('status',1)->get();          
+    return view('admin\screening.index',compact('users','educat'));
     }
 
     public function course($id)
@@ -34,10 +32,12 @@ class ScreeningController extends Controller
 
         $docum = new Courseselection;
         $course = $request->all();
+        $id=$request->stu_id;
         $studentcourseselect=Courseselection::create([
             'stu_id'         => $request->stu_id,
             'course_id'    => json_encode($request->course_id),
         ]);
+        $status = User::where('id', $id)->update(array('status' => 4));
         return redirect()->route('screening.index')
         ->with('success','created successfully.');
     }

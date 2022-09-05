@@ -129,20 +129,67 @@ class AuthControllers extends Controller
         if(Auth::check()){
             if(Auth::user()->is_email_verified == 1){  
             $id = Auth::user()->id;
-            $student_edu = Education::where('stu_id',$id)->get(); 
-            $course_select = Courseselection::where('stu_id',$id)->pluck('course_id');
-            $student_course_offer=Studentcourseoffer::where('stu_id',$id)->get();
-            $course_selects=$course_select[0];
-            $course_sel=json_decode($course_selects);
-            foreach ($course_sel as $key => $value) {
-                $course_final_select[] = Courses::where('id',$value)->pluck('name');
+            $users = User::where('id',$id)->get();
+            if($users[0]->status==1){
+            return view('front/dashboard');
+            }
+            if($users[0]->status==2){
+                $student_edu = Education::where('stu_id',$id)->get();
+                return view('front/dashboard',compact('student_edu'));
             } 
-            $studentcourse=Studentcourse::where('stu_id',$id)->get();
-            return view('front/dashboard',compact('student_edu','course_final_select','course_sel','student_course_offer','studentcourse'));
+            if($users[0]->status==3){
+                $student_edu = Education::where('stu_id',$id)->get();
+                return view('front/dashboard',compact('student_edu'));
+            } 
+            if($users[0]->status==4){
+                $student_edu = Education::where('stu_id',$id)->get();
+                $course_select = Courseselection::where('stu_id',$id)->pluck('course_id');
+                $course_selects=$course_select[0];
+                $course_sel=json_decode($course_selects);
+                foreach ($course_sel as $key => $value) {
+                    $course_final_select[] = Courses::where('id',$value)->pluck('name');
+                }
+                return view('front/dashboard',compact('student_edu','course_final_select','course_sel'));
+            } 
+            if($users[0]->status==5){
+                $student_edu = Education::where('stu_id',$id)->get();
+                $course_select = Courseselection::where('stu_id',$id)->pluck('course_id');
+                $course_selects=$course_select[0];
+                $course_sel=json_decode($course_selects);
+                foreach ($course_sel as $key => $value) {
+                    $course_final_select[] = Courses::where('id',$value)->pluck('name');
+                }
+                $studentcourse=Studentcourse::where('stu_id',$id)->get();
+                return view('front/dashboard',compact('student_edu','course_final_select','course_sel','studentcourse'));
+            }  
+            if($users[0]->status==6){
+                $student_edu = Education::where('stu_id',$id)->get();
+                $course_select = Courseselection::where('stu_id',$id)->pluck('course_id');
+                $course_selects=$course_select[0];
+                $course_sel=json_decode($course_selects);
+                foreach ($course_sel as $key => $value) {
+                    $course_final_select[] = Courses::where('id',$value)->pluck('name');
+                }
+                $studentcourse=Studentcourse::where('stu_id',$id)->get();
+                $student_course_offer=Studentcourseoffer::where('stu_id',$id)->get();
+                return view('front/dashboard',compact('student_edu','course_final_select','course_sel','studentcourse','student_course_offer'));
+            }       
+            //$course_select = Courseselection::where('stu_id',$id)->pluck('course_id');
+            //$student_course_offer=Studentcourseoffer::where('stu_id',$id)->get();
+            //$course_selects=$course_select[0];
+            //$course_sel=json_decode($course_selects);
+            /*foreach ($course_sel as $key => $value) {
+                $course_final_select[] = Courses::where('id',$value)->pluck('name');
+            }*/ 
+            //$studentcourse=Studentcourse::where('stu_id',$id)->get();
+            //return view('front/dashboard',compact('student_edu','course_final_select','course_sel','student_course_offer','studentcourse'));
+  
         }
         }
         return redirect("login")->withSuccess('Opps! You do not have access');
     }
+
+  
 
     public function profile()
     {
@@ -161,6 +208,7 @@ class AuthControllers extends Controller
         ]);
         $studentcourseId = $studentcourse->id;
         $status = Studentcourse::where('id', $studentcourseId)->update(array('status' => 1));
+        $status = User::where('id', $id)->update(array('status' => 5));
         return redirect()->route('dashboard')
         ->with('success','created successfully.');
     }
@@ -175,8 +223,9 @@ class AuthControllers extends Controller
       return User::create([
         'name' => $data['name'],
         'phone' => $data['phone'],
-        'user_role' => '1',
-        'email' => $data['email'],
+        'user_role' => '2',
+        'status' =>'1',
+        'email' => $data['email'],  
         'password' => Hash::make($data['password'])
       ]);
     }

@@ -63,10 +63,11 @@ class UserController extends Controller
     * @param  \App\company  $company
     * @return \Illuminate\Http\Response
     */
-    public function show(User $user)
+    public function show($id, Request $request)
     {
     //$role = Role::all();
-    $id = Auth::user()->id;
+    
+    $user = User::findOrFail($id);
     $student_edu = Education::where('stu_id',$id)->get();          
     return view('admin/user.show',compact('user','student_edu'));
     } 

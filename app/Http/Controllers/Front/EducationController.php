@@ -120,6 +120,7 @@ class EducationController extends Controller
                     $education->document= $filename;
                 }
                 $education->save();   
+                $status = User::where('id', $id)->update(array('status' => 2));
                 return redirect()->route('dashboard');    
             }
             /*$file= $request->file('document');
