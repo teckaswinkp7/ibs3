@@ -15,12 +15,10 @@ class ScreeningController extends Controller
     //
     public function index()
     {
-    //$data['categories'] = Category::orderBy('id','desc')->paginate(5)
-    //$id = Auth::user()->id;
-    //$user = User::findOrFail($id); 
+    $id = Auth::user()->id; 
     $users = User::where('user_role',2) ->get();
     $educat = Document::all();
-    $courseselect = Courseselection::all();          
+    $courseselect = Courseselection::where('stu_id', $id);          
     return view('admin\screening.index',compact('users','educat','courseselect'));
     }
 
@@ -28,7 +26,7 @@ class ScreeningController extends Controller
     {
 
         $user = User::findOrFail($id);  
-        $course = Courses::all();     
+        $course = Courses::all();       
         return view('admin\screening.course',compact('user','course'));
     }
     public function store(Request $request)
@@ -36,7 +34,7 @@ class ScreeningController extends Controller
 
         $docum = new Courseselection;
         $course = $request->all();
-        Courseselection::create([
+        $studentcourseselect=Courseselection::create([
             'stu_id'         => $request->stu_id,
             'course_id'    => json_encode($request->course_id),
         ]);

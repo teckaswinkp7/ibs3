@@ -9,12 +9,16 @@ use App\Models\User;
 use App\Models\Courses;
 use App\Models\Studentcourse;
 use App\Models\Studentcourseoffer;
+use App\Mail\OfferEmail;
+use Illuminate\Support\Facades\Mail;
 use Hash;
 class StudentcourseController extends Controller
 {
     //
     public function index()
     {
+        $id = Auth::user()->id; 
+        $users = User::where('id',$id) ->get();
         $student_course= Studentcourse::select(
             "studentcourses.student_course_id", 
             "studentcourses.stu_id", 
@@ -22,7 +26,7 @@ class StudentcourseController extends Controller
         )
         ->join("courses", "courses.id", "=", "studentcourses.student_course_id")
         ->get();      
-    return view('admin\stucourse.index',compact('student_course',$student_course));
+    return view('admin\stucourse.index',compact('student_course','users'));
     }
     public function courseoffer()
     {
@@ -44,10 +48,14 @@ class StudentcourseController extends Controller
     {
         $offer = new Studentcourseoffer;
         $course_offer = $request->all();
-        Studentcourseoffer::create([
+        $offer=$request->course_offer_description;
+        $course_offer=Studentcourseoffer::create([
             'stu_id'         => $request->stu_id,
             'offer_course_id'    => $request->offer_course_id,
+            'course_offer_description'    => $request->course_offer_description,
         ]);
+        $data = array('offer_desc'=>"$request->course_offer_description",'offer'=> $offer);  
+        Mail::to($request->stu_email)->send(new OfferEmail($data));
         return redirect()->route('screening.index')
         ->with('success','created successfully.');
     }

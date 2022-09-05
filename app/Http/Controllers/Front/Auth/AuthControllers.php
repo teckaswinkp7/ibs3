@@ -13,6 +13,7 @@ use App\Models\Education;
 use App\Models\Courseselection;
 use App\Mail\SendEmail;
 use App\Models\Studentcourse;
+use App\Models\Studentcourseoffer;
 use Illuminate\Support\Facades\Mail;
 use Hash;
 class AuthControllers extends Controller
@@ -78,7 +79,7 @@ class AuthControllers extends Controller
         $subject="Registered User";
         $otp = rand(1000,9999);
         $user = User::where('email','=',$request->email)->update(['otp' => $otp]);
-
+        
         if($user){
             $data = array('otp' => $otp,'email' =>$request->email);
             Mail::to($request->email)->send(new SendEmail($data));
@@ -130,13 +131,14 @@ class AuthControllers extends Controller
             $id = Auth::user()->id;
             $student_edu = Education::where('stu_id',$id)->get(); 
             $course_select = Courseselection::where('stu_id',$id)->pluck('course_id');
+            $student_course_offer=Studentcourseoffer::where('stu_id',$id)->get();
             $course_selects=$course_select[0];
             $course_sel=json_decode($course_selects);
             foreach ($course_sel as $key => $value) {
                 $course_final_select[] = Courses::where('id',$value)->pluck('name');
             } 
-            
-            return view('front/dashboard',compact('student_edu','course_final_select','course_sel'));
+            $studentcourse=Studentcourse::where('stu_id',$id)->get();
+            return view('front/dashboard',compact('student_edu','course_final_select','course_sel','student_course_offer','studentcourse'));
         }
         }
         return redirect("login")->withSuccess('Opps! You do not have access');
@@ -153,11 +155,12 @@ class AuthControllers extends Controller
 
         $docum = new Studentcourse;
         $course = $request->all();
-        $test=Studentcourse::create([
+        $studentcourse=Studentcourse::create([
             'stu_id'         => $request->stu_id,
             'student_course_id'    => $request->student_course_id,
         ]);
-
+        $studentcourseId = $studentcourse->id;
+        $status = Studentcourse::where('id', $studentcourseId)->update(array('status' => 1));
         return redirect()->route('dashboard')
         ->with('success','created successfully.');
     }
@@ -188,5 +191,14 @@ class AuthControllers extends Controller
         Auth::logout();
   
         return Redirect('login');
+    }
+    public function approve($id){
+        $status = Studentcourseoffer::where('id', $id)->update(array('status' => 1));
+        return redirect()->back(); 
+    }
+     
+    public function decline($id){
+        $status = Studentcourseoffer::where('id', $id)->update(array('status' => 0));
+        return redirect()->back();
     }
 }

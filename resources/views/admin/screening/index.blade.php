@@ -40,8 +40,9 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <?php $_SESSION['i'] = 0; ?>                        
+                  <?php $_SESSION['i'] = 0; ?>                     
                   @foreach ($users as $user)
+                  @if($user->status == 1)
                   @foreach ($educat as $edu)
                   @if($edu->status == 1)
                   <?php $_SESSION['i']=$_SESSION['i']+1; ?>
@@ -66,10 +67,11 @@
                       </td>
                     </tr>
                   @endif 
-                
                   @endforeach
+                  @endif 
                   @endforeach
                   <?php unset($_SESSION['i']); ?>    
+                 
                   </tbody>
                   <tfoot>
                   <tr>

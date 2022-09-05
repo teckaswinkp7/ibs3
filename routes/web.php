@@ -60,7 +60,7 @@ Route::post('admin/subcat', 'App\Http\Controllers\Admin\CoursesController@subCat
 Route::get('education-profile', [EducationController::class, 'index']);
 Route::get('admin/studentcourse/', [StudentcourseController::class, 'index'])->name('studentcourse.index');
 Route::get('admin/studentcourse/courseoffer/{id}', [StudentcourseController::class, 'courseoffer'])->name('student.courseoffer');
-Route::get('admin/studentcourse/store/', [StudentcourseController::class, 'store'])->name('studentcourse.store');
+Route::post('admin/studentcourse/store/', [StudentcourseController::class, 'store'])->name('studentcourse.store');
 Route::post('edit-profile', [EducationController::class, 'store']);
 Route::post('student-course', [AuthControllers::class, 'studentCoursestore'])->name('student.course');
 Route::get('products', 'ProductController@index')->name('products.index');
@@ -72,5 +72,6 @@ Route::post('education/create-step-two', [EducationController::class, 'postCreat
 
 Route::get('education/create-step-three', 'EducationController@createStepThree')->name('products.create.step.three');
 Route::post('education/create-step-three', 'EducationController@postCreateStepThree')->name('products.create.step.three.post');
-
+Route::post('approve/{id}', [AuthControllers::class, 'approve'])->name('approve');
+Route::post('decline/{id}', [AuthControllers::class, 'decline'])->name('decline');
 

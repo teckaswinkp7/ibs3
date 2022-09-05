@@ -62,19 +62,51 @@
     <div class="col-md-12">
       <form action="{{ route('student.course') }}" method="POST">
        @csrf  
-        <input type="hidden" value="{{ Auth::user()->id }}" name="stu_id" class="form-control"  readonly>
+        <input type="hidden" value="{{ Auth::user()->id }}" name="stu_id" class="form-control">
         <div class="form-group row">
           <label for="username" class="col-4 col-form-label">Name*</label> 
           <div class="col-8">
-            <select name="student_course_id" id="student_course_id" class="form-control">
+            <select name="student_course_id" id="student_course_id" class="form-control" @if($studentcourse[0]->status == 1) disabled @endif>
               @foreach ($course_final_select as $key => $cselect)
+              @if($studentcourse[0]->status == 1)
+              <option value="{{$course_sel[$key]}}" @if($studentcourse[0]->student_course_id == $course_sel[$key] )  selected  @endif>{{$cselect[0]}}</option>
+              @else
               <option value="{{$course_sel[$key]}}">{{$cselect[0]}}</option>
+              @endif  
               @endforeach
             </select>
           </div>
         </div>
+        @if($studentcourse[0]->status == 1)
+        <button type="submit" class="btn btn-primary" style="display:none">Submit</button>
+        @else
         <button type="submit" class="btn btn-primary">Submit</button>
+        @endif
       </form>  
+    
+    </div>  
+   
+  </div> 
+  <div class="row">
+    <h5>Course Offer Details</h5>
+    <div class="col-md-12">
+        <p>{{$student_course_offer[0]->course_offer_description}}</p>
+        <input type="hidden" value="{{$student_course_offer[0]->stu_id}}" name="stu_id" class="form-control"  readonly>
+        <input type="hidden" value="{{$student_course_offer[0]->offer_course_id}}" name="student_course_id" class="form-control"  readonly>
+        @if($student_course_offer[0]->status == "NULL")
+        <form action="{{route('approve', $student_course_offer[0]->id)}}" method="POST">
+        @csrf  
+        <button type="submit" class="btn btn-success">Approve</button>
+        </form>
+        <form action="{{route('decline', $student_course_offer[0]->id)}}" method="POST">
+        @csrf  
+        <button type="submit" class="btn btn-danger">Decline</button>
+        </form>
+        @elseif($student_course_offer[0]->status == 1)
+        <p>Approved</p>
+        @else
+        <p>Not Approved</p>
+        @endif
     </div>  
    
   </div> 

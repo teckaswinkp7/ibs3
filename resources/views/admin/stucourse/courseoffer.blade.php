@@ -28,7 +28,7 @@
                 <h3 class="card-title">Student Course Offer</h3>
               </div>
                <!-- /.card-header -->
-               <form action="{{ route('studentcourse.store') }}" method="POST" enctype="multipart/form-data" class="mb-0" id="catform">
+               <form action="{{ route('studentcourse.store') }}" method="POST"  class="mb-0" id="catform">
                 @csrf    
                     <div class="card-body">
                         @if(session('status'))
