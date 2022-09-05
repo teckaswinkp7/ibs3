@@ -35,7 +35,7 @@
                   <tr>
                   <th>Sl.No.</th>
                   <th>Email</th>
-                  <th>Verify</th>
+                  <th>Verify </th>
                   </tr>
                   </thead>
                   <tbody>
