@@ -5,7 +5,7 @@
         <img src="{{asset('assets/front/images/img_avatar.png')}}" alt="Image" class="avatar">
       </div>
       <div class="pname">
-        <h4 class="mb-2 ml-3 profile-name">{{ ucwords(Auth::user()->name) }} Profile</h4>
+        <h4 class="mb-2 ml-3 profile-name">{{ ucwords(Auth::user()->name) }}</h4>
       </div>
     </div>
     <!-- Blue -->

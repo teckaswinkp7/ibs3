@@ -1,5 +1,12 @@
 @extends('front/header')  
 @section('content') 
+
+@if (Auth::check() && Auth::id() != 2)
+  <script>
+    window.location = "{{ route('update-profile') }}";
+  </script>
+@endif
+
 <div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image:url({{asset('assets/front/images/bg_1.jpg')}});">
   <div class="container">
     <div class="row align-items-end justify-content-center text-center">

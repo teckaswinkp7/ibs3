@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Courses;
 use App\Models\Studentcourse;
 use App\Models\Studentcourseoffer;
+use App\Models\Courseselection;
 use App\Mail\OfferEmail;
 use Illuminate\Support\Facades\Mail;
 use Hash;
@@ -17,22 +18,13 @@ class StudentcourseController extends Controller
     //
     public function index()
     {
-        $users = User::where('user_role',2)->where('status',5)->get();
-        if($users->isEmpty()){
-            return view('admin\stucourse.index');
-        }
-        else{
-        $uid=$users[0]->id;
-        $student_course = Studentcourse::select(
-        "studentcourses.student_course_id", 
-        "studentcourses.stu_id", 
-        "courses.name as courses_name"
-        )
-        ->join("courses", "courses.id", "=", "studentcourses.student_course_id")->where('studentcourses.stu_id','=',$uid)
-        ->get();    
-        return view('admin\stucourse.index',compact('student_course','users'));  
-        }        
+        $data = User::join('courseselections', 'courseselections.stu_id', '=', 'users.id')
+        ->where('courseselections.offer_generated', '=', 0)
+        ->get(['users.*','courseselections.studentSelCid']);
+               
+        return view('admin\stucourse.index', compact('data'));         
     }
+
     public function courseoffer()
     {
         $users = User::where('user_role',2)->where('status',5)->get();

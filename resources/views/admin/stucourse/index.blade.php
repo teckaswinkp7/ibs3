@@ -33,38 +33,33 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                  <th>Sl.No.</th>
+                  <th>SNo.</th>
                   <th>Student Name</th>
                   <th>Course</th>
                   <th>Offer Generate</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <?php $_SESSION['i'] = 0; ?>
-                  @if((!empty($users))&&(!empty($student_course)))
-                  @foreach($users as $user)               
-                  @foreach ($student_course as $course)
-                  <?php $_SESSION['i']=$_SESSION['i']+1; ?>
-                    <tr>
-                      <?php $dash=''; ?>
-                      <td>{{$_SESSION['i']}}</td>
-                      <td>{{ $user->name }}</td>
-                      <td>{{ $course->courses_name }}</td>
-                      <td>
-                        <form action="#" method="Post">
-                          <a  href="{{route('student.courseoffer',$course->stu_id) }}">   
-                            <i class="fa-solid  fa-eye"></i>
-                          </a>
-                          &nbsp;
-                          @csrf
-                          @method('DELETE')
-                        </form>
-                      </td>
-                    </tr>
-                  @endforeach
-                  @endforeach
-                  @endif
-                  <?php unset($_SESSION['i']); ?>    
+                    @php $i=1; @endphp
+                    @if((!empty($data)))
+                      @foreach($data as $key => $val)   
+                        <tr>
+                          <td>{{ $i++ }}</td>
+                          <td>{{ $val->name }}</td>
+                          <td>{{ $val->studentSelCid }}</td>
+                          <td>
+                            <form action="#" method="Post">
+                              <a  href="{{route('student.courseoffer',$val->id) }}">   
+                                <i class="fa-solid  fa-eye"></i>
+                              </a>
+                              &nbsp;
+                              @csrf
+                              @method('DELETE')
+                            </form>
+                          </td>
+                        </tr>
+                      @endforeach
+                    @endif   
                   </tbody>
                   <tfoot>
                   <tr>

@@ -45,7 +45,10 @@
           </tr>
           </thead>
           <tbody> 
-          @foreach ($student_edu as $cat)
+          @php
+            $student_education = DB::select( DB::raw("SELECT * FROM education WHERE stu_id = '".Auth::user()->id."'"));
+          @endphp
+          @foreach ($student_education as $cat)
           <tr>
           <td>{{ $cat->qualification }}</td>
           <td>{{ $cat->board }}</td>
@@ -57,6 +60,7 @@
       </form>
     </div>
   </div>
+
   <div class="row">
     <h5>Course Details</h5>
     <div class="col-md-12">
@@ -66,24 +70,42 @@
         <div class="form-group row">
           <label for="username" class="col-4 col-form-label">Name*</label> 
           <div class="col-8">
-            <select name="student_course_id" id="student_course_id" class="form-control" @if($studentcourse[0]->status == 1) disabled @endif>
-              @foreach ($course_final_select as $key => $cselect)
-              @if($studentcourse[0]->status == 1)
-              <option value="{{$course_sel[$key]}}" @if($studentcourse[0]->student_course_id == $course_sel[$key] )  selected  @endif>{{$cselect[0]}}</option>
+            <select name="student_course_id" id="student_course_id" class="form-control" required>
+              <option value="">--Select---</option>
+              @php
+                $course_list = DB::select( DB::raw("SELECT * FROM courseselections WHERE stu_id = '".Auth::user()->id."'"));
+              @endphp
+
+              @if(!empty($course_list))
+                @foreach($course_list as $cl)
+                  @php 
+                    $course_id = $cl->course_id;
+                    $studentSelCid = $cl->studentSelCid;
+                    $course_id = str_replace("[","",$course_id);
+                    $course_id = str_replace("]","",$course_id);
+                    $course_id = str_replace('"','',$course_id);
+                    $course_id_arr = explode(",",$course_id);
+                  @endphp
+                @endforeach
+                @foreach ($course_id_arr as $key => $val)
+                  <option value="{{ $val }}" {{ $studentSelCid == $val? 'selected="selected"' : "" }}>{{ $val }}</option>
+                @endforeach
               @else
-              <option value="{{$course_sel[$key]}}">{{$cselect[0]}}</option>
-              @endif  
-              @endforeach
+                @php
+                  $studentSelCid = 0;
+                @endphp
+              @endif
             </select>
           </div>
         </div>
-        @if($studentcourse[0]->status == 1)
-        <button type="submit" class="btn btn-primary" style="display:none">Submit</button>
-        @else
-        <button type="submit" class="btn btn-primary">Submit</button>
+
+        @if($studentSelCid == 0)
+          <button type="submit" class="btn btn-primary">Submit</button>
         @endif
+      
       </form>  
 </div>
+@php /*
 @if($studentcourse[0]->status == 1)
     <div class="col-md-12" style="display:none;">
       <form action="{{ route('student.course') }}" method="POST">
@@ -103,11 +125,13 @@
       </form>  
     
     </div>  
-  @endif  
+  @endif
+  */ @endphp  
   </div> 
   
   <div class="row">
     <h5>Course Offer Details</h5>
+    @php /*
     <div class="col-md-12">
         <p>{{$student_course_offer[0]->course_offer_description}}</p>
         <input type="hidden" value="{{$student_course_offer[0]->stu_id}}" name="stu_id" class="form-control"  readonly>
@@ -126,7 +150,8 @@
         @else
         <p>Not Approved</p>
         @endif
-    </div>  
+    </div> 
+    */ @endphp 
   </div> 
 </div>
 </div>
