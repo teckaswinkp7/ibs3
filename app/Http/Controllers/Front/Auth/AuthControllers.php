@@ -171,7 +171,8 @@ class AuthControllers extends Controller
                     $course_final_select[] = Courses::where('id',$value)->pluck('name');
                 }
                 $studentcourse=Studentcourse::where('stu_id',$id)->get();
-                $student_course_offer=Studentcourseoffer::where('stu_id',$id)->get();
+                $student_course_offer=Studentcourseoffer::where('stu_id',6)->get();
+                //dd($student_course_offer);
                 return view('front/dashboard',compact('student_edu','course_final_select','course_sel','studentcourse','student_course_offer'));
             }       
             //$course_select = Courseselection::where('stu_id',$id)->pluck('course_id');

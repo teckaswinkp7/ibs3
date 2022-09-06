@@ -40,14 +40,14 @@
                         <div class="col-md-12">
                               <div class="form-group">
                                 <label>Student Name</label>
-                                <input type="text" value="{{$student_course_offer[0]->name}}" name="stu_name" class="form-control"  readonly>
-                                <input type="hidden" value="{{$student_course_offer[0]->stu_id}}" name="stu_id" class="form-control"  readonly>
+                                <input type="text" value="{{$users[0]->name}}" name="stu_name" class="form-control"  readonly>
+                                <input type="hidden" value="{{$users[0]->id}}" name="stu_id" class="form-control"  readonly>
                               </div>
                             </div> 
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label>Email</label>
-                                <input type="text" value="{{$student_course_offer[0]->email}}" name="stu_email" class="form-control"  readonly>
+                                <input type="text" value="{{$users[0]->email}}" name="stu_email" class="form-control"  readonly>
                               </div>
                             </div> 
                             <div class="col-md-12">

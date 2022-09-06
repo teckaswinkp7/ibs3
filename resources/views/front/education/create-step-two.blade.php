@@ -110,7 +110,7 @@ $(document).ready(function () {
                 required: "This field is required",
             },
             'document[]': {
-                inputimage: "File must be JPG, PDF or PNG, less than 1MB",
+               inputimage: "File must be JPG, PDF or PNG, less than 1MB",
             }, 
         },
           errorElement: 'span',

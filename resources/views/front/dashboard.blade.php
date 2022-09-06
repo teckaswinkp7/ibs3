@@ -112,7 +112,7 @@
         <p>{{$student_course_offer[0]->course_offer_description}}</p>
         <input type="hidden" value="{{$student_course_offer[0]->stu_id}}" name="stu_id" class="form-control"  readonly>
         <input type="hidden" value="{{$student_course_offer[0]->offer_course_id}}" name="student_course_id" class="form-control"  readonly>
-        @if($student_course_offer[0]->status == "NULL")
+        @if(empty($student_course_offer[0]->status))
         <form action="{{route('approve', $student_course_offer[0]->id)}}" method="POST">
         @csrf  
         <button type="submit" class="btn btn-success">Approve</button>

@@ -34,25 +34,25 @@
                   <thead>
                   <tr>
                   <th>Sl.No.</th>
+                  <th>Student Name</th>
                   <th>Course</th>
-                  <th>Status</th>
                   <th>Offer Generate</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <?php $_SESSION['i'] = 0; ?>                  
-                  @foreach ($student_course as $user)
+                  <?php $_SESSION['i'] = 0; ?>
+                  @if((!empty($users))&&(!empty($student_course)))
+                  @foreach($users as $user)               
+                  @foreach ($student_course as $course)
                   <?php $_SESSION['i']=$_SESSION['i']+1; ?>
                     <tr>
                       <?php $dash=''; ?>
                       <td>{{$_SESSION['i']}}</td>
-                      <td>{{ $user->courses_name }}</td>
-                      <td>
-                     
-                      </td>
+                      <td>{{ $user->name }}</td>
+                      <td>{{ $course->courses_name }}</td>
                       <td>
                         <form action="#" method="Post">
-                          <a  href="{{ route('student.courseoffer',$user->stu_id) }}">   
+                          <a  href="{{route('student.courseoffer',$course->stu_id) }}">   
                             <i class="fa-solid  fa-eye"></i>
                           </a>
                           &nbsp;
@@ -62,7 +62,8 @@
                       </td>
                     </tr>
                   @endforeach
-                 
+                  @endforeach
+                  @endif
                   <?php unset($_SESSION['i']); ?>    
                   </tbody>
                   <tfoot>

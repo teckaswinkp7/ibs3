@@ -103,7 +103,6 @@ class EducationController extends Controller
         ]);*/
         $edu = new Education;
         $size = count(collect($request)->get('qualification'));
-        //dd($request->file('document'));
         for ($i = 0; $i < $size; $i++)
             {
                 //
