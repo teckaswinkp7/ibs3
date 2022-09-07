@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Education;
 use App\Models\User;
+use App\Models\Studentcourseoffer;
 use Illuminate\Support\Facades\Validator;
 class EducationController extends Controller
 {
@@ -155,6 +156,14 @@ class EducationController extends Controller
 
         $request->session()->forget('product');
 
+        return redirect()->route('education.index');
+    }
+
+    public function getCourseOffers()
+    {
+        $id = Auth::id();
+    	$userData = Studentcourseoffer::where('stu_id', $id)->get();
+        dd($userData);
         return redirect()->route('education.index');
     }
     

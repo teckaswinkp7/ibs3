@@ -13,6 +13,7 @@ use App\Models\Courseselection;
 use App\Mail\OfferEmail;
 use Illuminate\Support\Facades\Mail;
 use Hash;
+use DB;
 class StudentcourseController extends Controller
 {
     //
@@ -25,10 +26,16 @@ class StudentcourseController extends Controller
         return view('admin\stucourse.index', compact('data'));         
     }
 
-    public function courseoffer()
+    public function courseoffer($id)
     {
-        $users = User::where('user_role',2)->where('status',5)->get();
-        $uid=$users[0]->id;
+        //dd($id);
+        //$users = User::where('user_role',2)->where('status',5)->get();
+        $users = User::where('id',$id)->get();
+        //dd($users);
+        //$uid=$users[0]->id;
+        $uid=(int) $id;
+        //dd($uid);
+        //DB::enableQueryLog();
         $student_course_offer= Studentcourse::select(
             "studentcourses.student_course_id", 
             "studentcourses.stu_id",
@@ -38,6 +45,10 @@ class StudentcourseController extends Controller
         ->join("courses", "courses.id", "=", "studentcourses.student_course_id")
         ->where('studentcourses.stu_id','=',$uid)
         ->get(); 
+        //dd(student_course_offer);
+        
+        // $query = DB::getQueryLog();
+        // dd($query);
         return view('admin\stucourse.courseoffer',compact('student_course_offer','users'));
     }
     public function store(Request $request)
@@ -51,10 +62,12 @@ class StudentcourseController extends Controller
             'course_offer_description'    => $request->course_offer_description,
         ]);
         $id=$request->stu_id;
-        $status = User::where('id', $id)->update(array('status' => 6));
+        //$id = 10;
+        //$status = User::where('id', $id)->update(array('status' => 6));
         $data = array('offer_desc'=>"$request->course_offer_description",'offer'=> $offer);  
         Mail::to($request->stu_email)->send(new OfferEmail($data));
-        return redirect()->route('stucourse.index')
-        ->with('success','created successfully.');
+        //Mail::to('vedmanimoudgal@virtualemployee.com')->send(new OfferEmail($data));
+        return redirect('admin/studentcourse');
+        //->with('success','created successfully.');
     }
 }

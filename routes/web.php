@@ -66,6 +66,7 @@ Route::post('student-course', [AuthControllers::class, 'studentCoursestore'])->n
 Route::get('products', 'ProductController@index')->name('products.index');
 Route::get('education/create-step-one',[EducationController::class, 'createStepOne'])->name('education.create.step.one');
 Route::post('education/create-step-one',[EducationController::class, 'postCreateStepOne'])->name('education.create.step.one.post');
+Route::get('education/course-offer',[EducationController::class, 'getCourseOffers'])->name('education.course.offer');
 
 Route::get('education/create-step-two',  [EducationController::class, 'createStepTwo'])->name('education.create.step.two');
 Route::post('education/create-step-two', [EducationController::class, 'postCreateStepTwo'])->name('education.create.step.two.post');
