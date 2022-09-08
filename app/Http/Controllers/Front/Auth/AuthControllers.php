@@ -149,6 +149,12 @@ class AuthControllers extends Controller
         $id = Auth::id();
         $studentSelCid = $request->student_course_id;
         $status = Courseselection::where('stu_id', $id)->update(array('studentSelCid' => $studentSelCid));
+       
+        $studentcourse=Studentcourse::create([
+            'stu_id'            => $id,
+            'student_course_id' => $studentSelCid,
+            'status'            =>1,
+        ]);
         return redirect()->route('dashboard')
         ->with('success','created successfully.');
     }
@@ -181,6 +187,21 @@ class AuthControllers extends Controller
   
         return Redirect('login');
     }
+
+    public function approve_course()
+    {
+        $id = Auth::id();
+        $status = Courseselection::where('stu_id', $id)->update(array('offer_accepted' => 1));
+        return redirect()->back(); 
+    }
+
+    public function deny_course()
+    {
+        $id = Auth::id();
+        $status = Courseselection::where('stu_id', $id)->update(array('offer_accepted' => 2));
+        return redirect()->back(); 
+    }
+
     public function approve($id){
         $status = Studentcourseoffer::where('id', $id)->update(array('status' => 1));
         return redirect()->back(); 

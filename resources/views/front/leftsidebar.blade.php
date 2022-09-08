@@ -36,6 +36,8 @@
           <ul class="list-group">
           <li class="list-group-item"><a href="{{ route('dashboard') }}"><i class="fa fa-eye"></i> View Profile</a></li> 
           <li class="list-group-item"><a href="{{ route('education.create.step.one') }}"><i class="fa fa-pencil"></i> Edit Profile</a></li>
+          <li class="list-group-item"><a href="{{ route('dashboard') }}"><i class="fa fa-eye"></i> View Profile</a></li> 
+          <li class="list-group-item"><a href="{{ route('education.course.offer') }}"><i class="fa fa-graduation-cap"></i> Course Offer</a></li>
           </ul>
         </div>
       </div>

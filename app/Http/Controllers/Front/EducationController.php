@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Education;
 use App\Models\User;
 use App\Models\Studentcourseoffer;
+use App\Models\Studentcourse;
 use Illuminate\Support\Facades\Validator;
 class EducationController extends Controller
 {
@@ -162,9 +163,25 @@ class EducationController extends Controller
     public function getCourseOffers()
     {
         $id = Auth::id();
+        $student_course_offer= Studentcourse::select(
+            "studentcourses.student_course_id", 
+            "studentcourses.stu_id",
+            "studentcourses.student_course_id",            
+            "courses.name as courses_name",
+            "studentcourseoffers.course_offer_description",
+            "courseselections.offer_accepted",
+        )
+        ->join("courses", "courses.id", "=", "studentcourses.student_course_id")
+        ->join("studentcourseoffers","studentcourseoffers.stu_id", "=", "studentcourses.stu_id")
+        ->join("courseselections","courseselections.stu_id", "=", "studentcourses.stu_id")
+        ->where('studentcourses.stu_id','=',$id)
+        ->get(); 
+
     	$userData = Studentcourseoffer::where('stu_id', $id)->get();
-        dd($userData);
-        return redirect()->route('education.index');
+        //dd($userData);
+        //dd($student_course_offer);
+        return view('front\education\course-offer',compact('student_course_offer','userData'));
+        //return redirect()->route('education.course.offer','userData','student_course_offer');
     }
     
 }

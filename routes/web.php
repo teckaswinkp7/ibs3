@@ -76,3 +76,6 @@ Route::post('education/create-step-three', 'EducationController@postCreateStepTh
 Route::post('approve/{id}', [AuthControllers::class, 'approve'])->name('approve');
 Route::post('decline/{id}', [AuthControllers::class, 'decline'])->name('decline');
 
+Route::get('education/courseApproved', [AuthControllers::class, 'approve_course'])->name('courseApproved');
+Route::get('education/courseDenied', [AuthControllers::class, 'deny_course'])->name('courseDenied');
+

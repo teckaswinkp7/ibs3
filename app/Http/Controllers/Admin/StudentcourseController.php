@@ -64,6 +64,7 @@ class StudentcourseController extends Controller
         $id=$request->stu_id;
         //$id = 10;
         //$status = User::where('id', $id)->update(array('status' => 6));
+        $status = Courseselection::where('stu_id', $id)->update(array('offer_generated' => 1));
         $data = array('offer_desc'=>"$request->course_offer_description",'offer'=> $offer);  
         Mail::to($request->stu_email)->send(new OfferEmail($data));
         //Mail::to('vedmanimoudgal@virtualemployee.com')->send(new OfferEmail($data));

@@ -9,6 +9,6 @@ class Courseselection extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'stu_id', 'course_id', 'studentSelCid'
+        'stu_id', 'course_id', 'studentSelCid','offer_generated'
     ];
 }
