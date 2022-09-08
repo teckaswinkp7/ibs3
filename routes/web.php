@@ -60,7 +60,13 @@ Route::post('admin/subcat', 'App\Http\Controllers\Admin\CoursesController@subCat
 Route::get('education-profile', [EducationController::class, 'index']);
 Route::get('admin/studentcourse/', [StudentcourseController::class, 'index'])->name('studentcourse.index');
 Route::get('admin/studentcourse/courseoffer/{id}', [StudentcourseController::class, 'courseoffer'])->name('student.courseoffer');
+Route::get('admin/studentcourse/sendcourseInvoice/{id}', [StudentcourseController::class, 'sendcourseInvoice'])->name('student.sendcourseInvoice');
+
 Route::post('admin/studentcourse/store/', [StudentcourseController::class, 'store'])->name('studentcourse.store');
+Route::post('admin/studentcourse/storeInvoice/', [StudentcourseController::class, 'storeInvoice'])->name('studentcourse.storeInvoice');
+
+Route::get('admin/studentcourse/invoice/', [StudentcourseController::class, 'invoice'])->name('studentcourse.invoice');
+
 Route::post('edit-profile', [EducationController::class, 'store']);
 Route::post('student-course', [AuthControllers::class, 'studentCoursestore'])->name('student.course');
 Route::get('products', 'ProductController@index')->name('products.index');

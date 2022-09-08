@@ -187,6 +187,12 @@
                       <p>Student Course Selection</p>
                     </a>
                   </li>
+                  <li class="nav-item">
+                    <a href="{{route('studentcourse.invoice')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Send Invoice</p>
+                    </a>
+                  </li>
                 </ul>
             </li>
         </ul>

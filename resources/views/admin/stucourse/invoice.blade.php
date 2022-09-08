@@ -13,7 +13,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{route('admin-dashboard')}}">Home</a></li>
-              <li class="breadcrumb-item active">Manage Student Course Selection</li>
+              <li class="breadcrumb-item active">Manage Student Course Invoice</li>
             </ol>
           </div>
         </div>
@@ -26,17 +26,17 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Manage Student Course Selection</h3>
+                <h3 class="card-title">Manage Student Course Invoice</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                  <th>SNo.</th>
+                  <th>Sl.No.</th>
                   <th>Student Name</th>
                   <th>Course</th>
-                  <th>Offer Generate</th>
+                  <th>Generate Invoice</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -49,8 +49,8 @@
                           <td>{{ $val->csname }}</td>
                           <td>
                             <form action="#" method="Post">
-                              <a  href="{{route('student.courseoffer',$val->id) }}">   
-                                <i class="fa-solid  fa-eye"></i>
+                              <a href="{{route('student.sendcourseInvoice',$val->id) }}">   
+                                <i class="fa-solid  fa-file-invoice"></i>
                               </a>
                               &nbsp;
                               @csrf
@@ -64,9 +64,9 @@
                   <tfoot>
                   <tr>
                   <th>Sl.No.</th>
+                  <th>Student Name</th>
                   <th>Course</th>
-                  <th>Status</th>
-                  <th>Action</th>
+                  <th>Generate Invoice</th>
                   </tr>
                   </tfoot>
                 </table>

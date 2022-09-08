@@ -20,8 +20,9 @@ class StudentcourseController extends Controller
     public function index()
     {
         $data = User::join('courseselections', 'courseselections.stu_id', '=', 'users.id')
-        ->where('courseselections.offer_generated', '=', 0)
-        ->get(['users.*','courseselections.studentSelCid']);
+        ->join('courses','courses.id', '=', 'courseselections.studentSelCid')
+        ->where('courseselections.offer_accepted', '=', 0)
+        ->get(['users.*','courseselections.studentSelCid','courses.name as csname']);
                
         return view('admin\stucourse.index', compact('data'));         
     }
@@ -51,6 +52,23 @@ class StudentcourseController extends Controller
         // dd($query);
         return view('admin\stucourse.courseoffer',compact('student_course_offer','users'));
     }
+
+    public function sendcourseInvoice($id)
+    {        
+        $users = User::where('id',$id)->get();        
+        $uid=(int) $id;        
+        $student_course_invoice= Studentcourse::select(
+            "studentcourses.student_course_id", 
+            "studentcourses.stu_id",
+            "studentcourses.student_course_id", 
+            "courses.name as courses_name",
+        )
+        ->join("courses", "courses.id", "=", "studentcourses.student_course_id")
+        ->where('studentcourses.stu_id','=',$uid)
+        ->get();         
+        return view('admin\stucourse.sendInvoice',compact('student_course_invoice','users'));
+    }
+
     public function store(Request $request)
     {
         $offer = new Studentcourseoffer;
@@ -70,5 +88,28 @@ class StudentcourseController extends Controller
         //Mail::to('vedmanimoudgal@virtualemployee.com')->send(new OfferEmail($data));
         return redirect('admin/studentcourse');
         //->with('success','created successfully.');
+    }
+
+    public function storeInvoice(Request $request)
+    {
+        $offer = new Studentcourseoffer;
+        $course_offer = $request->all();
+        $offer=$request->course_offer_description;        
+        $id=$request->stu_id;        
+        $status = Courseselection::where('stu_id', $id)->update(array('invoice_sent' => 1));
+        $data = array('offer_desc'=>"$request->course_offer_description",'offer'=> $offer);  
+        Mail::to($request->stu_email)->send(new OfferEmail($data));        
+        return redirect('admin/studentcourse/invoice');       
+    }
+
+    public function invoice()
+    {
+        $data = User::join('courseselections', 'courseselections.stu_id', '=', 'users.id')
+        ->join('courses','courses.id', '=', 'courseselections.studentSelCid')
+        ->where('courseselections.offer_accepted', '=', 1)
+        ->where('courseselections.invoice_sent', '=', 0)
+        ->get(['users.*','courseselections.studentSelCid','courses.name as csname']);
+               
+        return view('admin\stucourse.invoice', compact('data'));  
     }
 }
