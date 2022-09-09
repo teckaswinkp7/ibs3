@@ -28,7 +28,7 @@
                 <h3 class="card-title">Send Invoice For Course</h3>
               </div>
                <!-- /.card-header -->
-               <form action="{{ route('studentcourse.storeInvoice') }}" method="POST"  class="mb-0" id="catform">
+               <form action="{{ route('studentcourse.storeInvoice') }}" method="POST"  class="mb-0" id="catform" enctype="multipart/form-data">
                 @csrf    
                     <div class="card-body">
                         @if(session('status'))
@@ -63,6 +63,13 @@
                                 <textarea class="form-control" rows="8" name="course_offer_description" id="course_offer_description"></textarea>
                               </div>
                             </div> 
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <label>Attachment</label>
+                                <input type="file" class="form-control" rows="8" name="attachment" id="attachment"></textarea>
+                              </div>
+                            </div> 
+                            
                         </div>
                     </div>
                     <!-- /.card-body -->

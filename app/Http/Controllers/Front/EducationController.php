@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Education;
 use App\Models\User;
 use App\Models\Studentcourseoffer;
+use App\Models\Bankdetails;
 use App\Models\Studentcourse;
 use Illuminate\Support\Facades\Validator;
 class EducationController extends Controller
@@ -170,6 +171,7 @@ class EducationController extends Controller
             "courses.name as courses_name",
             "studentcourseoffers.course_offer_description",
             "courseselections.offer_accepted",
+            "courseselections.invoice_sent",
         )
         ->join("courses", "courses.id", "=", "studentcourses.student_course_id")
         ->join("studentcourseoffers","studentcourseoffers.stu_id", "=", "studentcourses.stu_id")
@@ -177,10 +179,11 @@ class EducationController extends Controller
         ->where('studentcourses.stu_id','=',$id)
         ->get(); 
 
+        $bankdetails = Bankdetails::findOrFail(1);  
     	$userData = Studentcourseoffer::where('stu_id', $id)->get();
         //dd($userData);
         //dd($student_course_offer);
-        return view('front\education\course-offer',compact('student_course_offer','userData'));
+        return view('front\education\course-offer',compact('student_course_offer','userData','bankdetails'));
         //return redirect()->route('education.course.offer','userData','student_course_offer');
     }
     

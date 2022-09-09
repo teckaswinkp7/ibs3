@@ -13,6 +13,7 @@ use App\Http\Controllers\Front\EducationController;
 use App\Http\Controllers\Admin\ScreeningController;
 use App\Http\Controllers\Admin\DocumentVerificationController;
 use App\Http\Controllers\Admin\StudentcourseController;
+use App\Http\Controllers\Admin\BankController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,6 +67,11 @@ Route::post('admin/studentcourse/store/', [StudentcourseController::class, 'stor
 Route::post('admin/studentcourse/storeInvoice/', [StudentcourseController::class, 'storeInvoice'])->name('studentcourse.storeInvoice');
 
 Route::get('admin/studentcourse/invoice/', [StudentcourseController::class, 'invoice'])->name('studentcourse.invoice');
+Route::get('admin/bank/', [BankController::class, 'index'])->name('bank.index');
+Route::get('admin/bank/edit/{id}', [BankController::class, 'edit'])->name('bank.edit');
+Route::post('admin/bank/update/{id}', [BankController::class, 'update'])->name('bank.update');
+
+
 
 Route::post('edit-profile', [EducationController::class, 'store']);
 Route::post('student-course', [AuthControllers::class, 'studentCoursestore'])->name('student.course');

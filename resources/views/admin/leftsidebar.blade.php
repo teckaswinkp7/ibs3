@@ -195,6 +195,24 @@
                   </li>
                 </ul>
             </li>
+
+            <li class="nav-item">
+                <a href="{{route('bank.index')}}" class="nav-link">
+                  <i class="nav-icon fas fa-bank"></i>
+                  <p>
+                   Bank Details 
+                    <!-- <i class="fas fa-angle-down"></i> -->
+                  </p>
+                </a>
+                <!-- <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{route('enrollment.index')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Document Verification</p>
+                    </a>
+                  </li>                  
+                </ul> -->
+            </li>
         </ul>
     </nav>
     <!-- /.sidebar-menu -->

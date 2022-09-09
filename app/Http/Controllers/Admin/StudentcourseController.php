@@ -98,6 +98,12 @@ class StudentcourseController extends Controller
         $id=$request->stu_id;        
         $status = Courseselection::where('stu_id', $id)->update(array('invoice_sent' => 1));
         $data = array('offer_desc'=>"$request->course_offer_description",'offer'=> $offer);  
+
+        $path = public_path('uploads');
+        $attachment = $request->file('attachment');
+
+        $name = time().'.'.$attachment->getClientOriginalExtension();
+
         Mail::to($request->stu_email)->send(new OfferEmail($data));        
         return redirect('admin/studentcourse/invoice');       
     }

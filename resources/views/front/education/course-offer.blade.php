@@ -23,11 +23,35 @@
         <a href="courseDenied"><button type="submit" class="btn btn-danger">Decline</button></a>
         @endif
         @if($student_course_offer[0]->offer_accepted == 1)
-        <p>Approved</p>
+        <h4 class="mb-2 ml-3 profile-name">Approved <i style="color:#51be78;" class="fa fa-check-circle"></i></h4>
         @else
-        <p>Not Approved</p>
+        <h4 class="mb-2 ml-3 profile-name">Not Approved <i style="color:red;" class="fa fa-times"></i></h4>
         @endif
         
+        
+        @if($student_course_offer[0]->invoice_sent == 1)
+        <div class="accordion custom-margin" id="payment_process">    
+        <h4 class="mb-2 ml-3 profile-name"> You must have received an invoice in your email to enroll in this course</h4>
+        <select class="form-control" name="payment_method" id="payment_method" onchange="checkPayOptions()">
+        <option value="">I Want to pay</option>
+        <option value="Online">Online</option>
+        <option value="Bank Transfer">Bank Transfer</option>
+        </select>
+        <a href="#"><button style="margin-top:20px; display:none;" id="paynow" type="submit" class="btn btn-success">Pay Now</button></a>
+        </div>
+
+        <div class="accordion custom-margin" id="bank" style="display:none;">          
+          <h4 class="mb-2 ml-3 profile-name">Bank Name : {{$bankdetails->bank_name}}</h4>
+          <h4 class="mb-2 ml-3 profile-name">IFSC Code : {{$bankdetails->ifsc_code}}</h4>
+          <h4 class="mb-2 ml-3 profile-name">Account Number : <span>{{$bankdetails->account_number}}</span></h4>
+          <h4 class="mb-2 ml-3 profile-name">Account Holder : {{$bankdetails->account_holder_name}}</h4>
+
+          <p style="color:#51be78;font-weight:bold;">Please upload your reciept after successful payment</p>
+          <input type="file" class="form-control" name="receipt">
+          <button type="submit" style="margin-top:20px;" class="btn btn-success">Upload Receipt</button>
+        </div>
+        @endif
+
     </div> 
      
   </div> 
@@ -39,5 +63,22 @@
 </div>
 @include('front/footer')  
 @endsection
+<script>
+  function checkPayOptions()
+  {
+    var pay_method = $('#payment_method').val();    
+    if(pay_method == 'Online')
+    {
+      $('#bank').hide();
+      $('#paynow').show();
+    }
+    else if(pay_method == 'Bank Transfer')
+    {
+      $('#bank').show();
+      $('#paynow').hide();
+    }
+  }
+</script>
+
 </body>
 </html>   

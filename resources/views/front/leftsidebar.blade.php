@@ -35,13 +35,14 @@
         <div class="card-body">
           <ul class="list-group">
           <li class="list-group-item"><a href="{{ route('dashboard') }}"><i class="fa fa-eye"></i> View Profile</a></li> 
-          <li class="list-group-item"><a href="{{ route('education.create.step.one') }}"><i class="fa fa-pencil"></i> Edit Profile</a></li>
-          <li class="list-group-item"><a href="{{ route('dashboard') }}"><i class="fa fa-eye"></i> View Profile</a></li> 
+          <li class="list-group-item"><a href="{{ route('education.create.step.one') }}"><i class="fa fa-pencil"></i> Edit Profile</a></li>          
           <li class="list-group-item"><a href="{{ route('education.course.offer') }}"><i class="fa fa-graduation-cap"></i> Course Offer</a></li>
           </ul>
         </div>
       </div>
     </div>
+
+    
     <!--<div class="card">
       <div class="card-header" id="headingTwo">
         <h2 class="mb-0">									
