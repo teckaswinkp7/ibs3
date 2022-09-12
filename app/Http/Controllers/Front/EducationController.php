@@ -10,7 +10,9 @@ use App\Models\User;
 use App\Models\Studentcourseoffer;
 use App\Models\Bankdetails;
 use App\Models\Studentcourse;
+use App\Models\Courseselection;
 use Illuminate\Support\Facades\Validator;
+use Session;
 class EducationController extends Controller
 {
 	/**
@@ -106,12 +108,14 @@ class EducationController extends Controller
         ]);*/
         $edu = new Education;
         $size = count(collect($request)->get('qualification'));
+        //$size = count(collect($request)->get('document'));
+        //dd($size);
         for ($i = 0; $i < $size; $i++)
             {
                 //
                 $education = new Education;
                 $id = Auth::id();
-                $education->stu_id =$id ;
+                $education->stu_id =$id;
                 $education->qualification = $request->get('qualification')[$i];
                 $education->board = $request->get('board')[$i];
                 $education->percentage = $request->get('percentage')[$i];
@@ -121,10 +125,10 @@ class EducationController extends Controller
                     $file-> move(public_path('public/Image'), $filename);
                     $education->document= $filename;
                 }
-                $education->save();   
-                $status = User::where('id', $id)->update(array('status' => 2));
-                return redirect()->route('dashboard');    
+                $education->save();                  
             }
+            $status = User::where('id', $id)->update(array('status' => 2));
+            return redirect()->route('dashboard');   
             /*$file= $request->file('document');
             $filename= date('YmdHi').$file->getClientOriginalName();
             $file-> move(public_path('public/Image'), $filename);
@@ -169,6 +173,7 @@ class EducationController extends Controller
             "studentcourses.stu_id",
             "studentcourses.student_course_id",            
             "courses.name as courses_name",
+            "courses.price",
             "studentcourseoffers.course_offer_description",
             "courseselections.offer_accepted",
             "courseselections.invoice_sent",
@@ -185,6 +190,33 @@ class EducationController extends Controller
         //dd($student_course_offer);
         return view('front\education\course-offer',compact('student_course_offer','userData','bankdetails'));
         //return redirect()->route('education.course.offer','userData','student_course_offer');
+    }
+
+    public function upload_invoice(Request $request)
+    {
+        $id = Auth::id();
+        if($request->file('receipt')){
+            $file= $request->file('receipt');
+            $filename= time().rand(1000,9999).$file->getClientOriginalName();
+            $file->move(public_path('public/uploads/receipt'), $filename);
+            //$category->cat_image= $filename;
+            
+            $status = Courseselection::where('stu_id', $id)->update(array('receipt' => $filename));
+            //dd($status == 1);
+            if($status)
+            {
+                Session::flash('message', 'File uploaded successfully!'); 
+                Session::flash('alert-class', 'alert-success');
+                return redirect('education/course-offer');
+            }
+            else
+            {
+                Session::flash('message', 'Error during upload!'); 
+                Session::flash('alert-class', 'alert-danger');
+                return redirect('education/course-offer');
+            }
+        }
+
     }
     
 }

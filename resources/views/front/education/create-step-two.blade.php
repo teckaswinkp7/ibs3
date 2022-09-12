@@ -46,7 +46,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="description">Document Upload<span class="red">*</span></label>
-                                <input type="file" class="form-control" name="document[]" id="document"> 
+                                <input type="file" class="form-control" name="document[]" id="document" multiple> 
                             </div>  
                             </div>  
                             <div class="card">

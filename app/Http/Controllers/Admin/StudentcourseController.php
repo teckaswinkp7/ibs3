@@ -11,6 +11,7 @@ use App\Models\Studentcourse;
 use App\Models\Studentcourseoffer;
 use App\Models\Courseselection;
 use App\Mail\OfferEmail;
+use App\Mail\InvoiceEmail;
 use Illuminate\Support\Facades\Mail;
 use Hash;
 use DB;
@@ -96,15 +97,15 @@ class StudentcourseController extends Controller
         $course_offer = $request->all();
         $offer=$request->course_offer_description;        
         $id=$request->stu_id;        
-        $status = Courseselection::where('stu_id', $id)->update(array('invoice_sent' => 1));
-        $data = array('offer_desc'=>"$request->course_offer_description",'offer'=> $offer);  
+        $status = Courseselection::where('stu_id', $id)->update(array('invoice_sent' => 1));         
 
-        $path = public_path('uploads');
-        $attachment = $request->file('attachment');
-
-        $name = time().'.'.$attachment->getClientOriginalExtension();
-
-        Mail::to($request->stu_email)->send(new OfferEmail($data));        
+        $file= $request->file('attachment');
+        $path = public_path('uploads/attachment/');
+        $filename= $file->getClientOriginalName();
+        $file->move(public_path('public/uploads/attachment'), $filename);        
+        $data = array('offer_desc'=>"$request->course_offer_description",'offer'=> $offer,'filename'=>$filename);
+        Mail::to($request->stu_email)->send(new InvoiceEmail($data));  
+        //Mail::to('vedmanimoudgal@virtualemployee.com')->send(new InvoiceEmail($data));        
         return redirect('admin/studentcourse/invoice');       
     }
 

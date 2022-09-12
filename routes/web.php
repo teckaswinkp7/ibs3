@@ -59,6 +59,7 @@ Route::post('admin/screening/store', [ScreeningController::class, 'store'])->nam
 Route::get('admin/screening/course/{id}', [ScreeningController::class, 'course'])->name('screening.course');
 Route::post('admin/subcat', 'App\Http\Controllers\Admin\CoursesController@subCat')->name('subcat');
 Route::get('education-profile', [EducationController::class, 'index']);
+Route::post('education-receipt', [EducationController::class, 'upload_invoice'])->name('education.receipt');
 Route::get('admin/studentcourse/', [StudentcourseController::class, 'index'])->name('studentcourse.index');
 Route::get('admin/studentcourse/courseoffer/{id}', [StudentcourseController::class, 'courseoffer'])->name('student.courseoffer');
 Route::get('admin/studentcourse/sendcourseInvoice/{id}', [StudentcourseController::class, 'sendcourseInvoice'])->name('student.sendcourseInvoice');

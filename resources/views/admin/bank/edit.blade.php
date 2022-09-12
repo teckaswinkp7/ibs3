@@ -30,7 +30,7 @@
                <!-- /.card-header -->
                <form action="{{ route('bank.update',$bankdetails->id) }}" method="POST" enctype="multipart/form-data" class="mb-0" id="catform">
                 @csrf
-                {{ method_field('POST') }}    
+                {{ method_field('POST') }}     
                     <div class="card-body">
                         @if(session('status'))
                             <div class="alert alert-success mb-1 mt-1">
@@ -49,8 +49,7 @@
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label>Bank Name <span class="required">*</span></label>
-                                <input type="text" value="{{ $bankdetails->bank_name }}" name="bank_name"   class="form-control @if ($errors->has('name')) is-invalid @endif" placeholder="Category Name">
-                                
+                                <input type="text" value="{{ $bankdetails->bank_name }}" name="bank_name"  class="form-control @if ($errors->has('name')) is-invalid @endif" placeholder="Category Name">                                
                               </div>
                             </div> 
 
@@ -68,9 +67,7 @@
                                 <input type="text" value="{{ $bankdetails->account_holder_name }}" name="account_holder_name"   class="form-control @if ($errors->has('name')) is-invalid @endif" placeholder="Category Name">
                                
                               </div>
-                            </div> 
-                             
-                                
+                            </div>               
                          
                         
                               
