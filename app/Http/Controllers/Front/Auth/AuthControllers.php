@@ -70,11 +70,13 @@ class AuthControllers extends Controller
         $request->validate([
             'name' => 'required',
             'phone'=> 'required|digits:10',
+            'user_role'=> 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
         ]);
            
         $data = $request->all();
+        //dd($data);
         $check = $this->create($data);
         $subject="Registered User";
         $otp = rand(1000,9999);
@@ -169,7 +171,7 @@ class AuthControllers extends Controller
       return User::create([
         'name' => $data['name'],
         'phone' => $data['phone'],
-        'user_role' => '2',
+        'user_role' => $data['user_role'],
         'status' =>'1',
         'email' => $data['email'],  
         'password' => Hash::make($data['password'])

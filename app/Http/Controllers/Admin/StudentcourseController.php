@@ -23,8 +23,7 @@ class StudentcourseController extends Controller
         $data = User::join('courseselections', 'courseselections.stu_id', '=', 'users.id')
         ->join('courses','courses.id', '=', 'courseselections.studentSelCid')
         ->where('courseselections.offer_accepted', '=', 0)
-        ->get(['users.*','courseselections.studentSelCid','courses.name as csname']);
-               
+        ->get(['users.*','courseselections.studentSelCid','courses.name as csname']);               
         return view('admin\stucourse.index', compact('data'));         
     }
 
@@ -118,5 +117,17 @@ class StudentcourseController extends Controller
         ->get(['users.*','courseselections.studentSelCid','courses.name as csname']);
                
         return view('admin\stucourse.invoice', compact('data'));  
+    }
+
+    public function viewReceipt()
+    {
+        $data = User::join('courseselections', 'courseselections.stu_id', '=', 'users.id')
+        ->join('courses','courses.id', '=', 'courseselections.studentSelCid')
+        ->where('courseselections.offer_accepted', '=', 1)
+        ->where('courseselections.invoice_sent', '=', 1)
+        ->where('courseselections.receipt', '!=', null)
+        ->get(['users.*','courseselections.studentSelCid','courseselections.receipt','courses.name as csname']);
+               
+        return view('admin\stucourse.receipt', compact('data'));  
     }
 }

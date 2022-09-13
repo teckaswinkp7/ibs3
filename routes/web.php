@@ -63,6 +63,7 @@ Route::post('education-receipt', [EducationController::class, 'upload_invoice'])
 Route::get('admin/studentcourse/', [StudentcourseController::class, 'index'])->name('studentcourse.index');
 Route::get('admin/studentcourse/courseoffer/{id}', [StudentcourseController::class, 'courseoffer'])->name('student.courseoffer');
 Route::get('admin/studentcourse/sendcourseInvoice/{id}', [StudentcourseController::class, 'sendcourseInvoice'])->name('student.sendcourseInvoice');
+Route::get('admin/studentcourse/viewReceipt/', [StudentcourseController::class, 'viewReceipt'])->name('studentcourse.viewReceipt');
 
 Route::post('admin/studentcourse/store/', [StudentcourseController::class, 'store'])->name('studentcourse.store');
 Route::post('admin/studentcourse/storeInvoice/', [StudentcourseController::class, 'storeInvoice'])->name('studentcourse.storeInvoice');
@@ -80,6 +81,7 @@ Route::get('products', 'ProductController@index')->name('products.index');
 Route::get('education/create-step-one',[EducationController::class, 'createStepOne'])->name('education.create.step.one');
 Route::post('education/create-step-one',[EducationController::class, 'postCreateStepOne'])->name('education.create.step.one.post');
 Route::get('education/course-offer',[EducationController::class, 'getCourseOffers'])->name('education.course.offer');
+Route::get('education/view-student',[EducationController::class, 'getStudents'])->name('education.view.student');
 
 Route::get('education/create-step-two',  [EducationController::class, 'createStepTwo'])->name('education.create.step.two');
 Route::post('education/create-step-two', [EducationController::class, 'postCreateStepTwo'])->name('education.create.step.two.post');

@@ -193,6 +193,12 @@
                       <p>Send Invoice</p>
                     </a>
                   </li>
+                  <li class="nav-item">
+                    <a href="{{route('studentcourse.viewReceipt')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>View Receipt</p>
+                    </a>
+                  </li>
                 </ul>
             </li>
 

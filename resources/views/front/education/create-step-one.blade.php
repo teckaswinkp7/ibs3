@@ -37,10 +37,11 @@
 
                         
                     </div>
-
+                    @if(Auth::user()->user_role == 2)
                     <div class="card-footer text-right">
                         <button type="submit" class="btn btn-primary">Next</button>
                     </div>
+                    @endif
                 </div>
             </form>
         </div>

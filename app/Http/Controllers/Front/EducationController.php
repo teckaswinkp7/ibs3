@@ -218,5 +218,30 @@ class EducationController extends Controller
         }
 
     }
+
+    public function getStudents()
+    {
+        $data['student_course_offer']= Studentcourse::select(
+            "studentcourses.student_course_id", 
+            "studentcourses.stu_id",
+            "studentcourses.student_course_id",            
+            "courses.name as courses_name",
+            "courses.price",            
+            "courseselections.offer_accepted",
+            "courseselections.invoice_sent",
+            "users.name",
+            "users.email",
+        )
+        ->join("courses", "courses.id", "=", "studentcourses.student_course_id")
+        ->join("studentcourseoffers","studentcourseoffers.stu_id", "=", "studentcourses.stu_id")
+        ->join("courseselections","courseselections.stu_id", "=", "studentcourses.stu_id")
+        ->join("users","users.id","=","courseselections.stu_id")
+        //->where('studentcourses.stu_id','=',$id)
+        ->get(); 
+        //$data['users'] = User::where('user_role',2)->get();
+        //dd($data['student_course_offer']);
+        return view('front\education\student',$data);
+        
+    }
     
 }

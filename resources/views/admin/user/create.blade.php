@@ -32,11 +32,20 @@
                 @csrf    
                     <div class="card-body">
                       <div class="row">
-                        <div class="col-md-12">
+                        <!-- <div class="col-md-12">
                           <div class="form-group">
                             <label>User Id<span class="required">*</span></label>
                             <input type="text" name="uid" id="@if ($errors->has('uid')) inputError @endif" class="form-control @if ($errors->has('uid')) is-invalid @endif" placeholder="User Id">
                             @error('uid')
+                              <span class="error invalid-feedback">{{ $message }}</span>
+                            @enderror
+                          </div>
+                        </div> -->
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label>Name<span class="required">*</span></label>
+                            <input type="text" name="name" id="@if ($errors->has('name')) inputError @endif" class="form-control @if ($errors->has('name')) is-invalid @endif" placeholder="Name">
+                            @error('name')
                               <span class="error invalid-feedback">{{ $message }}</span>
                             @enderror
                           </div>
@@ -60,6 +69,15 @@
                             <label>Email<span class="required">*</span></label>
                             <input type="text" name="email" id="@if ($errors->has('email')) inputError @endif" class="form-control @if ($errors->has('email')) is-invalid @endif" placeholder="Email">
                             @error('email')
+                              <span class="error invalid-feedback">{{ $message }}</span>
+                            @enderror
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label>Phone<span class="required">*</span></label>
+                            <input type="text" name="phone" id="@if ($errors->has('phone')) inputError @endif" class="form-control @if ($errors->has('phone')) is-invalid @endif" placeholder="Phone">
+                            @error('phone')
                               <span class="error invalid-feedback">{{ $message }}</span>
                             @enderror
                           </div>

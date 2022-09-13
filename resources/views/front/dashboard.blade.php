@@ -35,6 +35,7 @@
           <p>{{ Auth::user()->phone }}</p>
           </div>
         </div> 
+        @if(Auth::user()->user_role == 2) 
         <h5>Educational Details</h5>
         <table class="table table-bordered">
           <thead>
@@ -57,10 +58,12 @@
           @endforeach
           </tbody>
         </table>
+        @endif
       </form>
     </div>
   </div>
 
+  @if(Auth::user()->user_role == 2) 
   <div class="row">
     <h5>Course Details</h5>
     <div class="col-md-12">
@@ -105,6 +108,7 @@
       
       </form>  
 </div>
+@endif
 @php /*
 @if($studentcourse[0]->status == 1)
     <div class="col-md-12" style="display:none;">
@@ -130,8 +134,9 @@
   </div> 
   
   <div class="row">
+  @php /*
     <h5>Course Offer Details</h5>
-    @php /*
+    
     <div class="col-md-12">
         <p>{{$student_course_offer[0]->course_offer_description}}</p>
         <input type="hidden" value="{{$student_course_offer[0]->stu_id}}" name="stu_id" class="form-control"  readonly>
