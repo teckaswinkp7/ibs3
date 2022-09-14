@@ -59,7 +59,7 @@
                                       <option value='{{$role_data->id}}'>{{$role_data->name}}</option>
                                      @endforeach
                                 </select>
-                                @error('user_role')
+                              @error('user_role')
                               <span class="error invalid-feedback" style="color:#dc3545;display:block !important;">{{ $message }}</span>
                               @enderror
                             </div>

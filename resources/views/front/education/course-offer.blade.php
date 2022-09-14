@@ -39,7 +39,28 @@
         <option value="">I Want to pay</option>
         <option value="Online">Online</option>
         <option value="Bank Transfer">Bank Transfer</option>
+        <option value="Sponsor">Sponsor</option>
         </select>
+        <h4 class="mb-2 ml-3 profile-name" style="display:none;" id="amt">Amount : ${{$student_course_offer[0]->price}}</h4>
+        <a href="#"><button style="margin-top:20px; display:none;" id="paynow" type="submit" class="btn btn-success">Pay Now</button></a>
+        </div>
+
+        <div class="accordion custom-margin" id="sponsor" style="display:none;">    
+        <h4 class="mb-2 ml-3 profile-name"> Fill the sponsor details</h4>
+        <form action="#">
+        <input typle="text" class="form-control" name="sponsor_name" placeholder="Sponsor/Company Name">
+        <input typle="text" class="form-control" name="sponsor_phone" placeholder="Sponsor Phone">
+        <input typle="text" class="form-control" name="sponsor_email" placeholder="Sponsor Email">
+        <button style="margin-top:20px;" type="submit" class="btn btn-success">Submit</button>
+        </form>
+        </div>
+
+        <!-- <select class="form-control" name="payment_method" id="payment_method" onchange="checkPayOptions()">
+        <option value="">I Want to pay</option>
+        <option value="Online">Online</option>
+        <option value="Bank Transfer">Bank Transfer</option>
+        <option value="Sponsor">Sponsor</option>
+        </select> -->
         <h4 class="mb-2 ml-3 profile-name" style="display:none;" id="amt">Amount : ${{$student_course_offer[0]->price}}</h4>
         <a href="#"><button style="margin-top:20px; display:none;" id="paynow" type="submit" class="btn btn-success">Pay Now</button></a>
         </div>
@@ -81,13 +102,24 @@
       $('#bank').hide();
       $('#paynow').show();
       $('#amt').show();
+      $('#sponsor').hide();
     }
     else if(pay_method == 'Bank Transfer')
     {
       $('#bank').show();
       $('#paynow').hide();
       $('#amt').hide();
+      $('#sponsor').hide();
     }
+    else if(pay_method == 'Sponsor')
+    {
+      $('#sponsor').show();
+      $('#bank').hide();
+      $('#paynow').hide();
+      $('#amt').hide();
+    }
+
+    
   }
 </script>
 

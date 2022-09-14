@@ -45,14 +45,14 @@
       @if ($errors->has('user_role'))
        <div class="input-group mb-3"> <span class="text-danger">{{ $errors->first('user_role') }}</span></div>
       @endif
-
-      <div class="col-md-12 form-group">
+      <input type="hidden" value="2" user_role="2">
+      <!-- <div class="col-md-12 form-group">
         <label for="email">I am a<span style="color:red !important;font-weight:700;">*</span></label>
         <select id="user_role" class="form-control form-control-lg" name="user_role">
           <option value="2">Student</option>
           <option value="3">Sponsor</option>
         </select>        
-      </div>
+      </div> -->
       @if ($errors->has('email'))
        <div class="input-group mb-3"> <span class="text-danger">{{ $errors->first('email') }}</span></div>
       @endif

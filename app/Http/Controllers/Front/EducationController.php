@@ -229,6 +229,7 @@ class EducationController extends Controller
             "courses.price",            
             "courseselections.offer_accepted",
             "courseselections.invoice_sent",
+            "courseselections.invoice",
             "users.name",
             "users.email",
         )
@@ -238,6 +239,7 @@ class EducationController extends Controller
         ->join("users","users.id","=","courseselections.stu_id")
         //->where('studentcourses.stu_id','=',$id)
         ->get(); 
+        $data['bankdetails'] = Bankdetails::findOrFail(1); 
         //$data['users'] = User::where('user_role',2)->get();
         //dd($data['student_course_offer']);
         return view('front\education\student',$data);

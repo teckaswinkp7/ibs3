@@ -95,16 +95,16 @@ class StudentcourseController extends Controller
         $offer = new Studentcourseoffer;
         $course_offer = $request->all();
         $offer=$request->course_offer_description;        
-        $id=$request->stu_id;        
-        $status = Courseselection::where('stu_id', $id)->update(array('invoice_sent' => 1));         
+        $id=$request->stu_id;                
 
         $file= $request->file('attachment');
         $path = public_path('uploads/attachment/');
-        $filename= $file->getClientOriginalName();
+        $filename= rand(0000,9999).$file->getClientOriginalName();
         $file->move(public_path('public/uploads/attachment'), $filename);        
         $data = array('offer_desc'=>"$request->course_offer_description",'offer'=> $offer,'filename'=>$filename);
-        Mail::to($request->stu_email)->send(new InvoiceEmail($data));  
-        //Mail::to('vedmanimoudgal@virtualemployee.com')->send(new InvoiceEmail($data));        
+        $status = Courseselection::where('stu_id', $id)->update(array('invoice_sent' => 1,'invoice' => $filename)); 
+        //Mail::to($request->stu_email)->send(new InvoiceEmail($data));  
+        Mail::to('vedmanimoudgal@virtualemployee.com')->send(new InvoiceEmail($data));        
         return redirect('admin/studentcourse/invoice');       
     }
 
@@ -113,7 +113,7 @@ class StudentcourseController extends Controller
         $data = User::join('courseselections', 'courseselections.stu_id', '=', 'users.id')
         ->join('courses','courses.id', '=', 'courseselections.studentSelCid')
         ->where('courseselections.offer_accepted', '=', 1)
-        ->where('courseselections.invoice_sent', '=', 0)
+        ->where('courseselections.invoice_sent', '=', 1)
         ->get(['users.*','courseselections.studentSelCid','courses.name as csname']);
                
         return view('admin\stucourse.invoice', compact('data'));  
