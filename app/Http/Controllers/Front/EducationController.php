@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Education;
 use App\Models\User;
+use App\Models\Sponsor;
 use App\Models\Studentcourseoffer;
 use App\Models\Bankdetails;
 use App\Models\Studentcourse;
@@ -138,6 +139,29 @@ class EducationController extends Controller
   
     }
 
+    public function insert_sponsor(Request $request)
+    {
+        $id = Auth::id();
+        $val = Sponsor::create([
+            'sponsor_name'    => $request->sponsor_name,
+            'sponsor_email'   => $request->sponsor_email,
+            'sponsor_phone'   => $request->sponsor_phone,
+            'course_id'       => $request->course_id,
+            'stu_id'          => $id               
+        ]);
+        if($val)
+        {
+            return redirect()->route('education.course.offer')
+            ->with('success','Sponsor Inserted successfully.');
+        }
+        else
+        {
+            return redirect()->route('education.course.offer')
+            ->with('danger','Error during sponsor insertion');
+        }
+        
+    }
+
     /**
      * Show the step One Form for creating a new product.
      *
@@ -221,6 +245,8 @@ class EducationController extends Controller
 
     public function getStudents()
     {
+        $id = Auth::id();
+        $email = Auth::user()->email;
         $data['student_course_offer']= Studentcourse::select(
             "studentcourses.student_course_id", 
             "studentcourses.stu_id",
@@ -239,9 +265,10 @@ class EducationController extends Controller
         ->join("users","users.id","=","courseselections.stu_id")
         //->where('studentcourses.stu_id','=',$id)
         ->get(); 
+        $data['sponsorDetails'] = Sponsor::select('users.name as student_name','users.email','courses.name as course_name','courses.price','courseselections.offer_accepted','courseselections.invoice_sent','courseselections.invoice','sponsors.*')->join('users','users.id', '=','sponsors.stu_id')->join('courses','courses.id','=','sponsors.course_id')->join('courseselections','courseselections.stu_id','=','sponsors.stu_id')->where('sponsors.sponsor_email',$email)->get(); 
         $data['bankdetails'] = Bankdetails::findOrFail(1); 
         //$data['users'] = User::where('user_role',2)->get();
-        //dd($data['student_course_offer']);
+        //dd($data['sponsorDetails']);
         return view('front\education\student',$data);
         
     }

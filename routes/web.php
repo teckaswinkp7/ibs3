@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\ScreeningController;
 use App\Http\Controllers\Admin\DocumentVerificationController;
 use App\Http\Controllers\Admin\StudentcourseController;
 use App\Http\Controllers\Admin\BankController;
+use App\Http\Controllers\Admin\SponsorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,6 +74,8 @@ Route::get('admin/bank/', [BankController::class, 'index'])->name('bank.index');
 Route::get('admin/bank/edit/{id}', [BankController::class, 'edit'])->name('bank.edit');
 Route::post('admin/bank/update/{id}', [BankController::class, 'update'])->name('bank.update');
 
+Route::get('admin/sponsor/', [SponsorController::class, 'index'])->name('sponsor.index');
+
 
 
 Route::post('edit-profile', [EducationController::class, 'store']);
@@ -82,6 +85,8 @@ Route::get('education/create-step-one',[EducationController::class, 'createStepO
 Route::post('education/create-step-one',[EducationController::class, 'postCreateStepOne'])->name('education.create.step.one.post');
 Route::get('education/course-offer',[EducationController::class, 'getCourseOffers'])->name('education.course.offer');
 Route::get('education/view-student',[EducationController::class, 'getStudents'])->name('education.view.student');
+Route::post('education/add-sponsor',[EducationController::class, 'insert_sponsor'])->name('education.sponsor');
+
 
 Route::get('education/create-step-two',  [EducationController::class, 'createStepTwo'])->name('education.create.step.two');
 Route::post('education/create-step-two', [EducationController::class, 'postCreateStepTwo'])->name('education.create.step.two.post');

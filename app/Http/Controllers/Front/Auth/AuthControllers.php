@@ -67,10 +67,11 @@ class AuthControllers extends Controller
      */
     public function postRegistration(Request $request)
     {  
+        //dd($request);
         $request->validate([
             'name' => 'required',
             'phone'=> 'required|digits:10',
-            'user_role'=> 'required',
+            //'user_role'=> 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
         ]);
@@ -171,7 +172,7 @@ class AuthControllers extends Controller
       return User::create([
         'name' => $data['name'],
         'phone' => $data['phone'],
-        'user_role' => $data['user_role'],
+        'user_role' => 2,//$data['user_role'],
         'status' =>'1',
         'email' => $data['email'],  
         'password' => Hash::make($data['password'])

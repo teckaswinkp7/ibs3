@@ -31,11 +31,11 @@
           </thead>
           <tbody> 
           
-          @foreach ($student_course_offer as $value)
+          @foreach ($sponsorDetails as $value)
           <tr>
-          <td>{{ $value->name }}</td>
+          <td>{{ $value->student_name }}</td>
           <td>{{ $value->email }}</td>
-          <td>{{ $value->courses_name }}</td>
+          <td>{{ $value->course_name }}</td>
           <td>${{ $value->price }}</td>
           <td><a href="{{Url('public/uploads/attachment')}}/{{ $value->invoice }}" target="_blank"><img src="{{Url('public/uploads/attachment')}}/{{ $value->invoice }}" style="width:100px;height:100px;"></a></td>
           </tr>
@@ -56,8 +56,8 @@
         <div style="display:none;" id="amt"> 
         <h4 class="mb-2 ml-3 profile-name"> Select Student</h4>
         <select class="form-control" name="payment_method" id="sutdent_id" onchange="checkPayOptions()">
-        @foreach ($student_course_offer as $value)
-        <option value="{{$value->stu_id}}">{{$value->name}}</option>
+        @foreach ($sponsorDetails as $value)
+        <option value="{{$value->stu_id}}">{{$value->student_name}}</option>
         @endforeach        
         </select>
         <h4 class="mb-2 ml-3 profile-name">Amount : ${{$student_course_offer[0]->price}}</h4>
@@ -69,8 +69,8 @@
         <div class="accordion custom-margin">    
         <h4 class="mb-2 ml-3 profile-name"> Select Student</h4>        
         <select class="form-control" name="payment_method" id="sutdent_id" onchange="checkPayOptions()">
-        @foreach ($student_course_offer as $value)
-        <option value="{{$value->stu_id}}">{{$value->name}}</option>
+        @foreach ($sponsorDetails as $value)
+        <option value="{{$value->stu_id}}">{{$value->student_name}}</option>
         @endforeach        
         </select>
         </div>

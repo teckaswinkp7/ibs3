@@ -29,8 +29,11 @@
         @endif
         
         @if(Session::has('message'))
-        <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+        <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>        
         @endif
+        
+        
+        
         
         @if($student_course_offer[0]->invoice_sent == 1)
         <div class="accordion custom-margin" id="payment_process">    
@@ -47,10 +50,12 @@
 
         <div class="accordion custom-margin" id="sponsor" style="display:none;">    
         <h4 class="mb-2 ml-3 profile-name"> Fill the sponsor details</h4>
-        <form action="#">
-        <input typle="text" class="form-control" name="sponsor_name" placeholder="Sponsor/Company Name">
-        <input typle="text" class="form-control" name="sponsor_phone" placeholder="Sponsor Phone">
-        <input typle="text" class="form-control" name="sponsor_email" placeholder="Sponsor Email">
+        <form action="{{ route('education.sponsor') }}" method="post" class="mb-0">
+        @csrf
+        <input type="hidden" class="form-control" name="course_id" value="{{$student_course_offer[0]->student_course_id}}">
+        <input type="text" class="form-control" name="sponsor_name" placeholder="Sponsor/Company Name">
+        <input type="text" class="form-control" name="sponsor_phone" placeholder="Sponsor Phone">
+        <input type="text" class="form-control" name="sponsor_email" placeholder="Sponsor Email">
         <button style="margin-top:20px;" type="submit" class="btn btn-success">Submit</button>
         </form>
         </div>
