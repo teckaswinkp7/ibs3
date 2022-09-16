@@ -41,6 +41,8 @@
           @endif  
           @if(Auth::user()->user_role == 3)          
           <li class="list-group-item"><a href="{{ route('education.view.student') }}"><i class="fa fa-users"></i> View Student</a></li>
+          <li class="list-group-item"><a href="{{ route('education.sponsored.student') }}"><i class="fa fa-hand-holding-dollar"></i> Sponsored Student</a></li>
+          
           @endif 
           </ul>
         </div>

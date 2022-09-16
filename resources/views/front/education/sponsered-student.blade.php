@@ -9,7 +9,7 @@
 <div class="card-body">
   <div class="row">
     <div class="col-md-12">
-      <h4>Student Data</h4>
+      <h4>Sponsered Student</h4>
       <hr>
     </div>
   </div>
@@ -20,7 +20,7 @@
         <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>        
         @endif
         @if(Auth::user()->user_role == 3) 
-        <h5>Needs Sponser</h5>
+        
         <table class="table table-bordered">
           <thead>
           <tr>
@@ -29,7 +29,7 @@
           <th>Email</th>
           <th>Course</th>
           <th>Price</th>
-          <th>Invoice</th>
+          
           <th>Action</th>
           </tr>
           </thead>
@@ -42,7 +42,7 @@
           <td>{{ $value->email }}</td>
           <td>{{ $value->course_name }}</td>
           <td>${{ $value->price }}</td>
-          <td><a href="{{Url('public/uploads/attachment')}}/{{ $value->invoice }}" target="_blank"><img src="{{Url('public/uploads/')}}/pdf_icon.png" style="width:40px;height:50px;"></a></td>
+          
           @if($value->receipt == null || $value->receipt == '')
           <td><a href="{{route('sponsor.pay',$value->stu_id) }}" class="btn btn-warning">Pay Now</a></td>             
           @else
@@ -52,14 +52,7 @@
           <?php $i++; $s_total = $i; ?>
           @endforeach
 
-          <tr>
-          <th>{{$studentTotal}}</th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th>${{$priceTotal}}</th>
-          <th></th>
-          </tr>
+          
 
           </tbody>
         </table>

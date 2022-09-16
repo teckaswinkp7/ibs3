@@ -61,6 +61,7 @@ Route::get('admin/screening/course/{id}', [ScreeningController::class, 'course']
 Route::post('admin/subcat', 'App\Http\Controllers\Admin\CoursesController@subCat')->name('subcat');
 Route::get('education-profile', [EducationController::class, 'index']);
 Route::post('education-receipt', [EducationController::class, 'upload_invoice'])->name('education.receipt');
+Route::post('education-receipt-sponsor', [EducationController::class, 'upload_invoice_sponsor'])->name('education.sponsor.receipt');
 Route::get('admin/studentcourse/', [StudentcourseController::class, 'index'])->name('studentcourse.index');
 Route::get('admin/studentcourse/courseoffer/{id}', [StudentcourseController::class, 'courseoffer'])->name('student.courseoffer');
 Route::get('admin/studentcourse/sendcourseInvoice/{id}', [StudentcourseController::class, 'sendcourseInvoice'])->name('student.sendcourseInvoice');
@@ -75,8 +76,7 @@ Route::get('admin/bank/edit/{id}', [BankController::class, 'edit'])->name('bank.
 Route::post('admin/bank/update/{id}', [BankController::class, 'update'])->name('bank.update');
 
 Route::get('admin/sponsor/', [SponsorController::class, 'index'])->name('sponsor.index');
-
-
+Route::get('education/pay-sponsor/{id}', [EducationController::class, 'sponsor_pay'])->name('sponsor.pay');
 
 Route::post('edit-profile', [EducationController::class, 'store']);
 Route::post('student-course', [AuthControllers::class, 'studentCoursestore'])->name('student.course');
@@ -85,6 +85,7 @@ Route::get('education/create-step-one',[EducationController::class, 'createStepO
 Route::post('education/create-step-one',[EducationController::class, 'postCreateStepOne'])->name('education.create.step.one.post');
 Route::get('education/course-offer',[EducationController::class, 'getCourseOffers'])->name('education.course.offer');
 Route::get('education/view-student',[EducationController::class, 'getStudents'])->name('education.view.student');
+Route::get('education/view-sponsered',[EducationController::class, 'getsponseredStudents'])->name('education.sponsored.student');
 Route::post('education/add-sponsor',[EducationController::class, 'insert_sponsor'])->name('education.sponsor');
 
 

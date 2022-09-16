@@ -47,7 +47,7 @@
                           <td>{{ $i++ }}</td>
                           <td>{{ $val->name }}</td>
                           <td>{{ $val->csname }}</td>
-                          <td><a href="{{Url('public/uploads/receipt')}}/{{ $val->receipt }}" target="_blank"><img src="{{Url('public/uploads/receipt')}}/{{ $val->receipt }}" style="width:100px;height:100px;"></a></td>                          
+                          <td><a href="{{Url('public/uploads/receipt')}}/{{ $val->receipt }}" target="_blank"><img src="{{Url('public/uploads/')}}/pdf_icon.png" style="width:40px;height:50px;"></a></td>                          
                         </tr>
                       @endforeach
                     @endif   

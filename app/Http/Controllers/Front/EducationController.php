@@ -243,6 +243,33 @@ class EducationController extends Controller
 
     }
 
+    public function upload_invoice_sponsor(Request $request)
+    {
+        $id = $request->stu_id;
+        if($request->file('receipt')){
+            $file= $request->file('receipt');
+            $filename= time().rand(1000,9999).$file->getClientOriginalName();
+            $file->move(public_path('public/uploads/receipt'), $filename);
+            //$category->cat_image= $filename;
+            
+            $status = Courseselection::where('stu_id', $id)->update(array('receipt' => $filename));
+            //dd($status == 1);
+            if($status)
+            {
+                Session::flash('message', 'File uploaded successfully!'); 
+                Session::flash('alert-class', 'alert-success');
+                return redirect('education/view-student');
+            }
+            else
+            {
+                Session::flash('message', 'Error during upload!'); 
+                Session::flash('alert-class', 'alert-danger');
+                return redirect('education/view-student');
+            }
+        }
+
+    }
+
     public function getStudents()
     {
         $id = Auth::id();
@@ -265,12 +292,40 @@ class EducationController extends Controller
         ->join("users","users.id","=","courseselections.stu_id")
         //->where('studentcourses.stu_id','=',$id)
         ->get(); 
-        $data['sponsorDetails'] = Sponsor::select('users.name as student_name','users.email','courses.name as course_name','courses.price','courseselections.offer_accepted','courseselections.invoice_sent','courseselections.invoice','sponsors.*')->join('users','users.id', '=','sponsors.stu_id')->join('courses','courses.id','=','sponsors.course_id')->join('courseselections','courseselections.stu_id','=','sponsors.stu_id')->where('sponsors.sponsor_email',$email)->get(); 
+        $data['sponsorDetails'] = Sponsor::select('users.name as student_name','users.email','courses.name as course_name','courses.price','courseselections.offer_accepted','courseselections.invoice_sent','courseselections.invoice','courseselections.receipt','sponsors.*')->join('users','users.id', '=','sponsors.stu_id')->join('courses','courses.id','=','sponsors.course_id')->join('courseselections','courseselections.stu_id','=','sponsors.stu_id')->where('sponsors.sponsor_email',$email)->get(); 
+        $data['priceTotal'] = Sponsor::join('courses','courses.id','=','sponsors.course_id')->where('sponsors.sponsor_email',$email)->sum('courses.price'); 
+        $data['studentTotal'] = Sponsor::join('users','users.id', '=','sponsors.stu_id')->where('sponsors.sponsor_email',$email)->count('users.id'); 
         $data['bankdetails'] = Bankdetails::findOrFail(1); 
         //$data['users'] = User::where('user_role',2)->get();
         //dd($data['sponsorDetails']);
         return view('front\education\student',$data);
         
     }
+
+    public function getsponseredStudents()
+    {
+        $id = Auth::id();
+        $email = Auth::user()->email;
+        
+        $data['sponsorDetails'] = Sponsor::select('users.name as student_name','users.email','courses.name as course_name','courses.price','courseselections.offer_accepted','courseselections.invoice_sent','courseselections.invoice','courseselections.receipt','sponsors.*')->join('users','users.id', '=','sponsors.stu_id')->join('courses','courses.id','=','sponsors.course_id')->join('courseselections','courseselections.stu_id','=','sponsors.stu_id')->where('sponsors.sponsor_email',$email)->where('courseselections.receipt','!=','')->get();        
+       
+        //$data['users'] = User::where('user_role',2)->get();
+        //dd($data['sponsorDetails']);
+        return view('front\education\sponsered-student',$data);
+        
+    }
+
+    public function sponsor_pay($id)
+    {
+        $email = Auth::user()->email;
+        $sponsor_id = Auth::id();
+        $student_id = $id;
+        $data['sponsorDetails'] = Sponsor::select('users.name as student_name','users.email','courses.name as course_name','courses.price','courseselections.offer_accepted','courseselections.invoice_sent','courseselections.invoice','courseselections.receipt','sponsors.*')->join('users','users.id', '=','sponsors.stu_id')->join('courses','courses.id','=','sponsors.course_id')->join('courseselections','courseselections.stu_id','=','sponsors.stu_id')->where('users.id',$student_id)->first(); 
+        $data['bankdetails'] = Bankdetails::findOrFail(1); 
+        //dd($data['sponsorDetails']);
+        return view('front\education\sponsor-payment',$data);
+    }
+
+    
     
 }
