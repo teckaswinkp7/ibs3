@@ -42,14 +42,28 @@ class AuthController extends Controller
             'email' => 'required',
             'password' => 'required',
         ]);
-   
-        $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials)) {
-            return redirect()->intended('admin\dashboard')
-                        ->withSuccess('You have Successfully loggedin');
+        $userVal = User::where('email',$request->email)->first();
+        //dd($userVal);
+        if($userVal->user_role == 1)
+        //$role = Auth::user_role();
+        {
+            $credentials = $request->only('email', 'password');
+            if (Auth::attempt($credentials)) {
+                
+                return redirect()->intended('admin\dashboard')
+                            ->withSuccess('You have Successfully loggedin');
+            }
+            Session::flash('message', 'Opps! Invalid credentials'); 
+            Session::flash('alert-class', 'alert-danger');
+            return redirect("admin\login");
         }
-  
-        return redirect("admin\login")->withSuccess('Oppes! You have entered invalid credentials');
+        else
+        {
+            Session::flash('message', 'You are not authorized!'); 
+            Session::flash('alert-class', 'alert-danger');
+            return redirect('admin\login');            
+        } 
+        
     }
       
     /**

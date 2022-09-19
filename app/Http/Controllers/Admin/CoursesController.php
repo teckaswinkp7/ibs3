@@ -95,7 +95,9 @@ class CoursesController extends Controller
     {
         $category = Category::where('parent_id',null)->get();     
         $course = Courses::findOrFail($id);       
-        return view('courses.edit',compact('category','course'));
+        //return view('courses.edit',compact('category','course'));
+        return view('admin\courses.edit',compact('category','course'));
+        
     }
            
     /**

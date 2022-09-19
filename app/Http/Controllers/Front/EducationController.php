@@ -292,9 +292,9 @@ class EducationController extends Controller
         ->join("users","users.id","=","courseselections.stu_id")
         //->where('studentcourses.stu_id','=',$id)
         ->get(); 
-        $data['sponsorDetails'] = Sponsor::select('users.name as student_name','users.email','courses.name as course_name','courses.price','courseselections.offer_accepted','courseselections.invoice_sent','courseselections.invoice','courseselections.receipt','sponsors.*')->join('users','users.id', '=','sponsors.stu_id')->join('courses','courses.id','=','sponsors.course_id')->join('courseselections','courseselections.stu_id','=','sponsors.stu_id')->where('sponsors.sponsor_email',$email)->get(); 
-        $data['priceTotal'] = Sponsor::join('courses','courses.id','=','sponsors.course_id')->where('sponsors.sponsor_email',$email)->sum('courses.price'); 
-        $data['studentTotal'] = Sponsor::join('users','users.id', '=','sponsors.stu_id')->where('sponsors.sponsor_email',$email)->count('users.id'); 
+        $data['sponsorDetails'] = Sponsor::select('users.name as student_name','users.email','courses.name as course_name','courses.price','courseselections.offer_accepted','courseselections.invoice_sent','courseselections.invoice','courseselections.receipt','sponsors.*')->join('users','users.id', '=','sponsors.stu_id')->join('courses','courses.id','=','sponsors.course_id')->join('courseselections','courseselections.stu_id','=','sponsors.stu_id')->where('sponsors.sponsor_email',$email)->where('courseselections.receipt',null)->get(); 
+        $data['priceTotal'] = Sponsor::join('courses','courses.id','=','sponsors.course_id')->join('courseselections','courseselections.stu_id','=','sponsors.stu_id')->where('sponsors.sponsor_email',$email)->where('courseselections.receipt',null)->sum('courses.price'); 
+        $data['studentTotal'] = Sponsor::join('users','users.id', '=','sponsors.stu_id')->join('courseselections','courseselections.stu_id','=','sponsors.stu_id')->where('sponsors.sponsor_email',$email)->where('courseselections.receipt',null)->count('users.id'); 
         $data['bankdetails'] = Bankdetails::findOrFail(1); 
         //$data['users'] = User::where('user_role',2)->get();
         //dd($data['sponsorDetails']);
@@ -324,8 +324,6 @@ class EducationController extends Controller
         $data['bankdetails'] = Bankdetails::findOrFail(1); 
         //dd($data['sponsorDetails']);
         return view('front\education\sponsor-payment',$data);
-    }
-
-    
+    }    
     
 }

@@ -7,6 +7,9 @@
                   </div>
                   <div class="card-body">
                   <p class="login-box-msg">Sign in to start your session</p>
+                  @if(Session::has('message'))
+                  <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>        
+                  @endif
                       <form action="{{ route('admin/login.post') }}" method="POST">
                           @csrf
                           <div class="input-group mb-3">
