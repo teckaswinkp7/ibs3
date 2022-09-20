@@ -93,10 +93,12 @@ class CoursesController extends Controller
     */
     public function edit($id)
     {
-        $category = Category::where('parent_id',null)->get();     
+        $category = Category::where('parent_id',null)->get();   
+        $subcategory=Category::whereNotNull('parent_id')->get();
+        //dd($subcategory);  
         $course = Courses::findOrFail($id);       
         //return view('courses.edit',compact('category','course'));
-        return view('admin\courses.edit',compact('category','course'));
+        return view('admin\courses.edit',compact('category','course','subcategory'));
         
     }
            
@@ -118,7 +120,8 @@ class CoursesController extends Controller
         ]);
 
         $course = Courses::findOrFail($id);
-        if($request->name != $course->name || $request->parent_id != $course->parent_id)
+        //dd($course);
+        /*if($request->name != $course->name || $request->parent_id != $course->parent_id)
         {
             if(isset($request->parent_id))
             {
@@ -136,11 +139,12 @@ class CoursesController extends Controller
                     return redirect()->back()->with('error', 'Category already exist with this name.');
                 }
             }
-        }  
+        }*/  
         $course->name = $request->name;
         $course->slug = $request->slug;
         $course->cat_id = $request->cat_id;
         $course->subcat_id = $request->subcat_id;
+        //dd($request);
         if($request->file('course_image')){
         $file= $request->file('course_image');
         $filename= date('YmdHi').$file->getClientOriginalName();

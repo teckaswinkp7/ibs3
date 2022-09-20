@@ -40,8 +40,10 @@
         <h4 class="mb-2 ml-3 profile-name"> You must have received an invoice in your email to enroll in this course</h4>
         <select class="form-control" name="payment_method" id="payment_method" onchange="checkPayOptions()">
         <option value="">I Want to pay</option>
-        <option value="Online">Online</option>
-        <option value="Bank Transfer">Bank Transfer</option>
+        <option value="Online">Online Transfer</option>
+        <option value="Bank Transfer">Direct Deposit</option>
+        <option value="Mobile Banking">Mobile Banking</option>
+        <option value="Visa Transfer">Visa Transfer</option>        
         <option value="Sponsor">Sponsor</option>
         </select>
         <h4 class="mb-2 ml-3 profile-name" style="display:none;" id="amt">Amount : ${{$student_course_offer[0]->price}}</h4>
@@ -123,8 +125,12 @@
       $('#paynow').hide();
       $('#amt').hide();
     }
-
-    
+    else
+    {
+      $('#bank').hide();
+      $('#paynow').show();
+      $('#amt').show();    
+    }    
   }
 </script>
 

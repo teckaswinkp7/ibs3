@@ -66,6 +66,7 @@ Route::get('admin/studentcourse/', [StudentcourseController::class, 'index'])->n
 Route::get('admin/studentcourse/courseoffer/{id}', [StudentcourseController::class, 'courseoffer'])->name('student.courseoffer');
 Route::get('admin/studentcourse/sendcourseInvoice/{id}', [StudentcourseController::class, 'sendcourseInvoice'])->name('student.sendcourseInvoice');
 Route::get('admin/studentcourse/viewReceipt/', [StudentcourseController::class, 'viewReceipt'])->name('studentcourse.viewReceipt');
+Route::get('admin/studentcourse/viewStudent/', [StudentcourseController::class, 'view_student'])->name('studentcourse.viewStudent');
 
 Route::post('admin/studentcourse/store/', [StudentcourseController::class, 'store'])->name('studentcourse.store');
 Route::post('admin/studentcourse/storeInvoice/', [StudentcourseController::class, 'storeInvoice'])->name('studentcourse.storeInvoice');

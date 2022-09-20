@@ -19,8 +19,10 @@
         <h4 class="mb-2 ml-3 profile-name"> Pay for <span style="color:#51be78;">{{ $sponsorDetails->student_name}}</span></h4>
         <select class="form-control" name="payment_method" id="payment_method" onchange="checkPayOptions()">
         <option value="">I Want to pay</option>
-        <option value="Online">Online</option>
-        <option value="Bank Transfer">Bank Transfer</option>
+        <option value="Online">Online Transfer</option>
+        <option value="Bank Transfer">Direct Deposit</option>
+        <option value="Mobile Banking">Mobile Banking</option>
+        <option value="Visa Transfer">Visa Transfer</option>        
         </select>
         <div style="display:none;" id="amt">         
         <h4 class="mb-2 ml-3 profile-name">Amount : ${{$sponsorDetails->price}}</h4>
@@ -29,7 +31,7 @@
         </div>
 
         <div class="accordion custom-margin" id="bank" style="display:none;"> 
-        <div class="accordion custom-margin">  
+          <div class="accordion custom-margin">  
         
         </div>
 
@@ -82,6 +84,12 @@
       $('#bank').show();
       $('#paynow').hide();
       $('#amt').hide();
+    }
+    else
+    {
+      $('#bank').hide();
+      $('#paynow').show();
+      $('#amt').show();    
     }
   }
 

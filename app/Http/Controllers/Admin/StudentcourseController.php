@@ -130,4 +130,13 @@ class StudentcourseController extends Controller
                
         return view('admin\stucourse.receipt', compact('data'));  
     }
+
+    public function view_student()
+    {
+        $data = User::join('courseselections', 'courseselections.stu_id', '=', 'users.id')
+        ->join('courses','courses.id', '=', 'courseselections.studentSelCid')        
+        ->get(['users.*','courseselections.studentSelCid','courseselections.receipt','courses.name as csname','courses.price']);
+               
+        return view('admin\stucourse.student', compact('data')); 
+    }
 }

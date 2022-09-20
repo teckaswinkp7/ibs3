@@ -1,4 +1,4 @@
-@extends('header')  
+@extends('admin\header')  
 @section('content')
 @include('admin\leftsidebar') 
  <!-- Content Wrapper. Contains page content -->
@@ -61,16 +61,10 @@
                                 <div class="form-group">
                                   <label>Select Parent Course</label>
                                    <select name="cat_id" id="cat_id" class="form-control">
-                @foreach($category as $key=>$cat_data)
-                @foreach ($course->category as $cat)
-                @if($cat_data->id==$cat->id)
-                <option value='{{$cat_data->id}}'>{{$cat_data->name}}</option>
-                @else
-                <option value='{{$cat_data->id}}'>{{$cat_data->name}}</option>
-                @endif  
-                @endforeach
-                 @endforeach
-                </select>
+                                    @foreach($category as $cat_data)               
+                                      <option {{($course->cat_id == $cat_data->id) ? 'selected' : ''}} value="{{$cat_data->id}} ">{{$cat_data->name}}</option>               
+                                    @endforeach                                    
+                                   </select>
                                 </div>
                               </div>  
                                 <!-- /.form-group -->
@@ -82,8 +76,9 @@
                 @endif   
                 <label>SubCategories</label>
                 <select class="browser-default custom-select" name="subcat_id" id="subcat_id">
-                @foreach ($course->subcategory as $subcat)
-                <option value='{{$subcat->id}}'>{{$subcat->name}}</option>
+                @foreach ($subcategory as $subcat)
+                <option {{($course->subcat_id == $subcat->id) ? 'selected' : ''}} value="{{$subcat->id}} ">{{$subcat->name}}</option>               
+                
                 @endforeach
                 </select>
               </div>
@@ -154,7 +149,7 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-@include('footer')
+@include('admin\footer')
 <script type="text/javascript">
 $.ajaxSetup({
 headers: {
