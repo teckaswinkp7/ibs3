@@ -80,7 +80,7 @@
                 </li>
                 <li>
                     <a href="#" class="nav-link text-left">Contact</a>
-                  </li>
+                </li>
               </ul>                                                                                                                                                                                                                                                                                          </ul>
             </nav>
 

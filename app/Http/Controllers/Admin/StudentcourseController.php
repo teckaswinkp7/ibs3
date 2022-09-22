@@ -46,7 +46,7 @@ class StudentcourseController extends Controller
         ->join("courses", "courses.id", "=", "studentcourses.student_course_id")
         ->where('studentcourses.stu_id','=',$uid)
         ->get(); 
-        //dd(student_course_offer);
+        //dd($student_course_offer);
         
         // $query = DB::getQueryLog();
         // dd($query);
@@ -113,7 +113,7 @@ class StudentcourseController extends Controller
         $data = User::join('courseselections', 'courseselections.stu_id', '=', 'users.id')
         ->join('courses','courses.id', '=', 'courseselections.studentSelCid')
         ->where('courseselections.offer_accepted', '=', 1)
-        ->where('courseselections.invoice_sent', '=', 0)
+        ->where('courseselections.invoice_sent', '=', 1)
         ->get(['users.*','courseselections.studentSelCid','courses.name as csname']);
                
         return view('admin\stucourse.invoice', compact('data'));  

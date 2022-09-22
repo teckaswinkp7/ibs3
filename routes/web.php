@@ -15,6 +15,8 @@ use App\Http\Controllers\Admin\DocumentVerificationController;
 use App\Http\Controllers\Admin\StudentcourseController;
 use App\Http\Controllers\Admin\BankController;
 use App\Http\Controllers\Admin\SponsorController;
+use App\Http\Controllers\Admin\PDFController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -100,4 +102,7 @@ Route::post('decline/{id}', [AuthControllers::class, 'decline'])->name('decline'
 
 Route::get('education/courseApproved', [AuthControllers::class, 'approve_course'])->name('courseApproved');
 Route::get('education/courseDenied', [AuthControllers::class, 'deny_course'])->name('courseDenied');
+
+Route::get('generate-invoice/{id}', [PDFController::class, 'generateInvoicePDF'])->name('generate.invoice');
+Route::get('generate-invoice-pdf', array('as'=> 'generate.invoice.pdf', 'uses' => 'PDFController@generateInvoicePDF'));
 

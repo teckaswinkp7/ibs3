@@ -68,14 +68,17 @@
                                 <label>Attachment</label>
                                 <input type="file" class="form-control" rows="8" name="attachment" id="attachment"></textarea>
                               </div>
-                            </div> 
-                            
+                            </div>                            
                         </div>
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
+                        <a href="{{route('generate.invoice',$users[0]->id)}}" class="btn btn-info">Generate Invoice</a>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
+                    <!-- <div class="card-footer">
+                       
+                    </div> -->
             </div>
             <!-- /.card -->
           </div>

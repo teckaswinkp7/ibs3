@@ -28,8 +28,7 @@
           <th>Student Name</th>
           <th>Email</th>
           <th>Course</th>
-          <th>Price</th>
-          
+          <th>Price</th>          
           <th>Action</th>
           </tr>
           </thead>
@@ -51,9 +50,6 @@
         </tr>
           <?php $i++; $s_total = $i; ?>
           @endforeach
-
-          
-
           </tbody>
         </table>
         @endif
