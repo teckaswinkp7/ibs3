@@ -25,7 +25,7 @@ class AuthControllers extends Controller
      */
     public function index()
     {
-        return view('front\auth.login');
+        return view('front.auth.login');
     }  
       
     /**
