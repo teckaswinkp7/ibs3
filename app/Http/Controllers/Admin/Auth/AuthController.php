@@ -17,7 +17,7 @@ class AuthController extends Controller
      */
     public function index()
     {
-        return view('admin\auth.login');
+        return view('admin.auth.login');
     }  
       
     /**
@@ -28,7 +28,7 @@ class AuthController extends Controller
     public function registration()
     {
         $role=Role::all();
-        return view('admin\auth.registration')->with('role',$role);
+        return view('admin.auth.registration')->with('role',$role);
     }
       
     /**
