@@ -35,7 +35,7 @@ class AuthControllers extends Controller
      */
     public function registration()
     {
-        return view('front\auth.registration');
+        return view('front.auth.registration');
     }
       
     /**
@@ -52,9 +52,18 @@ class AuthControllers extends Controller
         
         $credentials = $request->only('email', 'password');
         if ((Auth::attempt($credentials))&&(Auth::user()->is_email_verified == 1)) {  
-            
-            return redirect("dashboard")->with('Oppes! You have entered invalid credentials');  
-                    
+            $userid = Auth::id();
+            $user = User::where('id','=',$userid)->first();
+            //dd($userRole);
+            if($user->user_role == 3)
+            {
+                //return redirect("dashboard")->with('Oppes! You have entered invalid credentials'); 
+                return redirect("dashboard"); 
+            }
+            else
+            {
+                return redirect("education/create-step-one"); 
+            }                    
         }
   
         return redirect("login")->with('Oppes! You have entered invalid credentials');
@@ -71,13 +80,13 @@ class AuthControllers extends Controller
         $request->validate([
             'name' => 'required',
             'phone'=> 'required|digits:10',
-            //'user_role'=> 'required',
+            'user_role'=> 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
         ]);
            
-        $data = $request->all();
-        //dd($data);
+        $data = $request->all();        
+        Session::put('pass', $request->password);
         $check = $this->create($data);
         $subject="Registered User";
         $otp = rand(1000,9999);
@@ -86,7 +95,7 @@ class AuthControllers extends Controller
         if($user){
             $data = array('otp' => $otp,'email' =>$request->email);
             Mail::to($request->email)->send(new SendEmail($data));
-            return view('front/verifyotp')->with($data);
+            return view('front.verifyotp')->with($data);
         }
         else{
             return response(["status" => 401, 'message' => 'Invalid']);
@@ -98,10 +107,22 @@ class AuthControllers extends Controller
         $otp = $request->input('otp');
         $user  = User::where([['email','=',$request->email],['otp','=',$request->otp]])->first();
         if($user){
-
+            
            $verified=date("Y-m-d H:i:s", strtotime('now'));
            $users= User::where('email','=',$request->email)->update(['email_verified_at' =>$verified,'is_email_verified' => 1]);
-           return redirect("login");
+           $credentials = array('email'=>$request->email,'password'=>Session::get('pass'));
+           //dd($users);
+           Auth::attempt($credentials);
+           if($users->user_role == 3)
+           {
+            return redirect("dashboard");
+           }
+           else
+           {
+            return redirect("education.create.step.one");
+           }
+           Session::put('pass', '');
+           //return redirect("login");
         }
         else{
             return response(["status" => 401, 'message' => 'Invalid']);
@@ -114,7 +135,7 @@ class AuthControllers extends Controller
         if($user){
             $data = array('otp' => $otp,'email' =>$request->email);
             Mail::to($request->email)->send(new SendEmail($data));
-            return view('front/verifyotp')->with($data);
+            return view('front.verifyotp')->with($data);
         }
         else{
             return response(["status" => 401, 'message' => 'Invalid']);
@@ -172,7 +193,7 @@ class AuthControllers extends Controller
       return User::create([
         'name' => $data['name'],
         'phone' => $data['phone'],
-        'user_role' => 2,//$data['user_role'],
+        'user_role' => $data['user_role'],
         'status' =>'1',
         'email' => $data['email'],  
         'password' => Hash::make($data['password'])

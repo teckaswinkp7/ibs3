@@ -10,10 +10,12 @@
     </div>
     <!-- Blue -->
     <div>
-      <h4 class="mb-2 ml-1 profile-progress">Profile Progress</h4>
+      <h4 class="mb-2 ml-1 profile-progress">Email</h4>
     </div>
     <div class="progress mt-3">
-      <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:40%">40%</div>
+      
+        {{Auth::user()->email}}
+      <!-- <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:40%">40%</div> -->
     </div>   
     @if (session('success'))
       <div class="alert alert-success">
@@ -34,12 +36,13 @@
       <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
         <div class="card-body">
           <ul class="list-group">
-          <li class="list-group-item"><a href="{{ route('dashboard') }}"><i class="fa fa-eye"></i> View Profile</a></li> 
+          
           @if(Auth::user()->user_role == 2)  
           <li class="list-group-item"><a href="{{ route('education.create.step.one') }}"><i class="fa fa-pencil"></i> Edit Profile</a></li>                  
           <li class="list-group-item"><a href="{{ route('education.course.offer') }}"><i class="fa fa-graduation-cap"></i> Course Offer</a></li>
           @endif  
-          @if(Auth::user()->user_role == 3)          
+          @if(Auth::user()->user_role == 3)   
+          <li class="list-group-item"><a href="{{ route('dashboard') }}"><i class="fa fa-eye"></i> View Profile</a></li>        
           <li class="list-group-item"><a href="{{ route('education.view.student') }}"><i class="fa fa-users"></i> View Student</a></li>
           <li class="list-group-item"><a href="{{ route('education.sponsored.student') }}"><i class="fa fa-hand-holding-dollar"></i> Sponsored Student</a></li>
           

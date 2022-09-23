@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Education;
+use App\Models\Document;
 use App\Models\User;
 use App\Models\Sponsor;
 use App\Models\Studentcourseoffer;
@@ -76,7 +77,28 @@ class EducationController extends Controller
     public function createStepTwo(Request $request)
     {
         //$education = $request->session()->get('education');
-        return view('front/education.create-step-two');
+        $uid = Auth::id();
+        $data = Document::where('stu_id',$uid)->first();
+        //dd($data);
+        if($data->status == 1)
+        {
+            //dd($data);
+            return redirect('dashboard');
+            //return view('front/education.create-step-two');
+        }
+
+        else if($data->status == 0)
+        {
+            //dd($data);
+            return redirect('dashboard');
+            //return view('front/education.create-step-two');
+        }
+
+        else
+        {
+            return view('front/education.create-step-two');
+        }
+        
         //return view('front/education.create-step-two',compact('education'));
     }
 
@@ -240,7 +262,6 @@ class EducationController extends Controller
                 return redirect('education/course-offer');
             }
         }
-
     }
 
     public function upload_invoice_sponsor(Request $request)

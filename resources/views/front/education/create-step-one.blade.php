@@ -38,8 +38,8 @@
                         
                     </div>
                     @if(Auth::user()->user_role == 2)
-                    <div class="card-footer text-right">
-                        <button type="submit" class="btn btn-primary">Next</button>
+                    <div class="pull-right">
+                        <button type="submit" class="btn btn-primary float-right">Next</button>
                     </div>
                     @endif
                 </div>

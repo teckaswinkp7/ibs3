@@ -70,6 +70,7 @@
                   <tbody>
                   <?php $_SESSION['i'] = 0; ?>                        
                   @foreach ($student_edu as $user)
+                  
                   <?php $_SESSION['i']=$_SESSION['i']+1; ?>
                     <tr>
                       <?php $dash=''; ?>
@@ -77,7 +78,18 @@
                       <td>{{ $user->qualification }}</td>
                       <td>{{ $user->board }}</td>
                       <td>{{ $user->percentage }}</td>
-                      <td><a href="{{Url('public/Image')}}/{{ $user->document }}" target="_blank"><img src="{{Url('public/Image')}}/{{ $user->document }}" style="width:100px;height:100px;"></a></td>
+                      <?php 
+                      $val = $user->document;
+                      $ext = explode('.',$val);
+                      if($ext[1] == 'pdf')
+                      { ?>
+                        <td><a href="{{Url('public/Image')}}/{{ $user->document }}" target="_blank"><img src="{{Url('public/uploads/pdf_icon.png')}}" style="width:100px;height:100px;"></a></td>
+                      <?php }
+                      else{ ?>
+                        <td><a href="{{Url('public/Image')}}/{{ $user->document }}" target="_blank"><img src="{{Url('public/Image')}}/{{ $user->document }}" style="width:100px;height:100px;"></a></td>
+                      <?php }
+                      ?>
+                      
                     </tr> 
                   @endforeach
                   <?php unset($_SESSION['i']); ?>    

@@ -43,17 +43,19 @@
           <th>Qualification</th>
           <th>Board</th>
           <th>Percentage</th>
+          <th>Staus</th>
           </tr>
           </thead>
           <tbody> 
           @php
-            $student_education = DB::select( DB::raw("SELECT * FROM education WHERE stu_id = '".Auth::user()->id."'"));
+            $student_education = DB::select( DB::raw("SELECT e.*,d.status FROM education e join documents d on d.stu_id=e.stu_id WHERE e.stu_id = '".Auth::user()->id."'"));
           @endphp
           @foreach ($student_education as $cat)
           <tr>
           <td>{{ $cat->qualification }}</td>
           <td>{{ $cat->board }}</td>
           <td>{{ $cat->percentage }}</td>
+          <td>{{ ($cat->status == 1) ? 'Verified' : 'Resubmit' }}</td>
           </tr>
           @endforeach
           </tbody>
@@ -91,6 +93,10 @@
                   @endphp
                 @endforeach
                 @foreach ($course_id_arr as $key => $val)
+                @php
+                $course_name = DB::select(DB::raw("SELECT * FROM courses WHERE id = $val"));
+                
+                @endphp
                   <option value="{{ $val }}" {{ $studentSelCid == $val? 'selected="selected"' : "" }}>{{ $val }}</option>
                 @endforeach
               @else
