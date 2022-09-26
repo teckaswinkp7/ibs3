@@ -114,7 +114,7 @@
                     </div>
                     <div class="form-check">
                     <label class="form-check-label" for="radio2">
-                    <input type="radio" class="form-check-input" id="status" name="status" value="0">No
+                    <input type="radio" class="form-check-input" id="status" name="status" value="2">No
                     </label>
                     </div>
                   </div>

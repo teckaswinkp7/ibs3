@@ -93,6 +93,7 @@ Route::post('education/add-sponsor',[EducationController::class, 'insert_sponsor
 
 
 Route::get('education/create-step-two',  [EducationController::class, 'createStepTwo'])->name('education.create.step.two');
+Route::get('education/reupload',  [EducationController::class, 'reupload'])->name('education.reupload');
 Route::post('education/create-step-two', [EducationController::class, 'postCreateStepTwo'])->name('education.create.step.two.post');
 
 Route::get('education/create-step-three', 'EducationController@createStepThree')->name('products.create.step.three');

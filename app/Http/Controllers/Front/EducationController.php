@@ -15,6 +15,7 @@ use App\Models\Studentcourse;
 use App\Models\Courseselection;
 use Illuminate\Support\Facades\Validator;
 use Session;
+use DB;
 class EducationController extends Controller
 {
 	/**
@@ -79,6 +80,7 @@ class EducationController extends Controller
         //$education = $request->session()->get('education');
         $uid = Auth::id();
         $data = Document::where('stu_id',$uid)->first();
+        //$data = DB::select( DB::raw("SELECT e.*,d.status FROM education e left join documents d on d.stu_id=e.stu_id WHERE e.stu_id = '".Auth::user()->id."'"));
         //dd($data);
         if(!empty($data))
         {
@@ -89,13 +91,23 @@ class EducationController extends Controller
                 //return view('front/education.create-step-two');
             }
 
-            else
+            else if($data->status == 2)
             {
                 //dd($data);
-                return view('front.education.create-step-two');
+                return redirect('dashboard');
+                //return view('front.education.create-step-two');
                 //return view('front/education.create-step-two');
             }
-        }       
+            else
+            {
+                return view('front.education.create-step-two');
+            }
+        } 
+        
+        elseif($data == null)
+        {
+            return redirect('dashboard');
+        }
 
         else
         {
@@ -103,6 +115,11 @@ class EducationController extends Controller
         }
         
         //return view('front/education.create-step-two',compact('education'));
+    }
+
+    public function reupload()
+    {
+        return view('front.education.create-step-two');
     }
 
     /**
@@ -226,6 +243,7 @@ class EducationController extends Controller
             "studentcourseoffers.course_offer_description",
             "courseselections.offer_accepted",
             "courseselections.invoice_sent",
+            "courseselections.invoice",
         )
         ->join("courses", "courses.id", "=", "studentcourses.student_course_id")
         ->join("studentcourseoffers","studentcourseoffers.stu_id", "=", "studentcourses.stu_id")

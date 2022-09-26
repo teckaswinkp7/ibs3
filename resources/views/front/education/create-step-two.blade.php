@@ -24,7 +24,10 @@
     </div>
                 <div class="card mt-5">
                     <div class="card-header">Step 2: Education</div>
+                    
                     <div class="card-body" id="dynamic_field">
+                        <div class="row">
+                            <div class="col-sm-3">
                             <div class="form-group">
                                 <label for="qualification">Qualification<span class="red">*</span></label><br/>
                                 <select class="form-control select2 select2-init" name="qualification[]" id="qualification">
@@ -35,25 +38,34 @@
                                     <option>Phd </option>
                                 </select>  
                             </div>
+                            </div>
+                            <div class="col-sm-3">
                             <div class="form-group">
                                 <label for="description">Board<span class="red">*</span></label>
                                 <input type="text"  value="" class="form-control" name="board[]" id="board"/>
                                 
                             </div>
+                            </div>
+                            <div class="col-sm-2">
                             <div class="form-group">
                                 <label for="description">Percentage<span class="red">*</span></label>
                                 <input type="text"  value="" class="form-control" name="percentage[]" id="percentage"/>
                             </div>
+                            </div>
+                            <div class="col-sm-3">
                             <div class="form-group">
                                 <label for="description">Document Upload<span class="red">*</span></label>
                                 <input type="file" class="form-control" name="document[]" id="document" multiple> 
                             </div>  
-                            </div>  
+                            </div>
+                            <div class="col-sm-1">
                             <div class="card">
                             <div>
-                            <a class="btn btn-success btn-sm" id="add" name="add"  role="button"><i class="fa fa-plus"></i> Add more</a>
+                            <a class="btn btn-success btn-sm" style="margin-top:45px;" id="add" name="add"  role="button"><i class="fa fa-plus"></i> </a>
                             </div>
                             </div> 
+                            </div>
+                        </div>  
                         </div>
                     <div class="card-footer">
                         <div class="row">
@@ -81,7 +93,8 @@ $(document).ready(function() {
     $('#add').click(function(){           
         var qualification = $("#qualification").val();
         i++;  
-        $('#dynamic_field').append('<div id="row'+i+'" class="dynamic-added"><div class="form-group"><label for="qualification">Qualification<span class="red">*</span></label><br/><select class="form-control select2 select2-init" name="qualification[]"><option>Higher School(10th)</option><option>Higher School(12th)</option><option>Graduation(Bachelors)</option><option>Post Graduation(Masters)</option><option>Phd</option></select></div><div class="form-group"><label for="board">Board<span class="red">*</span></label><input type="text"  value="" class="form-control" name="board[]" /></div><div class="form-group"><label for="description">Percentage<span class="red">*</span></label><input type="text"  value="" class="form-control" name="percentage[]"/></div><div class="form-group"><label for="document">Document Upload<span class="red">*</span></label><input type="file" class="form-control" name="document[]" id="document"></div><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></div>');  
+        //$('#dynamic_field').append('<div id="row'+i+'" class="dynamic-added"><div class="form-group"><label for="qualification">Qualification<span class="red">*</span></label><br/><select class="form-control select2 select2-init" name="qualification[]"><option>Higher School(10th)</option><option>Higher School(12th)</option><option>Graduation(Bachelors)</option><option>Post Graduation(Masters)</option><option>Phd</option></select></div><div class="form-group"><label for="board">Board<span class="red">*</span></label><input type="text"  value="" class="form-control" name="board[]" /></div><div class="form-group"><label for="description">Percentage<span class="red">*</span></label><input type="text"  value="" class="form-control" name="percentage[]"/></div><div class="form-group"><label for="document">Document Upload<span class="red">*</span></label><input type="file" class="form-control" name="document[]" id="document"></div><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></div>'); 
+        $('#dynamic_field').append('<div id="row'+i+'" class="dynamic-added"><div class="row"><div class="col-sm-3"><div class="form-group"><label for="qualification">Qualification<span class="red">*</span></label><br/><select class="form-control select2 select2-init" name="qualification[]" id="qualification"><option>Higher School(10th)</option><option>Higher School(12th) </option><option>Graduation(Bachelors)</option><option>Post Graduation(Masters)</option><option>Phd </option></select></div></div><div class="col-sm-3"><div class="form-group"><label for="description">Board<span class="red">*</span></label><input type="text"  value="" class="form-control" name="board[]" id="board"/></div></div><div class="col-sm-2"><div class="form-group"><label for="description">Percentage<span class="red">*</span></label><input type="text"  value="" class="form-control" name="percentage[]" id="percentage"/></div></div><div class="col-sm-3"><div class="form-group"><label for="description">Document Upload<span class="red">*</span></label><input type="file" class="form-control" name="document[]" id="document" multiple></div></div><div class="col-sm-1"><button type="button" style="margin-top:40" name="remove" id="'+i+'" class="btn btn-danger btn_remove"><i class="fa fa-trash"></i></button></div></div></div>');  
     }); 
 });        
 $(document).on('click', '.btn_remove', function(){  

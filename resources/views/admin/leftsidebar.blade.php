@@ -184,7 +184,7 @@
                   <li class="nav-item">
                     <a href="{{route('studentcourse.index')}}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Student Course Selection</p>
+                      <p>Send Offer</p>
                     </a>
                   </li>
                   <li class="nav-item">

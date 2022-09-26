@@ -49,23 +49,39 @@
           </thead>
           <tbody> 
           @php
-            $student_education = DB::select( DB::raw("SELECT e.*,d.status FROM education e join documents d on d.stu_id=e.stu_id WHERE e.stu_id = '".Auth::user()->id."'"));
+            $student_education = DB::select( DB::raw("SELECT e.*,d.status FROM education e left join documents d on d.stu_id=e.stu_id WHERE e.stu_id = '".Auth::user()->id."'"));
+            //dd($student_education);
           @endphp
           @foreach ($student_education as $cat)
           <tr>
           <td>{{ $cat->qualification }}</td>
           <td>{{ $cat->board }}</td>
-          <td>{{ $cat->percentage }}</td>
-          <td>{{ ($cat->status == 1) ? 'Verified' : 'Verification Failed' }}</td>
+          <td>{{ $cat->percentage }}</td>          
+          <td>
+            @if($cat->status == 1)
+            Verified
+            @elseif($cat->status == 2)
+            Rejected <i style="color: red;" class="fa fa-ban"></i>           
+            @else
+            Verificaton Pending <i style="color: orange;" class="fa fa-clock"></i>
+            @endif           
+          </td>
           @if($cat->status == 1)
           
             <td><i class="fa fa-check-circle" style="color: green;"></i></td>
           
-          @else
+          @elseif($cat->status == 2)
           
             <td>
-              <a href="{{ route('education.create.step.two')}}">Reupload</a>
+              <a href="{{ route('education.reupload')}}">Reupload</a>
+              
             </td>
+          
+          @else
+          <td>
+            <p>Awaiting</p>
+          </td>
+          
           
           @endif
           
@@ -110,7 +126,7 @@
                 $course_name = DB::select(DB::raw("SELECT * FROM courses WHERE id = $val"));
                 
                 @endphp
-                  <option value="{{ $val }}" {{ $studentSelCid == $val? 'selected="selected"' : "" }}>{{ $val }}</option>
+                  <option value="{{ $val }}" {{ $studentSelCid == $val? 'selected="selected"' : "" }}>{{ $course_name[0]->name }}</option>
                 @endforeach
               @else
                 @php

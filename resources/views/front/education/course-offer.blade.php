@@ -11,9 +11,11 @@
     <h5>Course Offer Details</h5>
     
     <div class="col-md-12">
-        
+      
+
         <p>{{$student_course_offer[0]->course_offer_description}}</p>
         <input type="text" value="{{$student_course_offer[0]->courses_name}}" name="stu_id" class="form-control"  readonly>
+        
         <input type="hidden" value="{{$student_course_offer[0]->stu_id}}" name="stu_id" class="form-control"  readonly>
         <input type="hidden" value="{{$student_course_offer[0]->student_course_id}}" name="student_course_id" class="form-control"  readonly>
         @if($student_course_offer[0]->offer_accepted == 0 || $student_course_offer[0]->offer_accepted == 2)
@@ -30,14 +32,30 @@
         
         @if(Session::has('message'))
         <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>        
-        @endif
-        
-        
-        
+        @endif        
         
         @if($student_course_offer[0]->invoice_sent == 1)
         <div class="accordion custom-margin" id="payment_process">    
         <h4 class="mb-2 ml-3 profile-name"> You must have received an invoice in your email to enroll in this course</h4>
+        
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+          <th>Course</th>
+          <th>Price</th>
+          <th>Invoice</th>        
+          </tr>
+          </thead>
+          <tbody>       
+          <tr>        
+          <td>{{ $student_course_offer[0]->courses_name }}</td>       
+          <td>${{ $student_course_offer[0]->price }}</td>
+          <td><a href="{{Url('public/uploads/attachment')}}/{{ $student_course_offer[0]->invoice }}" target="_blank"><img src="{{Url('public/uploads/')}}/pdf_icon.png" style="width:40px;height:50px;"></a></td>      
+          
+          </tr>
+          </tbody>
+        </table> 
+
         <select class="form-control" name="payment_method" id="payment_method" onchange="checkPayOptions()">
         <option value="">I Want to pay</option>
         <option value="Online">Online Transfer</option>
@@ -54,11 +72,25 @@
         <h4 class="mb-2 ml-3 profile-name"> Fill the sponsor details</h4>
         <form action="{{ route('education.sponsor') }}" method="post" class="mb-0">
         @csrf
-        <input type="hidden" class="form-control" name="course_id" value="{{$student_course_offer[0]->student_course_id}}">
-        <input type="text" class="form-control" name="sponsor_name" placeholder="Sponsor/Company Name">
-        <input type="text" class="form-control" name="sponsor_phone" placeholder="Sponsor Phone">
-        <input type="text" class="form-control" name="sponsor_email" placeholder="Sponsor Email">
-        <button style="margin-top:20px;" type="submit" class="btn btn-success">Submit</button>
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="form-group">  
+            <input type="hidden" class="form-control" name="course_id" value="{{$student_course_offer[0]->student_course_id}}">
+            <input type="text" class="form-control" name="sponsor_name" placeholder="Sponsor/Company Name">
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group"> 
+              <input type="text" class="form-control" name="sponsor_phone" placeholder="Sponsor Phone">
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group"> 
+              <input type="text" class="form-control" name="sponsor_email" placeholder="Sponsor Email">
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
         </form>
         </div>
 
