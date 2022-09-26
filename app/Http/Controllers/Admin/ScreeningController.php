@@ -18,14 +18,14 @@ class ScreeningController extends Controller
     $users = User::where('user_role',2)->where('status',3)->get();
     //$users = User::select('users.*','courseselections.offer_generated')->join("courseselections","courseselections.stu_id","=","users.id")->where("courseselections.offer_generated","=",0)->where('users.user_role',2)->get();
     $educat = Document::where('status',1)->get();          
-    return view('admin\screening.index',compact('users','educat'));
+    return view('admin.screening.index',compact('users','educat'));
     }
 
     public function course($id)
     {
         $user = User::findOrFail($id);  
         $course = Courses::all();       
-        return view('admin\screening.course',compact('user','course'));
+        return view('admin.screening.course',compact('user','course'));
     }
     public function store(Request $request)
     {

@@ -15,7 +15,7 @@ class CoursesController extends Controller
     public function index()
     {
         $data['courses'] = Courses::orderBy('id','desc')->paginate(5);
-        return view('admin\courses.index', $data);
+        return view('admin.courses.index', $data);
         //return view('categories.index', compact('categories'));
     }
     /**
@@ -27,7 +27,7 @@ class CoursesController extends Controller
     {
        $category=Category::where('parent_id', null)->orderby('name', 'asc')->get();
        $subcategory=Category::whereNotNull('parent_id')->get();
-       return view('admin\courses.create')->with('category',$category)->with('subcategory',$subcategory);
+       return view('admin.courses.create')->with('category',$category)->with('subcategory',$subcategory);
         //return view('categories.create');
     }
     public function subCat(Request $request)
@@ -98,7 +98,7 @@ class CoursesController extends Controller
         //dd($subcategory);  
         $course = Courses::findOrFail($id);       
         //return view('courses.edit',compact('category','course'));
-        return view('admin\courses.edit',compact('category','course','subcategory'));
+        return view('admin.courses.edit',compact('category','course','subcategory'));
         
     }
            

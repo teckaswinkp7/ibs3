@@ -38,7 +38,7 @@ class EducationController extends Controller
     {
         $id = Auth::id();
         $user = User::where('id', $id)->get();
-        return view('front/education.create-step-one',compact('user'));
+        return view('front.education.create-step-one',compact('user'));
         //return view('front/education.create-step-one');
     }
 
@@ -90,13 +90,13 @@ class EducationController extends Controller
         else if($data->status == 0)
         {
             //dd($data);
-            return redirect('dashboard');
+            return view('front.education.create-step-two');
             //return view('front/education.create-step-two');
         }
 
         else
         {
-            return view('front/education.create-step-two');
+            return view('front.education.create-step-two');
         }
         
         //return view('front/education.create-step-two',compact('education'));
@@ -234,7 +234,7 @@ class EducationController extends Controller
     	$userData = Studentcourseoffer::where('stu_id', $id)->get();
         //dd($userData);
         //dd($student_course_offer);
-        return view('front\education\course-offer',compact('student_course_offer','userData','bankdetails'));
+        return view('front.education.course-offer',compact('student_course_offer','userData','bankdetails'));
         //return redirect()->route('education.course.offer','userData','student_course_offer');
     }
 
@@ -319,7 +319,7 @@ class EducationController extends Controller
         $data['bankdetails'] = Bankdetails::findOrFail(1); 
         //$data['users'] = User::where('user_role',2)->get();
         //dd($data['sponsorDetails']);
-        return view('front\education\student',$data);
+        return view('front.education.student',$data);
         
     }
 
@@ -332,7 +332,7 @@ class EducationController extends Controller
        
         //$data['users'] = User::where('user_role',2)->get();
         //dd($data['sponsorDetails']);
-        return view('front\education\sponsered-student',$data);
+        return view('front.education.sponsered-student',$data);
         
     }
 
@@ -344,7 +344,7 @@ class EducationController extends Controller
         $data['sponsorDetails'] = Sponsor::select('users.name as student_name','users.email','courses.name as course_name','courses.price','courseselections.offer_accepted','courseselections.invoice_sent','courseselections.invoice','courseselections.receipt','sponsors.*')->join('users','users.id', '=','sponsors.stu_id')->join('courses','courses.id','=','sponsors.course_id')->join('courseselections','courseselections.stu_id','=','sponsors.stu_id')->where('users.id',$student_id)->first(); 
         $data['bankdetails'] = Bankdetails::findOrFail(1); 
         //dd($data['sponsorDetails']);
-        return view('front\education\sponsor-payment',$data);
+        return view('front.education.sponsor-payment',$data);
     }    
     
 }

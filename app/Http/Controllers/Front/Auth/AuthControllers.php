@@ -113,13 +113,13 @@ class AuthControllers extends Controller
            $credentials = array('email'=>$request->email,'password'=>Session::get('pass'));
            //dd($users);
            Auth::attempt($credentials);
-           if($users->user_role == 3)
+           if(Auth::user()->user_role == 3)
            {
             return redirect("dashboard");
            }
            else
            {
-            return redirect("education.create.step.one");
+            return redirect("education/create-step-one");
            }
            Session::put('pass', '');
            //return redirect("login");
@@ -152,7 +152,7 @@ class AuthControllers extends Controller
     {   
         if(Auth::check()){
             if(Auth::user()->is_email_verified == 1){  
-                return view('front/dashboard');
+                return view('front.dashboard');
             }
         }
         
@@ -164,7 +164,7 @@ class AuthControllers extends Controller
     public function profile()
     {
         
-        return view('front/profile');
+        return view('front.profile');
             
     }
     public function studentCoursestore(Request $request)

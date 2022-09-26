@@ -44,6 +44,7 @@
           <th>Board</th>
           <th>Percentage</th>
           <th>Staus</th>
+          <th>Action</th>
           </tr>
           </thead>
           <tbody> 
@@ -55,7 +56,19 @@
           <td>{{ $cat->qualification }}</td>
           <td>{{ $cat->board }}</td>
           <td>{{ $cat->percentage }}</td>
-          <td>{{ ($cat->status == 1) ? 'Verified' : 'Resubmit' }}</td>
+          <td>{{ ($cat->status == 1) ? 'Verified' : 'Verification Failed' }}</td>
+          @if($cat->status == 1)
+          
+            <td><i class="fa fa-check-circle" style="color: green;"></i></td>
+          
+          @else
+          
+            <td>
+              <a href="{{ route('education.create.step.two')}}">Reupload</a>
+            </td>
+          
+          @endif
+          
           </tr>
           @endforeach
           </tbody>

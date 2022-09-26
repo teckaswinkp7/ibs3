@@ -15,7 +15,7 @@ class RoleController extends Controller
     public function index()
     {
     $data['role'] = Role::all();
-            return view('admin\role.index', $data);
+            return view('admin.role.index', $data);
     }
     /**
     * Show the form for creating a new resource.
@@ -27,7 +27,7 @@ class RoleController extends Controller
         //$categories = Category::where('parent_id', null)->orderby('name', 'asc')->get();
         //return view('categories.create', compact('categories'));
         
-            return view('admin\role.create');
+            return view('admin.role.create');
        
     }
     /**
@@ -59,7 +59,7 @@ class RoleController extends Controller
     public function show(Role $role)
     {
      
-            return view('admin/role.show',compact('role',$role));
+            return view('admin.role.show',compact('role',$role));
        
     } 
     /**
@@ -71,7 +71,7 @@ class RoleController extends Controller
     public function edit($id)
     {
         $roles = Role::findOrFail($id);    
-        return view('admin/role.edit', compact('roles',$roles));
+        return view('admin.role.edit', compact('roles',$roles));
     }
 
     

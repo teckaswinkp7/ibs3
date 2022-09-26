@@ -18,7 +18,7 @@ class BankController extends Controller
     {
     $data['bankDetails'] = Bankdetails::orderBy('id','desc')->get();
    // dd($data['bankDetails']);
-    return view('admin\bank.index', $data);
+    return view('admin.bank.index', $data);
     //return view('categories.index', compact('categories'));
     }
     /**
@@ -28,7 +28,7 @@ class BankController extends Controller
     */
     public function create(Request $request)
     {        
-        return view('admin\bank.create');
+        return view('admin.bank.create');
         
         //return view('categories.create');
     }
@@ -75,7 +75,7 @@ class BankController extends Controller
     {
         $bankdetails = Bankdetails::findOrFail($id);    
         
-        return view('admin\bank.edit', compact('bankdetails'));
+        return view('admin.bank.edit', compact('bankdetails'));
     }
            
     /**

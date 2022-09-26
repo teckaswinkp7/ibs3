@@ -20,7 +20,7 @@ class UserController extends Controller
     {
      $data['users'] = User::all();
      $data1['role']= Role::all();
-    return view('admin\user.index', $data,$data1);
+    return view('admin.user.index', $data,$data1);
     }
     /**
     * Show the form for creating a new resource.
@@ -31,7 +31,7 @@ class UserController extends Controller
     {
         $urole = Role::all();
         //return view('categories.create', compact('categories'));
-        return view('admin\user.create',compact('urole'));
+        return view('admin.user.create',compact('urole'));
     }
     /**
     * Store a newly created resource in storage.
@@ -76,7 +76,7 @@ class UserController extends Controller
     
     $user = User::findOrFail($id);
     $student_edu = Education::where('stu_id',$id)->get();          
-    return view('admin/user.show',compact('user','student_edu'));
+    return view('admin.user.show',compact('user','student_edu'));
     } 
     /**
     * Show the form for editing the specified resource.
@@ -88,7 +88,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);   
         $role = Role::all();      
-        return view('admin/user.edit', compact('user','role'));
+        return view('admin.user.edit', compact('user','role'));
     }
 
     
@@ -100,8 +100,7 @@ class UserController extends Controller
     * @return \Illuminate\Http\Response
     */
     public function update(Request $request,$id)
-    {
-    
+    {    
         $validator = $request->validate([
             'uid' => 'required',
             'email' => 'required|email',

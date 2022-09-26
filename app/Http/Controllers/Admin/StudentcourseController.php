@@ -24,7 +24,7 @@ class StudentcourseController extends Controller
         ->join('courses','courses.id', '=', 'courseselections.studentSelCid')
         ->where('courseselections.offer_accepted', '=', 0)
         ->get(['users.*','courseselections.studentSelCid','courses.name as csname']);               
-        return view('admin\stucourse.index', compact('data'));         
+        return view('admin.stucourse.index', compact('data'));         
     }
 
     public function courseoffer($id)
@@ -50,7 +50,7 @@ class StudentcourseController extends Controller
         
         // $query = DB::getQueryLog();
         // dd($query);
-        return view('admin\stucourse.courseoffer',compact('student_course_offer','users'));
+        return view('admin.stucourse.courseoffer',compact('student_course_offer','users'));
     }
 
     public function sendcourseInvoice($id)
@@ -66,7 +66,7 @@ class StudentcourseController extends Controller
         ->join("courses", "courses.id", "=", "studentcourses.student_course_id")
         ->where('studentcourses.stu_id','=',$uid)
         ->get();         
-        return view('admin\stucourse.sendInvoice',compact('student_course_invoice','users'));
+        return view('admin.stucourse.sendInvoice',compact('student_course_invoice','users'));
     }
 
     public function store(Request $request)
@@ -116,7 +116,7 @@ class StudentcourseController extends Controller
         ->where('courseselections.invoice_sent', '=', 1)
         ->get(['users.*','courseselections.studentSelCid','courses.name as csname']);
                
-        return view('admin\stucourse.invoice', compact('data'));  
+        return view('admin.stucourse.invoice', compact('data'));  
     }
 
     public function viewReceipt()
@@ -128,7 +128,7 @@ class StudentcourseController extends Controller
         ->where('courseselections.receipt', '!=', null)
         ->get(['users.*','courseselections.studentSelCid','courseselections.receipt','courses.name as csname']);
                
-        return view('admin\stucourse.receipt', compact('data'));  
+        return view('admin.stucourse.receipt', compact('data'));  
     }
 
     public function view_student()
@@ -137,6 +137,6 @@ class StudentcourseController extends Controller
         ->join('courses','courses.id', '=', 'courseselections.studentSelCid')        
         ->get(['users.*','courseselections.studentSelCid','courseselections.receipt','courses.name as csname','courses.price']);
                
-        return view('admin\stucourse.student', compact('data')); 
+        return view('admin.stucourse.student', compact('data')); 
     }
 }

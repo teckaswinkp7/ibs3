@@ -32,7 +32,7 @@ class PDFController extends Controller
         ->get();   
 
         //dd($student_course_invoice);
-        $pdf = PDF::loadView('admin/myPDF',$data);
+        $pdf = PDF::loadView('admin.myPDF',$data);
 
         //return $pdf->download('invoice.pdf');
         $ab = $pdf->download(public_path('public/uploads/attachment/','invoice.pdf'));
@@ -44,6 +44,6 @@ class PDFController extends Controller
         // $tempImage = tempnam(sys_get_temp_dir(), $filename);
         
         // return response()->download($tempImage, $filename);
-        return view('admin/myPDF', $data);
+        return view('admin.myPDF', $data);
     }
 }

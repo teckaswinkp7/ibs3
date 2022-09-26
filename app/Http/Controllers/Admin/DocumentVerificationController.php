@@ -19,7 +19,7 @@ class DocumentVerificationController extends Controller
     {
      $users = User::where('user_role',2)->where('status',2)->get();
      //$educat = Document::all();
-    return view('admin\enrollment.index',compact('users'));
+    return view('admin.enrollment.index',compact('users'));
     }
     public function verify($id)
     {
@@ -29,7 +29,7 @@ class DocumentVerificationController extends Controller
      //$data['users'] = User::where('user_role',2) ->get();
      $user = User::findOrFail($id);  
      $student_edu =  Education::where('stu_id',$id)->get();     
-     return view('admin\enrollment.verify',compact('user','student_edu'));
+     return view('admin.enrollment.verify',compact('user','student_edu'));
     }
     public function store(Request $request)
     {
