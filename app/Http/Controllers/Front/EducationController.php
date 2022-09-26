@@ -80,19 +80,22 @@ class EducationController extends Controller
         $uid = Auth::id();
         $data = Document::where('stu_id',$uid)->first();
         //dd($data);
-        if($data->status == 1)
+        if(!empty($data))
         {
-            //dd($data);
-            return redirect('dashboard');
-            //return view('front/education.create-step-two');
-        }
+            if($data->status == 1)
+            {
+                //dd($data);
+                return redirect('dashboard');
+                //return view('front/education.create-step-two');
+            }
 
-        else if($data->status == 0)
-        {
-            //dd($data);
-            return view('front.education.create-step-two');
-            //return view('front/education.create-step-two');
-        }
+            else
+            {
+                //dd($data);
+                return view('front.education.create-step-two');
+                //return view('front/education.create-step-two');
+            }
+        }       
 
         else
         {
@@ -234,7 +237,14 @@ class EducationController extends Controller
     	$userData = Studentcourseoffer::where('stu_id', $id)->get();
         //dd($userData);
         //dd($student_course_offer);
-        return view('front.education.course-offer',compact('student_course_offer','userData','bankdetails'));
+        if($student_course_offer->isEmpty())
+        {
+            echo 'No offers accepted.';
+        }
+        else
+        {
+            return view('front.education.course-offer',compact('student_course_offer','userData','bankdetails'));            
+        }
         //return redirect()->route('education.course.offer','userData','student_course_offer');
     }
 

@@ -1,6 +1,6 @@
-@extends('admin/header')  
+@extends('admin.header')  
 @section('content')
-@include('admin/leftsidebar') 
+@include('admin.leftsidebar') 
  <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -95,7 +95,7 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-@include('admin/footer')
+@include('admin.footer')
 @endsection
 </body>
 </html>   

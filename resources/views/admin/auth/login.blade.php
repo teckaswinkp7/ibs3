@@ -1,4 +1,4 @@
-@extends('admin/layoutlogin')
+@extends('admin.layoutlogin')
 @section('content')
 <div class="login-box">
   <div class="card card-outline card-primary">
