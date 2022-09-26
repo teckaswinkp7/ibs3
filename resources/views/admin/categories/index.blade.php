@@ -87,7 +87,7 @@
     </section>
     <!-- /.content -->
   </div>
-  @include('admin\footer')  
+  @include('admin.footer')  
 @endsection
 </body>
 </html>  

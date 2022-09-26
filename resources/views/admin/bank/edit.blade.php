@@ -1,4 +1,4 @@
-@extends('admin\header')  
+@extends('admin.header')  
 @section('content')
 @include('admin.leftsidebar') 
  <!-- Content Wrapper. Contains page content -->
