@@ -104,10 +104,10 @@ class EducationController extends Controller
             }
         } 
         
-        elseif($data == null)
-        {
-            return redirect('dashboard');
-        }
+        // elseif($data == null)
+        // {
+        //     return redirect('dashboard');
+        // }
 
         else
         {
@@ -244,6 +244,7 @@ class EducationController extends Controller
             "courseselections.offer_accepted",
             "courseselections.invoice_sent",
             "courseselections.invoice",
+            "courseselections.receipt",
         )
         ->join("courses", "courses.id", "=", "studentcourses.student_course_id")
         ->join("studentcourseoffers","studentcourseoffers.stu_id", "=", "studentcourses.stu_id")
@@ -253,6 +254,7 @@ class EducationController extends Controller
 
         $bankdetails = Bankdetails::findOrFail(1);  
     	$userData = Studentcourseoffer::where('stu_id', $id)->get();
+        $sponsorData = Sponsor::where('stu_id', $id)->first();
         //dd($userData);
         //dd($student_course_offer);
         if($student_course_offer->isEmpty())
@@ -261,7 +263,7 @@ class EducationController extends Controller
         }
         else
         {
-            return view('front.education.course-offer',compact('student_course_offer','userData','bankdetails'));            
+            return view('front.education.course-offer',compact('student_course_offer','userData','bankdetails','sponsorData'));            
         }
         //return redirect()->route('education.course.offer','userData','student_course_offer');
     }
@@ -354,8 +356,7 @@ class EducationController extends Controller
     public function getsponseredStudents()
     {
         $id = Auth::id();
-        $email = Auth::user()->email;
-        
+        $email = Auth::user()->email;        
         $data['sponsorDetails'] = Sponsor::select('users.name as student_name','users.email','courses.name as course_name','courses.price','courseselections.offer_accepted','courseselections.invoice_sent','courseselections.invoice','courseselections.receipt','sponsors.*')->join('users','users.id', '=','sponsors.stu_id')->join('courses','courses.id','=','sponsors.course_id')->join('courseselections','courseselections.stu_id','=','sponsors.stu_id')->where('sponsors.sponsor_email',$email)->where('courseselections.receipt','!=','')->get();        
        
         //$data['users'] = User::where('user_role',2)->get();

@@ -34,16 +34,20 @@
         <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>        
         @endif        
         
+        
         @if($student_course_offer[0]->invoice_sent == 1)
         <div class="accordion custom-margin" id="payment_process">    
-        <h4 class="mb-2 ml-3 profile-name"> You must have received an invoice in your email to enroll in this course</h4>
+        {{-- <h4 class="mb-2 ml-3 profile-name"> You must have received an invoice in your email to enroll in this course</h4> --}}
         
         <table class="table table-bordered">
           <thead>
           <tr>
           <th>Course</th>
           <th>Price</th>
-          <th>Invoice</th>        
+          <th>Invoice</th> 
+          @if($student_course_offer[0]->receipt != null || $student_course_offer[0]->receipt != '')
+          <th>Receipt</th> 
+          @endif      
           </tr>
           </thead>
           <tbody>       
@@ -51,10 +55,14 @@
           <td>{{ $student_course_offer[0]->courses_name }}</td>       
           <td>${{ $student_course_offer[0]->price }}</td>
           <td><a href="{{Url('public/uploads/attachment')}}/{{ $student_course_offer[0]->invoice }}" target="_blank"><img src="{{Url('public/uploads/')}}/pdf_icon.png" style="width:40px;height:50px;"></a></td>      
-          
+          @if($student_course_offer[0]->receipt != null || $student_course_offer[0]->receipt != '')
+          <td><a href="{{Url('public/uploads/receipt')}}/{{ $student_course_offer[0]->receipt }}" target="_blank"><img src="{{Url('public/uploads/')}}/pdf_icon.png" style="width:40px;height:50px;"></a></td>
+          @endif
           </tr>
           </tbody>
         </table> 
+        
+        @if($sponsorData->id == '' || $student_course_offer[0]->receipt == null)
 
         <select class="form-control" name="payment_method" id="payment_method" onchange="checkPayOptions()">
         <option value="">I Want to pay</option>
@@ -119,6 +127,7 @@
           <button type="submit" style="margin-top:20px;" class="btn btn-success">Upload Receipt</button>
           </form>
         </div>
+        @endif
         @endif
 
     </div> 
