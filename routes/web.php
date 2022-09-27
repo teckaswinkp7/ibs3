@@ -90,6 +90,7 @@ Route::get('education/course-offer',[EducationController::class, 'getCourseOffer
 Route::get('education/view-student',[EducationController::class, 'getStudents'])->name('education.view.student');
 Route::get('education/view-sponsered',[EducationController::class, 'getsponseredStudents'])->name('education.sponsored.student');
 Route::post('education/add-sponsor',[EducationController::class, 'insert_sponsor'])->name('education.sponsor');
+Route::post('searchSponsor',[EducationController::class, 'searchSponsor'])->name('searchSponsor');
 
 
 Route::get('education/create-step-two',  [EducationController::class, 'createStepTwo'])->name('education.create.step.two');

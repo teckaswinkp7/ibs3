@@ -49,7 +49,7 @@
           </thead>
           <tbody> 
           @php
-            $student_education = DB::select( DB::raw("SELECT e.*,d.status FROM education e left join documents d on d.stu_id=e.stu_id WHERE e.stu_id = '".Auth::user()->id."'"));
+            $student_education = DB::select( DB::raw("SELECT e.*,d.status FROM education e left join documents d on d.edu_id=e.id WHERE e.stu_id = '".Auth::user()->id."'"));
             //dd($student_education);
           @endphp
           @foreach ($student_education as $cat)
@@ -136,7 +136,16 @@
             </select>
           </div>
         </div>
-
+        
+        @if($studentSelCid > 0 && $course_list[0]->offer_generated == 0)
+        <span style="color: green;font-weight:bold;">You will get the offer email soon.</span>
+        @elseif($studentSelCid > 0 && $course_list[0]->offer_generated == 1)
+        <span style="color: green;font-weight:bold;">Email Sent ! Check course offer section.</span>
+        {{-- @elseif($studentSelCid > 0 && $course_list[0]->offer_accepted == 1)
+        <span style="color: green;font-weight:bold;">Congrats ! You have accepted the offer.</span>
+        @elseif($studentSelCid > 0 && $course_list[0]->offer_accepted == 2)
+        <span style="color: red;font-weight:bold;">Oops ! You have declined the offer.</span> --}}
+        @endif
         @if($studentSelCid == 0)
           <button type="submit" class="btn btn-primary">Submit</button>
         @endif

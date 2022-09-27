@@ -28,17 +28,26 @@ class DocumentVerificationController extends Controller
      //$data1['role']= Role::all();
      //$data['users'] = User::where('user_role',2) ->get();
      $user = User::findOrFail($id);  
-     $student_edu =  Education::where('stu_id',$id)->get();     
+     //$student_edu =  Education::join('documents','documents.edu_id','education.id')->where('education.stu_id',$id)->where('documents.status',1)->get();   
+     $student_edu =  Education::where('stu_id',$id)->where('verification_status',null)->get();
+     //dd($student_edu);  
      return view('admin.enrollment.verify',compact('user','student_edu'));
     }
     public function store(Request $request)
     {
-
         $docum = new Document;
         $id=$request->stu_id;
-        $docum->stu_id =$request->stu_id;
-        $docum->status = $request->status;
-        $docum->save();
+        $student_edu =  Education::where('stu_id',$id)->get();
+        foreach($student_edu as $val)
+        {
+            $vals = array('stu_id'=>$val->stu_id,'edu_id'=>$val->id,'status'=>$request->status);            
+            $docum->create($vals);
+            Education::where('id', $val->id)->update(array('verification_status' => $request->status));            
+        }
+        // $docum->stu_id =$request->stu_id;
+        // $docum->status = $request->status;
+        // $docum->edu_id = $request->edu_id;
+        // $docum->save();
         $status = User::where('id', $id)->update(array('status' => 3));
         return redirect()->route('enrollment.index')
         ->with('success','created successfully.');

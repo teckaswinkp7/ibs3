@@ -12,11 +12,12 @@
     <div>
       <h4 class="mb-2 ml-1 profile-progress">Email</h4>
     </div>
-    <div class="progress mt-3">
+    {{-- <div class="progress mt-3">
       
-        {{Auth::user()->email}}
+       
       <!-- <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:40%">40%</div> -->
-    </div>   
+    </div>    --}}
+    <h6>{{Auth::user()->email}}</h6>
     @if (session('success'))
       <div class="alert alert-success">
       {{ session('success') }}

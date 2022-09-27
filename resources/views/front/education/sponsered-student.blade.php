@@ -20,7 +20,7 @@
         <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>        
         @endif
         @if(Auth::user()->user_role == 3) 
-        
+        @if(count($sponsorDetails) >= 1)
         <table class="table table-bordered">
           <thead>
           <tr>
@@ -52,6 +52,9 @@
           @endforeach
           </tbody>
         </table>
+        @else
+        No Student Found
+        @endif
         @endif
       </form>   
 

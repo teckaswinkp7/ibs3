@@ -179,8 +179,10 @@ class AuthControllers extends Controller
             'student_course_id' => $studentSelCid,
             'status'            =>1,
         ]);
-        return redirect()->route('dashboard')
-        ->with('success','created successfully.');
+        Session::flash('message', 'You will get the course offer soon!'); 
+        Session::flash('alert-class', 'alert-success');
+        return redirect()->route('dashboard');
+        
     }
     
     /**
@@ -222,7 +224,7 @@ class AuthControllers extends Controller
     public function deny_course()
     {
         $id = Auth::id();
-        $status = Courseselection::where('stu_id', $id)->update(array('offer_accepted' => 2));
+        $status = Courseselection::where('stu_id', $id)->update(array('offer_accepted' => 2,'offer_generated'=>0));
         return redirect()->back(); 
     }
 

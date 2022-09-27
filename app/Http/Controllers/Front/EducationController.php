@@ -80,6 +80,7 @@ class EducationController extends Controller
         //$education = $request->session()->get('education');
         $uid = Auth::id();
         $data = Document::where('stu_id',$uid)->first();
+        $eduData = Education::where('stu_id',$uid)->first();
         //$data = DB::select( DB::raw("SELECT e.*,d.status FROM education e left join documents d on d.stu_id=e.stu_id WHERE e.stu_id = '".Auth::user()->id."'"));
         //dd($data);
         if(!empty($data))
@@ -104,10 +105,10 @@ class EducationController extends Controller
             }
         } 
         
-        // elseif($data == null)
-        // {
-        //     return redirect('dashboard');
-        // }
+        elseif($data == null && $eduData != null)
+        {
+            return redirect('dashboard');
+        }
 
         else
         {
@@ -254,17 +255,9 @@ class EducationController extends Controller
 
         $bankdetails = Bankdetails::findOrFail(1);  
     	$userData = Studentcourseoffer::where('stu_id', $id)->get();
-        $sponsorData = Sponsor::where('stu_id', $id)->first();
-        //dd($userData);
-        //dd($student_course_offer);
-        if($student_course_offer->isEmpty())
-        {
-            echo 'No offers accepted.';
-        }
-        else
-        {
-            return view('front.education.course-offer',compact('student_course_offer','userData','bankdetails','sponsorData'));            
-        }
+        $sponsorData = Sponsor::where('stu_id', $id)->first();        
+        return view('front.education.course-offer',compact('student_course_offer','userData','bankdetails','sponsorData'));            
+        
         //return redirect()->route('education.course.offer','userData','student_course_offer');
     }
 
@@ -374,6 +367,13 @@ class EducationController extends Controller
         $data['bankdetails'] = Bankdetails::findOrFail(1); 
         //dd($data['sponsorDetails']);
         return view('front.education.sponsor-payment',$data);
-    }    
+    }  
+    
+    public function searchSponsor(Requst $request)
+    {
+        $email = $request->email;
+        $val = User::where('email',$email)->first();
+        echo json_encode($val);
+    }
     
 }
