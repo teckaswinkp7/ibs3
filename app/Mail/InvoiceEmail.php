@@ -31,6 +31,6 @@ class InvoiceEmail extends Mailable
 
     public function build()
     {
-        return $this->from('info@supertyreguy.com')->view('emails.offers.invoiceEmail',['data'=>$this->data])->subject('Invoice')->attach(public_path('public/uploads/attachment/'.$this->data['filename']));    
+        return $this->from('info@supertyreguy.com')->view('emails.offers.invoiceEmail',['data'=>$this->data])->subject('Invoice')->attach(public_path('uploads/attachment/'.$this->data['filename']));    
     }
 }

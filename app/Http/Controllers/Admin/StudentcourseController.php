@@ -15,6 +15,7 @@ use App\Mail\InvoiceEmail;
 use Illuminate\Support\Facades\Mail;
 use Hash;
 use DB;
+use PDF;
 class StudentcourseController extends Controller
 {
     //
@@ -92,15 +93,35 @@ class StudentcourseController extends Controller
 
     public function storeInvoice(Request $request)
     {
+        $data['invoice_id'] = '#INV-'.time();
+        $id=$request->stu_id; 
+        $data['users'] = User::where('id',$id)->get();        
+        $uid=(int) $id;        
+        $data['student_course_invoice']= Studentcourse::select(
+            "studentcourses.student_course_id", 
+            "studentcourses.stu_id",
+            "studentcourses.student_course_id", 
+            "courses.name as courses_name",
+            "courses.price"
+        )
+        ->join("courses", "courses.id", "=", "studentcourses.student_course_id")
+        ->where('studentcourses.stu_id','=',$uid)
+        ->get();
+
+        $path = public_path('uploads/attachment');        
+        $pdf = PDF::loadView('admin.myPDF',$data);
+        $filename= rand(0000,9999).'Invoice.pdf';    
+        $ac = $pdf->save($path.'/'.$filename);
+
         $offer = new Studentcourseoffer;
         $course_offer = $request->all();
         $offer=$request->course_offer_description;        
         $id=$request->stu_id;                
 
-        $file= $request->file('attachment');
-        $path = public_path('uploads/attachment/');
-        $filename= rand(0000,9999).$file->getClientOriginalName();
-        $file->move(public_path('public/uploads/attachment'), $filename);        
+        // $file= $request->file('attachment');
+        // $path = public_path('uploads/attachment/');
+        // $filename= rand(0000,9999).$file->getClientOriginalName();
+        // $file->move(public_path('public/uploads/attachment'), $filename);        
         $data = array('offer_desc'=>"$request->course_offer_description",'offer'=> $offer,'filename'=>$filename);
         $status = Courseselection::where('stu_id', $id)->update(array('invoice_sent' => 1,'invoice' => $filename)); 
         Mail::to($request->stu_email)->send(new InvoiceEmail($data));  
