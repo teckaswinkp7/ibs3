@@ -86,7 +86,7 @@
 </style>
 <body>
 <div class="head-title">
-<p align="center"><img src="http://localhost/ibs/assets/front/images/IBS-Logo.png"></p>  
+<p align="center"><img src="{{asset('assets/front/images/IBS-Logo.png')}}"></p>  
     <h1 class="text-center m-0 p-0">Invoice</h1>
      
 </div>
@@ -94,7 +94,7 @@
     <div class="w-50 float-left mt-10">
         <p class="m-0 pt-5 text-bold w-100">Invoice Id - <span class="gray-color">{{$invoice_id}}</span></p>
         <!-- <p class="m-0 pt-5 text-bold w-100">Order Id - <span class="gray-color">162695CDFS</span></p> -->
-        <p class="m-0 pt-5 text-bold w-100">Order Date - <span class="gray-color">{{date('Y-m-d')}}</span></p>
+        <p class="m-0 pt-5 text-bold w-100">Invoice Date - <span class="gray-color">{{date('Y-m-d')}}</span></p>
     </div>
     <!-- <div class="w-50 float-left logo mt-10">
         <img src="http://localhost/ibs/assets/front/images/IBS-Logo.png">      
@@ -157,24 +157,24 @@
         <tr align="center">
             
             <td>{{$student_course_invoice[0]->courses_name}}</td>
-            <td>{{$student_course_invoice[0]->price}}</td>
+            <td>{{($custom_price != '') ? $custom_price : $student_course_invoice[0]->price}}</td>
             <td>1</td>
             <!-- <td>$500</td>
             <td>$50</td> -->
-            <td>{{$student_course_invoice[0]->price}}</td>
+            <td>{{($custom_price != '') ? $custom_price : $student_course_invoice[0]->price}}</td>
         </tr>        
         <tr>
             <td colspan="7">
                 <div class="total-part">
                     <div class="total-left w-85 float-left" align="right">
                         <p>Sub Total</p>
-                        <p>Tax (18%)</p>
+                        <p>Tax (x%)</p>
                         <p>Total Payable</p>
                     </div>
                     <div class="total-right w-15 float-left text-bold" align="right">
-                        <p>$20</p>
-                        <p>$20</p>
-                        <p>${{$student_course_invoice[0]->price}}</p>
+                        <p>${{($custom_price != '') ? $custom_price : $student_course_invoice[0]->price}}</p>
+                        <p>$x</p>
+                        <p>${{($custom_price != '') ? $custom_price : $student_course_invoice[0]->price}}</p>
                     </div>
                     <div style="clear: both;"></div>
                 </div> 

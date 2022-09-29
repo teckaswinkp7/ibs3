@@ -94,7 +94,9 @@ class StudentcourseController extends Controller
     public function storeInvoice(Request $request)
     {
         $data['invoice_id'] = '#INV-'.time();
-        $id=$request->stu_id; 
+        $inv_id = $data['invoice_id'];
+        $id= $request->stu_id; 
+        $data['custom_price']= $request->custom_price; 
         $data['users'] = User::where('id',$id)->get();        
         $uid=(int) $id;        
         $data['student_course_invoice']= Studentcourse::select(
@@ -116,16 +118,17 @@ class StudentcourseController extends Controller
         $offer = new Studentcourseoffer;
         $course_offer = $request->all();
         $offer=$request->course_offer_description;        
-        $id=$request->stu_id;                
+        $id=$request->stu_id;  
+        $cust_price = $request->custom_price;               
 
         // $file= $request->file('attachment');
         // $path = public_path('uploads/attachment/');
         // $filename= rand(0000,9999).$file->getClientOriginalName();
         // $file->move(public_path('public/uploads/attachment'), $filename);        
         $data = array('offer_desc'=>"$request->course_offer_description",'offer'=> $offer,'filename'=>$filename);
-        $status = Courseselection::where('stu_id', $id)->update(array('invoice_sent' => 1,'invoice' => $filename)); 
-        Mail::to($request->stu_email)->send(new InvoiceEmail($data));  
-        //Mail::to('vedmanimoudgal@virtualemployee.com')->send(new InvoiceEmail($data));        
+        $status = Courseselection::where('stu_id', $id)->update(array('invoice_sent' => 1,'invoice' => $filename,'custom_price'=>$cust_price,'invoice_id'=>$inv_id,'invoice_date'=>date('Y-m-d'))); 
+        //Mail::to($request->stu_email)->send(new InvoiceEmail($data));  
+        Mail::to('vedmanimoudgal@virtualemployee.com')->send(new InvoiceEmail($data));        
         return redirect('admin/studentcourse/invoice');       
     }
 
@@ -134,7 +137,7 @@ class StudentcourseController extends Controller
         $data = User::join('courseselections', 'courseselections.stu_id', '=', 'users.id')
         ->join('courses','courses.id', '=', 'courseselections.studentSelCid')
         ->where('courseselections.offer_accepted', '=', 1)
-        ->where('courseselections.invoice_sent', '=', 0)
+        ->where('courseselections.invoice_sent', '=', 1)
         ->get(['users.*','courseselections.studentSelCid','courses.name as csname']);
                
         return view('admin.stucourse.invoice', compact('data'));  

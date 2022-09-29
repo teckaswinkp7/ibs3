@@ -166,7 +166,7 @@ class EducationController extends Controller
                 if($request->file('document')){
                     $file= $request->file('document')[$i];
                     $filename= rand(10,100).$file->getClientOriginalName();
-                    $file-> move(public_path('public/Image'), $filename);
+                    $file->move(public_path('public/Image'), $filename);
                     $education->document= $filename;
                 }
                 $education->save();                  
@@ -201,8 +201,7 @@ class EducationController extends Controller
         {
             return redirect()->route('education.course.offer')
             ->with('danger','Error during sponsor insertion');
-        }
-        
+        }        
     }
 
     /**

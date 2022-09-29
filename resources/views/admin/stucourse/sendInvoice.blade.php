@@ -59,21 +59,27 @@
                             </div> 
                             <div class="col-md-12">
                               <div class="form-group">
-                                <label>Invoice Details</label>
-                                <textarea class="form-control" rows="8" name="course_offer_description" id="course_offer_description"></textarea>
+                                <label>Custom Price</label>
+                                <input type="text"  name="custom_price" class="form-control">                               
                               </div>
                             </div> 
                             <div class="col-md-12">
                               <div class="form-group">
+                                <label>Invoice Details (Email Body)</label>
+                                <textarea class="form-control" rows="8" name="course_offer_description" id="course_offer_description"></textarea>
+                              </div>
+                            </div> 
+                            {{-- <div class="col-md-12">
+                              <div class="form-group">
                                 <label>Attachment</label>
                                 <input type="file" class="form-control" rows="8" name="attachment" id="attachment"></textarea>
                               </div>
-                            </div>                            
+                            </div>                             --}}
                         </div>
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
-                        <a href="{{route('generate.invoice',$users[0]->id)}}" class="btn btn-info">Generate Invoice</a>
+                        {{-- <a href="{{route('generate.invoice',$users[0]->id)}}" class="btn btn-info">Generate Invoice</a> --}}
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                     <!-- <div class="card-footer">
