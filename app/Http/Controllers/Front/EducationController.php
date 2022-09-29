@@ -266,7 +266,7 @@ class EducationController extends Controller
         if($request->file('receipt')){
             $file= $request->file('receipt');
             $filename= time().rand(1000,9999).$file->getClientOriginalName();
-            $file->move(public_path('public/uploads/receipt'), $filename);
+            $file->move(public_path('uploads/receipt'), $filename);
             //$category->cat_image= $filename;
             
             $status = Courseselection::where('stu_id', $id)->update(array('receipt' => $filename));
@@ -292,7 +292,7 @@ class EducationController extends Controller
         if($request->file('receipt')){
             $file= $request->file('receipt');
             $filename= time().rand(1000,9999).$file->getClientOriginalName();
-            $file->move(public_path('public/uploads/receipt'), $filename);
+            $file->move(public_path('uploads/receipt'), $filename);
             //$category->cat_image= $filename;
             
             $status = Courseselection::where('stu_id', $id)->update(array('receipt' => $filename));
