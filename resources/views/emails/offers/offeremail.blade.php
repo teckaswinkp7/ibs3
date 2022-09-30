@@ -2,8 +2,8 @@
 <!DOCTYPE html>
 <html>
 <body>
-    <h1>Hello</h1>
-    <p>Offer Description:{{ $data['offer'] }}</p>
+    <h1>Course Offer</h1>
+    <p>{{ $data['offer'] }}</p>
     <p>Thank you</p>
 </body>
 </html>

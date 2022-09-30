@@ -188,9 +188,21 @@
                     </a>
                   </li>
                   <li class="nav-item">
+                    <a href="{{route('studentcourse.viewOffer')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>View Offer</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
                     <a href="{{route('studentcourse.invoice')}}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Send Invoice</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('studentcourse.viewInvoice')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>View Invoice</p>
                     </a>
                   </li>
                   <li class="nav-item">
