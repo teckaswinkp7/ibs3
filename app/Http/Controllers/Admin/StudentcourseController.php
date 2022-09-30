@@ -110,8 +110,8 @@ class StudentcourseController extends Controller
         //$status = User::where('id', $id)->update(array('status' => 6));
         $status = Courseselection::where('stu_id', $id)->update(array('offer_generated' => 1,'offer' => $filename));
         $data = array('offer_desc'=>"$request->course_offer_description",'offer'=> $offer,'filename'=>$filename);  
-        //Mail::to($request->stu_email)->send(new OfferEmail($data));
-        Mail::to('vedmanimoudgal@virtualemployee.com')->send(new OfferEmail($data));
+        Mail::to($request->stu_email)->send(new OfferEmail($data));
+        //Mail::to('vedmanimoudgal@virtualemployee.com')->send(new OfferEmail($data));
         return redirect('admin/studentcourse');
         //->with('success','created successfully.');
     }
@@ -175,8 +175,8 @@ class StudentcourseController extends Controller
         // $file->move(public_path('public/uploads/attachment'), $filename);        
         $data = array('offer_desc'=>"$request->course_offer_description",'offer'=> $offer,'filename'=>$filename);
         $status = Courseselection::where('stu_id', $id)->update(array('invoice_sent' => 1,'invoice' => $filename,'custom_price'=>$cust_price,'invoice_id'=>$inv_id,'invoice_date'=>date('Y-m-d'))); 
-        //Mail::to($request->stu_email)->send(new InvoiceEmail($data));  
-        Mail::to('vedmanimoudgal@virtualemployee.com')->send(new InvoiceEmail($data));        
+        Mail::to($request->stu_email)->send(new InvoiceEmail($data));  
+        //Mail::to('vedmanimoudgal@virtualemployee.com')->send(new InvoiceEmail($data));        
         return redirect('admin/studentcourse/invoice');       
     }
 
