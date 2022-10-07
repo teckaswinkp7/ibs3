@@ -16,7 +16,10 @@ use App\Http\Controllers\Admin\StudentcourseController;
 use App\Http\Controllers\Admin\BankController;
 use App\Http\Controllers\Admin\SponsorController;
 use App\Http\Controllers\Admin\PDFController;
-
+use App\Http\Controllers\Admin\registeredstudentscontroller;
+use App\Http\Controllers\Admin\confirmedstudentscontroller;
+use App\Http\Controllers\Admin\GradeController;
+use App\Http\Controllers\Admin\AssignmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -110,3 +113,55 @@ Route::get('education/courseDenied', [AuthControllers::class, 'deny_course'])->n
 Route::get('generate-invoice/{id}', [PDFController::class, 'generateInvoicePDF'])->name('generate.invoice');
 Route::get('generate-invoice-pdf', array('as'=> 'generate.invoice.pdf', 'uses' => 'PDFController@generateInvoicePDF'));
 
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('admin/reports/registeredstudents/', [registeredstudentscontroller::class, 'index'])->name('admin.reports.registeredstudents.index');
+    Route::get('admin/reports/registeredstudents/view/{id}', [registeredstudentscontroller::class, 'show'])->name('admin.reports.show.show');
+});
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('admin/reports/confirmedstudents/', [confirmedstudentscontroller::class, 'index'])->name('admin.reports.confirmedstudents.index');
+    Route::get('admin/reports/confirmedstudents/view/{id}', [confirmedstudentscontroller::class, 'confirmedshow'])->name('admin.reports.confirmedshow.confirmedshow');
+});
+
+/**Grade Backend**/
+Route::get('admin/grade', 'App\Http\Controllers\Admin\GradeController@index')->name('grade.index');
+Route::get('admin/grade/create', 'App\Http\Controllers\Admin\GradeController@create')->name('grade.create');
+Route::post('admin/grade/store', 'App\Http\Controllers\Admin\GradeController@store')->name('grade.store');
+Route::post('admin/grade/destroy/{id}', 'App\Http\Controllers\Admin\GradeController@destroy')->name('grade.destroy');
+Route::get('admin/grade/show/{id}', 'App\Http\Controllers\Admin\GradeController@show')->name('grade.show');
+Route::get('admin/grade/edit/{id}', 'App\Http\Controllers\Admin\GradeController@edit')->name('grade.edit');
+Route::post('admin/grade/update/{id}', 'App\Http\Controllers\Admin\GradeController@update')->name('grade.update');
+
+/**Assignment Backend**/
+Route::get('admin/assignment', 'App\Http\Controllers\Admin\AssignmentController@index')->name('assignment.index');
+Route::get('admin/assignment/create', 'App\Http\Controllers\Admin\AssignmentController@create')->name('assignment.create');
+Route::post('admin/assignment/store', 'App\Http\Controllers\Admin\AssignmentController@store')->name('assignment.store');
+Route::post('admin/assignment/destroy/{id}', 'App\Http\Controllers\Admin\AssignmentController@destroy')->name('assignment.destroy');
+Route::get('admin/assignment/show/{id}', 'App\Http\Controllers\Admin\AssignmentController@show')->name('assignment.show');
+Route::get('admin/assignment/edit/{id}', 'App\Http\Controllers\Admin\AssignmentController@edit')->name('assignment.edit');
+Route::get('admin/assignment/update/{id}', 'App\Http\Controllers\Admin\AssignmentController@update')->name('assignment.update');
+
+/**Student Assignment Front */
+Route::get('front/assignment', 'App\Http\Controllers\Front\StudentAssignmentController@index')->name('studentassignment.index');
+
+/**Student Assignment Submission Front */
+Route::get('front/assignmentsubmission/submit/{id}', 'App\Http\Controllers\Front\AssignmentsubmissionController@submit')->name('assignmentsubmit.submit');
+Route::post('front/assignmentsubmission/store/', 'App\Http\Controllers\Front\AssignmentsubmissionController@store')->name('assignmentsubmit.store');
+
+/**Assignmentgrade Backend**/
+Route::get('admin/assignmentgrade/', 'App\Http\Controllers\Admin\AssignmentGradeController@index')->name('assignmentgrade.index');
+Route::get('admin/assignmentgrade/grade/{id}', 'App\Http\Controllers\Admin\AssignmentGradeController@grade')->name('assignmentgrade.grade');
+Route::get('admin/assignmentgrade/store/', 'App\Http\Controllers\Admin\AssignmentGradeController@store')->name('assignmentgrade.store');
+
+/**Exam Backend */
+Route::get('admin/exam', 'App\Http\Controllers\Admin\ExamController@index')->name('exam.index');
+Route::get('admin/exam/create', 'App\Http\Controllers\Admin\ExamController@create')->name('exam.create');
+Route::post('admin/exam/store', 'App\Http\Controllers\Admin\ExamController@store')->name('exam.store');
+Route::get('admin/exam/show/{id}', 'App\Http\Controllers\Admin\ExamController@show')->name('exam.show');
+Route::get('admin/exam/edit/{id}', 'App\Http\Controllers\Admin\ExamController@edit')->name('exam.edit');
+Route::get('admin/exam/update/{id}', 'App\Http\Controllers\Admin\ExamController@update')->name('exam.update');
+Route::post('admin/exam/destroy/{id}', 'App\Http\Controllers\Admin\ExamController@destroy')->name('exam.destroy');
+
+/**Student View Exam Details Front */
+Route::get('front/studentexam', 'App\Http\Controllers\Front\StudentExamController@index')->name('studentexam.index');
+Route::get('front/studentexam/show/{id}', 'App\Http\Controllers\Front\StudentExamController@show')->name('studentexam.show');

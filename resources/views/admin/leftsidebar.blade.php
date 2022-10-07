@@ -4,6 +4,7 @@
       <!--<img src="{{asset('assets/admin/img/IBS-Logo-Trans.png')}}" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">-->
       <span class="brand-text font-weight-light" style="margin-left:20px;"><b>IBS</b></span>
     </a>
+
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar user (optional) -->
@@ -58,7 +59,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
             <li class="nav-item">
-                <a href="{{route('admin-dashboard')}}" class="nav-link">
+                <a href="{{route('admin-dashboard')}}" class="nav-link {{ request()->is('admin-dashboard') ? 'active' : '' }}">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>
                     Dashboard
@@ -75,8 +76,8 @@
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{route('role.index')}}" class="nav-link">
+                  <li class="nav-item active">
+                    <a href="{{route('role.index')}}" class="nav-link active">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Manage Role</p>
                     </a>

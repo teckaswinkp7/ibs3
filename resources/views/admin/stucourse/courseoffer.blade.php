@@ -59,6 +59,12 @@
                             </div> 
                             <div class="col-md-12">
                               <div class="form-group">
+                                <label>Custom Price</label>
+                                <input type="text"  name="custom_price" class="form-control">                               
+                              </div>
+                            </div> 
+                            <div class="col-md-12">
+                              <div class="form-group">
                                 <label>Offer Description (Email Boday)</label>
                                 <textarea class="form-control" rows="8" name="course_offer_description" id="course_offer_description"></textarea>
                               </div>

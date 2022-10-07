@@ -3,12 +3,29 @@
 namespace App\Http\Controllers\Admin;
 use App\Models\Sponsor;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Validator;
 
 
 class SponsorController extends Controller
 {
+    public function __construct() {       
+        
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $this->id = Auth::user()->user_role;
+            if($this->id != 1)
+            {
+                echo 'Unautohorized Access';
+                die();
+            }
+            else{
+                return $next($request);
+            }
+            
+        });
+    }
     /**
     * Display a listing of the resource.
     *

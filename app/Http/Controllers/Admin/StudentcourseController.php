@@ -16,8 +16,25 @@ use Illuminate\Support\Facades\Mail;
 use Hash;
 use DB;
 use PDF;
+
 class StudentcourseController extends Controller
 {
+    public function __construct() {       
+        
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $this->id = Auth::user()->user_role;
+            if($this->id != 1)
+            {
+                echo 'Unautohorized Access';
+                die();
+            }
+            else{
+                return $next($request);
+            }
+            
+        });
+    }
     //
     public function index()
     {
@@ -108,10 +125,10 @@ class StudentcourseController extends Controller
         $id=$request->stu_id;
         //$id = 10;
         //$status = User::where('id', $id)->update(array('status' => 6));
-        $status = Courseselection::where('stu_id', $id)->update(array('offer_generated' => 1,'offer' => $filename));
+        $status = Courseselection::where('stu_id', $id)->update(array('offer_generated' => 1,'custom_offer_price'=>$cust_price,'offer' => $filename));
         $data = array('offer_desc'=>"$request->course_offer_description",'offer'=> $offer,'filename'=>$filename);  
-        Mail::to($request->stu_email)->send(new OfferEmail($data));
-        //Mail::to('vedmanimoudgal@virtualemployee.com')->send(new OfferEmail($data));
+        //Mail::to($request->stu_email)->send(new OfferEmail($data));
+        Mail::to('vedmanimoudgal@virtualemployee.com')->send(new OfferEmail($data));
         return redirect('admin/studentcourse');
         //->with('success','created successfully.');
     }
@@ -190,6 +207,7 @@ class StudentcourseController extends Controller
                
         return view('admin.stucourse.invoice', compact('data'));  
     }
+    
 
     public function viewReceipt()
     {
