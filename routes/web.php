@@ -16,7 +16,7 @@ use App\Http\Controllers\Admin\StudentcourseController;
 use App\Http\Controllers\Admin\BankController;
 use App\Http\Controllers\Admin\SponsorController;
 use App\Http\Controllers\Admin\PDFController;
-use App\Http\Controllers\Admin\registeredstudentscontroller;
+use App\Http\Controllers\Admin\Registeredstudentscontroller;
 use App\Http\Controllers\Admin\confirmedstudentscontroller;
 use App\Http\Controllers\Admin\GradeController;
 use App\Http\Controllers\Admin\AssignmentController;
@@ -114,8 +114,8 @@ Route::get('generate-invoice/{id}', [PDFController::class, 'generateInvoicePDF']
 Route::get('generate-invoice-pdf', array('as'=> 'generate.invoice.pdf', 'uses' => 'PDFController@generateInvoicePDF'));
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('admin/reports/registeredstudents/', [registeredstudentscontroller::class, 'index'])->name('admin.reports.registeredstudents.index');
-    Route::get('admin/reports/registeredstudents/view/{id}', [registeredstudentscontroller::class, 'show'])->name('admin.reports.show.show');
+    Route::get('admin/reports/registeredstudents/', [Registeredstudentscontroller::class, 'index'])->name('admin.reports.registeredstudents.index');
+    Route::get('admin/reports/registeredstudents/view/{id}', [Registeredstudentscontroller::class, 'show'])->name('admin.reports.show.show');
 });
 
 Route::group(['middleware' => 'auth'], function () {
