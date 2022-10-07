@@ -216,6 +216,62 @@
             </li>
 
             <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-edit"></i>
+                <p>
+                 Reports
+                  <i class="fas fa-angle-down"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{route('admin.reports.registeredstudents.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Registered Users</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{route('admin.reports.confirmedstudents.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Confirmed Students</p>
+                  </a>
+                </li>
+               </ul>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('grade.index')}}" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+              Grade                  
+              </p>
+            </a>             
+          </li>
+          <li class="nav-item">
+            <a href="{{route('assignment.index')}}" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+              Assignment                 
+              </p>
+            </a>              
+          </li>
+          <li class="nav-item">
+            <a href="{{route('assignmentgrade.index')}}" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+              Assignment Grade              
+              </p>
+            </a>              
+          </li>
+          <li class="nav-item">
+            <a href="{{route('exam.index')}}" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+              Exam          
+              </p>
+            </a>              
+          </li>
+
+            <li class="nav-item">
                 <a href="{{route('bank.index')}}" class="nav-link">
                   <i class="nav-icon fas fa-bank"></i>
                   <p>

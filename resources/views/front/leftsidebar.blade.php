@@ -41,6 +41,8 @@
           @if(Auth::user()->user_role == 2)  
           <li class="list-group-item"><a href="{{ route('education.create.step.one') }}"><i class="fa fa-pencil"></i> Edit Profile</a></li>                  
           <li class="list-group-item"><a href="{{ route('education.course.offer') }}"><i class="fa fa-graduation-cap"></i> Course Offer</a></li>
+          <li class="list-group-item"><a href="{{ route('studentassignment.index') }}"><i class="fa fa-graduation-cap"></i>Assignment</a></li>
+          <li class="list-group-item"><a href="{{ route('studentexam.index') }}"><i class="fa fa-graduation-cap"></i>Exam</a></li>
           @endif  
           @if(Auth::user()->user_role == 3)   
           <li class="list-group-item"><a href="{{ route('dashboard') }}"><i class="fa fa-eye"></i> View Profile</a></li>        
