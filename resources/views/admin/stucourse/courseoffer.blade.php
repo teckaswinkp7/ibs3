@@ -66,7 +66,7 @@
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label>Offer Description (Email Boday)</label>
-                                <textarea class="form-control" rows="8" name="course_offer_description" id="course_offer_description"></textarea>
+                                <textarea class="form-control ckeditor" rows="8" name="course_offer_description" id="course_offer_description"></textarea>
                               </div>
                             </div> 
                         </div>
