@@ -10,6 +10,22 @@ use App\Models\Assignment;
 use App\Models\Courses;
 class AssignmentController extends Controller
 {
+      public function __construct() {       
+            
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $this->id = Auth::user()->user_role;
+            if($this->id != 1)
+            {
+                echo 'Unautohorized Access';
+                die();
+            }
+            else{
+                return $next($request);
+            }
+            
+        });
+      }
     //
     public function index()
     {

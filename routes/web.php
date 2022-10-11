@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\Registeredstudentscontroller;
 use App\Http\Controllers\Admin\confirmedstudentscontroller;
 use App\Http\Controllers\Admin\GradeController;
 use App\Http\Controllers\Admin\AssignmentController;
+use App\Http\Controllers\Admin\Reportingcontroller;
 
 /*
 |--------------------------------------------------------------------------
@@ -165,3 +166,8 @@ Route::post('admin/exam/destroy/{id}', 'App\Http\Controllers\Admin\ExamControlle
 /**Student View Exam Details Front */
 Route::get('front/studentexam', 'App\Http\Controllers\Front\StudentExamController@index')->name('studentexam.index');
 Route::get('front/studentexam/show/{id}', 'App\Http\Controllers\Front\StudentExamController@show')->name('studentexam.show');
+
+/**Reporting Controller */
+Route::get('admin/reports/documented', 'App\Http\Controllers\admin\Reportingcontroller@index')->name('reports.documented');
+Route::get('admin/reports/offerd', 'App\Http\Controllers\admin\Reportingcontroller@offer')->name('reports.offerd');
+Route::get('admin/reports/invoice', 'App\Http\Controllers\admin\Reportingcontroller@sent_invoice')->name('reports.invoice');
