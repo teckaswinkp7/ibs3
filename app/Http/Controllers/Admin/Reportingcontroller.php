@@ -44,17 +44,27 @@ class Reportingcontroller extends Controller
         $registeredstudents = User::where('users.user_role', 2)->where('courseselections.offer_generated',1)->join('courseselections', 'courseselections.stu_id','=','users.id')->groupBy('users.id')      
         ->get();
         
-        return view('admin.reports.document_submitted',$data1,compact('registeredstudents'));
+        return view('admin.reports.offered',$data1,compact('registeredstudents'));
+    }
+
+    public function offer_accepted(){
+
+        $data1['role']= Role::all();
+        DB::statement("SET SQL_MODE=''");
+        $registeredstudents = User::where('users.user_role', 2)->where('courseselections.offer_accepted',1)->join('courseselections', 'courseselections.stu_id','=','users.id')->groupBy('users.id')      
+        ->get();
+        
+        return view('admin.reports.offer_accepted',$data1,compact('registeredstudents'));
     }
 
     public function sent_invoice(){
 
         $data1['role']= Role::all();
         DB::statement("SET SQL_MODE=''");
-        $registeredstudents = User::where('user_role', 2)->where('courseselections.invoice_sent',1)->join('education', 'education.stu_id','=','users.id')       
+        $registeredstudents = User::where('user_role', 2)->where('courseselections.invoice_sent',1)->join('courseselections', 'courseselections.stu_id','=','users.id')->groupBy('users.id')       
         ->get();
         
-        return view('admin.reports.document_submitted',$data1,compact('registeredstudents'));
+        return view('admin.reports.invoice_sent',$data1,compact('registeredstudents'));
     }
 
     /**

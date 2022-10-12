@@ -200,18 +200,7 @@
                       <p>Send Invoice</p>
                     </a>
                   </li>
-                  <li class="nav-item">
-                    <a href="{{route('studentcourse.viewInvoice')}}" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>View Invoice</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{route('studentcourse.viewReceipt')}}" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>View Receipt</p>
-                    </a>
-                  </li>
+                  
                 </ul>
             </li>
 
@@ -234,6 +223,45 @@
                   <a href="{{route('admin.reports.confirmedstudents.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Confirmed Students</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="{{route('studentcourse.viewInvoice')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>View Invoice</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{route('studentcourse.viewReceipt')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>View Receipt</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="{{route('reports.offerd')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Offer Generated</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{route('reports.invoice')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Invoice Generated</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="{{route('reports.documented')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Document Sent</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{route('reports.offer_accepted')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Offer Accepted</p>
                   </a>
                 </li>
                </ul>

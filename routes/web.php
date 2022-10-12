@@ -171,3 +171,4 @@ Route::get('front/studentexam/show/{id}', 'App\Http\Controllers\Front\StudentExa
 Route::get('admin/reports/documented', 'App\Http\Controllers\admin\Reportingcontroller@index')->name('reports.documented');
 Route::get('admin/reports/offerd', 'App\Http\Controllers\admin\Reportingcontroller@offer')->name('reports.offerd');
 Route::get('admin/reports/invoice', 'App\Http\Controllers\admin\Reportingcontroller@sent_invoice')->name('reports.invoice');
+Route::get('admin/reports/offer_accepted', 'App\Http\Controllers\admin\Reportingcontroller@offer_accepted')->name('reports.offer_accepted');
