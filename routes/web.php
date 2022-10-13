@@ -168,7 +168,7 @@ Route::get('front/studentexam', 'App\Http\Controllers\Front\StudentExamControlle
 Route::get('front/studentexam/show/{id}', 'App\Http\Controllers\Front\StudentExamController@show')->name('studentexam.show');
 
 /**Reporting Controller */
-Route::get('admin/reports/documented', 'App\Http\Controllers\admin\Reportingcontroller@index')->name('reports.documented');
-Route::get('admin/reports/offerd', 'App\Http\Controllers\admin\Reportingcontroller@offer')->name('reports.offerd');
-Route::get('admin/reports/invoice', 'App\Http\Controllers\admin\Reportingcontroller@sent_invoice')->name('reports.invoice');
-Route::get('admin/reports/offer_accepted', 'App\Http\Controllers\admin\Reportingcontroller@offer_accepted')->name('reports.offer_accepted');
+Route::get('admin/reports/documented', 'App\Http\Controllers\Admin\Reportingcontroller@index')->name('reports.documented');
+Route::get('admin/reports/offerd', 'App\Http\Controllers\Admin\Reportingcontroller@offer')->name('reports.offerd');
+Route::get('admin/reports/invoice', 'App\Http\Controllers\Admin\Reportingcontroller@sent_invoice')->name('reports.invoice');
+Route::get('admin/reports/offer_accepted', 'App\Http\Controllers\Admin\Reportingcontroller@offer_accepted')->name('reports.offer_accepted');
