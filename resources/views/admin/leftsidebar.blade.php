@@ -264,6 +264,14 @@
                     <p>Offer Accepted</p>
                   </a>
                 </li>
+                <li class="nav-item">
+                  <a href="{{route('studentcourse.viewStudent')}}" class="nav-link">
+                    <i class="nav-icon fas fa-usd"></i>
+                    <p>
+                     Payment Status                     
+                    </p>
+                  </a>                
+              </li>
                </ul>
           </li>
           <li class="nav-item">
@@ -325,14 +333,7 @@
                 </a>                
             </li>
             
-            <li class="nav-item">
-                <a href="{{route('studentcourse.viewStudent')}}" class="nav-link">
-                  <i class="nav-icon fas fa-users"></i>
-                  <p>
-                   Student Details                     
-                  </p>
-                </a>                
-            </li>
+            
         </ul>
     </nav>
     <!-- /.sidebar-menu -->

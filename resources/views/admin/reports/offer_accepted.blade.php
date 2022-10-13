@@ -35,7 +35,7 @@
                   <tr>
                   <th>Sl.No.</th>
                   <th>Email</th>
-                  <th>Role</th>
+                  <th>Name</th>
                   <th>Action</th>
                   </tr>
                   </thead>
@@ -48,13 +48,7 @@
                       <td>{{$_SESSION['i']}}</td>
                       <td>{{ $user->email }}</td>
                       <td>
-                      @foreach($role as $key=>$cat_data)
-                      @foreach ($user->role as $cat)
-                      @if($cat_data->id==$cat->id)
-                      {{$cat_data->name}}
-                      @endif 
-                      @endforeach
-                      @endforeach
+                        {{ $user->name }}
                       </td>
                       <td>
                         <form action="{{ route('user.destroy',$user->id) }}" method="Post">
@@ -72,7 +66,7 @@
                   <tr>
                   <th>Sl.No.</th>
                   <th>Email</th>
-                  <th>Role</th>
+                  <th>Name</th>
                   <th>Action</th>
                   </tr>
                   </tfoot>

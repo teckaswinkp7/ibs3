@@ -34,9 +34,11 @@
                   <thead>
                   <tr>
                   <th>Sl.No.</th>
+                  <th>Name</th>
                   <th>Email</th>
-                  <th>Role</th>
-                  <th>Action</th>
+                  <th>Custom Offer</th>
+                  {{-- <th>Role</th> --}}
+                  <th>Course Name</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -47,7 +49,10 @@
                       <?php $dash=''; ?>
                       <td>{{$_SESSION['i']}}</td>
                       <td>{{ $user->email }}</td>
-                      <td>
+                      <td>{{ $user->name }}</td>
+                      <td>{{ $user->custom_offer_price }}</td>
+                      <td>{{ $user->cname }}</td>
+                      {{-- <td>
                       @foreach($role as $key=>$cat_data)
                       @foreach ($user->role as $cat)
                       @if($cat_data->id==$cat->id)
@@ -55,25 +60,27 @@
                       @endif 
                       @endforeach
                       @endforeach
-                      </td>
-                      <td>
+                      </td> --}}
+                      {{-- <td>
                         <form action="{{ route('user.destroy',$user->id) }}" method="Post">
                           <a  href="{{ route('admin.reports.show.show',$user->id)}}">   
                             <i class="fa-solid  fa-eye"></i>
                           </a>
                           &nbsp;                        
                         </form>
-                      </td>
+                      </td> --}}
                     </tr> 
                   @endforeach
                   <?php unset($_SESSION['i']); ?>    
                   </tbody>
                   <tfoot>
                   <tr>
-                  <th>Sl.No.</th>
+                  <th>Sl.No.</th>                  
+                  <th>Name</th>
                   <th>Email</th>
-                  <th>Role</th>
-                  <th>Action</th>
+                  <th>Custom Offer</th>
+                  
+                  <th>Course Name</th>
                   </tr>
                   </tfoot>
                 </table>
