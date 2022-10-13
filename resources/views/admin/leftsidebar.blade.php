@@ -206,7 +206,7 @@
 
             <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-edit"></i>
+                <i class="nav-icon fas fa-file"></i>
                 <p>
                  Reports
                   <i class="fas fa-angle-down"></i>
@@ -276,7 +276,7 @@
           </li>
           <li class="nav-item">
             <a href="{{route('grade.index')}}" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
+              <i class="nav-icon fas fa-graduation-cap"></i>
               <p>
               Grade                  
               </p>

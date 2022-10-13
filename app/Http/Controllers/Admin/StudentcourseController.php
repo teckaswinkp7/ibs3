@@ -138,7 +138,7 @@ class StudentcourseController extends Controller
         $data = User::join('courseselections', 'courseselections.stu_id', '=', 'users.id')
         ->join('courses','courses.id', '=', 'courseselections.studentSelCid')
         ->where('courseselections.offer_accepted', '=', 1)
-        ->where('courseselections.invoice_sent', '=', 1)        
+        ->where('courseselections.invoice_sent', '=', 0)        
         ->get(['users.*','courseselections.studentSelCid','courseselections.invoice','courses.name as csname']);
                
         return view('admin.stucourse.invoice-report', compact('data')); 
