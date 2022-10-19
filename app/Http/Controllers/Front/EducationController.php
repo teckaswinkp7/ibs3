@@ -211,7 +211,13 @@ class EducationController extends Controller
         Education::create($data);
 
         $status = User::where('id', $id)->update(array('status' => 2));
-        return redirect()->route('dashboard');  
+        //return redirect()->route('dashboard');  
+        return redirect()->route('docstatus');  
+    }
+
+    public function docstatus()
+    {
+        return view('front.education.document_submit');       
     }
 
     public function insert_sponsor(Request $request)

@@ -104,6 +104,9 @@ Route::post('searchSponsor',[EducationController::class, 'searchSponsor'])->name
 Route::get('education/create-step-two',  [EducationController::class, 'createStepTwo'])->name('education.create.step.two');
 Route::get('education/reupload',  [EducationController::class, 'reupload'])->name('education.reupload');
 Route::post('education/create-step-two', [EducationController::class, 'postCreateStepTwo'])->name('education.create.step.two.post');
+Route::get('education/docstatus', [EducationController::class, 'docstatus'])->name('docstatus');
+
+
 
 Route::get('education/create-step-three', [EducationController::class, 'createStepThree'])->name('products.create.step.three');
 Route::post('education/create-step-three', [EducationController::class, 'postCreateStepThree'])->name('products.create.step.three.post');
