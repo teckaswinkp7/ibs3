@@ -25,7 +25,7 @@
                 <a href="#">Resend code</a>
           </form>
 
-          <form class="needs-validation" action="{{route('resendOtp')}}" method="post" novalidate>
+          {{-- <form class="needs-validation" action="{{route('resendOtp')}}" method="post" novalidate>
             {!! csrf_field() !!}
             <div class="row" style="margin-top:16px;">
             <div class="col-md-4">
@@ -33,7 +33,7 @@
             <button class="btn btn-success" type="submit">Resend OTP</button>
             </div>
             </div>
-        </form>
+        </form> --}}
 
           
         </div>
