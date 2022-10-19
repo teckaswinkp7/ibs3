@@ -174,3 +174,6 @@ Route::get('admin/reports/documented', 'App\Http\Controllers\Admin\Reportingcont
 Route::get('admin/reports/offerd', 'App\Http\Controllers\Admin\Reportingcontroller@offer')->name('reports.offerd');
 Route::get('admin/reports/invoice', 'App\Http\Controllers\Admin\Reportingcontroller@sent_invoice')->name('reports.invoice');
 Route::get('admin/reports/offer_accepted', 'App\Http\Controllers\Admin\Reportingcontroller@offer_accepted')->name('reports.offer_accepted');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
