@@ -10,7 +10,7 @@
                 <a href="#"><img src="{{asset('assets/custom/New Project (14).png')}}" alt="" width="120px"></a>
             </div>  
             <h3>Submit your documents</h3>
-            <form action="{{route('education.create.step.two.post')}}" action="POST" enctype="multipart/form-data" class="document-form">
+            <form action="{{route('education.create.step.two.post')}}" method="POST" enctype="multipart/form-data" class="document-form">
                 @csrf
                 <p>Which is your highest qualification?</p>
                 <div class="radio-documents row">

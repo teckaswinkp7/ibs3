@@ -186,25 +186,26 @@ class EducationController extends Controller
 
     public function postCreateStepTwo(Request $request)
     {
-        dd($request);
+        //dd($request);
         $id = Auth::id();
-        $board = 'Abc';
+        $board = $request->qualification;
         $percentage = 67;
 
-        $id_image = $request->file('id_image');
-        $id_image = str_replace(' ', '', $id_image->getClientOriginalName());
+        $id_images = $request->file('id_image');
+        $id_image = str_replace(' ', '', $id_images->getClientOriginalName());
         $id_image_file = date('YmdHi').$id_image;
-        $id_image->move(public_path('public/Image'), $id_image_file);
-
-        $highest_qualification = $request->file('highest_qualification');
-        $highest_qualification = str_replace(' ', '', $highest_qualification->getClientOriginalName());
+        
+        $id_images->move(public_path('public/Image'), $id_image_file);
+        
+        $highest_qualifications = $request->file('highest_qualification');
+        $highest_qualification = str_replace(' ', '', $highest_qualifications->getClientOriginalName());
         $highest_qualification_file = date('YmdHi').$id_image;
-        $highest_qualification->move(public_path('public/Image'), $highest_qualification);
+        $highest_qualifications->move(public_path('public/Image'), $highest_qualification);
 
-        $course_syopsiy = $request->file('course_syopsiy');
-        $course_syopsiy = str_replace(' ', '', $course_syopsiy->getClientOriginalName());
+        $course_syopsiys = $request->file('course_syopsiy');
+        $course_syopsiy = str_replace(' ', '', $course_syopsiys->getClientOriginalName());
         $course_syopsiy_file = date('YmdHi').$id_image;
-        $course_syopsiy->move(public_path('public/Image'), $course_syopsiy_file);
+        $course_syopsiys->move(public_path('public/Image'), $course_syopsiy_file);
 
         $data = array('stu_id'=>$id,'board'=>$board,'percentage'=>$percentage,'id_image'=>$id_image_file,'highest_qualification'=>$highest_qualification_file,'course_syopsiy'=>$course_syopsiy_file);
         Education::create($data);
