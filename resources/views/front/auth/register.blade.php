@@ -15,14 +15,23 @@
                 <div>
                     <label for="">Full Name</label>
                     <input type="text" placeholder="" name="name">
+                    @if ($errors->has('name'))
+                        <span class="text-danger">{{ $errors->first('name') }}</span>
+                    @endif
                 </div>
                 <div>
                     <label for="">Email Address</label>
                     <input type="email" placeholder="" name="email" >
+                    @if ($errors->has('email'))
+                        <span class="text-danger">{{ $errors->first('email') }}</span>
+                    @endif
                 </div>
                 <div>
                     <label for="">Phone</label>
                     <input type="text" placeholder="" name="phone" >
+                    @if ($errors->has('phone'))
+                        <span class="text-danger">{{ $errors->first('phone') }}</span>
+                    @endif
                 </div>
                 <div class="register-btn">
                     <button type="submit">Register</button>

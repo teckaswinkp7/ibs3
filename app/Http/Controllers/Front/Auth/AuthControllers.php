@@ -137,11 +137,12 @@ class AuthControllers extends Controller
            //return redirect("setpassword");
            //return redirect()->route('setpassword');
            
-           return view('front.auth.set_password');
+           //return view('front.auth.set_password');
+           return view('front.auth.set_passworddds');
         }
         else{
-            return view('front.auth.set_passworddds');
-            //return response(["status" => 401, 'message' => 'Invalid']);
+            //return view('front.auth.set_passworddds');
+            return response(["status" => 401, 'message' => 'Invalid']);
         }
     }
 
@@ -154,11 +155,13 @@ class AuthControllers extends Controller
     public function resendOtp(Request $request)
     {
         $otp = rand(1000,9999);
-        $user = User::where('email','=',$request->email)->update(['otp' => $otp]);
-        if($user){
-            $data = array('otp' => $otp,'email' =>$request->email);
-            Mail::to($request->email)->send(new SendEmail($data));
-            return view('front.verifyotp')->with($data);
+        // $user = User::where('email','=',$request->email)->update(['otp' => $otp]);
+        // if($user){
+        $email = Session::get('email');
+        $data = array('otp' => $otp,'email' =>$email);
+        if(Mail::to($email)->send(new SendEmail($data)))
+        {
+        return view('front.otp')->with($data);
         }
         else{
             return response(["status" => 401, 'message' => 'Invalid']);

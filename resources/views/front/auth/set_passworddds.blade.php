@@ -19,10 +19,16 @@
                 <div>
                     <label for="">Password</label>
                     <input type="password" placeholder="" name="password" >
+                    @if ($errors->has('password'))
+                        <span class="text-danger">{{ $errors->first('password') }}</span>
+                    @endif
                 </div>
                 <div>
                     <label for="">Confirm Password</label>
                     <input type="password" placeholder="" name="confirm_password" >
+                    @if ($errors->has('confirm_password'))
+                        <span class="text-danger">{{ $errors->first('confirm_password') }}</span>
+                    @endif
                 </div>
                 <div class="register-btn">
                     <button type="submit">Register</button>

@@ -16,6 +16,7 @@
                 <div>
                     <label for="">Code</label>
                     <input type="text" placeholder="" id="otp" name="otp">
+                    
                 </div>
                 <div class="otp-btn">
                     <button type="submit">Confirm</button>
@@ -23,6 +24,16 @@
                 <p>Didn't recieve the code?</p>
                 <a href="#">Resend code</a>
           </form>
+
+          <form class="needs-validation" action="{{route('resendOtp')}}" method="post" novalidate>
+            {!! csrf_field() !!}
+            <div class="row" style="margin-top:16px;">
+            <div class="col-md-4">
+            <input id="email" name="email" type="hidden" value="{{$email}}">
+            <button class="btn btn-success" type="submit">Resend OTP</button>
+            </div>
+            </div>
+        </form>
 
           
         </div>
