@@ -35,7 +35,7 @@ use App\Http\Controllers\Admin\Reportingcontroller;
 Auth::routes();
 //Auth::routes(['verify' => true]);
 Route::get('/',[WelcomeController::class, 'index'])->middleware('cors');;
-Route::get('send-mail', 'App\Http\Controllers\MailController@sendMail')->name('send.mail');
+//Route::get('send-mail', 'App\Http\Controllers\MailController@sendMail')->name('send.mail');
 Route::post('otp-validate', [AuthControllers::class, 'validateOtp'])->name('validateOtp');
 Route::post('otp-resend', [AuthControllers::class, 'resendOtp'])->name('resendOtp');
 Route::get('registration', [AuthControllers::class, 'registration'])->name('registers');
@@ -91,7 +91,7 @@ Route::get('education/pay-sponsor/{id}', [EducationController::class, 'sponsor_p
 
 Route::post('edit-profile', [EducationController::class, 'store']);
 Route::post('student-course', [AuthControllers::class, 'studentCoursestore'])->name('student.course');
-Route::get('products', 'ProductController@index')->name('products.index');
+
 Route::get('education/create-step-one',[EducationController::class, 'createStepOne'])->name('education.create.step.one');
 Route::post('education/create-step-one',[EducationController::class, 'postCreateStepOne'])->name('education.create.step.one.post');
 Route::get('education/course-offer',[EducationController::class, 'getCourseOffers'])->name('education.course.offer');
@@ -105,8 +105,8 @@ Route::get('education/create-step-two',  [EducationController::class, 'createSte
 Route::get('education/reupload',  [EducationController::class, 'reupload'])->name('education.reupload');
 Route::post('education/create-step-two', [EducationController::class, 'postCreateStepTwo'])->name('education.create.step.two.post');
 
-Route::get('education/create-step-three', 'EducationController@createStepThree')->name('products.create.step.three');
-Route::post('education/create-step-three', 'EducationController@postCreateStepThree')->name('products.create.step.three.post');
+Route::get('education/create-step-three', [EducationController::class, 'createStepThree'])->name('products.create.step.three');
+Route::post('education/create-step-three', [EducationController::class, 'postCreateStepThree'])->name('products.create.step.three.post');
 Route::post('approve/{id}', [AuthControllers::class, 'approve'])->name('approve');
 Route::post('decline/{id}', [AuthControllers::class, 'decline'])->name('decline');
 
@@ -114,7 +114,7 @@ Route::get('education/courseApproved', [AuthControllers::class, 'approve_course'
 Route::get('education/courseDenied', [AuthControllers::class, 'deny_course'])->name('courseDenied');
 
 Route::get('generate-invoice/{id}', [PDFController::class, 'generateInvoicePDF'])->name('generate.invoice');
-Route::get('generate-invoice-pdf', array('as'=> 'generate.invoice.pdf', 'uses' => 'PDFController@generateInvoicePDF'));
+
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('admin/reports/registeredstudents/', [Registeredstudentscontroller::class, 'index'])->name('admin.reports.registeredstudents.index');
@@ -174,6 +174,3 @@ Route::get('admin/reports/documented', 'App\Http\Controllers\Admin\Reportingcont
 Route::get('admin/reports/offerd', 'App\Http\Controllers\Admin\Reportingcontroller@offer')->name('reports.offerd');
 Route::get('admin/reports/invoice', 'App\Http\Controllers\Admin\Reportingcontroller@sent_invoice')->name('reports.invoice');
 Route::get('admin/reports/offer_accepted', 'App\Http\Controllers\Admin\Reportingcontroller@offer_accepted')->name('reports.offer_accepted');
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
