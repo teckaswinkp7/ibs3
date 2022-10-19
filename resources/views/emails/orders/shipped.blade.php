@@ -5,10 +5,10 @@
     <title>fdsff</title>
 </head>
 <body>
-    <h1>Hello</h1>
-    <p>Please verify your OTP</P>
-    <p>Your OTP is:{{ $data['otp'] }}</p>
-   
+    <h1>Hi,</h1>
+    <p>Your verification code</P>
+    <p>{{ $data['otp'] }}</p>
+    <p>Copy this code and paste in your iConnect account address to confirm your email address.</P>
     <p>Thank you</p>
 </body>
 </html>

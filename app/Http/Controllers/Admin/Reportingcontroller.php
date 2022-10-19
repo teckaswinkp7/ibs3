@@ -40,7 +40,7 @@ class Reportingcontroller extends Controller
     public function offer(){
 
         $data1['role']= Role::all();
-        //DB::statement("SET SQL_MODE=''");
+        DB::statement("SET SQL_MODE=''");
         $registeredstudents = User::where('users.user_role', 2)->where('courseselections.offer_generated',1)->join('courseselections', 'courseselections.stu_id','=','users.id')->join('courses','courses.id','=','courseselections.studentSelCid')->groupBy('users.id')      
         ->select('users.*','courseselections.*','courses.name as cname')->get();
         //check

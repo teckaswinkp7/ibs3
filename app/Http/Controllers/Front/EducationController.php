@@ -112,7 +112,8 @@ class EducationController extends Controller
 
         else
         {
-            return view('front.education.create-step-two');
+            //return view('front.education.create-step-two');
+            return view('front.education.documents');
         }
         
         //return view('front/education.create-step-two',compact('education'));
@@ -120,7 +121,8 @@ class EducationController extends Controller
 
     public function reupload()
     {
-        return view('front.education.create-step-two');
+        //return view('front.education.create-step-two');
+        return view('front.education.documents');
     }
 
     /**
@@ -128,8 +130,8 @@ class EducationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function postCreateStepTwo(Request $request)
-    {
+    //public function postCreateStepTwo(Request $request)
+    //{
     	/*$validatedData = $request->validate([
             'board' => 'required',
             'percentage' => 'required',
@@ -150,10 +152,10 @@ class EducationController extends Controller
             'percentage' => 'required',
             
         ]);*/
-        $edu = new Education;
+        /**New commented from here */
+        /*$edu = new Education;
         $size = count(collect($request)->get('qualification'));
-        //$size = count(collect($request)->get('document'));
-        //dd($size);
+        
         for ($i = 0; $i < $size; $i++)
             {
                 //
@@ -172,7 +174,7 @@ class EducationController extends Controller
                 $education->save();                  
             }
             $status = User::where('id', $id)->update(array('status' => 2));
-            return redirect()->route('dashboard');   
+            return redirect()->route('dashboard'); */  
             /*$file= $request->file('document');
             $filename= date('YmdHi').$file->getClientOriginalName();
             $file-> move(public_path('public/Image'), $filename);
@@ -180,6 +182,35 @@ class EducationController extends Controller
             //return response()->json(['success'=>'Added new records.']);
          
   
+    //}
+
+    public function postCreateStepTwo(Request $request)
+    {
+        dd($request);
+        $id = Auth::id();
+        $board = 'Abc';
+        $percentage = 67;
+
+        $id_image = $request->file('id_image');
+        $id_image = str_replace(' ', '', $id_image->getClientOriginalName());
+        $id_image_file = date('YmdHi').$id_image;
+        $id_image->move(public_path('public/Image'), $id_image_file);
+
+        $highest_qualification = $request->file('highest_qualification');
+        $highest_qualification = str_replace(' ', '', $highest_qualification->getClientOriginalName());
+        $highest_qualification_file = date('YmdHi').$id_image;
+        $highest_qualification->move(public_path('public/Image'), $highest_qualification);
+
+        $course_syopsiy = $request->file('course_syopsiy');
+        $course_syopsiy = str_replace(' ', '', $course_syopsiy->getClientOriginalName());
+        $course_syopsiy_file = date('YmdHi').$id_image;
+        $course_syopsiy->move(public_path('public/Image'), $course_syopsiy_file);
+
+        $data = array('stu_id'=>$id,'board'=>$board,'percentage'=>$percentage,'id_image'=>$id_image_file,'highest_qualification'=>$highest_qualification_file,'course_syopsiy'=>$course_syopsiy_file);
+        Education::create($data);
+
+        $status = User::where('id', $id)->update(array('status' => 2));
+        return redirect()->route('dashboard');  
     }
 
     public function insert_sponsor(Request $request)

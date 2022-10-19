@@ -35,7 +35,8 @@ class AuthControllers extends Controller
      */
     public function registration()
     {
-        return view('front.auth.registration');
+        //return view('front.auth.registration');
+        return view('front.auth.register');
     }
       
     /**
@@ -80,22 +81,28 @@ class AuthControllers extends Controller
         $request->validate([
             'name' => 'required',
             'phone'=> 'required|digits:10',
-            'user_role'=> 'required',
+            //'user_role'=> 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
+            //'password' => 'required|min:6',
         ]);
            
         $data = $request->all();        
-        Session::put('pass', $request->password);
-        $check = $this->create($data);
+        //Session::put('pass', $request->password);
+        Session::put('uname', $request->name);
+        Session::put('email', $request->email);
+        Session::put('phone', $request->phone);
+        //$check = $this->create($data);
         $subject="Registered User";
         $otp = rand(1000,9999);
-        $user = User::where('email','=',$request->email)->update(['otp' => $otp]);
+        Session::put('otp', $otp);
+        //$user = User::where('email','=',$request->email)->update(['otp' => $otp]);
+        $user = User::where('email','=',$request->email)->get();
         
-        if($user){
+        if(!empty($user)){
             $data = array('otp' => $otp,'email' =>$request->email);
             Mail::to($request->email)->send(new SendEmail($data));
-            return view('front.verifyotp')->with($data);
+            //return view('front.verifyotp')->with($data);
+            return view('front.auth.otp')->with($data);
         }
         else{
             return response(["status" => 401, 'message' => 'Invalid']);
@@ -105,10 +112,13 @@ class AuthControllers extends Controller
     public function validateOtp(Request $request){
         
         $otp = $request->input('otp');
+        
         $user  = User::where([['email','=',$request->email],['otp','=',$request->otp]])->first();
-        if($user){
+        //if($user){
+        if(Session::get('otp') == $otp)
+        {
             
-           $verified=date("Y-m-d H:i:s", strtotime('now'));
+           /*$verified=date("Y-m-d H:i:s", strtotime('now'));
            $users= User::where('email','=',$request->email)->update(['email_verified_at' =>$verified,'is_email_verified' => 1]);
            $credentials = array('email'=>$request->email,'password'=>Session::get('pass'));
            //dd($users);
@@ -121,12 +131,25 @@ class AuthControllers extends Controller
            {
             return redirect("education/create-step-one");
            }
-           Session::put('pass', '');
+           Session::put('pass', '');*/
            //return redirect("login");
+           
+           //return redirect("setpassword");
+           //return redirect()->route('setpassword');
+           
+           return view('front.auth.set_password');
         }
         else{
-            return response(["status" => 401, 'message' => 'Invalid']);
+            return view('front.auth.set_passworddds');
+            //return response(["status" => 401, 'message' => 'Invalid']);
         }
+    }
+
+    public function set_password()
+    {
+        echo 'Ved';
+
+        return view('front.auth.set_password');
     }
     public function resendOtp(Request $request)
     {
@@ -142,7 +165,55 @@ class AuthControllers extends Controller
         }
     }
     
+    public function confirm_register(Request $request)
+    {
+        
+        /*$request->validate([            
+            'user_role'=> 'required',           
+            'password' => 'required|min:6',
+            'confirm_password' => 'required|min:6',
+            'user_role' => 'required',
+        ]);*/
+        //dd($request);   
+        $data = $request->all();        
+        //Session::put('pass', $request->password);
+        $name = Session::get('uname');
+        $email = Session::get('email');
+        $phone = Session::get('phone');
+        $otp = Session::get('otp');
+        $data = array('name'=>$name,'phone'=>$phone,'email'=>$email,'password'=>$request->password,'user_role'=>$request->user_role,'is_email_verified'=>1);
+        $check = $this->create($data);
+        //dd($check);
+        $user = User::where('email','=',$email)->update(['otp' => $otp]);
 
+        $credentials = array('email'=>$email,'password'=>$request->password);
+        //dd($credentials);
+        $val = Auth::attempt($credentials);
+        //dd($val);
+
+        if(Auth::user()->user_role == 3)
+        {
+        return redirect("dashboard");
+        }
+        else
+        {
+        return redirect("education/create-step-one");
+        }
+        Session::put('pass', '');
+        Session::put('uname', '');
+        Session::put('email', '');
+        Session::put('phone', '');
+        Session::put('otp', '');
+        
+        /*if($user){
+            $data = array('otp' => $otp,'email' =>$request->email);
+            Mail::to($request->email)->send(new SendEmail($data));
+            return view('front.verifyotp')->with($data);
+        }
+        else{
+            return response(["status" => 401, 'message' => 'Invalid']);
+        }*/
+    }
     /**
      * Write code on Method
      *
@@ -198,7 +269,8 @@ class AuthControllers extends Controller
         'user_role' => $data['user_role'],
         'status' =>'1',
         'email' => $data['email'],  
-        'password' => Hash::make($data['password'])
+        'password' => Hash::make($data['password']),
+        'is_email_verified' =>1
       ]);
     }
     

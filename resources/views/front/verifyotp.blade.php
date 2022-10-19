@@ -24,6 +24,7 @@
           </div>
           <div>Expire In <span id="timer"></span></div>
             {!! csrf_field() !!}
+            {{Session::get('otp')}}
             <input id="email" name="email" type="hidden" value="{{$email}}">
           <div class="row">
             <div class="col-md-4">

@@ -14,60 +14,40 @@
   <div class="container">
     <a href="{{ URL::to('/') }}">Home</a>
     <i class="mx-3 mt-2 fa-solid fa-angle-right" style="font-size:12px;"></i>
-    <span class="current">Register</span>
+    <span class="current">Set Your Password</span>
   </div>
 </div>
 <div class="site-section">
   <div class="container">
-    <div class="row justify-content-center" style="background: #c7c2c2;">
+    <div class="row justify-content-center">
    
     <div class="col-md-5">
-      <form action="{{ route('register.post') }}" method="POST">
-      @csrf
-      <div class="col-md-12 form-group">
-        <label for="name">Name<span style="color:red !important;font-weight:7 00;">*</span></label>
-        <input type="text" id="id" class="form-control form-control-lg" name="name" placeholder="Name" required autofocus>
-      </div>
-      @if ($errors->has('name'))
-       <div class="input-group mb-3"> <span class="text-danger">{{ $errors->first('name') }}</span></div>
-      @endif
-      <div class="col-md-12 form-group">
-      <label for="phone">Phone<span style="color:red !important;font-weight:700;">*</span></label>
-        <input type="phone" id="phone" class="form-control form-control-lg" name="phone" placeholder="Phone" required>
-      </div>
-      @if ($errors->has('phone'))
-       <div class="input-group mb-3"> <span class="text-danger">{{ $errors->first('phone') }}</span></div>
-      @endif
-      <div class="col-md-12 form-group">
-        <label for="email">Email<span style="color:red !important;font-weight:700;">*</span></label>
-        <input type="text" id="email_address" class="form-control form-control-lg" name="email" placeholder="Email" required autofocus>
-      </div>
-      @if ($errors->has('user_role'))
-       <div class="input-group mb-3"> <span class="text-danger">{{ $errors->first('user_role') }}</span></div>
-      @endif
+      <form action="{{route('register.final')}}" method="POST">
+      @csrf     
       
-      {{-- <div class="col-md-12 form-group">
+      <div class="col-md-12 form-group">
         <label for="email">I am a<span style="color:red !important;font-weight:700;">*</span></label>
         <select id="user_role" class="form-control form-control-lg" name="user_role">
           <option value="2">Student</option>
           <option value="3">Sponsor</option>
         </select>        
       </div>
-      @if ($errors->has('email'))
-       <div class="input-group mb-3"> <span class="text-danger">{{ $errors->first('email') }}</span></div>
-      @endif
 
       <div class="col-md-12 form-group">
       <label for="password">Password<span style="color:red !important;font-weight:700;">*</span></label>
         <input type="password" id="password" class="form-control form-control-lg" name="password" placeholder="Password" required>
-      </div> --}}
+      </div>
+      <div class="col-md-12 form-group">
+      <label for="Confirm_password">Confirm Password<span style="color:red !important;font-weight:700;">*</span></label>
+        <input type="password" id="password" class="form-control form-control-lg" name="confirm_password" placeholder="Confirm Password" required>
+      </div>
       @if ($errors->has('password'))
        <div class="input-group mb-3"> <span class="text-danger">{{ $errors->first('password') }}</span></div>
       @endif
       <div class="row">
         <div class="col-md-4">
           <button type="submit" class="btn btn-primary">
-          Proceed
+          Register
           </button>
         </div>
       </div>

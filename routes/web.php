@@ -40,7 +40,9 @@ Route::post('otp-validate', [AuthControllers::class, 'validateOtp'])->name('vali
 Route::post('otp-resend', [AuthControllers::class, 'resendOtp'])->name('resendOtp');
 Route::get('registration', [AuthControllers::class, 'registration'])->name('registers');
 Route::post('post-registration', [AuthControllers::class, 'postRegistration'])->name('register.post'); 
+Route::post('final-registration', [AuthControllers::class, 'confirm_register'])->name('register.final'); 
 Route::get('admin/login', [AuthController::class, 'index'])->name('admin_login');
+Route::get('setpassword', [AuthController::class, 'set_password'])->name('setpassword');
 Route::post('admin/post-login', [AuthController::class, 'postLogin'])->name('admin/login.post'); 
 Route::get('login', [AuthControllers::class, 'index'])->name('login');
 Route::post('post-login', [AuthControllers::class, 'postLogin'])->name('login.post');
