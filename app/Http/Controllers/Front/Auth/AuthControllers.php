@@ -61,6 +61,12 @@ class AuthControllers extends Controller
                 //return redirect("dashboard")->with('Oppes! You have entered invalid credentials'); 
                 return redirect("dashboard"); 
             }
+
+            else if($user->user_role == 2)
+            {
+                //return redirect("dashboard")->with('Oppes! You have entered invalid credentials'); 
+                return redirect('education/docstatus'); 
+            }
             else
             {
                 return redirect("education/create-step-one"); 
@@ -148,9 +154,14 @@ class AuthControllers extends Controller
 
     public function set_password()
     {
-        echo 'Ved';
+        //echo 'Ved';
 
         return view('front.auth.set_password');
+    }
+
+    public function password_form()
+    {
+        return view('front.auth.set_passworddds');
     }
     public function resendOtp(Request $request)
     {

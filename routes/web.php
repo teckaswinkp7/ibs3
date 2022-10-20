@@ -52,6 +52,7 @@ Route::get('admin/logout', [AuthController::class, 'logout'])->name('admin/logou
 Route::get('dashboard', [AuthControllers::class, 'dashboard'])->name('dashboard'); 
 Route::get('profile', [AuthControllers::class, 'profile'])->name('update-profile');
 Route::get('logout', [AuthControllers::class, 'logout'])->name('logout.front');
+Route::get('formcheck/chk', [AuthControllers::class, 'password_form'])->name('formcheck');
 Route::resource('admin/courses', CoursesController::class);
 Route::resource('admin/categories', CategoryController::class);
 Route::group(['middleware' => 'auth'], function () {

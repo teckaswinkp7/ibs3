@@ -89,7 +89,7 @@ class EducationController extends Controller
             {
                 //dd($data);
                 //return redirect('dashboard');
-                return redirect()->route('docstatus');  
+                return redirect('education/docstatus');  
                 
                 //return view('front/education.create-step-two');
             }
@@ -98,7 +98,7 @@ class EducationController extends Controller
             {
                 //dd($data);
                 //return redirect('dashboard');
-                return redirect()->route('docstatus');  
+                return redirect('education/docstatus');   
                 //return view('front.education.create-step-two');
                 //return view('front/education.create-step-two');
             }
@@ -110,7 +110,7 @@ class EducationController extends Controller
         
         elseif($data == null && $eduData != null)
         {
-            return redirect()->route('docstatus');  
+            return redirect('education/docstatus'); 
            // return redirect('dashboard');
         }
 
@@ -218,7 +218,7 @@ class EducationController extends Controller
         
         $status = User::where('id', $id)->update(array('status' => 2));
         //return redirect()->route('dashboard');  
-        return redirect()->route('docstatus');  
+        return redirect('education/docstatus');  
     }
 
     public function docstatus()

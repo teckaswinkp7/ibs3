@@ -22,7 +22,7 @@
                 </div>
                 <div>
                     <label for="">Password</label>
-                    <input type="text" placeholder="" name="password" id="password">
+                    <input type="password" placeholder="" name="password" id="password">
                     @if ($errors->has('password'))
                         <span class="text-danger">{{ $errors->first('password') }}</span>
                     @endif
