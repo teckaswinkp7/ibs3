@@ -9,6 +9,6 @@ class Education extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'stu_id'
+        'stu_id','board','percentage','id_image','highest_qualification','course_syopsiy'
     ];
 }

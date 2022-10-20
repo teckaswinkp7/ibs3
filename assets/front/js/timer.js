@@ -24,4 +24,4 @@ function timer(remaining) {
     // Do timeout stuff here
     alert('Timeout for otp');
 }
-timer(120);
+timer(300);

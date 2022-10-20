@@ -10,7 +10,7 @@
             </div>  
             <h3>Confirm your email</h3>
             <p>You should receive an email containing your code/one-time password (OTP) to verify your email. Kindly copy and paste code here to confirm</p>
-            <p>Time: <span id="timer"></span> 5 minutes</p>
+            <p>Time: 5 minutes</p>
             <form action="{{route('validateOtp')}}" method="POST" class="register-form">
                 @csrf
                 <div>

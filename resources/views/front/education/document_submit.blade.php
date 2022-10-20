@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="{{asset('assets/custom/common.css')}}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"/>  
 
-    <div class="background-submission"> 
+    <div class="background-submission" style="margin-top:100px;"> 
         <div class="submission-modal">
             <div class="register-logo">
                 <a href="#"><img src="{{asset('assets/custom/New Project (14).png')}}" alt="" width="120px"></a>
@@ -12,21 +12,23 @@
             <h3>Documents submitted successfully!</h3>
             <form action="" class="submission-form">
                 <div class="submission row">
+                   
                 <div class="col-sm-6">
                     <p>Documents</p>
-                    <input type="text" value="Grade 12 Certificate" disabled>
-                    <input type="text" value="Diploma in Accounting " disabled>
+                    {{-- <input type="text" value="Grade 12 Certificate" disabled> --}}
+                    <input type="text" value="{{ $newval[0]->board }} " disabled>
                 </div>
                 <div class="col-sm-3">
                     <p>Status</p>
                     <input type="text" value="Verification Pending" disabled>
-                    <input type="text" value="Verification Pending " disabled>
+                    {{-- <input type="text" value="Verification Pending " disabled> --}}
                 </div>
                 <div class="col-sm-3">
                     <p>Action</p>
                     <input type="text" value="Awaiting" disabled>
-                    <input type="text" value="Awaiting " disabled>
+                    {{-- <input type="text" value="Awaiting " disabled> --}}
                 </div>
+               
                 </div>
                 <div class="submission-btn">
                     <button type="submit">Prompt review</button>

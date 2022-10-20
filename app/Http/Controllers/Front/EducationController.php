@@ -88,14 +88,17 @@ class EducationController extends Controller
             if($data->status == 1)
             {
                 //dd($data);
-                return redirect('dashboard');
+                //return redirect('dashboard');
+                return redirect()->route('docstatus');  
+                
                 //return view('front/education.create-step-two');
             }
 
             else if($data->status == 2)
             {
                 //dd($data);
-                return redirect('dashboard');
+                //return redirect('dashboard');
+                return redirect()->route('docstatus');  
                 //return view('front.education.create-step-two');
                 //return view('front/education.create-step-two');
             }
@@ -107,11 +110,13 @@ class EducationController extends Controller
         
         elseif($data == null && $eduData != null)
         {
-            return redirect('dashboard');
+            return redirect()->route('docstatus');  
+           // return redirect('dashboard');
         }
 
         else
         {
+
             //return view('front.education.create-step-two');
             return view('front.education.documents');
         }
@@ -208,8 +213,9 @@ class EducationController extends Controller
         $course_syopsiys->move(public_path('public/Image'), $course_syopsiy_file);
 
         $data = array('stu_id'=>$id,'board'=>$board,'percentage'=>$percentage,'id_image'=>$id_image_file,'highest_qualification'=>$highest_qualification_file,'course_syopsiy'=>$course_syopsiy_file);
-        Education::create($data);
-
+        
+        $st = Education::create($data);
+        
         $status = User::where('id', $id)->update(array('status' => 2));
         //return redirect()->route('dashboard');  
         return redirect()->route('docstatus');  
@@ -217,7 +223,10 @@ class EducationController extends Controller
 
     public function docstatus()
     {
-        return view('front.education.document_submit');       
+        $uid = Auth::id();
+        $data['newval'] = Education::where('stu_id',$uid)->get();
+        //dd($data['newval']);
+        return view('front.education.document_submit',$data);       
     }
 
     public function insert_sponsor(Request $request)
