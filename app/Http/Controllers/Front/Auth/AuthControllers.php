@@ -213,7 +213,7 @@ class AuthControllers extends Controller
         }
         else
         {
-        return redirect("education/create-step-one");
+        return redirect("education/create-step-two");
         }
         Session::put('pass', '');
         Session::put('uname', '');
