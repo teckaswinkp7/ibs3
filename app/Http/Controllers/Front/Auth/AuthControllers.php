@@ -65,7 +65,9 @@ class AuthControllers extends Controller
             else if($user->user_role == 2)
             {
                 //return redirect("dashboard")->with('Oppes! You have entered invalid credentials'); 
-                return redirect('education/docstatus'); 
+                
+                return redirect('education/create-step-two'); 
+                //return redirect('education/docstatus'); 
             }
             else
             {
