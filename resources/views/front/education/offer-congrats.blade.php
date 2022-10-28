@@ -90,8 +90,8 @@
                     <div class="profile-course">
                         <a href="#">Profile</a>
                         <a href="#">Course</a>
-                        <a href="#"></a>
-                        <a href="#"></a>
+                        {{-- <a href="#"></a>
+                        <a href="#"></a> --}}
                     </div>
                 </div>
                 <div class="col-sm-9">
@@ -103,7 +103,7 @@
                         </a> --}}
                         <a href="#">{{$student_course_offer[0]->courses_name}}</a>
                         <div class="congrats-letter">
-                            <a href="#"><img src="profile-logo.png" alt="" width="150px"></a>
+                            <a href="#"><img src="{{asset('assets/custom/profile-logo.png')}}" alt="" width="150px"></a>
                             <p>
                                 <?php echo date("l jS \of F Y"); ?>
                                  <br> <br>
