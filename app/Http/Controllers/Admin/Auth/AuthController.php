@@ -101,7 +101,14 @@ class AuthController extends Controller
     public function dashboard()
     {
         if(Auth::check()){
-            return view('admin.dashboard');
+            if(Auth::id() == 1)
+            {
+                return view('admin.dashboard');
+            }
+            else
+            {
+                return redirect('unauthorized');
+            }
         }
   
         return redirect("admin\login")->withSuccess('Opps! You do not have access');
