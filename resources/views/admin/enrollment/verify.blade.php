@@ -88,7 +88,7 @@
                         <td><a href="{{url('public/public/Image')}}/{{ $user->id_image }}" target="_blank"><img src="{{url('public/uploads/pdf_icon.png')}}" style="width:100px;height:100px;"></a></td>
                       <?php }
                       else{ ?>
-                        <td><a href="{{url('public/public/Image')}}/{{ $user->id_image }}" target="_blank"><img src="{{url('public/Image')}}/{{ $user->id_image }}" style="width:100px;height:100px;"></a></td>
+                        <td><a href="{{url('public/public/Image')}}/{{ $user->id_image }}" target="_blank"><img src="{{url('public/public/Image')}}/{{ $user->id_image }}" style="width:100px;height:100px;"></a></td>
                       <?php }
                       ?>
 
