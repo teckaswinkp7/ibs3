@@ -9,7 +9,7 @@
     <div class="background-profile" style="margin-top: 100px;"> 
         <div class="profile-modal">
             <div class="profile-logo">
-                <a href="#"><img src="profile-logo.png" alt="" width="100px"></a>
+                <a href="#"><img src="{{asset('assets/custom/profile-logo.png')}}" alt="" width="100px"></a>
             </div>  
             <h3>Select your Course </h3>
             <div class="row">
@@ -17,8 +17,8 @@
                     <div class="profile-course">
                         <a href="userprofile">Profile</a>
                         <a href="useroffer">Course</a>
-                        <a href="#"></a>
-                        <a href="#"></a>
+                        {{-- <a href="#"></a>
+                        <a href="#"></a> --}}
                     </div>
                 </div>
                 <div class="col-sm-9">
