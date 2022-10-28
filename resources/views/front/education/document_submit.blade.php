@@ -20,19 +20,33 @@
                 </div>
                 <div class="col-sm-3">
                     <p>Status</p>
+                    @if($newval[0]->verification_status == 1)
+                    <input type="text" value="Document Verified" disabled>    
+                    @elseif($newval[0]->verification_status == 2)      
+                    <input type="text" value="Decline" disabled>          
+                    @else
                     <input type="text" value="Verification Pending" disabled>
+                    @endif
                     {{-- <input type="text" value="Verification Pending " disabled> --}}
                 </div>
                 <div class="col-sm-3">
                     <p>Action</p>
+                    @if($newval[0]->verification_status == 1)
+                    <input type="text" value="Verified" disabled>
+                    @elseif($newval[0]->verification_status == 2) 
+                    <input type="text" value="Decline" disabled>   
+                    @else
                     <input type="text" value="Awaiting" disabled>
+                    @endif
                     {{-- <input type="text" value="Awaiting " disabled> --}}
                 </div>
                
                 </div>
+                @if($newval[0]->verification_status != 2)
                 <div class="submission-btn">
-                    <button type="submit">Prompt review</button>
+                <button class=""><a style="color: #fff; text-decoration:none;" href="{{route('userprofiles')}}">Prompt review</a></button>
                 </div>
+                @endif
                 <div class="imp-submission">
                     <h6>Important</h6>
                     <p>Please note the following instructions for a smooth Application to Admission into IBS University.</p>

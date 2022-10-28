@@ -1,0 +1,238 @@
+.profile-modal{
+    width: 70%;
+    margin: auto;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.background-profile{
+    background-image: url(New\ Project\ \(4\).jpg);
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    padding: 40px;
+}
+
+.profile-modal h3{
+    text-align: center;
+    margin-bottom: 50px;
+ }
+
+ .profile-box ul{
+  list-style: none;
+  padding-left: 0px;
+ }
+
+
+
+
+   .profile-course  a{
+    display: block;
+    height: 54px;
+    padding: 12px;
+    width: 100%;
+    text-decoration: none;
+    margin-bottom: 2px;
+    border-radius: 6px;
+    color: rgba(0, 0, 0, 0.8);
+    background-color: white;
+    transition: all .3s ease;
+    border: 1px solid #d9d9d9;
+   }
+
+   .profile-course  a:hover{
+    background-color: #d9d9d9;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+   }
+
+   .profile-course a:focus{
+    background-color: #d9d9d9;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+   }
+
+   .profile-photo{
+    width: 25%;
+    position: relative;
+   }
+   .profile-details{
+    width: 75%;
+   }
+.profile-box{
+    margin-bottom: 30px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+}
+.profile-box img{
+    border-radius: 100%;
+}
+
+.profile-box img:nth-child(2){
+    position: absolute;
+    bottom: 0;
+}
+
+.user-credentials{
+    color: rgba(0, 0, 0, 0.7);
+}
+.profile-box{
+    display: flex;
+}
+
+.profile-details a{
+    color: #4472c4;
+}
+.profile-details div input{
+    background-color: transparent;
+    outline: none;
+    border: none;
+}
+
+.profile-details div label{
+    min-width: 90px;
+}
+.personal-info div label, .background-info div label{
+    width: 25%;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.personal-info div input{
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  padding: 10px;
+  outline: none;
+  width: 50%;
+}
+
+.background-info div input{
+    border: 1px solid rgba(0, 0, 0, 0.3);
+  padding: 10px;
+  outline: none;
+  width: 35%;
+}
+
+.personal-info{
+    width: 100%;
+    margin-bottom: 50px;
+}
+.background-info{
+    width: 100%;
+}
+
+.profile-details div a{
+    text-decoration: none;
+}
+.personal-info div, .background-info div{
+    margin-bottom: 10px;
+}
+
+/* Course css */
+
+
+.select-course  a{
+    display: block;
+    height: 54px;
+    padding: 12px;
+    width: 80%;
+    text-decoration: none;
+    margin-bottom: 2px;
+    border-radius: 6px;
+    color: rgba(0, 0, 0, 0.8);
+    background-color: white;
+    transition: all .3s ease;
+    border: 1px solid #d9d9d9;
+   }
+
+   .select-course  a:hover{
+    background-color: #d9d9d9;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+   }
+
+   .select-course a:focus{
+    background-color: #d9d9d9;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+   }
+
+   /* Offer css */
+   .offer-course  a{
+    display: block;
+    height: 100%;
+    padding: 12px;
+    width: 80%;
+    text-decoration: none;
+    margin-bottom: 2px;
+    border-radius: 6px;
+    color: rgba(0, 0, 0, 0.8);
+    background-color: white;
+    transition: all .3s ease;
+    border: 1px solid #d9d9d9;
+   }
+
+   .offer-course textarea{
+    width: 100%;
+   }
+
+   .congrats{
+      padding-bottom: 100px !important;
+   }
+
+   .offer-btn{
+    margin-top: 30px;
+   }
+
+   .offer-btn button{
+    padding: 12px 35px;
+    background-color: #cc6600;
+    color: white;
+    transition: background .4s ease;
+    border-radius: 10px;
+    border: none;
+}
+
+.offer-btn button:hover{
+    background-color: black;
+    color: white;
+
+}
+
+
+
+
+ @media only screen and (max-width: 600px) {
+    .profile-modal{
+        width: 100%;
+        padding: 20px;
+    }
+    .profile-logo{
+        margin-bottom: 30px;
+    }
+
+    .background-profile{
+        padding: 30px 15px;
+    }
+
+    .personal-info div input {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .personal-info div label, .background-info div label {
+        width: 100%;
+    }
+
+    .background-info div input {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .select-course  a, .offer-course a{
+        width: 100%;
+      }
+
+      .offer-btn button{
+        padding: 12px 25px;
+    }
+    
+    }

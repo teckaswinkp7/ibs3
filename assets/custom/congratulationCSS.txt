@@ -1,0 +1,73 @@
+.congrats-btn {
+    text-align: right;
+}
+
+.congrats-btn button{
+    padding: 12px 35px;
+    background-color: #cc6600;
+    color: white;
+    transition: background .4s ease;
+    border-radius: 10px;
+    border: none;
+}
+
+.congrats-btn button:hover{
+    background-color: black;
+    color: white;
+
+}
+
+.congrats-btn button{
+    padding: 10px 30px;
+    background-color: #cc6600;
+    color: white;
+    transition: background .4s ease;
+    border: none;
+}
+
+.congrats-btn button:hover{
+    background-color: black;
+    color: white;
+
+}
+
+.congrats-course > a{
+    display: block;
+    height: 100%;
+    padding: 12px;
+    text-decoration: none;
+    margin-bottom: 2px;
+    border-radius: 6px;
+    color: rgba(0, 0, 0, 0.8);
+    background-color: white;
+    transition: all .3s ease;
+    border: 1px solid #d9d9d9;
+   }
+
+   .congrats-letter{
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.6);
+    border-radius: 6px;
+   }
+
+   .congrats-letter ul{
+    list-style: number;
+   }
+   .print-download-btn{
+    margin-top: 30px;
+   }
+
+   .print-download-btn button{
+    padding: 3px 6px;
+    background-color: #cc6600;
+    color: white;
+    transition: background .4s ease;
+    border: none;
+}
+
+.print-download-btn button:hover{
+    background-color: black;
+    color: white;
+
+}

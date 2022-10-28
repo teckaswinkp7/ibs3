@@ -1,3 +1,17 @@
+
+.news a{
+    color: #51be78;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+.snew a:nth-child(2){
+    background-color: #51be78;
+    color: #fff;
+    border: none;
+
+}
+
 .background-register{
     background-image: url(New\ Project\ \(4\).jpg);
     background-position: center;

@@ -39,6 +39,16 @@ Route::get('/',[WelcomeController::class, 'index'])->middleware('cors');;
 Route::post('otp-validate', [AuthControllers::class, 'validateOtp'])->name('validateOtp');
 Route::post('otp-resend', [AuthControllers::class, 'resendOtp'])->name('resendOtp');
 Route::get('registration', [AuthControllers::class, 'registration'])->name('registers');
+Route::get('userprofile', [AuthControllers::class, 'user_profile'])->name('userprofiles');
+Route::post('updateprofile', [AuthControllers::class, 'update_profile'])->name('updateprofile');
+Route::get('coursestatus/{id}', [AuthControllers::class, 'studentCourseInsert'])->name('coursestatus');
+Route::get('unauthorized', [AuthControllers::class, 'error_page'])->name('unauthorized');
+
+
+Route::get('useroffer', [EducationController::class, 'user_offer'])->name('useroffer');
+Route::get('userofferaccept', [EducationController::class, 'user_offer_accept'])->name('userofferaccept');
+Route::get('useroffercongrats', [EducationController::class, 'user_offer_congrats'])->name('useroffercongrats');
+
 Route::post('post-registration', [AuthControllers::class, 'postRegistration'])->name('register.post'); 
 Route::post('final-registration', [AuthControllers::class, 'confirm_register'])->name('register.final'); 
 Route::get('admin/login', [AuthController::class, 'index'])->name('admin_login');
@@ -116,6 +126,7 @@ Route::post('decline/{id}', [AuthControllers::class, 'decline'])->name('decline'
 
 Route::get('education/courseApproved', [AuthControllers::class, 'approve_course'])->name('courseApproved');
 Route::get('education/courseDenied', [AuthControllers::class, 'deny_course'])->name('courseDenied');
+Route::get('education/courseDefer', [AuthControllers::class, 'defer_course'])->name('courseDefer');
 
 Route::get('generate-invoice/{id}', [PDFController::class, 'generateInvoicePDF'])->name('generate.invoice');
 

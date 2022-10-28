@@ -9,6 +9,22 @@ use Session;
 use App\Models\Grade;
 class GradeController extends Controller
 {
+      public function __construct() {       
+            
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $this->id = Auth::user()->user_role;
+            if($this->id != 1)
+            {
+                return redirect('unauthorized');
+                die();
+            }
+            else{
+                return $next($request);
+            }
+            
+        });
+    }
     //
     public function index()
     {

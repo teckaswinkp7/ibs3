@@ -32,20 +32,20 @@
       </div>
       <div class="site-mobile-menu-body"></div>
     </div>
-    <div class="py-2 bg-light">
+    <div class="py-2 bg-light news">
       <div class="container">
         <div class="row align-items-center">
           <div class="col-lg-9 d-none d-lg-block"> 
-            <a href="#" class="small mr-3"><i class="fa fa-phone" aria-hidden="true"></i>(675) 74114100</a> 
-            <a href="#" class="small mr-3"><i class="fa fa-envelope" aria-hidden="true"></i> &nbsp;ask@ibs.ac.pg</a> 
+            <a href="#"  class="small mr-3"><i class="fa fa-phone" aria-hidden="true"></i>(675) 74114100</a> 
+            <a href="#"  class="small mr-3"><i class="fa fa-envelope" aria-hidden="true"></i> &nbsp;ask@ibs.ac.pg</a> 
           </div>
-          <div class="col-lg-3 text-right">
+          <div class="col-lg-3 text-right snew">
           @if (( Auth::check())&&(Auth::user()->is_email_verified == 1))
           <a class="small mr-3">Hi <strong>{{ Auth::user()->name }}</strong></a>
           <a href="{{ route('logout') }}" class="small mr-3">Logout</a>
           @else 
-            <a href="{{ route('login') }}" class="small mr-3"><i class="fa fa-unlock" aria-hidden="true"></i> Log In</a>
-            <a href="{{ route('registers') }}" class="small btn btn-primary px-4 py-2 rounded-0"><i class="fa fa-users" aria-hidden="true"></i> Register</a>
+            <a  href="{{ route('login') }}" class="small mr-3"><i class="fa fa-unlock" aria-hidden="true"></i> Log In</a>
+            <a  href="{{ route('registers') }}" class="small btn btn-primary px-4 py-2 rounded-0"><i class="fa fa-users" aria-hidden="true"></i> Register</a>
           @endif  
   
           </div>

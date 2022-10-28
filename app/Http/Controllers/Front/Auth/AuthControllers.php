@@ -14,6 +14,7 @@ use App\Models\Courseselection;
 use App\Mail\SendEmail;
 use App\Models\Studentcourse;
 use App\Models\Studentcourseoffer;
+use App\Models\Profile;
 use Illuminate\Support\Facades\Mail;
 use Hash;
 class AuthControllers extends Controller
@@ -66,7 +67,8 @@ class AuthControllers extends Controller
             {
                 //return redirect("dashboard")->with('Oppes! You have entered invalid credentials'); 
                 
-                return redirect('education/create-step-two'); 
+                //return redirect('education/create-step-two'); 
+                return redirect('userprofile'); 
                 //return redirect('education/docstatus'); 
             }
             else
@@ -199,6 +201,7 @@ class AuthControllers extends Controller
         $otp = Session::get('otp');
         $data = array('name'=>$name,'phone'=>$phone,'email'=>$email,'password'=>$request->password,'user_role'=>$request->user_role,'is_email_verified'=>1);
         $check = $this->create($data);
+        
         //dd($check);
         $user = User::where('email','=',$email)->update(['otp' => $otp]);
 
@@ -213,7 +216,10 @@ class AuthControllers extends Controller
         }
         else
         {
-        return redirect("education/create-step-two");
+            $id = Auth::id();
+            $vals = array('stu_id'=>$id,'college_id'=>'IBS-'.rand(00000,99999));
+            $val = Profile::create($vals);
+            return redirect("education/create-step-two");
         }
         Session::put('pass', '');
         Session::put('uname', '');
@@ -249,14 +255,12 @@ class AuthControllers extends Controller
   
 
     public function profile()
-    {
-        
-        return view('front.profile');
-            
+    {        
+        return view('front.profile');            
     }
+
     public function studentCoursestore(Request $request)
     {
-
         $id = Auth::id();
         $studentSelCid = $request->student_course_id;
         $status = Courseselection::where('stu_id', $id)->update(array('studentSelCid' => $studentSelCid));
@@ -270,6 +274,23 @@ class AuthControllers extends Controller
         Session::flash('alert-class', 'alert-success');
         return redirect()->route('dashboard');
         
+    }
+
+    public function studentCourseInsert($cid)
+    {
+        $id = Auth::id();
+        //$studentSelCid = $request->student_course_id;
+        $status = Courseselection::where('stu_id', $id)->update(array('studentSelCid' => $cid));
+       
+        $studentcourse=Studentcourse::create([
+            'stu_id'            => $id,
+            'student_course_id' => $cid,
+            'status'            =>1,
+        ]);
+        Session::flash('message', 'You will get the course offer soon!'); 
+        Session::flash('alert-class', 'alert-success');
+        //return redirect()->route('dashboard');   
+        return redirect('userofferaccept');        
     }
     
     /**
@@ -306,23 +327,90 @@ class AuthControllers extends Controller
     {
         $id = Auth::id();
         $status = Courseselection::where('stu_id', $id)->update(array('offer_accepted' => 1));
-        return redirect()->back(); 
+        //return redirect()->back(); 
+        return redirect('useroffercongrats'); 
     }
 
     public function deny_course()
     {
         $id = Auth::id();
         $status = Courseselection::where('stu_id', $id)->update(array('offer_accepted' => 2,'offer_generated'=>0));
+        //dd($status);
+        return redirect()->back(); 
+    }
+
+    public function defer_course()
+    {
+        $id = Auth::id();
+        $status = Courseselection::where('stu_id', $id)->update(array('offer_accepted' => 3,'offer_generated'=>0));
         return redirect()->back(); 
     }
 
     public function approve($id){
         $status = Studentcourseoffer::where('id', $id)->update(array('status' => 1));
         return redirect()->back(); 
+        
     }
      
     public function decline($id){
         $status = Studentcourseoffer::where('id', $id)->update(array('status' => 0));
         return redirect()->back();
+    }
+
+    public function user_profile()
+    {
+        $id = Auth::id();
+        $existData['newval'] = Education::where('stu_id',$id)->get();
+        
+        //$existData['val'] = User::where('id',$id)->get();
+        $existData['val'] = User::where('id',$id)->first();
+        $existData['allval'] = Profile::where('stu_id',$id)->first();
+        $name = $existData['val']->name;
+        $space_count = substr_count($name, ' ');
+        $fname = explode(' ',$name);
+        //dd($space_count);
+        $existData['val']['first_name'] = $fname[0];
+        //dd($existData['val']['first_name']);
+        if($space_count >= 1)
+        {
+            $existData['val']['mname'] = $fname[1];
+        }
+        if($space_count >= 2)
+        {
+            $existData['val']['lname'] = $fname[2];
+        }
+        
+        return view('front.auth.profile',$existData);
+    }
+
+    public function update_profile(Request $request)
+    {
+        //dd($request->stu_id);
+        $id = Auth::id();
+        $val = $request->except('_token');
+        //dd($val['stu_id']);
+        $data = Profile::where('stu_id',$val['stu_id'])->get();
+        
+        //dd($lname);
+        $c = count($data);
+        if($c != 0)
+        {
+            //$val = array('');
+            $val = Profile::where('stu_id',$val['stu_id'])->update($val);
+            return redirect()->back(); 
+            
+        }
+        else
+        {
+            $val = Profile::create($val);
+            return redirect()->back(); 
+        }
+        //$id = Auth::id();        
+        
+    }
+
+    public function error_page()
+    {
+        return view('front.unauthorized');
     }
 }

@@ -198,8 +198,7 @@ class EducationController extends Controller
 
         $id_images = $request->file('id_image');
         $id_image = str_replace(' ', '', $id_images->getClientOriginalName());
-        $id_image_file = date('YmdHi').$id_image;
-        
+        $id_image_file = date('YmdHi').$id_image;        
         $id_images->move(public_path('public/Image'), $id_image_file);
         
         $highest_qualifications = $request->file('highest_qualification');
@@ -211,7 +210,7 @@ class EducationController extends Controller
         $course_syopsiy = str_replace(' ', '', $course_syopsiys->getClientOriginalName());
         $course_syopsiy_file = date('YmdHi').$id_image;
         $course_syopsiys->move(public_path('public/Image'), $course_syopsiy_file);
-
+        
         $data = array('stu_id'=>$id,'board'=>$board,'percentage'=>$percentage,'id_image'=>$id_image_file,'highest_qualification'=>$highest_qualification_file,'course_syopsiy'=>$course_syopsiy_file);
         
         $st = Education::create($data);
@@ -420,6 +419,41 @@ class EducationController extends Controller
         $email = $request->email;
         $val = User::where('email',$email)->first();
         echo json_encode($val);
+    }
+
+    public function user_offer()
+    {     
+        
+        return view('front.education.course-offer-new');
+    }
+
+    public function user_offer_accept()
+    {
+        $id = Auth::id();
+        $student_course_offer= Courseselection::select("courses.name as courses_name")->join("courses","courses.id", "=", "courseselections.studentSelCid")->where('courseselections.stu_id','=',$id)->get();
+        
+        return view('front.education.offer-accepted',compact('student_course_offer'));
+    }
+
+    public function user_offer_congrats()
+    {
+        $id = Auth::id();
+        $student_course_offer= Courseselection::select("courses.name as courses_name","users.name as uname")->join("courses","courses.id", "=", "courseselections.studentSelCid")->join("users","courseselections.stu_id","=", "users.id")->where('courseselections.stu_id','=',$id)->get();
+        //dd($student_course_offer);
+        /*$student_course_offer= Studentcourse::select(
+            "studentcourses.student_course_id", 
+            "studentcourses.stu_id",
+            "studentcourses.student_course_id",            
+            "courses.name as courses_name",  
+            "users.name as uname"          
+        )
+        ->join("courses", "courses.id", "=", "studentcourses.student_course_id")
+        ->join("studentcourseoffers","studentcourseoffers.stu_id", "=", "studentcourses.stu_id")
+        ->join("courseselections","courseselections.stu_id", "=", "studentcourses.stu_id")
+        ->join("users","users.id", "=", "studentcourses.stu_id")
+        ->where('studentcourses.stu_id','=',$id)
+        ->get();   */ 
+        return view('front.education.offer-congrats',compact('student_course_offer'));
     }
     
 }

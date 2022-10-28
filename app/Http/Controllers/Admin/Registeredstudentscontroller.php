@@ -17,7 +17,7 @@ class Registeredstudentscontroller extends Controller
             $this->id = Auth::user()->user_role;
             if($this->id != 1)
             {
-                echo 'Unautohorized Access';
+                return redirect('unauthorized');
                 die();
             }
             else{

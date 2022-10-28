@@ -61,10 +61,12 @@
                   <thead>
                   <tr>
                   <th>Sl.No.</th>
-                  <th>Qualification</th>
+                  {{-- <th>Qualification</th> --}}
                   <th>Board</th>
-                  <th>Percentage</th>
-                  <th>Document</th>
+                  {{-- <th>Percentage</th> --}}
+                  <th>ID Image</th>
+                  <th>Heighest Qualification</th>
+                  <th>Course Synopsis</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -75,18 +77,42 @@
                     <tr>
                       <?php $dash=''; ?>
                       <td>{{$_SESSION['i']}}</td>
-                      <td>{{ $user->qualification }}</td>
+                      {{-- <td>{{ $user->qualification }}</td> --}}
                       <td>{{ $user->board }}</td>
-                      <td>{{ $user->percentage }}</td>
+                      {{-- <td>{{ $user->percentage }}</td> --}}
                       <?php 
-                      $val = $user->document;
+                      $val = $user->id_image;
                       $ext = explode('.',$val);
                       if($ext[1] == 'pdf')
                       { ?>
-                        <td><a href="{{Url('public/Image')}}/{{ $user->document }}" target="_blank"><img src="{{Url('public/uploads/pdf_icon.png')}}" style="width:100px;height:100px;"></a></td>
+                        <td><a href="{{Url('public/Image')}}/{{ $user->id_image }}" target="_blank"><img src="{{Url('public/uploads/pdf_icon.png')}}" style="width:100px;height:100px;"></a></td>
                       <?php }
                       else{ ?>
-                        <td><a href="{{Url('public/Image')}}/{{ $user->document }}" target="_blank"><img src="{{Url('public/Image')}}/{{ $user->document }}" style="width:100px;height:100px;"></a></td>
+                        <td><a href="{{Url('public/Image')}}/{{ $user->id_image }}" target="_blank"><img src="{{Url('public/Image')}}/{{ $user->id_image }}" style="width:100px;height:100px;"></a></td>
+                      <?php }
+                      ?>
+
+                      <?php 
+                      $val = $user->id_image;
+                      $ext = explode('.',$val);
+                      if($ext[1] == 'pdf')
+                      { ?>
+                        <td><a href="{{Url('public/Image')}}/{{ $user->highest_qualification }}" target="_blank"><img src="{{Url('public/uploads/pdf_icon.png')}}" style="width:100px;height:100px;"></a></td>
+                      <?php }
+                      else{ ?>
+                        <td><a href="{{Url('public/Image')}}/{{ $user->highest_qualification }}" target="_blank"><img src="{{Url('public/Image')}}/{{ $user->highest_qualification }}" style="width:100px;height:100px;"></a></td>
+                      <?php }
+                      ?>
+
+                      <?php 
+                      $val = $user->id_image;
+                      $ext = explode('.',$val);
+                      if($ext[1] == 'pdf')
+                      { ?>
+                        <td><a href="{{Url('public/Image')}}/{{ $user->course_syopsiy }}" target="_blank"><img src="{{Url('public/uploads/pdf_icon.png')}}" style="width:100px;height:100px;"></a></td>
+                      <?php }
+                      else{ ?>
+                        <td><a href="{{Url('public/Image')}}/{{ $user->course_syopsiy }}" target="_blank"><img src="{{Url('public/Image')}}/{{ $user->course_syopsiy }}" style="width:100px;height:100px;"></a></td>
                       <?php }
                       ?>
                       
@@ -95,13 +121,13 @@
                   <?php unset($_SESSION['i']); ?>    
                   </tbody>
                   <tfoot>
-                  <tr>
+                  {{-- <tr>
                   <th>Sl.No.</th>
                   <th>Qualification</th>
                   <th>Board</th>
                   <th>Percentage</th>
                   <th>Document</th>
-                  </tr>
+                  </tr> --}}
                   </tfoot>
                 </table>
                 <div class="col-md-12">

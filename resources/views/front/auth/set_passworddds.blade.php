@@ -34,7 +34,7 @@
                         
                 <div>
                     <label for="">Password</label>
-                    <input type="password" placeholder="" id="password" name="password" >
+                    <input type="password" placeholder="" id="password" name="password" required>
                     @if ($errors->has('password'))
                         <span class="text-danger">{{ $errors->first('password') }}</span>
                     @endif
@@ -43,7 +43,7 @@
                 </div>
                 <div>
                     <label for="">Confirm Password</label>
-                    <input type="password" placeholder="" id="conpassword" name="confirm_password" >
+                    <input type="password" placeholder="" id="conpassword" name="confirm_password" required>
                     @if ($errors->has('confirm_password'))
                         <span class="text-danger">{{ $errors->first('confirm_password') }}</span>
                     @endif
