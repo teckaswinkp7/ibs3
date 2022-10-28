@@ -85,10 +85,10 @@
                       $ext = explode('.',$val);
                       if($ext[1] == 'pdf')
                       { ?>
-                        <td><a href="{{Url('public/Image')}}/{{ $user->id_image }}" target="_blank"><img src="{{Url('public/uploads/pdf_icon.png')}}" style="width:100px;height:100px;"></a></td>
+                        <td><a href="{{public_path('public/Image')}}/{{ $user->id_image }}" target="_blank"><img src="{{public_path('public/uploads/pdf_icon.png')}}" style="width:100px;height:100px;"></a></td>
                       <?php }
                       else{ ?>
-                        <td><a href="{{Url('public/Image')}}/{{ $user->id_image }}" target="_blank"><img src="{{Url('public/Image')}}/{{ $user->id_image }}" style="width:100px;height:100px;"></a></td>
+                        <td><a href="{{public_path('public/Image')}}/{{ $user->id_image }}" target="_blank"><img src="{{public_path('public/Image')}}/{{ $user->id_image }}" style="width:100px;height:100px;"></a></td>
                       <?php }
                       ?>
 
@@ -97,10 +97,10 @@
                       $ext = explode('.',$val);
                       if($ext[1] == 'pdf')
                       { ?>
-                        <td><a href="{{Url('public/Image')}}/{{ $user->highest_qualification }}" target="_blank"><img src="{{Url('public/uploads/pdf_icon.png')}}" style="width:100px;height:100px;"></a></td>
+                        <td><a href="{{public_path('public/Image')}}/{{ $user->highest_qualification }}" target="_blank"><img src="{{public_path('public/uploads/pdf_icon.png')}}" style="width:100px;height:100px;"></a></td>
                       <?php }
                       else{ ?>
-                        <td><a href="{{Url('public/Image')}}/{{ $user->highest_qualification }}" target="_blank"><img src="{{Url('public/Image')}}/{{ $user->highest_qualification }}" style="width:100px;height:100px;"></a></td>
+                        <td><a href="{{public_path('public/Image')}}/{{ $user->highest_qualification }}" target="_blank"><img src="{{public_path('public/Image')}}/{{ $user->highest_qualification }}" style="width:100px;height:100px;"></a></td>
                       <?php }
                       ?>
 
@@ -109,10 +109,10 @@
                       $ext = explode('.',$val);
                       if($ext[1] == 'pdf')
                       { ?>
-                        <td><a href="{{Url('public/Image')}}/{{ $user->course_syopsiy }}" target="_blank"><img src="{{Url('public/uploads/pdf_icon.png')}}" style="width:100px;height:100px;"></a></td>
+                        <td><a href="{{public_path('public/Image')}}/{{ $user->course_syopsiy }}" target="_blank"><img src="{{public_path('public/uploads/pdf_icon.png')}}" style="width:100px;height:100px;"></a></td>
                       <?php }
                       else{ ?>
-                        <td><a href="{{Url('public/Image')}}/{{ $user->course_syopsiy }}" target="_blank"><img src="{{Url('public/Image')}}/{{ $user->course_syopsiy }}" style="width:100px;height:100px;"></a></td>
+                        <td><a href="{{public_path('public/Image')}}/{{ $user->course_syopsiy }}" target="_blank"><img src="{{public_path('public/Image')}}/{{ $user->course_syopsiy }}" style="width:100px;height:100px;"></a></td>
                       <?php }
                       ?>
                       
