@@ -31,6 +31,7 @@ class OfferEmail extends Mailable
 
     public function build()
     {
-        return $this->from('info@supertyreguy.com')->view('emails.offers.offeremail',['data'=>$this->data])->subject('Offer Email')->attach(public_path('uploads/attachment/'.$this->data['filename']));    
+        //return $this->from('info@supertyreguy.com')->view('emails.offers.offeremail',['data'=>$this->data])->subject('Offer Email')->attach(public_path('uploads/attachment/'.$this->data['filename']));  
+        return $this->from('info@supertyreguy.com')->view('emails.offers.offeremail',['data'=>$this->data])->subject('Offer Email');    
     }
 }

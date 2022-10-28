@@ -8,12 +8,14 @@ use Illuminate\Http\Request;
 use App\Models\Education;
 use App\Models\Document;
 use App\Models\User;
+use App\Mail\OfferEmail;
 use App\Models\Sponsor;
 use App\Models\Studentcourseoffer;
 use App\Models\Bankdetails;
 use App\Models\Studentcourse;
 use App\Models\Courseselection;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 use Session;
 use DB;
 class EducationController extends Controller
@@ -430,8 +432,14 @@ class EducationController extends Controller
     public function user_offer_accept()
     {
         $id = Auth::id();
-        $student_course_offer= Courseselection::select("courses.name as courses_name")->join("courses","courses.id", "=", "courseselections.studentSelCid")->where('courseselections.stu_id','=',$id)->get();
+        $user = User::where('id',$id)->first();
+        $email = $user->email;
         
+        $student_course_offer= Courseselection::select("courses.name as courses_name")->join("courses","courses.id", "=", "courseselections.studentSelCid")->where('courseselections.stu_id','=',$id)->get();
+        $data = array('offer_desc'=>"",'offer'=> 'Offer Email','filename'=>'ABC.txt','uname'=>$user->name);  
+        //Mail::to('vedmanimoudgal@virtualemployee.com')->send(new OfferEmail($data));
+        Mail::to($email)->send(new OfferEmail($data));
+
         return view('front.education.offer-accepted',compact('student_course_offer'));
     }
 
