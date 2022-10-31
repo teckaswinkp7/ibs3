@@ -44,6 +44,11 @@ Route::post('updateprofile', [AuthControllers::class, 'update_profile'])->name('
 Route::get('coursestatus/{id}', [AuthControllers::class, 'studentCourseInsert'])->name('coursestatus');
 Route::get('unauthorized', [AuthControllers::class, 'error_page'])->name('unauthorized');
 
+Route::get('changeuser', [AuthControllers::class, 'change_user'])->name('changeuser');
+Route::get('changepassword', [AuthControllers::class, 'change_pass'])->name('changepassword');
+Route::post('updateusername', [AuthControllers::class, 'update_username'])->name('updateusername');
+Route::post('updatepasswords', [AuthControllers::class, 'update_passwords'])->name('updatepasswords');
+
 
 Route::get('useroffer', [EducationController::class, 'user_offer'])->name('useroffer');
 Route::get('userofferaccept', [EducationController::class, 'user_offer_accept'])->name('userofferaccept');

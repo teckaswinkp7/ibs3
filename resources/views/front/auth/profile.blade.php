@@ -24,11 +24,15 @@
             </div>
             <div class="col-sm-9">
                 <h6 class="user-credentials">User credentials</h6>
+                @if(Session::has('message'))
+                    <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>        
+                    @endif  
                 <div class="profile-box">
                     <div class="profile-photo">
                        <img src="{{asset('assets/custom/profile-photo.jpg')}}" alt="" width="100px">
                        <img src="{{asset('assets/custom/edit-icon.jpg')}}" alt="" width="18px" height="auto">
                     </div>
+                    
                     <div class="profile-details">
                        <div>
                           <label for="">ID</label>
@@ -36,13 +40,13 @@
                        </div>
                        <div>
                         <label for="">Username</label>
-                        <input type="text" value="{{$val['email']}}">
-                        <a href="">(Update)</a>
+                        <input type="text" value="{{$val['email']}}" style="width: 100%;">
+                        <a href="changeuser">(Update)</a>
                      </div>
                      <div>
                         <label for="">Password</label>
                         <input type="text" value="********">
-                        <a href="">(Reset)</a>
+                        <a href="changepassword">(Reset)</a>
                      </div>
                     </div>
                 </div>

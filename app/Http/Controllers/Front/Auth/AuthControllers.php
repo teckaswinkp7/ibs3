@@ -413,4 +413,49 @@ class AuthControllers extends Controller
     {
         return view('front.unauthorized');
     }
+
+    public function change_user()
+    {
+        $id = Auth::id();   
+        
+        //$existData['val'] = User::where('id',$id)->get();
+        $existData['val'] = User::where('id',$id)->first();
+        return view('front.auth.username_update',$existData);
+    }
+
+    public function change_pass()
+    {
+        return view('front.auth.update_password');
+    }
+
+    public function update_username(Request $request)
+    {
+        $val = $request->except('_token');
+        $val = User::where('id',$val['id'])->update($val);
+        return redirect()->back(); 
+    }
+
+    public function update_passwords(Request $request)
+    {        
+        $val = $request->except('_token');
+
+        //dd($val);
+        if($val['password'] === $val['confirm_password'])
+        {  
+            $vals = array('password'=>Hash::make($val['password']));          
+            $valss = User::where('id',$val['id'])->update($vals);
+            if($valss)
+            {
+                Session::flash('message', 'Password Updated Successfully!'); 
+                Session::flash('alert-class', 'alert-success');
+                return redirect('userprofile'); 
+            }
+        }
+        else{
+            Session::flash('message', 'password and confirm password does not match!'); 
+            Session::flash('alert-class', 'alert-danger');
+            return redirect()->back(); 
+            
+        }        
+    }
 }
