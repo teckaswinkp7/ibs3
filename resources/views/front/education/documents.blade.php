@@ -48,16 +48,19 @@
                 {{-- <input type="email" name="email" id="email" class="form-control" placeholder="Email" data-val-required="Please fill up the details" data-val="true">
                   <span data-valmsg-for="email" class="field-validation-valid text-danger" data-valmsg-replace="true"></span>  --}}
                 <div class="upload-ps">
+                    <label>Upload your passport size ID image</label>
                     <input style="display:block" type="file" id="my-file" name="id_image" data-val-required="Please fill up the details" data-val="true">
                     {{-- <button type="button" onclick="document.getElementById('my-file').click()">Upload your passport size ID image</button> --}}
                     <span data-valmsg-for="id_image" class="field-validation-valid text-danger" data-valmsg-replace="true"></span> 
                 </div>
                 <div class="upload-ps">
+                    <label>Upload your highest qualification</label>
                     <input style="display:block" type="file" id="my-file-hq" name="highest_qualification" data-val-required="Please fill up the details" data-val="true">
                     {{-- <button type="button" onclick="document.getElementById('my-file-hq').click()">Upload your highest qualification</button> --}}
                     <span data-valmsg-for="highest_qualification" class="field-validation-valid text-danger" data-valmsg-replace="true"></span> 
                 </div>
                 <div class="upload-ps">
+                    <label>Upload Transcripts or Course Synopsis</label>
                     <input style="display:block" type="file" id="my-file-toc" name="course_syopsiy" data-val-required="Please fill up the details" data-val="true">
                     {{-- <button type="button" onclick="document.getElementById('my-file-toc').click()">Upload Transcripts or Course Synopsis ( for qualification higher than Grade 12)</button> --}}
                     <span data-valmsg-for="course_syopsiy" class="field-validation-valid text-danger" data-valmsg-replace="true"></span> 
