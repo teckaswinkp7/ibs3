@@ -81,7 +81,7 @@
                   <a href="#" class="nav-link text-left">Industry</a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link text-left">Contact</a>
+                    <a href="#" class="nav-link text-left">Contact us</a>
                 </li>
                 @foreach ( $menuitems as $item )
                 <li>
