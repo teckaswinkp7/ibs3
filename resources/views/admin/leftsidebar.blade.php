@@ -158,8 +158,21 @@
                       <p>Add Course</p>
                     </a>
                   </li>
+                  <li class="nav-item">
+                    <a href="{{route('admin.units.index')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Manage Unit</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('admin.units.create')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Add  Unit</p>
+                    </a>
+                  </li>
                 </ul>
             </li>
+            
             
             <li class="nav-item">
                 <a href="#" class="nav-link">
@@ -274,6 +287,46 @@
               </li>
                </ul>
           </li>
+          <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-edit"></i>
+                  <p>
+                  Pages
+                    <i class="fas fa-angle-down"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{route('admin.pages.index')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Manage Pages</p>
+                    </a>
+                  </li>
+                 </ul>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-edit"></i>
+                  <p>
+                   Menu Items
+                    <i class="fas fa-angle-down"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{route('admin.menuitems.index')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Manage Menu</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('admin.menuitems.create')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Add Menu</p>
+                    </a>
+                  </li>
+                 </ul>
+            </li>
           <li class="nav-item">
             <a href="{{route('grade.index')}}" class="nav-link">
               <i class="nav-icon fas fa-graduation-cap"></i>

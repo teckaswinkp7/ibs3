@@ -21,6 +21,16 @@ use App\Http\Controllers\Admin\confirmedstudentscontroller;
 use App\Http\Controllers\Admin\GradeController;
 use App\Http\Controllers\Admin\AssignmentController;
 use App\Http\Controllers\Admin\Reportingcontroller;
+use App\Http\Controllers\MailController;
+use App\Http\Controllers\Front\AssignmentsubmissionController;
+use App\Http\Controllers\Front\StudentAssignmentController;
+use App\Http\Controllers\Admin\ExamController;
+use App\Http\Controllers\Front\StudentExamController;
+use App\Http\Controllers\Admin\AssignmentGradeController;
+use App\Http\Controllers\Admin\Pagescontroller;
+use App\Http\Controllers\Admin\Menuitemscontroller;
+use App\Http\Controllers\Admin\Unitcontroller;
+use App\Http\Controllers\Admin\Unitselectioncontroller;
 
 /*
 |--------------------------------------------------------------------------
@@ -145,6 +155,46 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('admin/reports/confirmedstudents/', [confirmedstudentscontroller::class, 'index'])->name('admin.reports.confirmedstudents.index');
     Route::get('admin/reports/confirmedstudents/view/{id}', [confirmedstudentscontroller::class, 'confirmedshow'])->name('admin.reports.confirmedshow.confirmedshow');
 });
+
+/** Pages **/
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('admin/pages/', [Pagescontroller ::class, 'index'])->name('admin.pages.index');
+    Route::get('admin/pages/create', [Pagescontroller ::class, 'create'])->name('admin.pages.create');
+    Route::post('admin/pages/store', [Pagescontroller ::class, 'store'])->name('admin.pages.store');
+    Route::delete('admin/pages/delete/{id}', [Pagescontroller ::class, 'destroy'])->name('admin.pages.destroy');
+    Route::get('admin/pages/edit/{id}', [Pagescontroller ::class, 'edit'])->name('admin.pages.edit');
+    Route::post('admin/pages/edit/{id}/update', [Pagescontroller ::class, 'update'])->name('admin.pages.update');
+    
+});
+
+
+Route::get('{pages_slug}',[Pagescontroller::class, 'viewpage'])->name('front.page.view');
+
+/** Navigation Menu **/
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::get('admin/menuitems/', [Menuitemscontroller ::class, 'index'])->name('admin.menuitems.index');
+    Route::get('admin/menuitems/create', [Menuitemscontroller ::class, 'create'])->name('admin.menuitems.create');
+    Route::post('admin/menuitems/store', [Menuitemscontroller ::class, 'store'])->name('admin.menuitems.store');
+    Route::delete('admin/menuitems/{id}/delete', [Menuitemscontroller ::class, 'destroy'])->name('admin.menuitems.destroy');
+    Route::get('admin/menuitems/{id}/edit', [Menuitemscontroller ::class, 'edit'])->name('admin.menuitems.edit');
+    Route::post('admin/menuitems/{id}/edit/update', [Menuitemscontroller ::class, 'update'])->name('admin.menuitems.update');
+   
+    
+});
+
+/** Units **/
+
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::get('admin/units/', [Unitcontroller::class, 'index'])->name('admin.units.index');
+    Route::get('admin/units/create', [Unitcontroller ::class, 'create'])->name('admin.units.create');
+    Route::post('admin/units/store', [Unitcontroller ::class, 'store'])->name('admin.units.store');
+    Route::delete('admin/units/{id}/delete', [Unitcontroller ::class, 'destroy'])->name('units.destroy');
+    Route::get('admin/units/{id}/edit', [Unitcontroller::class, 'edit'])->name('admin.units.edit');
+    Route::post('admin/units/{id}/edit/update', [Unitcontroller ::class, 'update'])->name('admin.units.update');
+   });
+
 
 /**Grade Backend**/
 Route::get('admin/grade', 'App\Http\Controllers\Admin\GradeController@index')->name('grade.index');

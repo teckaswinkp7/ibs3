@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Courses;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CoursesController extends Controller
 {
@@ -77,6 +78,7 @@ class CoursesController extends Controller
         $courses->slug = $request->slug;
         $courses->course_duration = $request->course_duration;
         $courses->course_id = $request->course_id;
+        $courses->price = $request->price;
         $courses->cat_id = $request->cat_id;
         $courses->subcat_id = $request->subcat_id;
         if($request->file('course_image')){
