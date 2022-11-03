@@ -16,6 +16,7 @@
                     <div class="profile-course">
                         <a href="userprofile">Profile</a>
                         <a href="useroffer">Course</a>
+                        <a href="useroffer">Bill</a>
                         {{-- <a href="#"></a>
                         <a href="#"></a> --}}
                     </div>
@@ -49,7 +50,7 @@
                       <div class="offer-btn">
                         <button class=""><a style="text-decoration:none; color:#fff;" href="{{route('courseApproved')}}">Accept</a></button>
                         <button class=""><a style="text-decoration:none; color:#fff;" href="{{route('courseDenied')}}">Decline</a></button>
-                        <button class=""><a style="text-decoration:none; color:#fff;" href="{{route('courseDefer')}}">Defer</a></button>
+                        <button class=""><a style="text-decoration:none; color:#fff;" href="{{route('coursedefer')}}">Defer</a></button>
                       </div>
                     </form>
 

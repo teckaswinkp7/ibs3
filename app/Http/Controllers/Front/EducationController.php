@@ -472,5 +472,54 @@ class EducationController extends Controller
         ->get();   */ 
         return view('front.education.offer-congrats',compact('student_course_offer'));
     }
+
+
+    public function coursedefer(){
+
+        return view('front.education.coursedefer');
+    }
+
+    public function coursesdefer(Request $request){
+
+        $id = Auth::id();
+
+        $defercourse = courseselection::updateOrCreate(
+            [
+                'stu_id' => $id
+            ],
+            [
+
+            'defer_course' => $request->defer_course,
+        ]);
+        
+        if($request->defer_course == 'yes')
+        {
+            return view('front.education.coursedeferdate');
+        }
+        else{
+ 
+            return redirect('userprofile');
+        }
+    }
+
+    public function coursedeferdate(){
+
+        return view('front.education.coursedeferdate');
+    }
     
+    public function coursedefersdate(Request $request){
+
+        $id = Auth::id();
+
+        $defercoursedate = courseselection::updateOrCreate(
+            [
+                'stu_id' => $id
+            ],
+            [
+
+            'defer_date' => date("Y-m-d", strtotime($request->defer_date)),
+        ]);
+        
+        return redirect('userprofile');
+    }
 }

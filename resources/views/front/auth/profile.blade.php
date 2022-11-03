@@ -5,6 +5,38 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"/>  
  
 <link rel="stylesheet" href="{{asset('assets/custom/profile.css')}}">
+
+<style>
+*{
+   list-style-type: none;
+}
+
+nav ul li a:hover{
+   color:#51be78;
+}
+
+ nav ul ul {
+   position:static;
+   display:none;
+}
+nav ul  .bill-show.show{
+   display:block;
+}
+
+nav ul li a span{
+   position:absolute;
+   top:50%;
+   right:20px;
+   transform:translateY(-50%);
+   transition:transform 0.4s;
+}
+
+nav ul li a:hover span{
+
+   transform:translateY(-50%) rotate(-180deg);
+}
+
+   </style>
     
 
 <div class="background-profile" style="margin-top: 100px;"> 
@@ -15,12 +47,25 @@
         <h3>Your Profile </h3>
         <div class="row">
             <div class="col-sm-3">
-                <div class="profile-course">
-                    <a href="userprofile">Profile</a>
-                    <a href="useroffer">Course</a>
-                    {{-- <a href="#"></a>
-                    <a href="#"></a> --}}
-                </div>
+                <nav class="profile-course">
+                  <ul>
+
+                   <li> <a href="userprofile">Profile</a></li>
+                    <li><a href="useroffer">Course</a></li>
+                    
+                    <li><a class="bill-btn" href="#">bill
+                    <span class="fas fa-caret-down"> </span>
+                  <ul class="bill-show"> 
+                  <li><a href="proinvoice">Pro-forma-invoice</a></li>
+                  <li><a href="salesinvoice">Sales Invoice</a></li>
+                  <li><a href="payment">Payment</a></li>
+                  <li><a href="history">History</a></li>
+                  </ul>
+                    </a></li>
+
+
+                    </ul>
+</nav>
             </div>
             <div class="col-sm-9">
                 <h6 class="user-credentials">User credentials</h6>
@@ -199,6 +244,17 @@
         
     </div>
 </div>
+
+<script type="text/javascript">
+
+$('.bill-btn').click(function(){
+
+   $(' nav ul .bill-show').toggleClass("show");
+
+});
+   </script>
+    
+    
     @include('front/footer')  
 
     
