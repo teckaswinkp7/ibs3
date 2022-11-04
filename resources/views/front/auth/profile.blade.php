@@ -5,7 +5,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"/>  
  
 <link rel="stylesheet" href="{{asset('assets/custom/profile.css')}}">
-
 <style>
 *{
    list-style-type: none;
@@ -15,12 +14,19 @@ nav ul li a:hover{
    color:#51be78;
 }
 
- nav ul ul {
+ .bill {
    position:static;
-   display:none;
-}
-nav ul  .bill-show.show{
    display:block;
+}
+.bill.show{
+   display:block;
+}
+
+
+
+.bill-show{
+
+   display:none;
 }
 
 nav ul li a span{
@@ -55,12 +61,12 @@ nav ul li a:hover span{
                     
                     <li><a class="bill-btn" href="#">bill
                     <span class="fas fa-caret-down"> </span>
-                  <ul class="bill-show"> 
-                  <li><a href="proinvoice">Pro-forma-invoice</a></li>
-                  <li><a href="salesinvoice">Sales Invoice</a></li>
-                  <li><a href="payment">Payment</a></li>
-                  <li><a href="history">History</a></li>
-                  </ul>
+                    <li class="bill-show">
+                  <li class="bill"><a href="proformainvoice">Pro-forma-invoice</a></li>
+                  <li class="bill"><a href="salesinvoice">Sales Invoice</a></li>
+                  <li class="bill"><a href="payment">Payment</a></li>
+                  <li class="bill"><a href="history">History</a></li>
+</li>
                     </a></li>
 
 
@@ -249,7 +255,7 @@ nav ul li a:hover span{
 
 $('.bill-btn').click(function(){
 
-   $(' nav ul .bill-show').toggleClass("show");
+   $('.bill').toggleClass("show");
 
 });
    </script>

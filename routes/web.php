@@ -25,6 +25,7 @@ use App\Http\Controllers\MailController;
 use App\Http\Controllers\Front\AssignmentsubmissionController;
 use App\Http\Controllers\Front\StudentAssignmentController;
 use App\Http\Controllers\Admin\ExamController;
+use App\Http\Controllers\Front\Invoicecontroller;
 use App\Http\Controllers\Front\StudentExamController;
 use App\Http\Controllers\Admin\AssignmentGradeController;
 use App\Http\Controllers\Admin\Pagescontroller;
@@ -67,6 +68,12 @@ Route::post('coursesdefer', [EducationController::class, 'coursesdefer'])->name(
 Route::get('useroffercongrats', [EducationController::class, 'user_offer_congrats'])->name('useroffercongrats');
 Route::get('coursedeferdate', [EducationController::class, 'coursedeferdate'])->name('coursedeferdate');
 Route::post('coursedefersdate', [EducationController::class, 'coursedefersdate'])->name('coursedefersdate');
+
+
+
+/** Pro Forma Invoice  */
+
+Route::get('proformainvoice', [Invoicecontroller::class, 'index'])->name('proformainvoice');
 
 Route::post('post-registration', [AuthControllers::class, 'postRegistration'])->name('register.post'); 
 Route::post('final-registration', [AuthControllers::class, 'confirm_register'])->name('register.final'); 
