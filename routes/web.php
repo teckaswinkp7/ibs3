@@ -74,6 +74,10 @@ Route::post('coursedefersdate', [EducationController::class, 'coursedefersdate']
 /** Pro Forma Invoice  */
 
 Route::get('proformainvoice', [Invoicecontroller::class, 'index'])->name('proformainvoice');
+Route::post('performainvoicepost', [Invoicecontroller::class, 'store'])->name('performainvoicepost');
+Route::get('proformainvoicepreview', [Invoicecontroller::class, 'preview'])->name('proformainvoicepreview');
+
+Route::get('generate-invoice/{id}', [PDFController::class, 'generateInvoicePDF'])->name('generate.invoice');
 
 Route::post('post-registration', [AuthControllers::class, 'postRegistration'])->name('register.post'); 
 Route::post('final-registration', [AuthControllers::class, 'confirm_register'])->name('register.final'); 
@@ -154,7 +158,7 @@ Route::get('education/courseApproved', [AuthControllers::class, 'approve_course'
 Route::get('education/courseDenied', [AuthControllers::class, 'deny_course'])->name('courseDenied');
 Route::get('education/courseDefer', [AuthControllers::class, 'defer_course'])->name('courseDefer');
 
-Route::get('generate-invoice/{id}', [PDFController::class, 'generateInvoicePDF'])->name('generate.invoice');
+
 
 
 Route::group(['middleware' => 'auth'], function () {

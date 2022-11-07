@@ -79,7 +79,7 @@ nav ul li a:hover span{
             <div class="col-sm-9">
                 <div class="select-course">
             
-                <form action="#" class="submission-form" method="post">
+                <form action="{{route('performainvoicepost')}}" class="submission-form" method="post">
                     @csrf
 
                    @foreach ($selectedcourse as $course)
@@ -90,11 +90,11 @@ nav ul li a:hover span{
 </br>      
 
                <div id="select-study"> 
-                <label>&nbsp;&nbsp;Select Study-type :</label></br>
-                <input id="parttime" type="radio" name="study_mode" value="0" onclick="show2();">
-                <label for="0"> Part-time </label> 
-                <input type="radio" name="study_mode" value="1" onclick="show1();">
-                <label for="1">Full-time </label> 
+                <p>&nbsp;&nbsp;Select Study-type :</p></br>
+                <input id="parttime" type="radio" name="study_mode" value="part" onclick="show2();">
+                <label for="part"> Part-time </label> 
+                <input type="radio" name="study_mode" value="full" onclick="show1();">
+                <label for="full">Full-time </label> 
                 </div>
                 
                 
@@ -110,9 +110,11 @@ nav ul li a:hover span{
 </div>
 
 </br>
+
+
                 <div class="col-sm-12">
                <div id="period"> 
-                <label>Select the period you would like to make payment for :</label>
+                <p>Select the period you would like to make payment for :</p>
                 <input type="radio" name="study_mode" value="0">
                 <label for="0"> Semester 1 only </label></br>
                 <input type="radio" name="study_mode" value="1">
@@ -140,17 +142,17 @@ nav ul li a:hover span{
 </div>
 </div>
 
+<div class="submission-btn">
+                    <button type="submit">  Preview </button></a>
+                <button type="submit">Close</button>
+            </div>
 
        
                  
-                       
-<div class="submission-btn">
-                <button type="submit">Preview</button>
-                <button type="submit">Close</button>
-            </div>
           
                 
                     </form>
+                    
                 </div>
 
             </div>

@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Front;
 use Illuminate\Support\Facades\Auth;
 use DB;
 use App\Models\User;
+use App\Models\Courseselection;
+use Session;
+
 
 
 use App\Http\Controllers\Controller;
@@ -35,4 +38,29 @@ class Invoicecontroller extends Controller
         return view('front.invoice.proformainvoice',compact('selectedcourse','availableunits','selectedid'));
 
     }
+
+
+    public function preview(){
+
+
+        $id = Auth::id();
+        $user = User::where('id',$id)->first();
+        $email = $user->email;
+        $name = $user->name;
+        
+        $student_course_offer= Courseselection::select("courses.name as courses_name")->join("courses","courses.id", "=", "courseselections.studentSelCid")->where('courseselections.stu_id','=',$id)->get();
+
+        return view('front.invoice.proformainvoicepreview',compact('student_course_offer','user'));
+    }
+
+    public function store(Request $request){
+
+ 
+
+        return redirect()->route('proformainvoicepreview');
+
+
+    }
+
+
 }
