@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Front;
 use Illuminate\Support\Facades\Auth;
 use DB;
 use App\Models\User;
+use App\Models\Performainvoice;
+use App\Models\Profile;
 use App\Models\Courseselection;
 use Session;
+
 
 
 
@@ -16,9 +19,7 @@ class Invoicecontroller extends Controller
 {
     public function index(){
 
-
         $id= auth::id();
-
         $selectedcourse = DB::table('courses')
         ->select('courses.name','courses.id')
         ->Join('courseselections','courseselections.StudentSelCid','=','courses.id')
@@ -29,38 +30,44 @@ class Invoicecontroller extends Controller
         join('courseselections','courseselections.StudentSelCid','=','units.course_id')->
         where('courseselections.stu_id','=',$id)->
         get();
-
         $unitselectionid = DB::table('unitselection')->select('unitselection.units_id')->where('unitselection.stu_id','=',$id)->get();
-
         $selectedid = explode(",", $unitselectionid);
-
-
         return view('front.invoice.proformainvoice',compact('selectedcourse','availableunits','selectedid'));
 
     }
 
 
     public function preview(){
-
-
         $id = Auth::id();
         $user = User::where('id',$id)->first();
         $email = $user->email;
-        $name = $user->name;
-        
+        $name = $user->name;        
+        $unitselectionid = DB::table('unitselection')->select('unitselection.units_id')->where('unitselection.stu_id','=',$id)->get();
+        $selectedid = explode(",", $unitselectionid);        
+        $exist = Performainvoice::where('stu_id',$id)->first();        
+        $exist = $exist->additional_item;
+        $exist = json_decode($exist);
+        $location = Profile::where('stu_id',$id)->select('current_location','current_address_location')->first();
+        $communication = User::where('id',$id)->select('email','phone')->first();        
         $student_course_offer= Courseselection::select("courses.name as courses_name")->join("courses","courses.id", "=", "courseselections.studentSelCid")->where('courseselections.stu_id','=',$id)->get();
-
-        return view('front.invoice.proformainvoicepreview',compact('student_course_offer','user'));
+        return view('front.invoice.proformainvoicepreview',compact('student_course_offer','user','exist','location','communication'));
     }
 
     public function store(Request $request){
-
- 
-
+        $id = Auth::id();
+        $data = $request->except('_token');        
+        $additional = json_encode($data['additional_item']);        
+        $val = array('stu_id'=>$id,'additional_item'=>$additional,'study_type'=>$data['study_type'],'payment_period'=>$data['payment_period']);
+        $exist = Performainvoice::where('stu_id',$id)->get();
+        $exist_count = count($exist);
+        if($exist_count <=0)
+        {
+            $inserted = Performainvoice::create($val);                       
+        }
+        else
+        {
+            $updated = Performainvoice::where('stu_id',$id)->update($val);           
+        }
         return redirect()->route('proformainvoicepreview');
-
-
     }
-
-
 }

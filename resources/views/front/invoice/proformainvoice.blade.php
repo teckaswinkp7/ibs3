@@ -91,9 +91,9 @@ nav ul li a:hover span{
 
                <div id="select-study"> 
                 <p>&nbsp;&nbsp;Select Study-type :</p></br>
-                <input id="parttime" type="radio" name="study_mode" value="part" onclick="show2();">
+                <input id="parttime" type="radio" name="study_type" value="Part Time" onclick="show2();">
                 <label for="part"> Part-time </label> 
-                <input type="radio" name="study_mode" value="full" onclick="show1();">
+                <input type="radio" name="study_type" value="Full Time" onclick="show1();">
                 <label for="full">Full-time </label> 
                 </div>
                 
@@ -115,11 +115,11 @@ nav ul li a:hover span{
                 <div class="col-sm-12">
                <div id="period"> 
                 <p>Select the period you would like to make payment for :</p>
-                <input type="radio" name="study_mode" value="0">
+                <input type="radio" name="payment_period" value="0">
                 <label for="0"> Semester 1 only </label></br>
-                <input type="radio" name="study_mode" value="1">
+                <input type="radio" name="payment_period" value="1">
                 <label for="1">Semester 2 only </label> </br>
-                <input type="radio" name="study_mode" value="2">
+                <input type="radio" name="payment_period" value="2">
                 <label for="2"> Semester 1 and 2 </label> 
                 
                 </div>
@@ -128,10 +128,10 @@ nav ul li a:hover span{
                <div class="additional-items"> 
               <label>Additional Items to Include: </label></br>
                 
-                <label><input type="checkbox" name="checkbox" value="value"> Accomodation(Sem 1 only)</label>
-                <label><input type="checkbox" name="checkbox" value="value"> Transporation(Sem 1 only)</label>
-                <label><input type="checkbox" name="checkbox" value="value"> Accomodation(Sem 1 and 2)</label>
-                <label><input type="checkbox" name="checkbox" value="value"> Transportation(Sem 1 and 2)</label>
+                <label><input type="checkbox" name="additional_item[]" value="Accomodation(Sem 1 only)"> Accomodation(Sem 1 only)</label>
+                <label><input type="checkbox" name="additional_item[]" value="Transporation(Sem 1 only)"> Transporation(Sem 1 only)</label>
+                <label><input type="checkbox" name="additional_item[]" value="Accomodation(Sem 1 and 2)"> Accomodation(Sem 1 and 2)</label>
+                <label><input type="checkbox" name="additional_item[]" value="Transportation(Sem 1 and 2)"> Transportation(Sem 1 and 2)</label>
 
                
                 

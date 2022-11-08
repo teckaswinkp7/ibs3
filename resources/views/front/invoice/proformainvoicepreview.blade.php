@@ -84,7 +84,7 @@ font-weight:bold;
                         
                         <p > Course: {{$student_course_offer[0]->courses_name}}</p>
                         <p> Name: {{$user->name}}</p>
-                        <p> Address: #### </p>
+                        <p> Address: {{$location->current_location}} </p>
                         <p> Email: {{$user->email}}</p>
                         <p> Phone: {{$user->phone}}</p>
                         <button class="d-flex edit-btn float-right"> Edit </button>
@@ -110,15 +110,18 @@ font-weight:bold;
 							<div class="col-sm-6">
 								<span>invoice to: </span></br>
 								<strong>
-									Andres felipe posada
+									{{$location->current_location}}
 								</strong>
 								<p>
-									989 5th Avenue <br>
+                                    
+                                    
+                                    {{$location->current_address_location}}
+									{{-- 989 5th Avenue <br>
 									City of monterrey <br>
 									55839 <br>
-									USA <br>
+									USA <br> --}}
 									<a href="#">
-										jonnydeff@gmail.com
+                                        {{$communication->email}}
 									</a>
 								</p>
 							</div>
@@ -149,15 +152,18 @@ font-weight:bold;
 							</div>
 						</div>
 						<div class="items">
+                            
+                            @foreach($exist as $val)
 							<div class="row item">
 								<div class="col-xs-4 desc">
-									Html theme
+									{{$val}}
 								</div>
 								<div class="col-xs-5 amount text-right">
 									$60.00
 								</div>
 							</div>
-							<div class="row item">
+                            @endforeach
+							{{-- <div class="row item">
 								<div class="col-xs-4 desc">
 									Bootstrap snippet
 								</div>
@@ -172,7 +178,7 @@ font-weight:bold;
 								<div class="col-xs-5 amount text-right">
 									$18.00
 								</div>
-							</div>
+							</div> --}}
 						</div>
                         </br>
 						<div class="total">
