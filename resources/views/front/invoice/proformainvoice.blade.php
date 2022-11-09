@@ -79,7 +79,7 @@ nav ul li a:hover span{
             <div class="col-sm-9">
                 <div class="select-course">
             
-                <form action="{{route('performainvoicepost')}}" class="submission-form" method="post">
+                <form action="{{route('proformainvoicepost')}}" class="submission-form" method="post">
                     @csrf
 
                    @foreach ($selectedcourse as $course)
@@ -105,9 +105,12 @@ nav ul li a:hover span{
                  
                  @foreach ($availableunits as $units)
 </br>
-                 <input type="checkbox" value="{{$units->id}}" name="selected_units" >{{$units->title}}</input>
+                 <input type="checkbox" value="{{$units->id}}" name="units[]" >{{$units->title}}</input>
+                
                  @endforeach
 </div>
+
+
 
 </br>
 
@@ -115,12 +118,12 @@ nav ul li a:hover span{
                 <div class="col-sm-12">
                <div id="period"> 
                 <p>Select the period you would like to make payment for :</p>
-                <input type="radio" name="payment_period" value="0">
-                <label for="0"> Semester 1 only </label></br>
-                <input type="radio" name="payment_period" value="1">
-                <label for="1">Semester 2 only </label> </br>
-                <input type="radio" name="payment_period" value="2">
-                <label for="2"> Semester 1 and 2 </label> 
+                <input type="radio" name="payment_period" value="Sem 1">
+                <label for="Sem 1"> Semester 1 only </label></br>
+                <input type="radio" name="payment_period" value="Sem 2 ">
+                <label for="Sem 2">Semester 2 only </label> </br>
+                <input type="radio" name="payment_period" value="Sem 1 and 2">
+                <label for="Sem 1 and 2"> Semester 1 and 2 </label> 
                 
                 </div>
 </br>
@@ -147,11 +150,7 @@ nav ul li a:hover span{
                 <button type="submit">Close</button>
             </div>
 
-       
-                 
-          
-                
-                    </form>
+</form>
                     
                 </div>
 
@@ -165,9 +164,11 @@ nav ul li a:hover span{
 <script type="text/javascript">
 function show1(){
   document.getElementById('div1').style.display ='none';
+  document.getElementById('div2').style.display ='block';
 }
 function show2(){
   document.getElementById('div1').style.display = 'block';
+  document.getElementById('div2').style.display ='none';
 }
    </script>
 

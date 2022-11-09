@@ -54,7 +54,17 @@ font-weight:bold;
 
 .edit-btn{
 
+    position:relative;
+    bottom:60px;
+    padding: 15px 20px;
+    background-color: #cc6600;
+    color:white;
 
+}
+
+.edit-btn > a {
+    color:white;
+    text-decoration:none;
 }
 
 </style>
@@ -87,16 +97,14 @@ font-weight:bold;
                         <p> Address: {{$location->current_location}} </p>
                         <p> Email: {{$user->email}}</p>
                         <p> Phone: {{$user->phone}}</p>
-                        <button class="d-flex edit-btn float-right"> Edit </button>
+                      <button class="d-flex edit-btn float-right" > <a href="{{route('proformainvoice')}}">  Edit </button> </a>
                         </div>
                         <div class="congrats-letter">
                         <img class="float-right" src="{{asset('assets/front/images/IBS-Logo.png')}}" alt="" width="150px"></img>
                         </br>
                         </br>
-                            <h1> Pro Forma Invoice #### </h1>
-                            <p>
-                                <?php echo date("Y-m-d"); ?>
-                              
+                            <h4> Pro Forma Invoice : {{$invoicedata[0]->invoiceno}}</h4>
+                            <p>  <?php echo date("Y-m-d"); ?></p>
 
                                                         
 <div class="receipt-content">
@@ -121,22 +129,21 @@ font-weight:bold;
 									55839 <br>
 									USA <br> --}}
 									<a href="#">
-                                        {{$communication->email}}
+                                        
+                                        {{$user->email}}
 									</a>
 								</p>
 							</div>
 							<div class="col-sm-6 text-right">
 								<span>Issued By,</span></br>
 								<strong>
-									Juan fernando arias
+									IBS University
 								</strong>
 								<p>
-									344 9th Avenue <br>
-									San Francisco <br>
-									99383 <br>
-									USA <br>
+									P.O Box 2826 Boroko <br>
+									NCD Port Moresby <br>
 									<a href="#">
-										juanfer@gmail.com
+										ask@ibs.ac.pg
 									</a>
 								</p>
 							</div>
@@ -163,22 +170,14 @@ font-weight:bold;
 								</div>
 							</div>
                             @endforeach
-							{{-- <div class="row item">
+                            <div class="row item">
 								<div class="col-xs-4 desc">
-									Bootstrap snippet
+                                {{$invoicedata[0]->payment_period}}
 								</div>
 								<div class="col-xs-5 amount text-right">
-									$20.00
+									$60.00
 								</div>
 							</div>
-							<div class="row item">
-								<div class="col-xs-4 desc">
-									Snippets on bootdey 
-								</div>
-								<div class="col-xs-5 amount text-right">
-									$18.00
-								</div>
-							</div> --}}
 						</div>
                         </br>
 						<div class="total">
@@ -195,10 +194,14 @@ font-weight:bold;
                                 
                         </div>
                       </div>
+                      
+                      
                       <div class="print-download-btn">
-                        <button class=""><img src="{{asset('assets/custom/download-icon.png')}}" alt="" width="15px"></button>
-                        <button class=""><img src="{{asset('assets/custom/print-icon.png')}}" alt="" width="15px"></button>
-                      </div>
+                      <a href="{{route('invoice')}}"> <button class=""><img src="{{asset('assets/custom/download-icon.png')}}" alt="" width="15px"> </a></button>
+                        <button class=""><img src="{{asset('assets/custom/print-icon.png')}}" alt="" width="15px"></button>    
+                    </div>
+
+                    
                    </form>
 
                

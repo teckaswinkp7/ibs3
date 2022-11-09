@@ -74,8 +74,10 @@ Route::post('coursedefersdate', [EducationController::class, 'coursedefersdate']
 /** Pro Forma Invoice  */
 
 Route::get('proformainvoice', [Invoicecontroller::class, 'index'])->name('proformainvoice');
-Route::post('performainvoicepost', [Invoicecontroller::class, 'store'])->name('performainvoicepost');
+Route::post('proformainvoicepost', [Invoicecontroller::class, 'store'])->name('proformainvoicepost');
 Route::get('proformainvoicepreview', [Invoicecontroller::class, 'preview'])->name('proformainvoicepreview');
+
+Route::get('/invoice',[Invoicecontroller::class, 'viewpdf'])->name('invoice');
 
 Route::get('generate-invoice/{id}', [PDFController::class, 'generateInvoicePDF'])->name('generate.invoice');
 
