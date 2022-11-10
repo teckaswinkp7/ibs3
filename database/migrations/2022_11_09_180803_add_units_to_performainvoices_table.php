@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddUnitsToPerformainvoiceTable extends Migration
+class AddUnitsToPerformainvoicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +14,8 @@ class AddUnitsToPerformainvoiceTable extends Migration
     public function up()
     {
         Schema::table('performainvoices', function (Blueprint $table) {
-            
-            $table->longtext('units')->nullable();
-            $table->integer('invoiceno')->nullable();
-            $table->string('sem')->nullable();
+            $table->longtext('units')->after('additional_item')->nullable();
+            $table->integer('invoiceno')->after('units')->nullable();
         });
     }
 
@@ -29,8 +27,7 @@ class AddUnitsToPerformainvoiceTable extends Migration
     public function down()
     {
         Schema::table('performainvoices', function (Blueprint $table) {
-            
-            Schema::dropIfExists('performainvoices');
+            //
         });
     }
 }

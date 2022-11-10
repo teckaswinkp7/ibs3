@@ -172,13 +172,25 @@ font-weight:bold;
                             @endforeach
                             <div class="row item">
 								<div class="col-xs-4 desc">
-                                {{$invoicedata[0]->payment_period}}
+                                {{$invoicedata[0]->sem}}
 								</div>
 								<div class="col-xs-5 amount text-right">
 									$60.00
 								</div>
 							</div>
 						</div>
+                        @foreach($unitsData as $unit)
+                        <div class="row item">
+								<div class="col-xs-4 desc">
+                                {{$unit}}
+								</div>
+								<div class="col-xs-5 amount text-right">
+									$60.00
+								</div>
+							</div>
+                           
+						</div>
+                        @endforeach
                         </br>
 						<div class="total">
 							<div  class="field total">

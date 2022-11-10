@@ -91,9 +91,9 @@ nav ul li a:hover span{
 
                <div id="select-study"> 
                 <p>&nbsp;&nbsp;Select Study-type :</p></br>
-                <input id="parttime" type="radio" name="study_type" value="Part Time" onclick="show2();">
+                <input id="parttime" type="radio" name="stud_type" value="Part Time" onclick="show2();">
                 <label for="part"> Part-time </label> 
-                <input type="radio" name="study_type" value="Full Time" onclick="show1();">
+                <input type="radio" name="stud_type" value="Full Time" onclick="show1();">
                 <label for="full">Full-time </label> 
                 </div>
                 
@@ -105,12 +105,21 @@ nav ul li a:hover span{
                  
                  @foreach ($availableunits as $units)
 </br>
-                 <input type="checkbox" value="{{$units->id}}" name="units[]" >{{$units->title}}</input>
+                 <input type="checkbox" value="{{$units->title}}" name="units[]" >{{$units->title}}</input>
+                 
                 
                  @endforeach
 </div>
 
-
+<div class="col-sm-9">
+                <div id="div2" class="hide">
+               <label> Units </label>
+                 
+</br>
+                 <input type="checkbox" value="all" name="units[]" >All Units</input>
+                 
+                
+</div>
 
 </br>
 
@@ -118,11 +127,11 @@ nav ul li a:hover span{
                 <div class="col-sm-12">
                <div id="period"> 
                 <p>Select the period you would like to make payment for :</p>
-                <input type="radio" name="payment_period" value="Sem 1">
+                <input type="radio" name="sem" value="Sem 1">
                 <label for="Sem 1"> Semester 1 only </label></br>
-                <input type="radio" name="payment_period" value="Sem 2 ">
+                <input type="radio" name="sem" value="Sem 2 ">
                 <label for="Sem 2">Semester 2 only </label> </br>
-                <input type="radio" name="payment_period" value="Sem 1 and 2">
+                <input type="radio" name="sem" value="Sem 1 and 2">
                 <label for="Sem 1 and 2"> Semester 1 and 2 </label> 
                 
                 </div>
@@ -131,10 +140,10 @@ nav ul li a:hover span{
                <div class="additional-items"> 
               <label>Additional Items to Include: </label></br>
                 
-                <label><input type="checkbox" name="additional_item[]" value="Accomodation(Sem 1 only)"> Accomodation(Sem 1 only)</label>
-                <label><input type="checkbox" name="additional_item[]" value="Transporation(Sem 1 only)"> Transporation(Sem 1 only)</label>
-                <label><input type="checkbox" name="additional_item[]" value="Accomodation(Sem 1 and 2)"> Accomodation(Sem 1 and 2)</label>
-                <label><input type="checkbox" name="additional_item[]" value="Transportation(Sem 1 and 2)"> Transportation(Sem 1 and 2)</label>
+                <label><input type="checkbox" name="additional_info[]" value="Accomodation(Sem 1 only)"> Accomodation(Sem 1 only)</label>
+                <label><input type="checkbox" name="additional_info[]" value="Transporation(Sem 1 only)"> Transporation(Sem 1 only)</label>
+                <label><input type="checkbox" name="additional_info[]" value="Accomodation(Sem 1 and 2)"> Accomodation(Sem 1 and 2)</label>
+                <label><input type="checkbox" name="additional_info[]" value="Transportation(Sem 1 and 2)"> Transportation(Sem 1 and 2)</label>
 
                
                 
