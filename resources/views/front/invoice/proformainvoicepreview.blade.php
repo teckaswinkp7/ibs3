@@ -184,12 +184,24 @@ font-weight:bold;
 								<div class="col-xs-4 desc">
                                 {{$unit}}
 								</div>
+                                
 								<div class="col-xs-5 amount text-right">
-									$60.00
+									
+                                    @foreach($unitPrice as $val)
+                                    {{$val}}
+                                    
+                                @php                                  
+                                // $data = DB::table('units')->select('unit_price')->where('id',20)->get();
+                                // $data = json_decode($data);
+                                // $val = $data->unit_price;
+                                // $val = json_decode($val);
+                                // echo $val;
+                                @endphp    
 								</div>
 							</div>
                            
 						</div>
+                        @endforeach
                         @endforeach
                         </br>
 						<div class="total">

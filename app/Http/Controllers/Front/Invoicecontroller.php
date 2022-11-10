@@ -57,11 +57,19 @@ class Invoicecontroller extends Controller
         $unitsData = $exist->units;
         $unitsData = json_decode($unitsData);
         $exist = $exist->additional_info;
+        $unitPrice = array();
+        //$unitsData['price'] = array();
+        foreach($unitsData as $val)
+        {
+            $data = DB::table('units')->select('unit_price')->where('title',$val)->first();
+            array_push($unitPrice,$data->unit_price);
+        }
+        //dd($unitPrice);
         $exist = json_decode($exist);
         $location = Profile::where('stu_id',$id)->select('current_location','current_address_location')->first();
         $communication = User::where('id',$id)->select('email','phone')->first();        
         $student_course_offer= Courseselection::select("courses.name as courses_name")->join("courses","courses.id", "=", "courseselections.studentSelCid")->where('courseselections.stu_id','=',$id)->get();
-        return view('front.invoice.proformainvoicepreview',compact('student_course_offer','user','exist','location','communication','unitsData','invoicedata','selectedcourse','unitsData'));
+        return view('front.invoice.proformainvoicepreview',compact('student_course_offer','user','exist','location','communication','unitsData','invoicedata','selectedcourse','unitsData','unitPrice'));
     }
 
     public function store(Request $request){
@@ -118,7 +126,7 @@ class Invoicecontroller extends Controller
         'sem' => $request->sem,
         'units' => json_encode($request->units),
         'additional_info' =>json_encode($request->additional_info),
-        'invoiceno' => 'arm' . time(),
+        'invoiceno' => '#INV'.rand(0000,9999).time()
     ]);
 
 
