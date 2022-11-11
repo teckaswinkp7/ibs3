@@ -170,6 +170,12 @@
                       <p>Add  Unit</p>
                     </a>
                   </li>
+                  <li class="nav-item">
+                    <a href="{{route('admin.additionalfee.index')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Add Additional Fee</p>
+                    </a>
+                  </li>
                 </ul>
             </li>
             

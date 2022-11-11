@@ -166,16 +166,20 @@ font-weight:bold;
 									{{$val}}
 								</div>
 								<div class="col-xs-5 amount text-right">
-									$60.00
+									@php 
+                                 $data = DB::table('additionalfee')->select('price')->where('title',$val)->get();
+                                 $price = json_decode('data');
+                                 echo $data[0]->price;
+                                 @endphp
 								</div>
 							</div>
-                            @endforeach
+                           @endforeach
                             <div class="row item">
 								<div class="col-xs-4 desc">
                                 {{$invoicedata[0]->sem}}
 								</div>
 								<div class="col-xs-5 amount text-right">
-									$60.00
+									20
 								</div>
 							</div>
 						</div>
@@ -186,27 +190,20 @@ font-weight:bold;
 								</div>
                                 
 								<div class="col-xs-5 amount text-right">
-									
-                                    @foreach($unitPrice as $val)
-                                    {{$val}}
                                     
                                 @php                                  
-                                // $data = DB::table('units')->select('unit_price')->where('id',20)->get();
-                                // $data = json_decode($data);
-                                // $val = $data->unit_price;
-                                // $val = json_decode($val);
-                                // echo $val;
+                               $data = DB::table('units')->select('unit_price')->where('title',$unit)->get();            
+                              echo $data[0]->unit_price;
                                 @endphp    
 								</div>
 							</div>
-                           
-						</div>
-                        @endforeach
+                           </div>
+                      
                         @endforeach
                         </br>
 						<div class="total">
 							<div  class="field total">
-								Total Amount Payable:   <span class="col-xs-5 float-right"> $379.00 </span>
+								Total Amount Payable:   <span id="total" class="col-xs-5 float-right"> </span>
 							</div>	
 						</div>
 					</div>
@@ -233,5 +230,16 @@ font-weight:bold;
             
         </div>
     </div>
+    <script>
+
+const sum = [];
+const students = document.querySelectorAll('.amount');
+
+for(student of students) {
+        sum.push(parseFloat(student.innerText));             
+}
+
+document.getElementById("total").innerHTML = eval(sum.join('+'));
+</script>
     @include('front/footer')      
     @endsection  

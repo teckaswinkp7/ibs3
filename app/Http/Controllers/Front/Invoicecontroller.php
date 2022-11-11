@@ -6,6 +6,7 @@ use DB;
 use App\Models\User;
 use App\Models\unit;
 use App\Models\Performainvoice;
+use App\Models\Additionalfee;
 use App\Models\invoice;
 use App\Models\Profile;
 use App\Models\Courseselection;
@@ -33,9 +34,11 @@ class Invoicecontroller extends Controller
         join('courseselections','courseselections.StudentSelCid','=','units.course_id')->
         where('courseselections.stu_id','=',$id)->
         get();
+
+        $additionalfee = Additionalfee::all();
         $unitselectionid = DB::table('unitselection')->select('unitselection.units_id')->where('unitselection.stu_id','=',$id)->get();
         $selectedid = explode(",", $unitselectionid);
-        return view('front.invoice.proformainvoice',compact('selectedcourse','availableunits','selectedid'));
+        return view('front.invoice.proformainvoice',compact('selectedcourse','availableunits','selectedid','additionalfee'));
 
     }
 
@@ -64,12 +67,12 @@ class Invoicecontroller extends Controller
             $data = DB::table('units')->select('unit_price')->where('title',$val)->first();
             array_push($unitPrice,$data->unit_price);
         }
-        //dd($unitPrice);
+     //   dd($unitPrice);
         $exist = json_decode($exist);
         $location = Profile::where('stu_id',$id)->select('current_location','current_address_location')->first();
         $communication = User::where('id',$id)->select('email','phone')->first();        
         $student_course_offer= Courseselection::select("courses.name as courses_name")->join("courses","courses.id", "=", "courseselections.studentSelCid")->where('courseselections.stu_id','=',$id)->get();
-        return view('front.invoice.proformainvoicepreview',compact('student_course_offer','user','exist','location','communication','unitsData','invoicedata','selectedcourse','unitsData','unitPrice'));
+        return view('front.invoice.proformainvoicepreview',compact('student_course_offer','user','exist','location','communication','invoicedata','selectedcourse','unitsData','unitPrice'));
     }
 
     public function store(Request $request){
@@ -126,7 +129,7 @@ class Invoicecontroller extends Controller
         'sem' => $request->sem,
         'units' => json_encode($request->units),
         'additional_info' =>json_encode($request->additional_info),
-        'invoiceno' => '#INV'.rand(0000,9999).time()
+        'invoiceno' => '#INV'.rand(0000,9999)
     ]);
 
 
@@ -137,29 +140,36 @@ class Invoicecontroller extends Controller
     }
     public function viewpdf(){
 
-        $id= auth::id();
+        $id = Auth::id();
+        $user = User::where('id',$id)->first();
+        $email = $user->email;
+        $name = $user->name;
         $selectedcourse = DB::table('courses')
-        ->select('courses.name','courses.id')
+        ->select('courses.name','courses.id','courses.price')
         ->Join('courseselections','courseselections.StudentSelCid','=','courses.id')
         ->where('courseselections.stu_id',$id)
-        ->get();
-        $invoiceid = performainvoice::where('stu_id',$id)->select('invoiceno')->get();  
-        $availableunits = DB::table('units')->select('units.id','units.title','units.slug','units.short_text','units.unit_price','units.course_id')->
-        join('courseselections','courseselections.StudentSelCid','=','units.course_id')->
-        where('courseselections.stu_id','=',$id)->
-        get();
+        ->get();        
         $unitselectionid = DB::table('unitselection')->select('unitselection.units_id')->where('unitselection.stu_id','=',$id)->get();
-        $selectedid = explode(",", $unitselectionid);
+        $selectedid = explode(",", $unitselectionid);   
+        $invoicedata = invoice::where('stu_id',$id)->select('invoiceno','sem')->get();         
+        $exist = invoice::where('stu_id',$id)->first();  
+        $unitsData = $exist->units;
+        $unitsData = json_decode($unitsData);
+        $exist = $exist->additional_info;
+        $unitPrice = array();
+        //$unitsData['price'] = array();
+        foreach($unitsData as $val)
+        {
+            $data = DB::table('units')->select('unit_price')->where('title',$val)->first();
+            array_push($unitPrice,$data->unit_price);
+        }
+     //   dd($unitPrice);
+        $exist = json_decode($exist);
         $location = Profile::where('stu_id',$id)->select('current_location','current_address_location')->first();
         $communication = User::where('id',$id)->select('email','phone')->first();        
-        $student_course_offer= Courseselection::select("courses.name as courses_name")->join("courses","courses.id", "=", "courseselections.studentSelCid")->where('courseselections.stu_id','=',$id)->get();
-        $invoicedata = performainvoice::where('stu_id',$id)->select('invoiceno','payment_period')->get();  
-        $user = User::where('id',$id)->first();
-        $exist = Performainvoice::where('stu_id',$id)->first();
-        $exist = $exist->additional_item;
-        $exist = json_decode($exist);  
+        $student_course_offer= Courseselection::select("courses.name as courses_name")->join("courses","courses.id", "=", "courseselections.studentSelCid")->where('courseselections.stu_id','=',$id)->get();  
 
-        $pdf = PDF::loadview('front.invoice.invoice',compact('invoiceid','location','user','exist','invoicedata'));
+        $pdf = PDF::loadview('front.invoice.invoice',compact('student_course_offer','user','exist','location','communication','invoicedata','selectedcourse','unitsData','unitPrice'));
         return $pdf->download('invoice.pdf');
 
 

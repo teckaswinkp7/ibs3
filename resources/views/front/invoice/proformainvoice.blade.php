@@ -138,15 +138,11 @@ nav ul li a:hover span{
 </br>
             <div class="col-sm-12">
                <div class="additional-items"> 
+                 
               <label>Additional Items to Include: </label></br>
-                
-                <label><input type="checkbox" name="additional_info[]" value="Accomodation(Sem 1 only)"> Accomodation(Sem 1 only)</label>
-                <label><input type="checkbox" name="additional_info[]" value="Transporation(Sem 1 only)"> Transporation(Sem 1 only)</label>
-                <label><input type="checkbox" name="additional_info[]" value="Accomodation(Sem 1 and 2)"> Accomodation(Sem 1 and 2)</label>
-                <label><input type="checkbox" name="additional_info[]" value="Transportation(Sem 1 and 2)"> Transportation(Sem 1 and 2)</label>
-
-               
-                
+              @foreach ($additionalfee as $additional)
+                <label><input type="checkbox" name="additional_info[]" value="{{$additional->title}}"> {{$additional->title}}</label>
+                @endforeach
                 </div>
 
 </div>

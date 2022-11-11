@@ -31,6 +31,7 @@ use App\Http\Controllers\Admin\AssignmentGradeController;
 use App\Http\Controllers\Admin\Pagescontroller;
 use App\Http\Controllers\Admin\Menuitemscontroller;
 use App\Http\Controllers\Admin\Unitcontroller;
+use App\Http\Controllers\Admin\Additionalfeecontroller;
 use App\Http\Controllers\Admin\Unitselectioncontroller;
 
 /*
@@ -172,6 +173,18 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('admin/reports/confirmedstudents/', [confirmedstudentscontroller::class, 'index'])->name('admin.reports.confirmedstudents.index');
     Route::get('admin/reports/confirmedstudents/view/{id}', [confirmedstudentscontroller::class, 'confirmedshow'])->name('admin.reports.confirmedshow.confirmedshow');
 });
+
+/** Additional Fee **/
+
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::get('admin/additionalfee/', [Additionalfeecontroller::class, 'index'])->name('admin.additionalfee.index');
+    Route::get('admin/additionalfee/create', [Additionalfeecontroller ::class, 'create'])->name('admin.additionalfee.create');
+    Route::post('admin/additionalfee/store', [Additionalfeecontroller ::class, 'store'])->name('admin.additionalfee.store');
+    Route::delete('admin/additionalfee/{id}/delete', [Additionalfeecontroller ::class, 'delete'])->name('additionalfee.delete');
+    Route::get('admin/additionalfee/edit/{id}', [Additionalfeecontroller::class, 'edit'])->name('admin.additionalfee.edit');
+    Route::post('admin/additionalfee/edit/{id}/update', [Additionalfeecontroller ::class, 'update'])->name('admin.additionalfee.update');
+   });
 
 /** Pages **/
 Route::group(['middleware' => 'auth'], function () {
