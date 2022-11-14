@@ -68,6 +68,7 @@ font-weight:bold;
 }
 
 </style>
+
     <div class="background-profile" style="margin-top: 100px;"> 
         <div class="profile-modal">
             <div class="profile-logo">
@@ -104,7 +105,8 @@ font-weight:bold;
                         </br>
                         </br>
                             <h4> Pro Forma Invoice : {{$invoicedata[0]->invoiceno}}</h4>
-                            <p>  <?php echo date("Y-m-d"); ?></p>
+                            <p>  <?php echo date("M d Y"); ?></p>
+                           
 
                                                         
 <div class="receipt-content">
@@ -159,51 +161,70 @@ font-weight:bold;
 							</div>
 						</div>
 						<div class="items">
-                            
-                            @foreach($exist as $val)
-							<div class="row item">
-								<div class="col-xs-4 desc">
-									{{$val}}
-								</div>
-								<div class="col-xs-5 amount text-right">
-									@php 
-                                 $data = DB::table('additionalfee')->select('price')->where('title',$val)->get();
-                                 $price = json_decode('data');
-                                 echo $data[0]->price;
-                                 @endphp
-								</div>
-							</div>
-                           @endforeach
-                            <div class="row item">
-								<div class="col-xs-4 desc">
-                                {{$invoicedata[0]->sem}}
-								</div>
-								<div class="col-xs-5 amount text-right">
-									20
-								</div>
-							</div>
-						</div>
-                        @foreach($unitsData as $unit)
+                            @php 
+                            $total = 0;
+                            @endphp
+                        @foreach((array)$unitsData as $unit)
                         <div class="row item">
+                      
 								<div class="col-xs-4 desc">
                                 {{$unit}}
 								</div>
-                                
-								<div class="col-xs-5 amount text-right">
-                                    
-                                @php                                  
-                               $data = DB::table('units')->select('unit_price')->where('title',$unit)->get();            
+                                <div class="col-xs-5 amount text-right">
+                                @php   
+                                $data = DB::table('units')->select('unit_price')->where('title',$unit)->get(); 
+                               $price = json_decode('data');           
                               echo $data[0]->unit_price;
-                                @endphp    
+                              $total = $total + $data[0]->unit_price;
+                            @endphp    
 								</div>
 							</div>
                            </div>
-                      
-                        @endforeach
-                        </br>
+                
+@endforeach 
+                    @foreach((array)$courseData as $sem)
+                           <div class="row item">
+                         
+								<div class="col-xs-4 desc">
+                                {{$sem}}
+								</div>
+								<div class="col-xs-5 amount text-right">
+                                @php 
+                                 $data = DB::table('courses')->select('price')->where('name',$sem)->get();
+                                 $price = json_decode('data');
+                                 echo $data[0]->price;
+                                 $total = $total + $data[0]->price;
+                                 @endphp
+								</div>
+							</div>
+						</div>
+                     
+                   
+@endforeach     
+                            @foreach($exist as $val)
+							<div class="row item">
+								<div style="width:700px;" class="col-xs-10 desc">
+									{{$val}}
+								</div>
+								<div class="col-xs-5 amount text-right">
+								@php 
+                                 $data = DB::table('additionalfee')->select('price')->where('title',$val)->get();
+                                 $price = json_decode('data');
+                                 echo $data[0]->price;
+                                 $total = $total + $data[0]->price;
+                                 @endphp
+								</div>
+							</div>
+                         @endforeach
+                           
 						<div class="total">
 							<div  class="field total">
-								Total Amount Payable:   <span id="total" class="col-xs-5 float-right"> </span>
+								Total Amount Payable:   <span id="total" class="col-xs-5 float-right">
+                            
+                                         {{$total}}
+
+
+                                     </span>
 							</div>	
 						</div>
 					</div>
@@ -218,8 +239,8 @@ font-weight:bold;
                       
                       
                       <div class="print-download-btn">
-                      <a href="{{route('invoice')}}"> <button class=""><img src="{{asset('assets/custom/download-icon.png')}}" alt="" width="15px"> </a></button>
-                        <button class=""><img src="{{asset('assets/custom/print-icon.png')}}" alt="" width="15px"></button>    
+                      <a href="{{route('invoice')}}"> <button class="down"><img src="{{asset('assets/custom/download-icon.png')}}" alt="" width="15px"> </a></button>
+                        <button class="print"><img src="{{asset('assets/custom/print-icon.png')}}" alt="" width="15px"></button>    
                     </div>
 
                     
@@ -230,16 +251,19 @@ font-weight:bold;
             
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script>
 
-const sum = [];
-const students = document.querySelectorAll('.amount');
+//var $total;
 
-for(student of students) {
-        sum.push(parseFloat(student.innerText));             
-}
+//const sum = [];
+//const students = document.querySelectorAll('.amount');
 
-document.getElementById("total").innerHTML = eval(sum.join('+'));
+//for(student of students) {
+ //       sum.push(parseFloat(student.innerText));             
+//}
+
+//var $total = document.getElementById("total").innerHTML = eval(sum.join('+'));
 </script>
-    @include('front/footer')      
-    @endsection  
+ @include('front/footer')      
+@endsection  

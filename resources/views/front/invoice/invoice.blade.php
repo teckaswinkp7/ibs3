@@ -1,27 +1,11 @@
 <!DOCTYPE html>
 <html>
-	<head>
-	<meta charset="utf-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-      <meta name="description" content="" />
-      <meta name="author" content="" />
-      <title>@yield('title')</title>
-      <link rel="stylesheet" href="{{asset('assets/front/css/bootstrap.min.css')}}">
-      <link rel="stylesheet" href="{{asset('assets/front/css/jquery-ui.css')}}">
-      <link rel="stylesheet" href="{{asset('assets/front/fonts/icomoon/style.css')}}">
-      <link rel="stylesheet" href="{{asset('assets/front/css/owl.carousel.min.css')}}">
-      <link rel="stylesheet" href="{{asset('assets/front/css/owl.theme.default.min.css')}}">
-      <link rel="stylesheet" href="{{asset('assets/front/css/owl.theme.default.min.css')}}">
-      <link rel="stylesheet" href="{{asset('assets/front/css/jquery.fancybox.min.css')}}">
-      <link rel="stylesheet" href="{{asset('assets/front/css/bootstrap-datepicker.css')}}">
-      <link rel="stylesheet" href="{{asset('assets/front/css/aos.css')}}">
-      <link href="{{asset('assets/front/css/jquery.mb.YTPlayer.min.css')}}" media="all" rel="stylesheet" type="text/css">
-      <link rel="stylesheet" href="{{asset('assets/front/css/style.css')}}">
-      
-      <meta name="csrf-token" content="{{ csrf_token() }}" />
-      
-	<style>
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<style>
 
 .edit-course {
     display: block;
@@ -83,22 +67,20 @@ font-weight:bold;
     color:white;
     text-decoration:none;
 }
-
 </style>
-
+<link rel="stylesheet" href="{{asset('assets/front/css/bootstrap.min.css')}}">
+      <link rel="stylesheet" href="{{asset('assets/front/css/jquery-ui.css')}}">
+      
 </head>
-
-
 <body>
-
-
 
 <div class="congrats-letter">
                         <img class="float-right" src="{{asset('assets/front/images/IBS-Logo.png')}}" alt="" width="150px"></img>
                         </br>
                         </br>
                             <h4> Pro Forma Invoice : {{$invoicedata[0]->invoiceno}}</h4>
-                            <p>  <?php echo date("Y-m-d"); ?></p>
+                            <p>  <?php echo date("M d Y"); ?></p>
+                           
 
                                                         
 <div class="receipt-content">
@@ -109,7 +91,7 @@ font-weight:bold;
 
 					<div class="payment-details">
 						<div class="row">
-							<div class="col-sm-6">
+							<div class="col-sm-12">
 								<span>invoice to: </span></br>
 								<strong>
 									{{$location->current_location}}
@@ -128,7 +110,7 @@ font-weight:bold;
 									</a>
 								</p>
 							</div>
-							<div class="col-sm-6 text-right">
+							<div class="col-sm-12 text-right">
 								<span>Issued By,</span></br>
 								<strong>
 									IBS University
@@ -153,51 +135,70 @@ font-weight:bold;
 							</div>
 						</div>
 						<div class="items">
-                            
-                            @foreach($exist as $val)
-							<div class="row item">
-								<div class="col-xs-4 desc">
-									{{$val}}
-								</div>
-								<div class="col-xs-5 amount text-right">
-									@php 
-                                 $data = DB::table('additionalfee')->select('price')->where('title',$val)->get();
-                                 $price = json_decode('data');
-                                 echo $data[0]->price;
-                                 @endphp
-								</div>
-							</div>
-                           @endforeach
-                            <div class="row item">
-								<div class="col-xs-4 desc">
-                                {{$invoicedata[0]->sem}}
-								</div>
-								<div class="col-xs-5 amount text-right">
-									20
-								</div>
-							</div>
-						</div>
-                        @foreach($unitsData as $unit)
+                            @php 
+                            $total = 0;
+                            @endphp
+                        @foreach((array)$unitsData as $unit)
                         <div class="row item">
+                      
 								<div class="col-xs-4 desc">
                                 {{$unit}}
 								</div>
-                                
-								<div class="col-xs-5 amount text-right">
-                                    
-                                @php                                  
-                               $data = DB::table('units')->select('unit_price')->where('title',$unit)->get();            
+                                <div class="col-xs-5 amount text-right">
+                                @php   
+                                $data = DB::table('units')->select('unit_price')->where('title',$unit)->get(); 
+                               $price = json_decode('data');           
                               echo $data[0]->unit_price;
-                                @endphp    
+                              $total = $total + $data[0]->unit_price;
+                            @endphp    
 								</div>
 							</div>
                            </div>
-                      
-                        @endforeach
-                        </br>
+                
+@endforeach 
+                    @foreach((array)$courseData as $sem)
+                           <div class="row item">
+                         
+								<div class="col-xs-4 desc">
+                                {{$sem}}
+								</div>
+								<div class="col-xs-5 amount text-right">
+                                @php 
+                                 $data = DB::table('courses')->select('price')->where('name',$sem)->get();
+                                 $price = json_decode('data');
+                                 echo $data[0]->price;
+                                 $total = $total + $data[0]->price;
+                                 @endphp
+								</div>
+							</div>
+						</div>
+                     
+                   
+@endforeach     
+                            @foreach($exist as $val)
+							<div class="row item">
+								<div style="width:700px;" class="col-xs-10 desc">
+									{{$val}}
+								</div>
+								<div class="col-xs-5 amount text-right">
+								@php 
+                                 $data = DB::table('additionalfee')->select('price')->where('title',$val)->get();
+                                 $price = json_decode('data');
+                                 echo $data[0]->price;
+                                 $total = $total + $data[0]->price;
+                                 @endphp
+								</div>
+							</div>
+                         @endforeach
+                           
 						<div class="total">
 							<div  class="field total">
-								Total Amount Payable:   <span id="total" class="col-xs-5 float-right"> </span>
+								Total Amount Payable:   <span id="total" class="col-xs-5 float-right">
+                            
+                                         {{$total}}
+
+
+                                     </span>
 							</div>	
 						</div>
 					</div>
@@ -209,38 +210,9 @@ font-weight:bold;
                                 
                         </div>
                       </div>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </body>
 
-									</body>
-									
-
-<script src="{{asset('assets/front/js/jquery-3.3.1.min.js')}}"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="{{asset('assets/front/js/jquery-migrate-3.0.1.min.js')}}"></script>
-  <script src="{{asset('assets/front/js/jquery-ui.js')}}"></script>
-  <script src="{{asset('assets/front/js/popper.min.js')}}"></script>
-  <script src="{{asset('assets/front/js/bootstrap.min.js')}}"></script>
-  <script src="{{asset('assets/front/js/owl.carousel.min.js')}}"></script>
-  <script src="{{asset('assets/front/js/jquery.stellar.min.js')}}"></script>
-  <script src="{{asset('assets/front/js/jquery.countdown.min.js')}}"></script>
-  <script src="{{asset('assets/front/js/bootstrap-datepicker.min.js')}}"></script>
-  <script src="{{asset('assets/front/js/jquery.easing.1.3.js')}}"></script>
-  <script src="{{asset('assets/front/js/aos.js')}}"></script>
-  <script src="{{asset('assets/front/js/jquery.fancybox.min.js')}}"></script>
-  <script src="{{asset('assets/front/js/jquery.sticky.js')}}"></script>
-  <script src="{{asset('assets/front/js/jquery.mb.YTPlayer.min.js')}}"></script>
-  <script src="{{asset('assets/front/js/cloneData.js')}}"></script>
-  <script src="{{asset('assets/front/js/main.js')}}"></script>
-  <script src="{{asset('assets/front/js/timer.js')}}"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/js/all.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
-  <script>
-
-const sum = [];
-const students = document.querySelectorAll('.amount');
-
-for(student of students) {
-        sum.push(parseFloat(student.innerText));             
-}
-
-document.getElementById("total").innerHTML = eval(sum.join('+'));
-</script>
+									</html>

@@ -104,7 +104,9 @@ nav ul li a:hover span{
                <label> Units </label>
                  
                  @foreach ($availableunits as $units)
+
 </br>
+                 
                  <input type="checkbox" value="{{$units->title}}" name="units[]" >{{$units->title}}</input>
                  
                 
@@ -113,10 +115,10 @@ nav ul li a:hover span{
 
 <div class="col-sm-9">
                 <div id="div2" class="hide">
-               <label> Units </label>
+               <label> All Units </label>
                  
 </br>
-                 <input type="checkbox" value="all" name="units[]" >All Units</input>
+                 <input type="checkbox" value="{{$selectedcourse[0]->name}}" name="allunits[]" > {{$selectedcourse[0]->name}} </input>
                  
                 
 </div>
@@ -127,12 +129,10 @@ nav ul li a:hover span{
                 <div class="col-sm-12">
                <div id="period"> 
                 <p>Select the period you would like to make payment for :</p>
-                <input type="radio" name="sem" value="Sem 1">
-                <label for="Sem 1"> Semester 1 only </label></br>
-                <input type="radio" name="sem" value="Sem 2 ">
-                <label for="Sem 2">Semester 2 only </label> </br>
-                <input type="radio" name="sem" value="Sem 1 and 2">
-                <label for="Sem 1 and 2"> Semester 1 and 2 </label> 
+                @foreach ($sem as $semester)
+                <input type="radio" name="sem" value="{{$semester->name}}">
+                <label for="Sem 1"> {{$semester->name}}</label></br>
+              @endforeach
                 
                 </div>
 </br>

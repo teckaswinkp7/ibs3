@@ -33,6 +33,7 @@ use App\Http\Controllers\Admin\Menuitemscontroller;
 use App\Http\Controllers\Admin\Unitcontroller;
 use App\Http\Controllers\Admin\Additionalfeecontroller;
 use App\Http\Controllers\Admin\Unitselectioncontroller;
+use App\Http\Controllers\Admin\Semcontroller;
 
 /*
 |--------------------------------------------------------------------------
@@ -184,6 +185,18 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('admin/additionalfee/{id}/delete', [Additionalfeecontroller ::class, 'delete'])->name('additionalfee.delete');
     Route::get('admin/additionalfee/edit/{id}', [Additionalfeecontroller::class, 'edit'])->name('admin.additionalfee.edit');
     Route::post('admin/additionalfee/edit/{id}/update', [Additionalfeecontroller ::class, 'update'])->name('admin.additionalfee.update');
+   });
+
+   /** Sem Fee **/
+
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::get('admin/sem/', [Semcontroller::class, 'index'])->name('admin.sem.index');
+    Route::get('admin/sem/create', [Semcontroller ::class, 'create'])->name('admin.sem.create');
+    Route::post('admin/sem/store', [Semcontroller ::class, 'store'])->name('admin.sem.store');
+    Route::delete('admin/sem/{id}/delete', [Semcontroller ::class, 'delete'])->name('sem.delete');
+    Route::get('admin/sem/edit/{id}', [Semcontroller::class, 'edit'])->name('admin.sem.edit');
+    Route::post('admin/sem/edit/{id}/update', [Semcontroller ::class, 'update'])->name('admin.sem.update');
    });
 
 /** Pages **/

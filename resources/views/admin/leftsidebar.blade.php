@@ -176,6 +176,12 @@
                       <p>Add Additional Fee</p>
                     </a>
                   </li>
+                  <li class="nav-item">
+                    <a href="{{route('admin.sem.index')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Add Sem Wise Fee</p>
+                    </a>
+                  </li>
                 </ul>
             </li>
             
