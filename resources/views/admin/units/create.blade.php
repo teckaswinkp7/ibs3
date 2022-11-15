@@ -115,9 +115,9 @@
                         </div>
 </div>
 </div>
-                        <div class="col-md-12">
+<div class="col-md-12">
                           <div class="form-group">
-                            <label >Unit Price</label>
+                            <label  >Unit Price</label>
                             <input class="form-control" name="unit_price" type="number" placeholder="Unit Price"> 
     
                           </div>

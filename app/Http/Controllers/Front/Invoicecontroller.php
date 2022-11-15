@@ -62,7 +62,7 @@ class Invoicecontroller extends Controller
         $exist = invoice::where('stu_id',$id)->first();  
         $unitsData = $exist->units;
         $courseData = $invoicedata[0]->sem;
-        $courseData = json_decode($courseData);
+     //   $courseData = json_decode($courseData);
         $unitsData = json_decode($unitsData); 
         $exist = $exist->additional_info;
    //     $unitPrice = array();
@@ -159,7 +159,7 @@ class Invoicecontroller extends Controller
         $invoicedata = invoice::where('stu_id',$id)->select('invoiceno','sem','allunits')->get();         
         $exist = invoice::where('stu_id',$id)->first();  
         $unitsData = $exist->units;
-        $courseData = $invoicedata[0]->allunits;
+        $courseData = $invoicedata[0]->sem;
         $courseData = json_decode($courseData);
         $unitsData = json_decode($unitsData); 
         $exist = $exist->additional_info;

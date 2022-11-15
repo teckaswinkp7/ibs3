@@ -45,10 +45,10 @@ class Unitcontroller extends Controller
                'slug'        => str::slug($request->slug),
                'embed_id'    => $request->embed_id,
                'short_text'  => $request->short_text,
-               'full_text'   => $request->full_text,
                'unit_price' =>  $request->unit_price,
+               'full_text'   => $request->full_text,
                'published'   => $request->published,
-               'name'        =>$request->name
+               'name'        => $request->name
 ]
             
             + ['position' => unit::where('course_id', $request->course_id)->max('position') + 1]

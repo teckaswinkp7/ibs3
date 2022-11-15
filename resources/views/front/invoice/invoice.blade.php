@@ -91,7 +91,7 @@ font-weight:bold;
 
 					<div class="payment-details">
 						<div class="row">
-							<div class="col-sm-12">
+							<div class="col-sm-6">
 								<span>invoice to: </span></br>
 								<strong>
 									{{$location->current_location}}
@@ -210,6 +210,7 @@ font-weight:bold;
                                 
                         </div>
                       </div>
+                                    </div>
                                     </div>
                                     </div>
                                     </div>

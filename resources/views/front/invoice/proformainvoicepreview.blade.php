@@ -67,6 +67,11 @@ font-weight:bold;
     text-decoration:none;
 }
 
+.down > a{
+    color:white;
+    text-decoration:none;
+}
+
 </style>
 
     <div class="background-profile" style="margin-top: 100px;"> 
@@ -182,19 +187,18 @@ font-weight:bold;
                            </div>
                 
 @endforeach 
-                    @foreach((array)$courseData as $sem)
+                    @foreach((array)$courseData as $semester)
                            <div class="row item">
                          
 								<div class="col-xs-4 desc">
-                                {{$sem}}
+                                {{$semester}}
 								</div>
 								<div class="col-xs-5 amount text-right">
-                                @php 
-                                 $data = DB::table('courses')->select('price')->where('name',$sem)->get();
-                                 $price = json_decode('data');
-                                 echo $data[0]->price;
-                                 $total = $total + $data[0]->price;
-                                 @endphp
+                                @php   
+                                $data = DB::table('sem')->select('price')->where('name',$semester)->get();           
+                              echo $data[0]->price;
+                              $total = $total + $data[0]->price;
+                            @endphp   
 								</div>
 							</div>
 						</div>
@@ -239,31 +243,107 @@ font-weight:bold;
                       
                       
                       <div class="print-download-btn">
-                      <a href="{{route('invoice')}}"> <button class="down"><img src="{{asset('assets/custom/download-icon.png')}}" alt="" width="15px"> </a></button>
-                        <button class="print"><img src="{{asset('assets/custom/print-icon.png')}}" alt="" width="15px"></button>    
+                      <a href="{{route('invoice')}}"><button class="down"><img src="{{asset('assets/custom/download-icon.png')}}" alt="" width="15px"> Download </a></button>
+                        <button class="print"> Print <img src="{{asset('assets/custom/print-icon.png')}}" alt="" width="15px"></button>    
                     </div>
 
                     
                    </form>
 
+                   <div class="row">
+			<div class="col-md-12">
+                <h4> Select Your Payment Method option </h4> 
+                <p> Note: IBS does not accept any form of payment in cash or cheque.kindly deposit this form of payment at the bank</p>
+                <input data-toggle="modal" data-target="#exampleModalLong" type="radio" name="payment" value="0"> 
+                <label for="payment" > Bank Direct Deposit </label>
+                <input data-toggle="modal" data-target="#exampleModalLong" type="radio" name="payment" value="1"> 
+                <label  for="payment" > Mobile Banking </label>
+                <input data-toggle="modal" data-target="#exampleModalLong" type="radio" name="payment" value="2"> 
+                <label for="payment" > Visa Payment </label>
+                                    </br>
+                <input data-toggle="modal" data-target="#exampleModalLong" type="radio" name="payment" value="3"> 
+                <label for="payment" > Online Transfer </label>
+                <input data-toggle="modal" data-target="#exampleModalLong" type="radio" name="payment" value="4"> 
+                <label for="payment" > BSP Pay </label>
+                                    </div>
+                                    </div>
+
                
-            </div>
-            
-        </div>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 style="width:700px;" class="modal-title" id="exampleModalLongTitle">REFUND AGREEMENT FORM </h5>
+        <h8> Acceptance of Terms & Conditions </h8>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      ​
+The Refund Policy for students following at our Institution are as follows: ​
+
+​
+
+Request for course fee refund will only be entertained through adherence of our processes which include the correct submission of the "Letter of Withdrawal", along with the ID card received from the Institution.​
+
+​
+
+The eligibility and the amount of refund will be established as per the following criteria: ​
+
+Full Refund In the unlikely event that the institution is unable to deliver a course in full, a student will be offered a refund of course money paid to date. ​
+
+95% Refund If withdrawn after enrolment but before the commencement of the course, then 5% of the Total Course Fee Payable or unis applied to that study period will be retained, and the balance, will be refunded ​
+
+50% Refund If withdrawn on or before the last day of the fifth week of the study period, then 50% of the Total Course Fee Payable or units applied to that study period will be retained, and the balance, will be refunded. ​
+
+No Refund If withdrawn after 5 weeks from the commencement of the course OR if expelled for disciplinary reasons. ​
+
+​
+
+C.    Refunds of non-course related fees are summarized here: ​
+
+Registration Fees Strictly non-refundable this is the fee associated with filling in accordance with legislative requirements set out by the National Government. ​
+
+Accommodation & Transport If applicable any refunds we will calculated on a pro-rata basis (pay only  for what you used), with any outstanding balances strictly paid directly to the Sponsor’s account. ​
+
+Stationery & Textbooks Strictly non-refundable this is due to the fact that we do not hold stock and these materials have been provisioned specifically for you. ​
+
+​
+
+D.   Please note that any enrolment found to contain any false information/document(s), may be cancelled     ​
+
+       at any time with no refunds. ​
+
+​
+
+Any refunds for students, it will be reimbursed directly to the original account of the Sponsor ​
+
+        (individual/ organisation who paid the fees). ​
+
+      <h4>  F. I declare that: </h4>​
+
+<input type="checkbox" > I have read, understood and accept the terms and conditions regarding refunds outlined here.</input> ​
+                                    </br>
+<input type="checkbox"> The information I have provided is accurate and complete. ​</input>
+                                    </br>
+<input type="checkbox"> Any discovery of falsified or incorrect information regarding this application made before, on or afterwards may result in the termination of any offer of enrolment without any refunds. </input>​
+                                    </br>
+​
+                                    </br>
+On admission into this institution, I hereby accept to abide by the code of conduct, policies and procedures.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Submit</button>
+      </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <script>
-
-//var $total;
-
-//const sum = [];
-//const students = document.querySelectorAll('.amount');
-
-//for(student of students) {
- //       sum.push(parseFloat(student.innerText));             
-//}
-
-//var $total = document.getElementById("total").innerHTML = eval(sum.join('+'));
-</script>
+  </div>
+</div>
  @include('front/footer')      
 @endsection  

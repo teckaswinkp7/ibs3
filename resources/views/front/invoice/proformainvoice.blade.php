@@ -85,6 +85,7 @@ nav ul li a:hover span{
                    @foreach ($selectedcourse as $course)
 
                      <a>{{ $course->name }}</a>
+                     
                      @endforeach
                      </div>
 </br>      
@@ -131,7 +132,7 @@ nav ul li a:hover span{
                 <p>Select the period you would like to make payment for :</p>
                 @foreach ($sem as $semester)
                 <input type="radio" name="sem" value="{{$semester->name}}">
-                <label for="Sem 1"> {{$semester->name}}</label></br>
+                <label for="sem"> {{$semester->name}}</label></br>
               @endforeach
                 
                 </div>
