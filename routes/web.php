@@ -78,6 +78,7 @@ Route::post('coursedefersdate', [EducationController::class, 'coursedefersdate']
 Route::get('proformainvoice', [Invoicecontroller::class, 'index'])->name('proformainvoice');
 Route::post('proformainvoicepost', [Invoicecontroller::class, 'store'])->name('proformainvoicepost');
 Route::get('proformainvoicepreview', [Invoicecontroller::class, 'preview'])->name('proformainvoicepreview');
+Route::get('proformasalesinvoice', [Invoicecontroller::class, 'salesinvoice'])->name('proformasalesinvoice');
 
 Route::get('/invoice',[Invoicecontroller::class, 'viewpdf'])->name('invoice');
 

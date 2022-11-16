@@ -186,4 +186,40 @@ class Invoicecontroller extends Controller
 
 
     }
+
+    public function salesinvoice(){
+
+        $id = Auth::id();
+        $user = User::where('id',$id)->first();
+        $email = $user->email;
+        $name = $user->name;
+        $selectedcourse = DB::table('courses')
+        ->select('courses.name','courses.id','courses.price')
+        ->Join('courseselections','courseselections.StudentSelCid','=','courses.id')
+        ->where('courseselections.stu_id',$id)
+        ->get();        
+        $unitselectionid = DB::table('unitselection')->select('unitselection.units_id')->where('unitselection.stu_id','=',$id)->get();
+        $selectedid = explode(",", $unitselectionid);   
+        $invoicedata = invoice::where('stu_id',$id)->select('invoiceno','sem','allunits')->get();         
+        $exist = invoice::where('stu_id',$id)->first();  
+        $unitsData = $exist->units;
+        $courseData = $invoicedata[0]->sem;
+     //   $courseData = json_decode($courseData);
+        $unitsData = json_decode($unitsData); 
+        $exist = $exist->additional_info;
+   //     $unitPrice = array();
+        //$unitsData['price'] = array();
+  //      foreach($unitsData as $val)
+ //       {
+  //          $data = DB::table('units')->select('unit_price')->where('title',$val)->first();
+  //          array_push($unitPrice,$data->unit_price);
+  //      }
+     //   dd($unitPrice);
+        $exist = json_decode($exist);
+        $location = Profile::where('stu_id',$id)->select('current_location','current_address_location')->first();
+        $communication = User::where('id',$id)->select('email','phone')->first();        
+        $student_course_offer= Courseselection::select("courses.name as courses_name")->join("courses","courses.id", "=", "courseselections.studentSelCid")->where('courseselections.stu_id','=',$id)->get();
+        return view('front.invoice.proformasalesinvoice',compact('student_course_offer','user','exist','location','communication','invoicedata','selectedcourse','unitsData','courseData'));
+
+    }
 }

@@ -8,7 +8,12 @@
     .congrats-btn {
     text-align: right;
 }
+.proinvoice-btn > a{
 
+    color:white;
+    text-decoration:none;
+
+}
 .congrats-btn button{
     padding: 12px 35px;
     background-color: #cc6600;
@@ -130,7 +135,7 @@
                         <button class=""><img src="{{asset('assets/custom/print-icon.png')}}" alt="" width="15px"></button>
                       </div>
                       <div class="congrats-btn">
-                        <button class="">Pro-Invoice</button>
+                      <a href="{{route('proformainvoice')}}"> <button class="proinvoice-btn">Pro-Invoice </a></button>
                       </div>
                    </form>
 

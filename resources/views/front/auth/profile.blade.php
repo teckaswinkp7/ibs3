@@ -59,15 +59,7 @@ nav ul li a:hover span{
                    <li> <a href="userprofile">Profile</a></li>
                     <li><a href="useroffer">Course</a></li>
                     
-                    <li><a class="bill-btn" href="#">bill
-                    <span class="fas fa-caret-down"> </span>
-                    <li class="bill-show">
-                  <li class="bill"><a href="proformainvoice">Pro-forma-invoice</a></li>
-                  <li class="bill"><a href="salesinvoice">Sales Invoice</a></li>
-                  <li class="bill"><a href="payment">Payment</a></li>
-                  <li class="bill"><a href="history">History</a></li>
-</li>
-                    </a></li>
+                   
 
 
                     </ul>

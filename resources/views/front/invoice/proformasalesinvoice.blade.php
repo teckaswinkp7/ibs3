@@ -61,16 +61,8 @@ font-weight:bold;
     color:white;
 
 }
-.edit-btn2{
-  position:relative;
-    bottom:30px;
-padding: 15px 20px;
-background-color: #cc6600;
-color:white;
 
-}
-
-.edit-btn,.edit-btn2 > a {
+.edit-btn > a {
     color:white;
     text-decoration:none;
 }
@@ -143,18 +135,6 @@ nav ul li a:hover span{
                 <div class="col-sm-9">
                    
                     <form action="">
-                      <div class="edit-course">
-                        {{-- <a href="#">
-                          Accounting and Finance 
-                        </a> --}}
-                        
-                        <p > Course: {{$student_course_offer[0]->courses_name}}</p>
-                        <p> Name: {{$user->name}}</p>
-                        <p> Address: {{$location->current_location}} </p>
-                        <p> Email: {{$user->email}}</p>
-                        <p> Phone: {{$user->phone}}</p>
-                      <button class="d-flex edit-btn float-right" > <a href="{{route('proformainvoice')}}">  Edit </button> </a>
-                        </div>
                         <div class="congrats-letter">
                         <img class="float-right" src="{{asset('assets/front/images/IBS-Logo.png')}}" alt="" width="150px"></img>
                         </br>
@@ -293,31 +273,107 @@ nav ul li a:hover span{
                       
                       
                       <div class="print-download-btn">
-                      <a href="{{route('proformainvoice')}}"><button class="down"><img src="{{asset('assets/custom/edit-icon.png')}}" alt="" width="15px"> Edit  </a></button>
                       <a href="{{route('invoice')}}"><button class="down"><img src="{{asset('assets/custom/download-icon.png')}}" alt="" width="15px"> Download </a></button>
                         <button class="print"> Print <img src="{{asset('assets/custom/print-icon.png')}}" alt="" width="15px"></button>    
                     </div>
 
                     
                    </form>
-                  </br>
-                  </br>
 
-                   <div class="edit-course">
-                        
-            <p >When you are ready to make payment, click on the “Request Invoice” button to obtain your official invoice. ​</p>
-                  </br>
-                  </br>
-                  </br>
-                  </br>
-
-                      <button class="d-flex edit-btn2 float-right" > <a href="{{route('proformasalesinvoice')}}"> Request Invoice </button> </a>
-                        </div>
+                   <div class="row">
+			<div class="col-md-12">
+                <h4> Select Your Payment Method option </h4> 
+                <p> Note: IBS does not accept any form of payment in cash or cheque.kindly deposit this form of payment at the bank</p>
+                <input data-toggle="modal" data-target="#refundmodal" type="radio" name="payment" value="0"> 
+                <label for="payment" > Bank Direct Deposit </label>
+                <input data-toggle="modal" data-target="#refundmodal" type="radio" name="payment" value="1"> 
+                <label  for="payment" > Mobile Banking </label>
+                <input data-toggle="modal" data-target="#refundmodal" type="radio" name="payment" value="2"> 
+                <label for="payment" > Visa Payment </label>
+                                    </br>
+                <input data-toggle="modal" data-target="#refundmodal" type="radio" name="payment" value="3"> 
+                <label for="payment" > Online Transfer </label>
+                <input data-toggle="modal" data-target="#refundmodal" type="radio" name="payment" value="4"> 
+                <label for="payment" > BSP Pay </label>
+                                    </div>
+                                    </div>
 
                
                                     </div>
                                     </div>
                                     </div>
-                  </div>
+                                    </div>
+<!-- Modal -->
+<div class="modal fade" id="refundmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 style="width:700px;" class="modal-title" id="exampleModalLongTitle">REFUND AGREEMENT FORM </h5>
+        <h8> Acceptance of Terms & Conditions </h8>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      ​
+The Refund Policy for students following at our Institution are as follows: ​
+
+​
+
+Request for course fee refund will only be entertained through adherence of our processes which include the correct submission of the "Letter of Withdrawal", along with the ID card received from the Institution.​
+
+​
+
+The eligibility and the amount of refund will be established as per the following criteria: ​
+
+Full Refund In the unlikely event that the institution is unable to deliver a course in full, a student will be offered a refund of course money paid to date. ​
+
+95% Refund If withdrawn after enrolment but before the commencement of the course, then 5% of the Total Course Fee Payable or unis applied to that study period will be retained, and the balance, will be refunded ​
+
+50% Refund If withdrawn on or before the last day of the fifth week of the study period, then 50% of the Total Course Fee Payable or units applied to that study period will be retained, and the balance, will be refunded. ​
+
+No Refund If withdrawn after 5 weeks from the commencement of the course OR if expelled for disciplinary reasons. ​
+
+​
+
+C.    Refunds of non-course related fees are summarized here: ​
+
+Registration Fees Strictly non-refundable this is the fee associated with filling in accordance with legislative requirements set out by the National Government. ​
+
+Accommodation & Transport If applicable any refunds we will calculated on a pro-rata basis (pay only  for what you used), with any outstanding balances strictly paid directly to the Sponsor’s account. ​
+
+Stationery & Textbooks Strictly non-refundable this is due to the fact that we do not hold stock and these materials have been provisioned specifically for you. ​
+
+​
+
+D.   Please note that any enrolment found to contain any false information/document(s), may be cancelled     ​
+
+       at any time with no refunds. ​
+
+​
+
+Any refunds for students, it will be reimbursed directly to the original account of the Sponsor ​
+
+        (individual/ organisation who paid the fees). ​
+
+      <h4>  F. I declare that: </h4>​
+
+<input type="checkbox" name="refund[]" value="0" > I have read, understood and accept the terms and conditions regarding refunds outlined here.</input> ​
+                                    </br>
+<input type="checkbox" name="refund[]" value="1" > The information I have provided is accurate and complete. ​</input>
+                                    </br>
+<input type="checkbox" name="refund[]" value="2" > Any discovery of falsified or incorrect information regarding this application made before, on or afterwards may result in the termination of any offer of enrolment without any refunds. </input>​
+                                    </br>
+​
+                                    </br>
+On admission into this institution, I hereby accept to abide by the code of conduct, policies and procedures.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary"> I Agree</button>
+      </div>
+    </div>
+  </div>
+</div>
  @include('front/footer')      
 @endsection  
