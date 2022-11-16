@@ -161,7 +161,7 @@ nav ul li a:hover span{
                     </div>
                 </div>
                 <div class="col-sm-9">
-                <p> You have outstanding Bills on the following invoices: </p>
+                <p> You have outstanding  on the following invoices: </p>
                     <form action="">
                       <div class="edit-course">
                         {{-- <a href="#">
