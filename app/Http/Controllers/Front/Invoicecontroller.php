@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use DB;
 use App\Models\User;
 use App\Models\unit;
+use App\Models\payment;
 use App\Models\Performainvoice;
 use App\Models\Additionalfee;
 use App\Models\invoice;
@@ -160,7 +161,7 @@ class Invoicecontroller extends Controller
         $exist = invoice::where('stu_id',$id)->first();  
         $unitsData = $exist->units;
         $courseData = $invoicedata[0]->sem;
-        $courseData = json_decode($courseData);
+     //   $courseData = json_decode($courseData);
         $unitsData = json_decode($unitsData); 
         $exist = $exist->additional_info;
    //     $unitPrice = array();
@@ -220,6 +221,69 @@ class Invoicecontroller extends Controller
         $communication = User::where('id',$id)->select('email','phone')->first();        
         $student_course_offer= Courseselection::select("courses.name as courses_name")->join("courses","courses.id", "=", "courseselections.studentSelCid")->where('courseselections.stu_id','=',$id)->get();
         return view('front.invoice.proformasalesinvoice',compact('student_course_offer','user','exist','location','communication','invoicedata','selectedcourse','unitsData','courseData'));
+
+    }
+
+
+    public function payment(){
+
+ 
+        $id = Auth::id();
+        $invoicedata = invoice::select('*')->where('stu_id',$id)->get();
+        $total = payment::select('*')->where('stu_id',$id)->get();
+
+
+        return view ('front.invoice.confirmpayment',compact('invoicedata','total'));
+
+    }
+
+    public function refund(Request $request){
+
+        $id= Auth::id();
+        $refundpolicy = payment::updateorcreate([
+
+
+            'stu_id' =>$id,
+
+
+        ],
+        [
+
+
+            'stu_id' => auth::id(),
+            'refundpolicy' =>implode(',',$request->refund),
+
+
+
+        ]);
+
+
+        return redirect()->route('confirmpayment');
+
+    }
+    public function total(Request $request){
+
+        
+        $id= Auth::id();
+        $amountdue = payment::updateorcreate([
+
+
+            'stu_id' =>$id,
+
+
+        ],
+        [
+
+
+            'stu_id' => auth::id(),
+            'amountdue' =>$request->amountdue,
+
+
+
+        ]);
+
+
+        return redirect()->route('proformasalesinvoice');
 
     }
 }

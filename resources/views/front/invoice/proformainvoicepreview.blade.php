@@ -19,6 +19,22 @@
     transition: all .3s ease;
     border: 1px solid #d9d9d9;
    }
+   .edit-course2{
+
+    display: block;
+    height: 100%;
+    padding: 12px;
+    text-decoration: none;
+    margin-bottom: 6px;
+    border-radius: 6px;
+    line-height:5px;
+    color: rgba(0, 0, 0, 0.8);
+    background-color: #ffd4ca;
+    transition: all .3s ease;
+    border: 1px solid #d9d9d9;
+
+   }
+   
 
    .congrats-letter{
     padding: 10px;
@@ -70,8 +86,12 @@ color:white;
 
 }
 
-.edit-btn,.edit-btn2 > a {
+.edit-btn2 > a {
     color:white;
+    text-decoration:none;
+}
+.edit-btn > a{
+  color:white;
     text-decoration:none;
 }
 
@@ -270,10 +290,12 @@ nav ul li a:hover span{
 								</div>
 							</div>
                          @endforeach
+
+      
                            
 						<div class="total">
 							<div  class="field total">
-								Total Amount Payable:   <span id="total" class="col-xs-5 float-right">
+								Total Amount Payable:   <span id="total" name="total"  class="col-xs-5 float-right">
                             
                                          {{$total}}
 
@@ -303,17 +325,19 @@ nav ul li a:hover span{
                   </br>
                   </br>
 
-                   <div class="edit-course">
+                   <form action="{{route('totalpost')}}" method="post">
+                    @csrf
+                   <div class="edit-course2">
                         
-            <p >When you are ready to make payment, click on the “Request Invoice” button to obtain your official invoice. ​</p>
-                  </br>
-                  </br>
-                  </br>
-                  </br>
-
-                      <button class="d-flex edit-btn2 float-right" > <a href="{{route('proformasalesinvoice')}}"> Request Invoice </button> </a>
+            <p >When you are ready to make payment,</p> 
+            <p>  click on the “Request Invoice” button to obtain your official invoice :  ​</p>
+                  
+            <input id="total" type="hidden" name="amountdue" value="{{$total}}" class="col-xs-5 float-right">
+                            
+                            </input>
+                      <button type="submit" class="d-flex edit-btn2 float-right" >  Request Invoice </button> 
                         </div>
-
+                  </form>
                
                                     </div>
                                     </div>

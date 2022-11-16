@@ -41,6 +41,18 @@
     transition: background .4s ease;
     border: none;
 }
+.agree-btn{
+    padding: 10px 10px;
+    background-color: #cc6600;
+    color: white;
+    transition: background .4s ease;
+    border: none;
+
+}
+.agree-btn:hover{
+    background-color: black;
+    color: white;
+}
 
 .print-download-btn button:hover{
     background-color: black;
@@ -114,7 +126,7 @@ nav ul li a:hover span{
             <div class="profile-logo">
                 <a href="#"><img src="profile-logo.png" alt="" width="100px"></a>
             </div>  
-            <h3> Proforma invoice </h3>
+            <h3> Sales invoice </h3>
             
             <div class="row">
                 <div class="col-sm-3">
@@ -139,7 +151,7 @@ nav ul li a:hover span{
                         <img class="float-right" src="{{asset('assets/front/images/IBS-Logo.png')}}" alt="" width="150px"></img>
                         </br>
                         </br>
-                            <h4> Pro Forma Invoice : {{$invoicedata[0]->invoiceno}}</h4>
+                            <h4> Pro Forma Sales Invoice : {{$invoicedata[0]->invoiceno}}</h4>
                             <p>  <?php echo date("M d Y"); ?></p>
                            
 
@@ -279,6 +291,8 @@ nav ul li a:hover span{
 
                     
                    </form>
+                                    </br>
+                                    </br>
 
                    <div class="row">
 			<div class="col-md-12">
@@ -304,6 +318,7 @@ nav ul li a:hover span{
                                     </div>
                                     </div>
 <!-- Modal -->
+
 <div class="modal fade" id="refundmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -314,7 +329,10 @@ nav ul li a:hover span{
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      <form action="{{route('refundpolicypost')}}" method="POST" >
+        @csrf
       <div class="modal-body">
+     
       ​
 The Refund Policy for students following at our Institution are as follows: ​
 
@@ -355,24 +373,24 @@ D.   Please note that any enrolment found to contain any false information/docum
 Any refunds for students, it will be reimbursed directly to the original account of the Sponsor ​
 
         (individual/ organisation who paid the fees). ​
-
+       
       <h4>  F. I declare that: </h4>​
 
-<input type="checkbox" name="refund[]" value="0" > I have read, understood and accept the terms and conditions regarding refunds outlined here.</input> ​
+<input type="checkbox" value="0" name="refund[]" required  > I have read, understood and accept the terms and conditions regarding refunds outlined here.</input> ​
                                     </br>
-<input type="checkbox" name="refund[]" value="1" > The information I have provided is accurate and complete. ​</input>
+<input type="checkbox" value="1" name="refund[]"required  > The information I have provided is accurate and complete. ​</input>
                                     </br>
-<input type="checkbox" name="refund[]" value="2" > Any discovery of falsified or incorrect information regarding this application made before, on or afterwards may result in the termination of any offer of enrolment without any refunds. </input>​
+<input type="checkbox"value="2" name="refund[]" required > Any discovery of falsified or incorrect information regarding this application made before, on or afterwards may result in the termination of any offer of enrolment without any refunds. </input>​
                                     </br>
 ​
                                     </br>
 On admission into this institution, I hereby accept to abide by the code of conduct, policies and procedures.
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary"> I Agree</button>
+      <div class="modal-footer ">
+        <button type="submit" class="btn text-center btn-primary agree-btn"> I Agree</button>
       </div>
     </div>
+    </form> 
   </div>
 </div>
  @include('front/footer')      
