@@ -6,6 +6,27 @@
 <link rel="stylesheet" href="{{asset('assets/custom/profile.css')}}">
 <style>
 
+.required:after {
+    content:" *";
+    color: red;
+    
+  }
+  .required{
+    font-weight:bold;
+  }
+  #customFile .custom-file-control:lang(en)::after {
+  content: "Select file...";
+}
+/*when a value is selected, this class removes the content */
+.custom-file-control.selected:lang(en)::after {
+  content: "" !important;
+}
+
+
+.custom-file-control {
+  white-space: nowrap;
+}
+
 .edit-course {
     display: block;
     height: 100%;
@@ -13,27 +34,13 @@
     text-decoration: none;
     margin-bottom: 6px;
     border-radius: 6px;
-    line-height:5px;
+    line-height:20px;
     color: rgba(0, 0, 0, 0.8);
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: #e6e6e6;
     transition: all .3s ease;
     border: 1px solid #d9d9d9;
    }
-   .edit-course2{
-
-    display: block;
-    height: 100%;
-    padding: 12px;
-    text-decoration: none;
-    margin-bottom: 6px;
-    border-radius: 6px;
-    line-height:5px;
-    color: rgba(0, 0, 0, 0.8);
-    background-color: #ffd4ca;
-    transition: all .3s ease;
-    border: 1px solid #d9d9d9;
-
-   }
+  
    
 
    .congrats-letter{
@@ -70,8 +77,7 @@ font-weight:bold;
 
 .edit-btn{
 
-    position:relative;
-    bottom:60px;
+    
     padding: 15px 20px;
     background-color: #cc6600;
     color:white;
@@ -142,7 +148,7 @@ nav ul li a:hover span{
             <div class="profile-logo">
                 <a href="#"><img src="profile-logo.png" alt="" width="100px"></a>
             </div>  
-            <h3> Payment</h3>
+           
             
             <div class="row">
                 <div class="col-sm-3">
@@ -161,26 +167,31 @@ nav ul li a:hover span{
                     </div>
                 </div>
                 <div class="col-sm-9">
-                <p> You have outstanding  on the following invoices: </p>
-                    <form action="">
-                      <div class="edit-course">
-                        {{-- <a href="#">
-                          Accounting and Finance 
-                        </a> --}}
 
-                     
-                        
-                        <p > invoice Number : {{$invoicedata[0]->invoiceno}} </p>
-                        <p> Amount Due: ${{$total[0]->balance_due}} </p>
-                        <p> Due Date:   </p>
-                        <p > Status: <span class= "badge badge-danger " >{{$total[0]->status}} </span> </p>
-                      <button class="d-flex edit-btn float-right" > <a href="attachreciept"> Confirm Payment </button> </a>
+                
+               <div class="edit-course">
+</br>
+</br>
+                <h3> Reciept Submitted Succesfully </h3>
+                <p> Thank you for submitting your payment receipt form. 
+                    Your invoice and payment will now be sent to the Finance team for reconciliation. 
+                    Once your payment has been reconciled, your payment status will be updated, 
+                    and you will receive your IBS receipt here in your iConnect
+                
+</p>
+
+           
+<div class="submission-btn text-center">
+                         <button class="btn btn-primary edit-btn" > <a href="confirmpayment"> Submit Another  Reciept </button> </a>
+                        </div>
+                        </div>
                         </div>
 
                
                                     </div>
                                     </div>
                                     </div>
+                        </div>
                   </div>
  @include('front/footer')      
 @endsection  

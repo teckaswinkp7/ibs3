@@ -4,7 +4,31 @@
 <link rel="stylesheet" href="{{asset('assets/custom/common.css')}}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"/>  
 <link rel="stylesheet" href="{{asset('assets/custom/profile.css')}}">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
 <style>
+
+.required:after {
+    content:" *";
+    color: red;
+    
+  }
+  .required{
+    font-weight:bold;
+  }
+  #customFile .custom-file-control:lang(en)::after {
+  content: "Select file...";
+}
+/*when a value is selected, this class removes the content */
+.custom-file-control.selected:lang(en)::after {
+  content: "" !important;
+}
+
+.custom-file {
+  overflow: hidden;
+}
+.custom-file-control {
+  white-space: nowrap;
+}
 
 .edit-course {
     display: block;
@@ -13,9 +37,9 @@
     text-decoration: none;
     margin-bottom: 6px;
     border-radius: 6px;
-    line-height:5px;
+    line-height:20px;
     color: rgba(0, 0, 0, 0.8);
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: #e6e6e6;
     transition: all .3s ease;
     border: 1px solid #d9d9d9;
    }
@@ -70,8 +94,7 @@ font-weight:bold;
 
 .edit-btn{
 
-    position:relative;
-    bottom:60px;
+    
     padding: 15px 20px;
     background-color: #cc6600;
     color:white;
@@ -142,7 +165,7 @@ nav ul li a:hover span{
             <div class="profile-logo">
                 <a href="#"><img src="profile-logo.png" alt="" width="100px"></a>
             </div>  
-            <h3> Payment</h3>
+            <h3> Confirm Your Payment</h3>
             
             <div class="row">
                 <div class="col-sm-3">
@@ -162,25 +185,53 @@ nav ul li a:hover span{
                 </div>
                 <div class="col-sm-9">
                 <p> You have outstanding  on the following invoices: </p>
-                    <form action="">
+                <form action="{{route('recieptpost')}}" method="post" enctype="multipart/form-data">
+                          @csrf
                       <div class="edit-course">
-                        {{-- <a href="#">
-                          Accounting and Finance 
-                        </a> --}}
-
-                     
-                        
+                        <p > Course :</p>
                         <p > invoice Number : {{$invoicedata[0]->invoiceno}} </p>
-                        <p> Amount Due: ${{$total[0]->balance_due}} </p>
+                        <p> Amount Due: ${{$total[0]->amountdue}} </p>
+                        <p> Issue Date :                    </p>
                         <p> Due Date:   </p>
+                        <p> Balance Due: ${{$total[0]->balance_due}}  </p> 
                         <p > Status: <span class= "badge badge-danger " >{{$total[0]->status}} </span> </p>
-                      <button class="d-flex edit-btn float-right" > <a href="attachreciept"> Confirm Payment </button> </a>
+                        
+                       
+                        <div>
+                        <label class="required"> Enter Amount Deposited: </label></br>
+                        <input name="amount_paid" type="text " required >
                         </div>
+</br>
+                        <div >
+                          <div class="reciept">
+                        <label  class="required" for="payreciept">Attach Bank Reciept: </label></br>
+                        <div class="custom-file">
+   <input id="logo" name="payreciept" type="file" class="custom-file-input" required>
+   <label for="logo" class="custom-file-label text-truncate">Choose file...</label>
+</div>
+</div>
+</div>        
 
+<div class="submission-btn text-center">
+                         <button type="submit" class="btn btn-primary  edit-btn" > Submit Reciept </button> 
+                        </div>
+                        
+</form>
                
                                     </div>
                                     </div>
                                     </div>
+                        </div>
                   </div>
+
+                  <script>
+                   
+                   
+                   jquery('.custom-file-input').on('change', function() { 
+   let fileName = jquery(this).val().split('\\').pop(); 
+   jquery(this).next('.custom-file-label').addClass("selected").html(fileName); 
+});
+
+</script>
  @include('front/footer')      
 @endsection  

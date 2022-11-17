@@ -231,9 +231,12 @@ class Invoicecontroller extends Controller
         $id = Auth::id();
         $invoicedata = invoice::select('*')->where('stu_id',$id)->get();
         $total = payment::select('*')->where('stu_id',$id)->get();
+        $date = invoice::select('updated_at')->where('stu_id',$id)->get();
+        $date = $date->add(4);
+       
 
 
-        return view ('front.invoice.confirmpayment',compact('invoicedata','total'));
+        return view ('front.invoice.confirmpayment',compact('invoicedata','total','date'));
 
     }
 
@@ -277,6 +280,8 @@ class Invoicecontroller extends Controller
 
             'stu_id' => auth::id(),
             'amountdue' =>$request->amountdue,
+            'balance_due' =>$request->amountdue,
+            'status'   => 'waiting payment',
 
 
 
@@ -286,4 +291,59 @@ class Invoicecontroller extends Controller
         return redirect()->route('proformasalesinvoice');
 
     }
+
+    public function recieptsubmit(){
+
+        $id = Auth::id();
+        $amountdue = payment::select('amountdue')->where('stu_id',$id)->get();
+        $amountpaid =  payment::select('amount_paid')->where('stu_id',$id)->get();
+        $invoicedata = invoice::select('*')->where('stu_id',$id)->get();
+        $total = payment::select('*')->where('stu_id',$id)->get();
+        $date = invoice::select('updated_at')->where('stu_id',$id)->get();
+        $date = $date->add(4);
+
+
+        return view('front.invoice.recieptsubmit',compact('invoicedata','total','amountdue','amountpaid'));
+    }
+
+    public function success(){
+
+
+        return view('front.invoice.submitsuccess');
+    }
+    public function reciept(Request $request){
+
+
+        $id= Auth::id();
+        $amountdue = payment::select('amountdue')->where('stu_id',$id)->get();
+     //   $amountpaid =  payment::select('amount_paid')->where('stu_id',$id)->get();
+    //    $balancedue = $amountdue[0]->amountdue - $amountpaid[0]->amount_paid;
+        $reciept = payment::updateorcreate([
+
+
+            'stu_id' =>$id,
+
+
+        ],
+        
+        [
+
+
+            'stu_id' => auth::id(),
+            'amount_paid' =>$request->amount_paid,
+            'payreciept' =>$request->file('payreciept')->getclientoriginalname(),
+            'balance_due' =>   $amountdue[0]->amountdue - $request->amount_paid,
+      
+            'status'   => 'waiting Reconcillation',
+
+
+
+        ]);
+        
+
+
+        return redirect()->route('submitsuccess');
+
+    }
+
 }
