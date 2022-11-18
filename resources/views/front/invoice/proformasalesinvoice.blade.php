@@ -6,6 +6,10 @@
 <link rel="stylesheet" href="{{asset('assets/custom/profile.css')}}">
 <style>
 
+.profile-modal{
+
+background:#EDEDED;
+}
 .edit-course {
     display: block;
     height: 100%;

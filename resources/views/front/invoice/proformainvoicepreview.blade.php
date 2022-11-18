@@ -134,6 +134,10 @@ nav ul li a:hover span{
 
    transform:translateY(-50%) rotate(-180deg);
 }
+.profile-modal{
+
+  background:#EDEDED;
+}
 
 </style>
 
