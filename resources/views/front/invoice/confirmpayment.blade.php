@@ -187,7 +187,7 @@ nav ul li a:hover span{
                         </div>
 @else
 
-<p> nothing found !!! </p>
+<p> nothing found ! </p>
 
 @endif
                
