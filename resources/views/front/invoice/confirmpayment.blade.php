@@ -5,6 +5,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"/>  
 <link rel="stylesheet" href="{{asset('assets/custom/profile.css')}}">
 <style>
+    .profile-modal{
+
+background:#EDEDED;
+}
 
 .edit-course {
     display: block;
@@ -163,20 +167,29 @@ nav ul li a:hover span{
                 <div class="col-sm-9">
                 <p> You have outstanding  on the following invoices: </p>
                     <form action="">
-                      <div class="edit-course">
-                        {{-- <a href="#">
-                          Accounting and Finance 
-                        </a> --}}
+                    @php 
+                      
+                      $id= auth::id();
+                      $balancecheck = DB::table('payment')->select('balance_due')->where('stu_id',$id)->get();
+                      $balance = $balancecheck[0]->balance_due;
 
-                     
-                        
+                  
+
+                      @endphp
+
+                      @if($balance != 0 )
+                      <div class="edit-course">
                         <p > invoice Number : {{$invoicedata[0]->invoiceno}} </p>
                         <p> Amount Due: ${{$total[0]->balance_due}} </p>
                         <p> Due Date:   </p>
                         <p > Status: <span class= "badge badge-danger " >{{$total[0]->status}} </span> </p>
                       <button class="d-flex edit-btn float-right" > <a href="attachreciept"> Confirm Payment </button> </a>
                         </div>
+@else
 
+<p> nothing found 
+
+@endif
                
                                     </div>
                                     </div>
