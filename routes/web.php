@@ -79,6 +79,12 @@ Route::get('proformainvoice', [Invoicecontroller::class, 'index'])->name('profor
 Route::post('proformainvoicepost', [Invoicecontroller::class, 'store'])->name('proformainvoicepost');
 Route::get('proformainvoicepreview', [Invoicecontroller::class, 'preview'])->name('proformainvoicepreview');
 Route::get('proformasalesinvoice', [Invoicecontroller::class, 'salesinvoice'])->name('proformasalesinvoice');
+Route::get('confirmpayment', [Invoicecontroller::class, 'payment'])->name('confirmpayment');
+Route::post('refundpolicypost', [Invoicecontroller::class, 'refund'])->name('refundpolicypost');
+Route::post('totalpost', [Invoicecontroller::class, 'total'])->name('totalpost');
+Route::get('attachreciept', [Invoicecontroller::class, 'recieptsubmit'])->name('recieptsubmit');
+Route::get('submitsuccess', [Invoicecontroller::class, 'success'])->name('submitsuccess');
+Route::post('recieptpost', [Invoicecontroller::class, 'reciept'])->name('recieptpost');
 
 Route::get('/invoice',[Invoicecontroller::class, 'viewpdf'])->name('invoice');
 

@@ -74,7 +74,7 @@ font-weight:bold;
 </head>
 <body>
 
-<div class="congrats-letter">
+  <div class="congrats-letter">
                         <img class="float-right" src="{{asset('assets/front/images/IBS-Logo.png')}}" alt="" width="150px"></img>
                         </br>
                         </br>
@@ -110,7 +110,7 @@ font-weight:bold;
 									</a>
 								</p>
 							</div>
-							<div class="col-sm-12 text-right">
+							<div class="col-sm-6 text-right">
 								<span>Issued By,</span></br>
 								<strong>
 									IBS University
@@ -156,19 +156,18 @@ font-weight:bold;
                            </div>
                 
 @endforeach 
-                    @foreach((array)$courseData as $sem)
+                    @foreach((array)$courseData as $semester)
                            <div class="row item">
                          
 								<div class="col-xs-4 desc">
-                                {{$sem}}
+                                {{$semester}}
 								</div>
 								<div class="col-xs-5 amount text-right">
-                                @php 
-                                 $data = DB::table('courses')->select('price')->where('name',$sem)->get();
-                                 $price = json_decode('data');
-                                 echo $data[0]->price;
-                                 $total = $total + $data[0]->price;
-                                 @endphp
+                                @php   
+                                $data = DB::table('sem')->select('price')->where('name',$semester)->get();           
+                              echo $data[0]->price;
+                              $total = $total + $data[0]->price;
+                            @endphp   
 								</div>
 							</div>
 						</div>

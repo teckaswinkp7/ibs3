@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use DB;
 use App\Models\User;
 use App\Models\unit;
+use App\Models\payment;
 use App\Models\Performainvoice;
 use App\Models\Additionalfee;
 use App\Models\invoice;
@@ -160,7 +161,7 @@ class Invoicecontroller extends Controller
         $exist = invoice::where('stu_id',$id)->first();  
         $unitsData = $exist->units;
         $courseData = $invoicedata[0]->sem;
-        $courseData = json_decode($courseData);
+     //   $courseData = json_decode($courseData);
         $unitsData = json_decode($unitsData); 
         $exist = $exist->additional_info;
    //     $unitPrice = array();
@@ -222,4 +223,128 @@ class Invoicecontroller extends Controller
         return view('front.invoice.proformasalesinvoice',compact('student_course_offer','user','exist','location','communication','invoicedata','selectedcourse','unitsData','courseData'));
 
     }
+
+
+    public function payment(){
+
+ 
+        $id = Auth::id();
+        $invoicedata = invoice::select('*')->where('stu_id',$id)->get();
+        $total = payment::select('*')->where('stu_id',$id)->get();
+        $date = invoice::select('updated_at')->where('stu_id',$id)->get();
+        $date = $date->add(4);
+       
+
+
+        return view ('front.invoice.confirmpayment',compact('invoicedata','total','date'));
+
+    }
+
+    public function refund(Request $request){
+
+        $id= Auth::id();
+        $refundpolicy = payment::updateorcreate([
+
+
+            'stu_id' =>$id,
+
+
+        ],
+        [
+
+
+            'stu_id' => auth::id(),
+            'refundpolicy' =>implode(',',$request->refund),
+
+
+
+        ]);
+
+
+        return redirect()->route('confirmpayment');
+
+    }
+    public function total(Request $request){
+
+        
+        $id= Auth::id();
+        $amountdue = payment::updateorcreate([
+
+
+            'stu_id' =>$id,
+
+
+        ],
+        [
+
+
+            'stu_id' => auth::id(),
+            'amountdue' =>$request->amountdue,
+            'balance_due' =>$request->amountdue,
+            'amount_paid' => '0',
+            'status'   => 'waiting payment',
+
+
+
+        ]);
+
+
+        return redirect()->route('proformasalesinvoice');
+
+    }
+
+    public function recieptsubmit(){
+
+        $id = Auth::id();
+        $amountdue = payment::select('amountdue')->where('stu_id',$id)->get();
+        $amountpaid =  payment::select('amount_paid')->where('stu_id',$id)->get();
+        $invoicedata = invoice::select('*')->where('stu_id',$id)->get();
+        $total = payment::select('*')->where('stu_id',$id)->get();
+        $date = invoice::select('updated_at')->where('stu_id',$id)->get();
+        $date = $date->add(4);
+
+
+        return view('front.invoice.recieptsubmit',compact('invoicedata','total','amountdue','amountpaid'));
+    }
+
+    public function success(){
+
+
+        return view('front.invoice.submitsuccess');
+    }
+    public function reciept(Request $request){
+
+
+        $id= Auth::id();
+        $amountdue = payment::select('amountdue')->where('stu_id',$id)->get();
+     //   $amountpaid =  payment::select('amount_paid')->where('stu_id',$id)->get();
+    //    $balancedue = $amountdue[0]->amountdue - $amountpaid[0]->amount_paid;
+        $reciept = payment::updateorcreate([
+
+
+            'stu_id' =>$id,
+
+
+        ],
+        
+        [
+
+
+            'stu_id' => auth::id(),
+            'amount_paid' =>$request->amount_paid,
+            'payreciept' =>$request->file('payreciept')->getclientoriginalname(),
+            'balance_due' =>   $amountdue[0]->amountdue - $request->amount_paid,
+      
+            'status'   => 'waiting Reconcillation',
+
+
+
+        ]);
+        
+
+
+        return redirect()->route('submitsuccess');
+
+    }
+
 }
