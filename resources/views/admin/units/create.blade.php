@@ -115,13 +115,17 @@
                         </div>
 </div>
 </div>
-<div class="col-md-12">
+<div class="card-body">
+<div class="row">
+                          <div class="col-md-12">
                           <div class="form-group">
                             <label  >Unit Price</label>
                             <input class="form-control" name="unit_price" type="number" placeholder="Unit Price"> 
     
                           </div>
                         </div>
+                        </div>
+</div>
                         <div class="col-md-12">
                           <div class="form-group">
                             <label for="status" >Status </label>

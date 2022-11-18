@@ -146,7 +146,7 @@ nav ul li a:hover span{
             <div class="profile-logo">
                 <a href="#"><img src="profile-logo.png" alt="" width="100px"></a>
             </div>  
-            <h3> Payment</h3>
+            <h3> My Bill History </h3>
             
             <div class="row">
                 <div class="col-sm-3">
@@ -165,31 +165,56 @@ nav ul li a:hover span{
                     </div>
                 </div>
                 <div class="col-sm-9">
-                <p> You have outstanding  on the following invoices: </p>
+                <p> Pro Forma Invoice History:  </p>
                     <form action="">
-                    @php 
-                      
-                      $id= auth::id();
-                      $balancecheck = DB::table('payment')->select('balance_due')->where('stu_id',$id)->get();
-                      $balance = $balancecheck[0]->balance_due;
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead class="table-dark">
+                                <tr>
+                         <th> Amount </th>
+                          <th> Date Raised </th>
+                        <th> Document   </th>
+</tr>
+</thead>
+                            <tbody>
+                                <tr>
+                                <td> 1 </td>
+                                <td>  2</td>
+                                <td> 3 </td>
+</tr>
+</tbody>
 
+                        </table>
+
+</br>
+</br>
+
+
+<p> Sales Invoice History:</p> 
+
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead class="table-dark">
+                                <tr>
+                         <th> Amount </th>
+                          <th> Date Raised </th>
+                        <th> Invoice   </th>
+                        <th>Bank Reciept  </th>
+                        <th> IBS Reciept  </th>
+                        <th> Status  </th>
+</tr>
+</thead>
+                            <tbody>
+                                <tr>
+                                <td> $ {{$amountdue[0]->amountdue}} </td>
+                                <td> 2 </td>
+                                <td><a href="{{route('invoice')}}"> Download </a> </td>
+                                <td> 4  </td>
+                                <td> 5  </td>
+                                <td> {{$amountdue[0]->status}} </td>
+</tr>
+</tbody>
+
+                        </table>
                   
-
-                      @endphp
-
-                      @if($balance != 0 )
-                      <div class="edit-course">
-                        <p > invoice Number : {{$invoicedata[0]->invoiceno}} </p>
-                        <p> Amount Due: ${{$total[0]->balance_due}} </p>
-                        <p> Due Date:   </p>
-                        <p > Status: <span class= "badge badge-danger " >{{$total[0]->status}} </span> </p>
-                      <button class="d-flex edit-btn float-right" > <a href="attachreciept"> Confirm Payment </button> </a>
-                        </div>
-@else
-
-<p> nothing found ! </p>
-
-@endif
                
                                     </div>
                                     </div>

@@ -178,7 +178,7 @@ class Invoicecontroller extends Controller
         $student_course_offer= Courseselection::select("courses.name as courses_name")->join("courses","courses.id", "=", "courseselections.studentSelCid")->where('courseselections.stu_id','=',$id)->get();
 
         $pdf = \PDF::loadView('front.invoice.invoice',compact('student_course_offer','user','exist','location','communication','invoicedata','selectedcourse','unitsData','courseData'));
-        return $pdf->download('invoice.pdf');
+        return $pdf->download($name.'proformainvoice.pdf');
 
    //     PDF::Output(uniqid().'_SamplePDF.pdf', 'D');
         
@@ -316,8 +316,8 @@ class Invoicecontroller extends Controller
 
 
         $id= Auth::id();
-        $amountdue = payment::select('amountdue')->where('stu_id',$id)->get();
-     //   $amountpaid =  payment::select('amount_paid')->where('stu_id',$id)->get();
+        $amountdue = payment::select('balance_due')->where('stu_id',$id)->get();
+        $amountpaid =  payment::select('amount_paid')->where('stu_id',$id)->get();
     //    $balancedue = $amountdue[0]->amountdue - $amountpaid[0]->amount_paid;
         $reciept = payment::updateorcreate([
 
@@ -331,9 +331,9 @@ class Invoicecontroller extends Controller
 
 
             'stu_id' => auth::id(),
-            'amount_paid' =>$request->amount_paid,
+            'amount_paid' =>$request->amount_paid + $amountpaid[0]->amount_paid,
             'payreciept' =>$request->file('payreciept')->getclientoriginalname(),
-            'balance_due' =>   $amountdue[0]->amountdue - $request->amount_paid,
+            'balance_due' =>   $amountdue[0]->balance_due - $request->amount_paid,
       
             'status'   => 'waiting Reconcillation',
 
@@ -345,6 +345,17 @@ class Invoicecontroller extends Controller
 
         return redirect()->route('submitsuccess');
 
+    }
+
+    public function history(){
+
+
+        $id=auth::id();
+        $amountdue = payment::select('amountdue','status')->where('stu_id',$id)->get();
+
+
+
+        return view('front.invoice.history',compact('amountdue'));
     }
 
 }

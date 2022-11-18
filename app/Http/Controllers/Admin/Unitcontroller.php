@@ -38,21 +38,20 @@ class Unitcontroller extends Controller
 
     public function store(Request $request){
     
-        unit::create(
-            [
-               'course_id'   => $request->course_id,
-               'title'       => $request->title,
-               'slug'        => str::slug($request->slug),
-               'embed_id'    => $request->embed_id,
-               'short_text'  => $request->short_text,
-               'unit_price' =>  $request->unit_price,
-               'full_text'   => $request->full_text,
-               'published'   => $request->published,
-               'name'        => $request->name
-]
-            
-            + ['position' => unit::where('course_id', $request->course_id)->max('position') + 1]
-        );
+  
+              $units = new unit;
+
+              $units->course_id   = $request->course_id;
+               $units->title       = $request->title;
+               $units->slug        = str::slug($request->slug);
+               $units->embed_id    = $request->embed_id;
+               $units->short_text  = $request->short_text;
+               $units->full_text   = $request->full_text;
+               $units->unit_price  = $request->unit_price;
+               $units->published   = $request->published;
+               $units->position    = unit::where('course_id', $request->course_id)->max('position') + 1 ;
+
+               $units->Save();
 
         return redirect()->route('admin.units.index',  ['course_id' => $request->course_id]);
     }
@@ -82,7 +81,6 @@ class Unitcontroller extends Controller
                $units->full_text   = $request->full_text;
                $units->unit_price = $request->unit_price;
                $units->published   = $request->published;
-               $units->position    = unit::where('course_id', $request->course_id)->max('position') + 1;
 
                $units->Save();
 

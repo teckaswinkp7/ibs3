@@ -8,7 +8,7 @@
 
 .edit-course {
     display: block;
-    height: 100%;
+   
     padding: 12px;
     text-decoration: none;
     margin-bottom: 6px;
@@ -305,17 +305,16 @@ nav ul li a:hover span{
 
 
                                      </span>
-							</div>	
-						</div>
-					</div>
-				</div>	
-			</div>
-		</div>
-	</div>
-</div>                    
+		               
                                 
                         </div>
                       </div>
+                      </div>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </div>
+					</div>
                       
                       
                       <div class="print-download-btn">
@@ -326,7 +325,6 @@ nav ul li a:hover span{
 
                     
                    </form>
-                  </br>
                   </br>
 
                    <form action="{{route('totalpost')}}" method="post">
@@ -342,10 +340,14 @@ nav ul li a:hover span{
                       <button type="submit" class="d-flex edit-btn2 float-right" >  Request Invoice </button> 
                         </div>
                   </form>
-               
-                                    </div>
-                                    </div>
-                                    </div>
+                  
+                                    	
+						
+				</div>	
+			</div>
+		</div>
+	</div>
+</div>     
                   </div>
  @include('front/footer')      
 @endsection  

@@ -85,6 +85,7 @@ Route::post('totalpost', [Invoicecontroller::class, 'total'])->name('totalpost')
 Route::get('attachreciept', [Invoicecontroller::class, 'recieptsubmit'])->name('recieptsubmit');
 Route::get('submitsuccess', [Invoicecontroller::class, 'success'])->name('submitsuccess');
 Route::post('recieptpost', [Invoicecontroller::class, 'reciept'])->name('recieptpost');
+Route::get('history', [Invoicecontroller::class, 'history'])->name('history');
 
 Route::get('/invoice',[Invoicecontroller::class, 'viewpdf'])->name('invoice');
 

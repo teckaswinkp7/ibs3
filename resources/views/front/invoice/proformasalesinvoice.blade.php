@@ -281,8 +281,7 @@ nav ul li a:hover span{
 				</div>	
 			</div>
 		</div>
-	</div>
-</div>                    
+                  
                                 
                         </div>
                       </div>
@@ -321,6 +320,9 @@ nav ul li a:hover span{
                                     </div>
                                     </div>
                                     </div>
+
+                                    </div>
+</div>  
 <!-- Modal -->
 
 <div class="modal fade" id="refundmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
