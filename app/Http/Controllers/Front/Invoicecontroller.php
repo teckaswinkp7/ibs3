@@ -281,6 +281,7 @@ class Invoicecontroller extends Controller
             'stu_id' => auth::id(),
             'amountdue' =>$request->amountdue,
             'balance_due' =>$request->amountdue,
+            'amount_paid' => '0',
             'status'   => 'waiting payment',
 
 
