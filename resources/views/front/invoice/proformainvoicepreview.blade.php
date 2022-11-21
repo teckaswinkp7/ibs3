@@ -137,15 +137,82 @@ nav ul li a:hover span{
 .profile-modal{
 
   background:#EDEDED;
+}.circle{
+   width: 25px;
+      height: 25px;
+      -webkit-border-radius: 25px;
+      -moz-border-radius: 25px;
+      border-radius: 25px;
+      border:1px solid gray;
+      margin-left:20px;
+      margin-right:30px;
+      position:relative;
+      left:530px;
+      bottom:50px;
+    }
+    #clabel1{
+
+      position:absolute;
+      top:35px;
+      right:-20px;
+    }
+    #clabel2{
+
+position:absolute;
+top:30px;
+right:0px;
+}
+#clabel3{
+
+position:absolute;
+top:30px;
+right:0px;
+}
+#clabel4{
+
+position:absolute;
+top:30px;
+right:0px;
+}
+#ccolor{
+
+   background: #2b3f8e;
 }
 
 </style>
+@php 
+                      
+                      $id= auth::id();
+                      $statuscheck = DB::table('payment')->select('status')->where('stu_id',$id)->get();
+                      $statusis = $statuscheck[0]->status;
+
+                  
+
+                      @endphp
 
     <div class="background-profile" style="margin-top: 100px;"> 
         <div class="profile-modal">
             <div class="profile-logo">
                 <a href="#"><img src="profile-logo.png" alt="" width="100px"></a>
-            </div>  
+            </div> 
+            <div class="row">
+         @if($statusis == 'Fully Paid')
+         <div class="col-sm-4 text-right circle" ><span id="clabel1">Registered</span> </div>
+							 <div class="col-sm-6 text-right circle"><span id="clabel2"> Not Enrolled </span>  </div>
+                      <div class="col-sm-8 text-right circle" > <span id="clabel3"> Partially Enrolled </span>  </div>
+                      <div class="col-sm-8 text-right circle" id="ccolor"> <span id="clabel4"> Fully Enrolled </span> </div>
+                      @elseif($statusis == 'Partially paid')
+                      <div class="col-sm-4 text-right circle" ><span id="clabel1">Registered</span> </div>
+							 <div class="col-sm-6 text-right circle"><span id="clabel2"> Not Enrolled </span>  </div>
+                      <div class="col-sm-8 text-right circle" id="ccolor"> <span id="clabel3"> Partially Enrolled </span>  </div>
+                      <div class="col-sm-8 text-right circle" > <span id="clabel4"> Fully Enrolled </span> </div>
+                     @else
+                     <div class="col-sm-4 text-right circle" id="ccolor" ><span id="clabel1">Registered</span> </div>
+							 <div class="col-sm-6 text-right circle"><span id="clabel2"> Not Enrolled </span>  </div>
+                     <div class="col-sm-8 text-right circle" > <span id="clabel3"> Partially Enrolled </span>  </div>
+                     <div class="col-sm-8 text-right circle" > <span id="clabel4"> Fully Enrolled </span> </div>
+                      @endif
+							</div> 
             <h3> Proforma invoice </h3>
             
             <div class="row">
@@ -187,12 +254,7 @@ nav ul li a:hover span{
                             <p>  <?php echo date("M d Y"); ?></p>
                            
 
-                                                        
-<div class="receipt-content">
-    <div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="invoice-wrapper">
+                            <div class="invoice-wrapper">
 
 					<div class="payment-details">
 						<div class="row">
@@ -202,16 +264,11 @@ nav ul li a:hover span{
 									{{$location->current_location}}
 								</strong>
 								<p>
-                                    
-                                    
-                                    {{$location->current_address_location}}
-									{{-- 989 5th Avenue <br>
-									City of monterrey <br>
-									55839 <br>
-									USA <br> --}}
+          {{$location->current_address_location}}</br>
+                        </br>
 									<a href="#">
                                         
-                                        {{$user->email}}
+                {{$user->email}}
 									</a>
 								</p>
 							</div>
@@ -230,91 +287,93 @@ nav ul li a:hover span{
 							</div>
 						</div>
 					</div>
-
-					<div class="line-items">
-						<div class="headers clearfix">
+          </div>
 							<div class="row">
-								<div class="col-xs-4">Item: </div>
-							
-								<div class="col-xs-5 text-right">Amount: </div>
+								<div class="col-sm-4"> <strong> Item: </strong> </div>
+							 <div class="col-sm-8 text-right"> <strong> Amount: </strong> </div>
 							</div>
-						</div>
-						<div class="items">
-                            @php 
-                            $total = 0;
-                            @endphp
-                        @foreach((array)$unitsData as $unit)
-                        <div class="row item">
-                      
-								<div class="col-xs-4 desc">
-                                {{$unit}}
-								</div>
-                                <div class="col-xs-5 amount text-right">
-                                @php   
-                                $data = DB::table('units')->select('unit_price')->where('title',$unit)->get(); 
-                               $price = json_decode('data');           
-                              echo $data[0]->unit_price;
-                              $total = $total + $data[0]->unit_price;
-                            @endphp    
-								</div>
-							</div>
-                           </div>
-                
-@endforeach 
-                    @foreach((array)$courseData as $semester)
-                           <div class="row item">
-                         
-								<div class="col-xs-4 desc">
-                                {{$semester}}
-								</div>
-								<div class="col-xs-5 amount text-right">
-                                @php   
-                                $data = DB::table('sem')->select('price')->where('name',$semester)->get();           
-                              echo $data[0]->price;
-                              $total = $total + $data[0]->price;
-                            @endphp   
-								</div>
-							</div>
-						</div>
-                     
-                   
-@endforeach     
-                            @foreach($exist as $val)
-							<div class="row item">
-								<div style="width:700px;" class="col-xs-10 desc">
-									{{$val}}
-								</div>
-								<div class="col-xs-5 amount text-right">
-								@php 
-                                 $data = DB::table('additionalfee')->select('price')->where('title',$val)->get();
-                                 $price = json_decode('data');
-                                 echo $data[0]->price;
-                                 $total = $total + $data[0]->price;
-                                 @endphp
-								</div>
-							</div>
-                         @endforeach
 
-      
-                           
-						<div class="total">
-							<div  class="field total">
-								Total Amount Payable:   <span id="total" name="total"  class="col-xs-5 float-right">
-                            
-                                         {{$total}}
-
-
-                                     </span>
-		               
-                                
+              @php 
+                    $total = 0;
+                    @endphp
+                @foreach((array)$unitsData as $unit)
+                <div class="row item">
+              
+                        <div class="col-sm-4 desc">
+                        {{$unit}}
                         </div>
-                      </div>
-                      </div>
-                                    </div>
-                                    </div>
-                                    </div>
-                                    </div>
-					</div>
+                        <div class="col-sm-8 amount text-right">
+                        @php   
+                        $data = DB::table('units')->select('unit_price')->where('title',$unit)->get(); 
+                       $price = json_decode('data');           
+                      echo $data[0]->unit_price;
+                      $total = $total + $data[0]->unit_price;
+                    @endphp    
+                        </div>
+                    </div>
+                    @endforeach 
+                        </br>
+                    @foreach((array)$courseData as $semester)
+                   <div class="row item">
+                 
+                        <div class="col-sm-4 desc">
+                        {{$semester}}
+                        </div>
+                        <div class="col-sm-8 amount text-right">
+                        @php   
+                        $data = DB::table('sem')->select('price')->where('name',$semester)->get();           
+                      echo $data[0]->price;
+                      $total = $total + $data[0]->price;
+                    @endphp   
+                        </div>
+                    </div>
+                    @endforeach 
+                        </br>
+                    @foreach($exist as $val)
+                    <div class="row item">
+                        <div class="col-sm-4 desc">
+                            {{$val}}
+                        </div>
+                        <div class="col-sm-8 amount text-right">
+                        @php 
+                         $data = DB::table('additionalfee')->select('price')->where('title',$val)->get();
+                         $price = json_decode('data');
+                         echo $data[0]->price;
+                         $total = $total + $data[0]->price;
+                         @endphp
+                        </div>
+                    </div>
+                 @endforeach 
+                        </br>
+                 <div class="total">
+                    <div  class="field total">
+                        Total Amount Payable:   <span id="total" name="total"  class="col-xs-5 float-right">
+                    
+                                 {{$total}}
+
+
+                             </span>
+               
+                        
+                </div>
+                        </div> 
+						
+
+
+
+
+
+
+
+                            
+                            </div>
+                            </div>
+                          
+                          
+                          
+                        
+                                                        
+
                       
                       
                       <div class="print-download-btn">
@@ -322,32 +381,42 @@ nav ul li a:hover span{
                       <a href="{{route('invoice')}}"><button class="down"><img src="{{asset('assets/custom/download-icon.png')}}" alt="" width="15px"> Download </a></button>
                         <button class="print"> Print <img src="{{asset('assets/custom/print-icon.png')}}" alt="" width="15px"></button>    
                     </div>
+                    </form>
+</br>
+                        </br>
 
-                    
-                   </form>
-                  </br>
+ <form action="{{route('totalpost')}}" method="post">
+  @csrf
+ <div class="edit-course2">
+      
+<p >When you are ready to make payment,</p> 
+<p>  click on the “Request Invoice” button to obtain your official invoice :  ​</p>
 
-                   <form action="{{route('totalpost')}}" method="post">
-                    @csrf
-                   <div class="edit-course2">
-                        
-            <p >When you are ready to make payment,</p> 
-            <p>  click on the “Request Invoice” button to obtain your official invoice :  ​</p>
+<input id="total" type="hidden" name="amountdue" value="{{$total}}" class="col-xs-5 float-right">
+          
+          </input>
+    <button type="submit" class="d-flex edit-btn2 float-right" >  Request Invoice </button> 
+      </div>
+</form>
+
                   
-            <input id="total" type="hidden" name="amountdue" value="{{$total}}" class="col-xs-5 float-right">
-                            
-                            </input>
-                      <button type="submit" class="d-flex edit-btn2 float-right" >  Request Invoice </button> 
+                          
+                          </div>
+                          </div>
                         </div>
-                  </form>
+                   
+                     
+                                   
+                 
+                  
                   
                                     	
 						
-				</div>	
-			</div>
-		</div>
-	</div>
-</div>     
-                  </div>
+				
+			
+		
+	
+  
+                 
  @include('front/footer')      
 @endsection  

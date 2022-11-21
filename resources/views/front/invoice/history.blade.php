@@ -139,13 +139,83 @@ nav ul li a:hover span{
    transform:translateY(-50%) rotate(-180deg);
 }
 
+
+.circle{
+   width: 25px;
+      height: 25px;
+      -webkit-border-radius: 25px;
+      -moz-border-radius: 25px;
+      border-radius: 25px;
+      border:1px solid gray;
+      margin-left:20px;
+      margin-right:30px;
+      position:relative;
+      left:530px;
+      bottom:50px;
+    }
+    #clabel1{
+
+      position:absolute;
+      top:35px;
+      right:-20px;
+    }
+    #clabel2{
+
+position:absolute;
+top:30px;
+right:0px;
+}
+#clabel3{
+
+position:absolute;
+top:30px;
+right:0px;
+}
+#clabel4{
+
+position:absolute;
+top:30px;
+right:0px;
+}
+#ccolor{
+
+   background: #2b3f8e;
+}
+
 </style>
+@php 
+                      
+                      $id= auth::id();
+                      $statuscheck = DB::table('payment')->select('status')->where('stu_id',$id)->get();
+                      $statusis = $statuscheck[0]->status;
+
+                  
+
+                      @endphp
 
     <div class="background-profile" style="margin-top: 100px;"> 
         <div class="profile-modal">
             <div class="profile-logo">
                 <a href="#"><img src="profile-logo.png" alt="" width="100px"></a>
             </div>  
+            <div class="row">
+         @if($statusis == 'Fully Paid')
+         <div class="col-sm-4 text-right circle" ><span id="clabel1">Registered</span> </div>
+							 <div class="col-sm-6 text-right circle"><span id="clabel2"> Not Enrolled </span>  </div>
+                      <div class="col-sm-8 text-right circle" > <span id="clabel3"> Partially Enrolled </span>  </div>
+                      <div class="col-sm-8 text-right circle" id="ccolor"> <span id="clabel4"> Fully Enrolled </span> </div>
+                      @elseif($statusis == 'Partially paid')
+                      <div class="col-sm-4 text-right circle" ><span id="clabel1">Registered</span> </div>
+							 <div class="col-sm-6 text-right circle"><span id="clabel2"> Not Enrolled </span>  </div>
+                      <div class="col-sm-8 text-right circle" id="ccolor"> <span id="clabel3"> Partially Enrolled </span>  </div>
+                      <div class="col-sm-8 text-right circle" > <span id="clabel4"> Fully Enrolled </span> </div>
+                     @else
+                     <div class="col-sm-4 text-right circle" id="ccolor" ><span id="clabel1">Registered</span> </div>
+							 <div class="col-sm-6 text-right circle"><span id="clabel2"> Not Enrolled </span>  </div>
+                     <div class="col-sm-8 text-right circle" > <span id="clabel3"> Partially Enrolled </span>  </div>
+                     <div class="col-sm-8 text-right circle" > <span id="clabel4"> Fully Enrolled </span> </div>
+                      @endif
+							</div> 
             <h3> My Bill History </h3>
             
             <div class="row">
@@ -177,9 +247,13 @@ nav ul li a:hover span{
 </thead>
                             <tbody>
                                 <tr>
-                                <td> 1 </td>
-                                <td>  2</td>
-                                <td> 3 </td>
+                                <td> $ {{$amountdue[0]->amountdue}} </td>
+                                <td>  @php 
+$date = $total[0]->updated_at;
+$dt = new DateTime($date);
+echo $dt->format('Y-m-d');
+@endphp </td>
+                                <td> <a href="{{route('invoice')}}"> Download </a> </td>
 </tr>
 </tbody>
 
@@ -205,10 +279,14 @@ nav ul li a:hover span{
                             <tbody>
                                 <tr>
                                 <td> $ {{$amountdue[0]->amountdue}} </td>
-                                <td> 2 </td>
+                                <td> @php 
+$date = $total[0]->updated_at;
+$dt = new DateTime($date);
+echo $dt->format('Y-m-d');
+@endphp </td>
                                 <td><a href="{{route('invoice')}}"> Download </a> </td>
-                                <td> 4  </td>
-                                <td> 5  </td>
+                                <td> -- </td>
+                                <td> -  </td>
                                 <td> {{$amountdue[0]->status}} </td>
 </tr>
 </tbody>

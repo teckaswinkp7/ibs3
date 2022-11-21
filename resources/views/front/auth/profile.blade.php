@@ -58,6 +58,16 @@ nav ul li a:hover span{
 
                    <li> <a href="userprofile">Profile</a></li>
                     <li><a href="useroffer">Course</a></li>
+
+                    @php 
+
+                    $id = auth::id();
+                    $offeraccepted = DB::table('courseselections')->select('offer_accepted')->where('stu_id',$id)->get();
+                    @endphp 
+
+                    @if($offeraccepted == '1')
+                    <li><a href="history">History</a></li>
+                    @endif
                     
                    
 

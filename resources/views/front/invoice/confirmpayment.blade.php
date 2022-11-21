@@ -170,19 +170,26 @@ nav ul li a:hover span{
                     @php 
                       
                       $id= auth::id();
-                      $balancecheck = DB::table('payment')->select('balance_due')->where('stu_id',$id)->get();
-                      $balance = $balancecheck[0]->balance_due;
+                      $statuscheck = DB::table('payment')->select('status')->where('stu_id',$id)->get();
+                      $statusis = $statuscheck[0]->status;
 
                   
 
                       @endphp
 
-                      @if($balance != 0 )
+                      @if($statusis != 'Fully Paid' )
                       <div class="edit-course">
                         <p > invoice Number : {{$invoicedata[0]->invoiceno}} </p>
                         <p> Amount Due: ${{$total[0]->balance_due}} </p>
-                        <p> Due Date:   </p>
-                        <p > Status: <span class= "badge badge-danger " >{{$total[0]->status}} </span> </p>
+                        <p> Due Date: {{$total[0]->duedate}}  </p>
+                        <p > Status: 
+                            @if($statusis == 'Partially paid')
+                            <span class= "badge badge-warning " >{{$total[0]->status}} </span> 
+                            @else
+                            <span class= "badge badge-danger " >{{$total[0]->status}} </span> 
+                           @endif
+                    
+                        </p>
                       <button class="d-flex edit-btn float-right" > <a href="attachreciept"> Confirm Payment </button> </a>
                         </div>
 @else

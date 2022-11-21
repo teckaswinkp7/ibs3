@@ -17,6 +17,7 @@
                     <div class="profile-course">
                         <a href="userprofile">Profile</a>
                         <a href="useroffer">Course</a>
+                        <a href="history">History</a>
                         {{-- <a href="#"></a>
                         <a href="#"></a> --}}
                     </div>

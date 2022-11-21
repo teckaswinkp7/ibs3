@@ -83,136 +83,122 @@ font-weight:bold;
                            
 
                                                         
-<div class="receipt-content">
-    <div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="invoice-wrapper">
+                            <div class="invoice-wrapper">
 
-					<div class="payment-details">
-						<div class="row">
-							<div class="col-sm-6">
-								<span>invoice to: </span></br>
-								<strong>
-									{{$location->current_location}}
-								</strong>
-								<p>
-                                    
-                                    
-                                    {{$location->current_address_location}}
-									{{-- 989 5th Avenue <br>
-									City of monterrey <br>
-									55839 <br>
-									USA <br> --}}
-									<a href="#">
-                                        
-                                        {{$user->email}}
-									</a>
-								</p>
-							</div>
-							<div class="col-sm-6 text-right">
-								<span>Issued By,</span></br>
-								<strong>
-									IBS University
-								</strong>
-								<p>
-									P.O Box 2826 Boroko <br>
-									NCD Port Moresby <br>
-									<a href="#">
-										ask@ibs.ac.pg
-									</a>
-								</p>
-							</div>
-						</div>
-					</div>
+<div class="payment-details">
+    <div class="row">
+        <div class="col-sm-6">
+            <span>invoice to: </span></br>
+            <strong>
+                {{$location->current_location}}
+            </strong>
+            <p>
+{{$location->current_address_location}}</br>
+    </br>
+                <a href="#">
+                    
+{{$user->email}}
+                </a>
+            </p>
+        </div>
+        <div class="col-sm-11 text-right">
+            <span>Issued By,</span></br>
+            <strong>
+                IBS University
+            </strong>
+            <p>
+                P.O Box 2826 Boroko <br>
+                NCD Port Moresby <br>
+                <a href="#">
+                    ask@ibs.ac.pg
+                </a>
+            </p>
+        </div>
+    </div>
+</div>
+</div>
+        <div class="row">
+            <div class="col-sm-4"> <strong> Item: </strong> </div>
+         <div class="col-sm-11 text-right"> <strong> Amount: </strong> </div>
+        </div>
 
-					<div class="line-items">
-						<div class="headers clearfix">
-							<div class="row">
-								<div class="col-xs-4">Item: </div>
-							
-								<div class="col-xs-5 text-right">Amount: </div>
-							</div>
-						</div>
-						<div class="items">
-                            @php 
-                            $total = 0;
-                            @endphp
-                        @foreach((array)$unitsData as $unit)
-                        <div class="row item">
-                      
-								<div class="col-xs-4 desc">
-                                {{$unit}}
-								</div>
-                                <div class="col-xs-5 amount text-right">
-                                @php   
-                                $data = DB::table('units')->select('unit_price')->where('title',$unit)->get(); 
-                               $price = json_decode('data');           
-                              echo $data[0]->unit_price;
-                              $total = $total + $data[0]->unit_price;
-                            @endphp    
-								</div>
-							</div>
-                           </div>
-                
+@php 
+$total = 0;
+@endphp
+@foreach((array)$unitsData as $unit)
+<div class="row item">
+
+    <div class="col-sm-4 desc">
+    {{$unit}}
+    </div>
+    <div class="col-sm-11 amount text-right">
+    @php   
+    $data = DB::table('units')->select('unit_price')->where('title',$unit)->get(); 
+   $price = json_decode('data');           
+  echo $data[0]->unit_price;
+  $total = $total + $data[0]->unit_price;
+@endphp    
+    </div>
+</div>
 @endforeach 
-                    @foreach((array)$courseData as $semester)
-                           <div class="row item">
-                         
-								<div class="col-xs-4 desc">
-                                {{$semester}}
-								</div>
-								<div class="col-xs-5 amount text-right">
-                                @php   
-                                $data = DB::table('sem')->select('price')->where('name',$semester)->get();           
-                              echo $data[0]->price;
-                              $total = $total + $data[0]->price;
-                            @endphp   
-								</div>
-							</div>
-						</div>
-                     
-                   
-@endforeach     
-                            @foreach($exist as $val)
-							<div class="row item">
-								<div style="width:700px;" class="col-xs-10 desc">
-									{{$val}}
-								</div>
-								<div class="col-xs-5 amount text-right">
-								@php 
-                                 $data = DB::table('additionalfee')->select('price')->where('title',$val)->get();
-                                 $price = json_decode('data');
-                                 echo $data[0]->price;
-                                 $total = $total + $data[0]->price;
-                                 @endphp
-								</div>
-							</div>
-                         @endforeach
-                           
-						<div class="total">
-							<div  class="field total">
-								Total Amount Payable:   <span id="total" class="col-xs-5 float-right">
-                            
-                                         {{$total}}
+    </br>
+@foreach((array)$courseData as $semester)
+<div class="row item">
+
+    <div class="col-sm-4 desc">
+    {{$semester}}
+    </div>
+    <div class="col-sm-11 amount text-right">
+    @php   
+    $data = DB::table('sem')->select('price')->where('name',$semester)->get();           
+  echo $data[0]->price;
+  $total = $total + $data[0]->price;
+@endphp   
+    </div>
+</div>
+@endforeach 
+    </br>
+@foreach($exist as $val)
+<div class="row item">
+    <div class="col-sm-4 desc">
+        {{$val}}
+    </div>
+    <div class="col-sm-11 amount text-right">
+    @php 
+     $data = DB::table('additionalfee')->select('price')->where('title',$val)->get();
+     $price = json_decode('data');
+     echo $data[0]->price;
+     $total = $total + $data[0]->price;
+     @endphp
+    </div>
+</div>
+@endforeach 
+<div class="total">
+<div  class="field total">
+    Total Amount Payable:   <span id="total" name="total"  class="float-right">
+
+             {{$total}}
 
 
-                                     </span>
-							</div>	
-						</div>
-					</div>
-				</div>	
-			</div>
-		</div>
-	</div>
-</div>                    
-                                
+         </span>
+
+    
+</div>
+    </div> 
+    
+
+
+
+
+
+
+
+        
+        </div>
+        </div>
+        </div>
+                          </div>
                         </div>
-                      </div>
-                                    </div>
-                                    </div>
-                                    </div>
-                                    </div>
                                     </body>
 
 									</html>

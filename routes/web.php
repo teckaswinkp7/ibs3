@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\confirmedstudentscontroller;
 use App\Http\Controllers\Admin\GradeController;
 use App\Http\Controllers\Admin\AssignmentController;
 use App\Http\Controllers\Admin\Reportingcontroller;
+use App\Http\Controllers\Admin\Recieptverificationcontroller;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\Front\AssignmentsubmissionController;
 use App\Http\Controllers\Front\StudentAssignmentController;
@@ -90,6 +91,13 @@ Route::get('history', [Invoicecontroller::class, 'history'])->name('history');
 Route::get('/invoice',[Invoicecontroller::class, 'viewpdf'])->name('invoice');
 
 Route::get('generate-invoice/{id}', [PDFController::class, 'generateInvoicePDF'])->name('generate.invoice');
+
+/**  Reciept Verification Admin  */
+
+Route::get('reciept', [Recieptverificationcontroller::class, 'index'])->name('reciept.index');
+Route::get('recieptconfirm', [Recieptverificationcontroller::class, 'confirm'])->name('reciept.confirm');
+Route::post('recieptconfirmstore', [Recieptverificationcontroller::class, 'store'])->name('confirm.store');
+
 
 Route::post('post-registration', [AuthControllers::class, 'postRegistration'])->name('register.post'); 
 Route::post('final-registration', [AuthControllers::class, 'confirm_register'])->name('register.final'); 

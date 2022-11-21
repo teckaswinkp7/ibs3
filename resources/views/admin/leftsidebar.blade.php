@@ -225,6 +225,12 @@
                       <p>Send Invoice</p>
                     </a>
                   </li>
+                  <li class="nav-item">
+                    <a href="{{route('reciept.index')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Reciept Confirmation </p>
+                    </a>
+                  </li>
                   
                 </ul>
             </li>

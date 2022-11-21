@@ -14,6 +14,7 @@ use App\Models\sem;
 use App\Models\Courseselection;
 use Session;
 use PDF;
+use Carbon\Carbon;
 
 
 
@@ -243,6 +244,7 @@ class Invoicecontroller extends Controller
     public function refund(Request $request){
 
         $id= Auth::id();
+        $dueDate = Carbon::now()->addDays(4);
         $refundpolicy = payment::updateorcreate([
 
 
@@ -255,6 +257,7 @@ class Invoicecontroller extends Controller
 
             'stu_id' => auth::id(),
             'refundpolicy' =>implode(',',$request->refund),
+            'duedate' => $dueDate
 
 
 
@@ -319,6 +322,11 @@ class Invoicecontroller extends Controller
         $amountdue = payment::select('balance_due')->where('stu_id',$id)->get();
         $amountpaid =  payment::select('amount_paid')->where('stu_id',$id)->get();
     //    $balancedue = $amountdue[0]->amountdue - $amountpaid[0]->amount_paid;
+
+    if ($request->hasFile('payreciept')) {
+        $fileName = $request->payreciept->getClientOriginalName() . '.' . $request->payreciept->extension();
+        $request->payreciept->move(public_path('payreciept'), $fileName);
+    }
         $reciept = payment::updateorcreate([
 
 
@@ -332,9 +340,8 @@ class Invoicecontroller extends Controller
 
             'stu_id' => auth::id(),
             'amount_paid' =>$request->amount_paid + $amountpaid[0]->amount_paid,
-            'payreciept' =>$request->file('payreciept')->getclientoriginalname(),
+            "payreciept" =>$request->file('payreciept')->getClientOriginalName(),
             'balance_due' =>   $amountdue[0]->balance_due - $request->amount_paid,
-      
             'status'   => 'waiting Reconcillation',
 
 
@@ -349,13 +356,15 @@ class Invoicecontroller extends Controller
 
     public function history(){
 
-
+       
         $id=auth::id();
+        $total = payment::select('*')->where('stu_id',$id)->get();
         $amountdue = payment::select('amountdue','status')->where('stu_id',$id)->get();
 
 
 
-        return view('front.invoice.history',compact('amountdue'));
+        return view('front.invoice.history',compact('amountdue','total'));
     }
 
+    
 }

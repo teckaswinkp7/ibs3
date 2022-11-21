@@ -195,8 +195,14 @@ nav ul li a:hover span{
                         <p > Course :</p>
                         <p > invoice Number : {{$invoicedata[0]->invoiceno}} </p>
                         <p> Amount Due: ${{$total[0]->amountdue}} </p>
-                        <p> Issue Date :                    </p>
-                        <p> Due Date:   </p>
+                        <p> Issue Date :  
+                        @php 
+$date = $total[0]->updated_at;
+$dt = new DateTime($date);
+echo $dt->format('Y-m-d');
+@endphp
+</p>
+                        <p> Due Date: {{$total[0]->duedate}}  </p>
                         <p> Balance Due: ${{$total[0]->balance_due}}  </p> 
                         <p > Status: <span class= "badge badge-danger " >{{$total[0]->status}} </span> </p>
                         
