@@ -31,7 +31,7 @@ class Recieptverificationcontroller extends Controller
         ->where('payment.status','waiting Reconcillation')
         ->get();
 
-        $reciepts = payment::all();
+        $reciepts = Payment::all();
 
         return view('admin.reciept.confirm',compact('user','reciepts'));
     }
