@@ -150,8 +150,8 @@ nav ul li a:hover span{
       margin-left:20px;
       margin-right:30px;
       position:relative;
-      left:530px;
-      bottom:50px;
+      left:580px;
+      bottom:40px;
     }
     #clabel1{
 
@@ -181,6 +181,14 @@ right:0px;
 
    background: #2b3f8e;
 }
+#dcolor{
+
+background:  #FFC300 ;
+}
+#ecolor{
+
+background: #488e2b;
+}
 
 </style>
 @php 
@@ -203,11 +211,11 @@ right:0px;
          <div class="col-sm-4 text-right circle" ><span id="clabel1">Registered</span> </div>
 							 <div class="col-sm-6 text-right circle"><span id="clabel2"> Not Enrolled </span>  </div>
                       <div class="col-sm-8 text-right circle" > <span id="clabel3"> Partially Enrolled </span>  </div>
-                      <div class="col-sm-8 text-right circle" id="ccolor"> <span id="clabel4"> Fully Enrolled </span> </div>
+                      <div class="col-sm-8 text-right circle" id="ecolor"> <span id="clabel4"> Fully Enrolled </span> </div>
                       @elseif($statusis == 'Partially paid')
                       <div class="col-sm-4 text-right circle" ><span id="clabel1">Registered</span> </div>
 							 <div class="col-sm-6 text-right circle"><span id="clabel2"> Not Enrolled </span>  </div>
-                      <div class="col-sm-8 text-right circle" id="ccolor"> <span id="clabel3"> Partially Enrolled </span>  </div>
+                      <div class="col-sm-8 text-right circle" id="dcolor"> <span id="clabel3"> Partially Enrolled </span>  </div>
                       <div class="col-sm-8 text-right circle" > <span id="clabel4"> Fully Enrolled </span> </div>
                      @else
                      <div class="col-sm-4 text-right circle" id="ccolor" ><span id="clabel1">Registered</span> </div>

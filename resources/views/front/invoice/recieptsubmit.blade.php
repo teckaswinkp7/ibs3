@@ -162,14 +162,20 @@ nav ul li a:hover span{
    transform:translateY(-50%) rotate(-180deg);
 }
 
+
+
 </style>
+
+
 
     <div class="background-profile" style="margin-top: 100px;"> 
         <div class="profile-modal">
             <div class="profile-logo">
                 <a href="#"><img src="profile-logo.png" alt="" width="100px"></a>
-            </div>  
+            </div> 
+            
             <h3> Confirm Your Payment</h3>
+            
             
             <div class="row">
                 <div class="col-sm-3">
@@ -188,6 +194,7 @@ nav ul li a:hover span{
                     </div>
                 </div>
                 <div class="col-sm-9">
+                  
                 <p> You have outstanding  on the following invoices: </p>
                 <form action="{{route('recieptpost')}}" method="post" enctype="multipart/form-data">
                           @csrf

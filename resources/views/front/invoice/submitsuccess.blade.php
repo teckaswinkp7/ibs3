@@ -144,8 +144,68 @@ nav ul li a:hover span{
 
    transform:translateY(-50%) rotate(-180deg);
 }
+.circle{
+   width: 25px;
+      height: 25px;
+      -webkit-border-radius: 25px;
+      -moz-border-radius: 25px;
+      border-radius: 25px;
+      border:1px solid gray;
+      margin-left:20px;
+      margin-right:30px;
+      position:relative;
+      left:350px;
+      bottom:50px;
+    }
+    #clabel1{
+
+      position:absolute;
+      top:35px;
+      right:-20px;
+    }
+    #clabel2{
+
+position:absolute;
+top:30px;
+right:0px;
+}
+#clabel3{
+
+position:absolute;
+top:30px;
+right:0px;
+}
+#clabel4{
+
+position:absolute;
+top:30px;
+right:0px;
+}
+#ccolor{
+
+   background: #2b3f8e;
+}
+#dcolor{
+
+background:  #FFC300 ;
+}
+#ecolor{
+
+background: #488e2b;
+}
+
 
 </style>
+@php 
+                      
+                      $id= auth::id();
+                      $statuscheck = DB::table('payment')->select('status')->where('stu_id',$id)->get();
+                      $statusis = $statuscheck[0]->status;
+
+                  
+
+                      @endphp
+
 
     <div class="background-profile" style="margin-top: 100px;"> 
         <div class="profile-modal">
@@ -171,12 +231,31 @@ nav ul li a:hover span{
                     </div>
                 </div>
                 <div class="col-sm-9">
+                <div class="row">
+         @if($statusis == 'Fully Paid')
+         <div class="col-sm-4 text-right circle" ><span id="clabel1">Registered</span> </div>
+							 <div class="col-sm-6 text-right circle"><span id="clabel2"> Not Enrolled </span>  </div>
+                      <div class="col-sm-8 text-right circle" > <span id="clabel3"> Partially Enrolled </span>  </div>
+                      <div class="col-sm-8 text-right circle" id="ecolor"> <span id="clabel4"> Fully Enrolled </span> </div>
+                      @elseif($statusis == 'Partially paid')
+                      <div class="col-sm-4 text-right circle" ><span id="clabel1">Registered</span> </div>
+							 <div class="col-sm-6 text-right circle"><span id="clabel2"> Not Enrolled </span>  </div>
+                      <div class="col-sm-8 text-right circle" id="dcolor"> <span id="clabel3"> Partially Enrolled </span>  </div>
+                      <div class="col-sm-8 text-right circle" > <span id="clabel4"> Fully Enrolled </span> </div>
+                     @else
+                     <div class="col-sm-4 text-right circle" id="ccolor" ><span id="clabel1">Registered</span> </div>
+							 <div class="col-sm-6 text-right circle"><span id="clabel2"> Not Enrolled </span>  </div>
+                     <div class="col-sm-8 text-right circle" > <span id="clabel3"> Partially Enrolled </span>  </div>
+                     <div class="col-sm-8 text-right circle" > <span id="clabel4"> Fully Enrolled </span> </div>
+                      @endif
+							</div> 
 
-                
                <div class="edit-course">
 </br>
+               <img style="width:150px; position:relative; left:220px;" src="{{asset('public/image/accept.png')}}"></img>
 </br>
-                <h3> Reciept Submitted Succesfully </h3>
+</br>
+                <h4 style = "text-align:center;"> Reciept Submitted Succesfully </h4>
                 <p> Thank you for submitting your payment receipt form. 
                     Your invoice and payment will now be sent to the Finance team for reconciliation. 
                     Once your payment has been reconciled, your payment status will be updated, 
