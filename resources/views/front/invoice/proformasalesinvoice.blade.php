@@ -129,10 +129,7 @@ nav ul li a:hover span{
       -moz-border-radius: 25px;
       border-radius: 25px;
       border:1px solid gray;
-      margin-left:20px;
-      margin-right:30px;
     }
-
 #ccolor{
 
    background: #2b3f8e;
@@ -145,27 +142,100 @@ background:  #FFC300 ;
 
 background: #488e2b;
 }
+.progress-bar span{
+   font-size: 14px;
+}
+.progress-logo{
+    display: flex;
+    justify-content: space-between;
+}
 
 </style>
 
     <div class="background-profile" style="margin-top: 100px;"> 
         <div class="profile-modal">
-            <div class="profile-logo">
-                <a href="#"><img src="profile-logo.png" alt="" width="100px"></a>
-            </div>  
+        <div class="progress-logo">
+        <div class="profile-logo">
+            <a href="#"><img src="{{asset('assets/custom/profile-logo.png')}}" alt="" width="100px"></a>
+         </div>
+         <div class="progress-bar">
+               <div class="row">
+                  @if($statusis == 'Fully Paid')
+                  
+                  <div class="col-sm-3">
+                     <div class="circle" ></div>
+                     <span>Registered</span> 
+                  </div>
+                  <div class="col-sm-3 " >
+                     <div class="circle"></div>
+                     <span>Not <br> Enrolled </span> 
+                  </div>
+
+                  <div class="col-sm-3 " >
+                     <div class="circle"></div>
+                     <span>Partially <br> Enrolled</span> 
+                  </div>
+                  <div class="col-sm-3 " >
+                     <div class="circle" id="ecolor"></div>
+                     <span>Fully <br> Enrolled</span> 
+                  </div> 
+                  @elseif($statusis == 'Partially paid')
+                  <div class="col-sm-3">
+                     <div class="circle"></div>
+                     <span>Registered</span> 
+                  </div>
+                  <div class="col-sm-3 " >
+                     <div class="circle"></div>
+                     <span>Not <br> Enrolled </span> 
+                  </div>
+
+                  <div class="col-sm-3 " >
+                     <div class="circle"  id="dcolor"></div>
+                     <span>Partially <br> Enrolled</span> 
+                  </div>
+                  <div class="col-sm-3 " >
+                     <div class="circle"></div>
+                     <span>Fully <br> Enrolled</span> 
+                  </div> 
+                  @else
+                  <div class="col-sm-3">
+                     <div class="circle" id="ccolor"></div>
+                     <span>Registered</span> 
+                  </div>
+                  <div class="col-sm-3 " >
+                     <div class="circle"></div>
+                     <span>Not <br> Enrolled </span> 
+                  </div>
+
+                  <div class="col-sm-3 " >
+                     <div class="circle"  ></div>
+                     <span>Partially <br> Enrolled</span> 
+                  </div>
+                  <div class="col-sm-3 " >
+                     <div class="circle" ></div>
+                     <span>Fully <br> Enrolled</span> 
+                  </div> 
+                  @endif
+
+
+   
+                 </div>
+            </div>
+            
+         </div>
             <h3> Sales invoice </h3>
             
             <div class="row">
                 <div class="col-sm-3">
                     <div class="profile-course">
-                        <a href="#">Profile</a>
-                        <a href="#">Course</a>
+                        <a href="userprofile">Profile</a>
+                        <a href="useroffer">Course</a>
                         <li><a class="bill-btn" href="#">bill
                     <span class="fas fa-caret-down"> </span>
                     <li class="bill-show">
                   <li class="bill"><a href="proformainvoice">Pro-forma-invoice</a></li>
-                  <li class="bill"><a href="salesinvoice">Sales Invoice</a></li>
-                  <li class="bill"><a href="payment">Payment</a></li>
+                  <li class="bill"><a href="proformasalesinvoice">Sales Invoice</a></li>
+                  <li class="bill"><a href="confirmpayment">Payment</a></li>
                   <li class="bill"><a href="history">History</a></li>
 </li>
                     </a></li>

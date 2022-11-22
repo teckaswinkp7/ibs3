@@ -180,8 +180,8 @@ nav ul li a:hover span{
             <div class="row">
                 <div class="col-sm-3">
                     <div class="profile-course">
-                        <a href="#">Profile</a>
-                        <a href="#">Course</a>
+                        <a href="userprofile">Profile</a>
+                        <a href="useroffer">Course</a>
                         <li><a class="bill-btn" href="#">bill
                     <span class="fas fa-caret-down"> </span>
                     <li class="bill-show">
@@ -199,7 +199,7 @@ nav ul li a:hover span{
                 <form action="{{route('recieptpost')}}" method="post" enctype="multipart/form-data">
                           @csrf
                       <div class="edit-course">
-                        <p > Course :</p>
+                        <p > Course : {{$student_course_offer[0]->courses_name}} </p>
                         <p > invoice Number : {{$invoicedata[0]->invoiceno}} </p>
                         <p> Amount Due: ${{$total[0]->amountdue}} </p>
                         <p> Issue Date :  

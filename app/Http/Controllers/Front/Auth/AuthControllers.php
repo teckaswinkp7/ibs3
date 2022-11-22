@@ -73,7 +73,7 @@ class AuthControllers extends Controller
             }
             else
             {
-                return redirect("education/create-step-one"); 
+                return redirect("admin/dashboard"); 
             }                    
         }
   

@@ -5,6 +5,14 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"/>  
  
 <link rel="stylesheet" href="{{asset('assets/custom/profile.css')}}">
+
+<style>
+
+*{
+   list-style-type: none;
+}
+
+    </style>
     <div class="background-profile" style="margin-top: 100px;"> 
         <div class="profile-modal">
             <div class="profile-logo">
@@ -16,6 +24,10 @@
                     <div class="profile-course">
                         <a href="userprofile">Profile</a>
                         <a href="useroffer">Course</a>
+                        <li class="bill"><a href="proformainvoice">Pro-forma-invoice</a></li>
+                  <li class="bill"><a href="proformasalesinvoice">Sales Invoice</a></li>
+                  <li class="bill"><a href="confirmpayment">Payment</a></li>
+                  <li class="bill"><a href="history">History</a></li>
                         {{-- <a href="#"></a>
                         <a href="#"></a> --}}
                     </div>
@@ -37,7 +49,8 @@
                         </div>
 
                     </div>
-                    <form action="">
+                    <form action="{{route('courseofferpost')}}" method="post">
+                        @csrf
                       <div class="offer-course">
                         
                         <a href="#">{{$student_course_offer[0]->courses_name}}</a>
@@ -47,8 +60,8 @@
                         </a>
                       </div>
                       <div class="offer-btn">
-                        <button class=""><a style="text-decoration:none; color:#fff;" href="{{route('courseApproved')}}">Accept</a></button>
-                        <button class=""><a style="text-decoration:none; color:#fff;" href="{{route('courseDenied')}}">Decline</a></button>
+                        <button type="submit" value="yes" name="accepted" >Accept</button>
+                        <button type="submit" value="no" name="accepted">Decline  </button>
                         <button class=""><a style="text-decoration:none; color:#fff;" href="{{route('coursedefer')}}">Defer</a></button>
                       </div>
                     </form>

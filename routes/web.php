@@ -66,6 +66,8 @@ Route::post('updatepasswords', [AuthControllers::class, 'update_passwords'])->na
 
 Route::get('useroffer', [EducationController::class, 'user_offer'])->name('useroffer');
 Route::get('userofferaccept', [EducationController::class, 'user_offer_accept'])->name('userofferaccept');
+Route::post('courseofferpost', [EducationController::class, 'courseofferpost'])->name('courseofferpost');
+
 Route::get('coursedefer', [EducationController::class, 'coursedefer'])->name('coursedefer');
 Route::post('coursesdefer', [EducationController::class, 'coursesdefer'])->name('coursesdefer');
 Route::get('useroffercongrats', [EducationController::class, 'user_offer_congrats'])->name('useroffercongrats');

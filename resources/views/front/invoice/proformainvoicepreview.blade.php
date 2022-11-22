@@ -137,43 +137,16 @@ nav ul li a:hover span{
 .profile-modal{
 
   background:#EDEDED;
-}.circle{
+}
+
+.circle{
    width: 25px;
       height: 25px;
       -webkit-border-radius: 25px;
       -moz-border-radius: 25px;
       border-radius: 25px;
       border:1px solid gray;
-      margin-left:20px;
-      margin-right:30px;
-      position:relative;
-      left:530px;
-      bottom:50px;
     }
-    #clabel1{
-
-      position:absolute;
-      top:35px;
-      right:-20px;
-    }
-    #clabel2{
-
-position:absolute;
-top:30px;
-right:0px;
-}
-#clabel3{
-
-position:absolute;
-top:30px;
-right:0px;
-}
-#clabel4{
-
-position:absolute;
-top:30px;
-right:0px;
-}
 #ccolor{
 
    background: #2b3f8e;
@@ -186,6 +159,13 @@ background:  #FFC300 ;
 
 background: #488e2b;
 }
+.progress-bar span{
+   font-size: 14px;
+}
+.progress-logo{
+    display: flex;
+    justify-content: space-between;
+}
 
 
 </style>
@@ -193,16 +173,82 @@ background: #488e2b;
 
     <div class="background-profile" style="margin-top: 100px;"> 
         <div class="profile-modal">
-            <div class="profile-logo">
-                <a href="#"><img src="profile-logo.png" alt="" width="100px"></a>
-            </div> 
+        <div class="progress-logo">
+        <div class="profile-logo">
+            <a href="#"><img src="{{asset('assets/custom/profile-logo.png')}}" alt="" width="100px"></a>
+         </div>
+         <div class="progress-bar">
+               <div class="row">
+                  @if($statusis == 'Fully Paid')
+                  
+                  <div class="col-sm-3">
+                     <div class="circle" ></div>
+                     <span>Registered</span> 
+                  </div>
+                  <div class="col-sm-3 " >
+                     <div class="circle"></div>
+                     <span>Not <br> Enrolled </span> 
+                  </div>
+
+                  <div class="col-sm-3 " >
+                     <div class="circle"></div>
+                     <span>Partially <br> Enrolled</span> 
+                  </div>
+                  <div class="col-sm-3 " >
+                     <div class="circle" id="ecolor"></div>
+                     <span>Fully <br> Enrolled</span> 
+                  </div> 
+                  @elseif($statusis == 'Partially paid')
+                  <div class="col-sm-3">
+                     <div class="circle"></div>
+                     <span>Registered</span> 
+                  </div>
+                  <div class="col-sm-3 " >
+                     <div class="circle"></div>
+                     <span>Not <br> Enrolled </span> 
+                  </div>
+
+                  <div class="col-sm-3 " >
+                     <div class="circle"  id="dcolor"></div>
+                     <span>Partially <br> Enrolled</span> 
+                  </div>
+                  <div class="col-sm-3 " >
+                     <div class="circle"></div>
+                     <span>Fully <br> Enrolled</span> 
+                  </div> 
+                  @else
+                  <div class="col-sm-3">
+                     <div class="circle" id="ccolor"></div>
+                     <span>Registered</span> 
+                  </div>
+                  <div class="col-sm-3 " >
+                     <div class="circle"></div>
+                     <span>Not <br> Enrolled </span> 
+                  </div>
+
+                  <div class="col-sm-3 " >
+                     <div class="circle"  ></div>
+                     <span>Partially <br> Enrolled</span> 
+                  </div>
+                  <div class="col-sm-3 " >
+                     <div class="circle" ></div>
+                     <span>Fully <br> Enrolled</span> 
+                  </div> 
+                  @endif
+
+
+   
+                 </div>
+            </div>
+            
+         </div>
             <h3> Proforma invoice </h3>
             
             <div class="row">
                 <div class="col-sm-3">
                     <div class="profile-course">
-                        <a href="#">Profile</a>
-                        <a href="#">Course</a>
+                        <a href="userprofile">Profile</a>
+                        <a href="useroffer">Course</a>
                         <li><a class="bill-btn" href="#">bill
                     <span class="fas fa-caret-down"> </span>
                     <li class="bill-show">

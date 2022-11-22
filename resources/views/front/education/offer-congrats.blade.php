@@ -5,6 +5,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"/>  
 <link rel="stylesheet" href="{{asset('assets/custom/profile.css')}}">
 <style>
+    *{
+   list-style-type: none;
+}
+
     .congrats-btn {
     text-align: right;
 }
@@ -95,6 +99,10 @@
                     <div class="profile-course">
                         <a href="#">Profile</a>
                         <a href="#">Course</a>
+                        <li class="bill"><a href="proformainvoice">Pro-forma-invoice</a></li>
+                  <li class="bill"><a href="proformasalesinvoice">Sales Invoice</a></li>
+                  <li class="bill"><a href="confirmpayment">Payment</a></li>
+                  <li class="bill"><a href="history">History</a></li>
                         {{-- <a href="#"></a>
                         <a href="#"></a> --}}
                     </div>

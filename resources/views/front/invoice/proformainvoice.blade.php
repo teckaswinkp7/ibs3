@@ -52,36 +52,7 @@ nav ul li a:hover span{
       -moz-border-radius: 25px;
       border-radius: 25px;
       border:1px solid gray;
-      margin-left:20px;
-      margin-right:30px;
-      position:relative;
-      left:530px;
-      bottom:50px;
     }
-    #clabel1{
-
-      position:absolute;
-      top:35px;
-      right:-20px;
-    }
-    #clabel2{
-
-position:absolute;
-top:30px;
-right:0px;
-}
-#clabel3{
-
-position:absolute;
-top:30px;
-right:0px;
-}
-#clabel4{
-
-position:absolute;
-top:30px;
-right:0px;
-}
 #ccolor{
 
    background: #2b3f8e;
@@ -94,18 +65,87 @@ background:  #FFC300 ;
 
 background: #488e2b;
 }
-
-    
-
-   </style>
-    
-
-<div class="background-profile" style="margin-top: 100px;"> 
+.progress-bar span{
+   font-size: 14px;
+}
+.progress-logo{
+    display: flex;
+    justify-content: space-between;
+}
+</style>
+  <div class="background-profile" style="margin-top: 100px;"> 
     <div class="profile-modal">
+    <div class="progress-logo">
         <div class="profile-logo">
             <a href="#"><img src="{{asset('assets/custom/profile-logo.png')}}" alt="" width="100px"></a>
-         </div>  
-        <h3>  Pro Forma Invoice </h3>
+         </div>
+         <div class="progress-bar">
+        
+               <div class="row">
+                  @if($statusis == 'Registered')
+                  
+                  <div class="col-sm-3">
+                     <div class="circle" id="ccolor"></div>
+                     <span>Registered</span> 
+                  </div>
+                  <div class="col-sm-3 " >
+                     <div class="circle"></div>
+                     <span>Not <br> Enrolled </span> 
+                  </div>
+
+                  <div class="col-sm-3 " >
+                     <div class="circle"></div>
+                     <span>Partially <br> Enrolled</span> 
+                  </div>
+                  <div class="col-sm-3 " >
+                     <div class="circle"></div>
+                     <span>Fully <br> Enrolled</span> 
+                  </div> 
+                  @elseif($statusis == 'Partially paid')
+                  <div class="col-sm-3">
+                     <div class="circle"></div>
+                     <span>Registered</span> 
+                  </div>
+                  <div class="col-sm-3 " >
+                     <div class="circle"></div>
+                     <span>Not <br> Enrolled </span> 
+                  </div>
+
+                  <div class="col-sm-3 " >
+                     <div class="circle"  id="dcolor"></div>
+                     <span>Partially <br> Enrolled</span> 
+                  </div>
+                  <div class="col-sm-3 " >
+                     <div class="circle"></div>
+                     <span>Fully <br> Enrolled</span> 
+                  </div> 
+                  @else($statusis == 'Fully paid')
+                  <div class="col-sm-3">
+                     <div class="circle"></div>
+                     <span>Registered</span> 
+                  </div>
+                  <div class="col-sm-3 " >
+                     <div class="circle"></div>
+                     <span>Not <br> Enrolled </span> 
+                  </div>
+
+                  <div class="col-sm-3 " >
+                     <div class="circle"  ></div>
+                     <span>Partially <br> Enrolled</span> 
+                  </div>
+                  <div class="col-sm-3 " >
+                     <div class="circle" id="ecolor"></div>
+                     <span>Fully <br> Enrolled</span> 
+                  </div> 
+                  @endif
+
+
+   
+                 </div>
+            </div>
+            
+         </div>
+       <h3>  Pro Forma Invoice </h3>
         <div class="row">
             <div class="col-sm-3">
                 <nav class="profile-course">
@@ -114,16 +154,12 @@ background: #488e2b;
                    <li> <a href="userprofile">Profile</a></li>
                     <li><a href="useroffer">Course</a></li>
                   <li ><a href="proformainvoice">Pro-forma-invoice</a></li>
-                  <li><a href="salesinvoice">Sales Invoice</a></li>
-                  <li ><a href="payment">Payment</a></li>
+                  <li><a href="proformasalesinvoice">Sales Invoice</a></li>
+                  <li ><a href="confirmpayment">Payment</a></li>
                   <li ><a href="history">History</a></li>
-
-                    
-
-
-                    </ul>
-</nav>
-            </div>
+                  </ul>
+                  </nav>   
+</div>
             <div class="col-sm-9">
                 <div class="select-course">
             
@@ -173,9 +209,7 @@ background: #488e2b;
 </div>
 
 </br>
-
-
-                <div class="col-sm-12">
+<div class="col-sm-12">
                <div id="period" class="hide"> 
                 <p>Select the period you would like to make payment for :</p>
                 @foreach ($sem as $semester)
@@ -185,16 +219,18 @@ background: #488e2b;
                 
                 </div>
 </br>
+           <div class="row">
             <div class="col-sm-12">
                <div class="additional-items"> 
                  
-              <label>Additional Items to Include: </label></br>
+              <label>Additional Items to Include: </label>
               @foreach ($additionalfee as $additional)
                 <label><input type="checkbox" name="additional_info[]" value="{{$additional->title}}"> {{$additional->title}}</label>
                 @endforeach
                 </div>
 
-</div>
+             </div>
+             </div>
 </div>
 </div>
 </div>
@@ -210,7 +246,7 @@ background: #488e2b;
 
             </div>
         </div>
-        
+      
     </div>
 </div>
 <div>

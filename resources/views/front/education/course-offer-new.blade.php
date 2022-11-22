@@ -23,8 +23,8 @@
                         <a href="userprofile">Profile</a>
                         <a href="useroffer">Course</a>
                         <li ><a href="proformainvoice">Pro-forma-invoice</a></li>
-                  <li><a href="salesinvoice">Sales Invoice</a></li>
-                  <li ><a href="payment">Payment</a></li>
+                  <li><a href="proformasalesinvoice">Sales Invoice</a></li>
+                  <li ><a href="confirmpayment">Payment</a></li>
                   <li ><a href="history">History</a></li>
                         {{-- <a href="#"></a>
                         <a href="#"></a> --}}
@@ -33,6 +33,10 @@
                 <div class="col-sm-9">
                     <p>From the documents you have submitted, you are eligible for the following courses listed below. Kindly make your choice of the course you would like to study at IBS University and receive your offer</p></p>
                     <div class="select-course">
+                        @php 
+                        $id = auth::id();
+                        $student_course_offer= DB::table('courseselections')->select("courses.name")->join("courses","courses.id", "=", "courseselections.studentSelCid")->where('courseselections.stu_id','=',$id)->get();
+                        @endphp 
                       @php
                         $course_list = DB::select( DB::raw("SELECT * FROM courseselections WHERE stu_id = '".Auth::user()->id."'"));
                       @endphp
@@ -50,10 +54,17 @@
                       @foreach ($course_id_arr as $key => $val)
                       @php
                       $course_name = DB::select(DB::raw("SELECT * FROM courses WHERE id = $val"));
-                      
+                     
+                      $id = auth::id();
+                    $offer = DB::table('users')->select('offer_accepted')->where('id',$id)->get();
+                    $offeraccepted = $offer[0]->offer_accepted;
                       @endphp
-
+                      @if($offeraccepted == 'yes')
+                     <span ><a class="badge badge-success">Selected Course : {{ $student_course_offer[0]->name}}</a> <span>
+                     @else
                      <a href="{{ route('coursestatus',$val) }}">{{ $course_name[0]->name }}</a>
+                     @endif
+
                      @endforeach
                      @endif
                      {{-- <a href="#">Business and Management </a>

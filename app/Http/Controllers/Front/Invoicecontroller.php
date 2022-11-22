@@ -38,12 +38,16 @@ class Invoicecontroller extends Controller
         join('courseselections','courseselections.StudentSelCid','=','units.course_id')->
         where('courseselections.stu_id','=',$id)->
         get();
+     
+        $statuscheck = DB::table('payment')->select('status')->where('stu_id',$id)->get();
+        $statusis = $statuscheck[0]->status;
+
 
         $sem = sem::all();
         $additionalfee = Additionalfee::all();
         $unitselectionid = DB::table('unitselection')->select('unitselection.units_id')->where('unitselection.stu_id','=',$id)->get();
         $selectedid = explode(",", $unitselectionid);
-        return view('front.invoice.proformainvoice',compact('selectedcourse','availableunits','selectedid','additionalfee','sem'));
+        return view('front.invoice.proformainvoice',compact('selectedcourse','availableunits','selectedid','additionalfee','sem','statusis'));
 
     }
 
@@ -67,6 +71,8 @@ class Invoicecontroller extends Controller
      //   $courseData = json_decode($courseData);
         $unitsData = json_decode($unitsData); 
         $exist = $exist->additional_info;
+        $statuscheck = DB::table('payment')->select('status')->where('stu_id',$id)->get();
+        $statusis = $statuscheck[0]->status;
    //     $unitPrice = array();
         //$unitsData['price'] = array();
   //      foreach($unitsData as $val)
@@ -79,7 +85,7 @@ class Invoicecontroller extends Controller
         $location = Profile::where('stu_id',$id)->select('current_location','current_address_location')->first();
         $communication = User::where('id',$id)->select('email','phone')->first();        
         $student_course_offer= Courseselection::select("courses.name as courses_name")->join("courses","courses.id", "=", "courseselections.studentSelCid")->where('courseselections.stu_id','=',$id)->get();
-        return view('front.invoice.proformainvoicepreview',compact('student_course_offer','user','exist','location','communication','invoicedata','selectedcourse','unitsData','courseData'));
+        return view('front.invoice.proformainvoicepreview',compact('student_course_offer','user','exist','location','communication','invoicedata','selectedcourse','unitsData','courseData','statusis'));
     }
 
     public function store(Request $request){
@@ -209,6 +215,8 @@ class Invoicecontroller extends Controller
      //   $courseData = json_decode($courseData);
         $unitsData = json_decode($unitsData); 
         $exist = $exist->additional_info;
+        $statuscheck = DB::table('payment')->select('status')->where('stu_id',$id)->get();
+        $statusis = $statuscheck[0]->status;
    //     $unitPrice = array();
         //$unitsData['price'] = array();
   //      foreach($unitsData as $val)
@@ -221,7 +229,7 @@ class Invoicecontroller extends Controller
         $location = Profile::where('stu_id',$id)->select('current_location','current_address_location')->first();
         $communication = User::where('id',$id)->select('email','phone')->first();        
         $student_course_offer= Courseselection::select("courses.name as courses_name")->join("courses","courses.id", "=", "courseselections.studentSelCid")->where('courseselections.stu_id','=',$id)->get();
-        return view('front.invoice.proformasalesinvoice',compact('student_course_offer','user','exist','location','communication','invoicedata','selectedcourse','unitsData','courseData'));
+        return view('front.invoice.proformasalesinvoice',compact('student_course_offer','user','exist','location','communication','invoicedata','selectedcourse','unitsData','courseData','statusis'));
 
     }
 
@@ -234,10 +242,12 @@ class Invoicecontroller extends Controller
         $total = payment::select('*')->where('stu_id',$id)->get();
         $date = invoice::select('updated_at')->where('stu_id',$id)->get();
         $date = $date->add(4);
-       
+        $student_course_offer= Courseselection::select("courses.name as courses_name")->join("courses","courses.id", "=", "courseselections.studentSelCid")->where('courseselections.stu_id','=',$id)->get();      
+        $statuscheck = DB::table('payment')->select('status')->where('stu_id',$id)->get();
+        $statusis = $statuscheck[0]->status;
 
 
-        return view ('front.invoice.confirmpayment',compact('invoicedata','total','date'));
+        return view ('front.invoice.confirmpayment',compact('invoicedata','total','date','student_course_offer','statusis'));
 
     }
 
@@ -305,15 +315,18 @@ class Invoicecontroller extends Controller
         $total = payment::select('*')->where('stu_id',$id)->get();
         $date = invoice::select('updated_at')->where('stu_id',$id)->get();
         $date = $date->add(4);
+        $student_course_offer= Courseselection::select("courses.name as courses_name")->join("courses","courses.id", "=", "courseselections.studentSelCid")->where('courseselections.stu_id','=',$id)->get();
 
 
-        return view('front.invoice.recieptsubmit',compact('invoicedata','total','amountdue','amountpaid'));
+        return view('front.invoice.recieptsubmit',compact('invoicedata','total','amountdue','amountpaid','student_course_offer'));
     }
 
     public function success(){
+        $id = auth::id();
+        $statuscheck = DB::table('payment')->select('status')->where('stu_id',$id)->get();
+        $statusis = $statuscheck[0]->status;
 
-
-        return view('front.invoice.submitsuccess');
+        return view('front.invoice.submitsuccess',compact('statusis'));
     }
     public function reciept(Request $request){
 
@@ -324,7 +337,7 @@ class Invoicecontroller extends Controller
     //    $balancedue = $amountdue[0]->amountdue - $amountpaid[0]->amount_paid;
 
     if ($request->hasFile('payreciept')) {
-        $fileName = $request->payreciept->getClientOriginalName() . '.' . $request->payreciept->extension();
+        $fileName = $request->payreciept->getClientOriginalName();
         $request->payreciept->move(public_path('payreciept'), $fileName);
     }
         $reciept = payment::updateorcreate([
@@ -360,10 +373,12 @@ class Invoicecontroller extends Controller
         $id=auth::id();
         $total = payment::select('*')->where('stu_id',$id)->get();
         $amountdue = payment::select('amountdue','status')->where('stu_id',$id)->get();
+        $statuscheck = DB::table('payment')->select('status')->where('stu_id',$id)->get();
+        $statusis = $statuscheck[0]->status;
 
 
 
-        return view('front.invoice.history',compact('amountdue','total'));
+        return view('front.invoice.history',compact('amountdue','total','statusis'));
     }
 
     

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Education;
 use App\Models\Document;
 use App\Models\User;
+use App\Models\Payment;
 use App\Mail\OfferEmail;
 use App\Models\Sponsor;
 use App\Models\Studentcourseoffer;
@@ -522,4 +523,42 @@ class EducationController extends Controller
         
         return redirect('userprofile');
     }
+
+
+
+    public function courseofferpost(Request $request){
+
+        $id = Auth::id();
+
+        $offeraccepted = User::findorfail($id);
+
+        $offeraccepted->offer_accepted = $request->accepted;
+
+        $offeraccepted->save();
+
+    $courseoffer = Payment::updateOrCreate([
+  
+ 
+    'stu_id' =>$id
+
+],[
+
+    'status'          => 'Registered',
+    'offer_accepted'  =>  $request->accepted,
+
+
+
+  ]);
+
+  if($request->accepted == 'yes') {
+   
+    return redirect()->route('courseApproved');
+
+  }
+  else{
+
+    return redirect()->route('useroffer');
+
+  }
+  }
 }
