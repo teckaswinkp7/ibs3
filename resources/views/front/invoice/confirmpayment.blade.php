@@ -189,15 +189,7 @@ background: #488e2b;
 }
 
 </style>
-@php 
-                      
-                      $id= auth::id();
-                      $statuscheck = DB::table('payment')->select('status')->where('stu_id',$id)->get();
-                      $statusis = $statuscheck[0]->status;
 
-                  
-
-                      @endphp
 
     <div class="background-profile" style="margin-top: 100px;"> 
         <div class="profile-modal">
@@ -226,24 +218,6 @@ background: #488e2b;
                 </div>
             
                 <div class="col-sm-9">
-                <div class="row">
-         @if($statusis == 'Fully Paid')
-         <div class="col-sm-4 text-right circle" ><span id="clabel1">Registered</span> </div>
-							 <div class="col-sm-6 text-right circle"><span id="clabel2"> Not Enrolled </span>  </div>
-                      <div class="col-sm-8 text-right circle" > <span id="clabel3"> Partially Enrolled </span>  </div>
-                      <div class="col-sm-8 text-right circle" id="ecolor"> <span id="clabel4"> Fully Enrolled </span> </div>
-                      @elseif($statusis == 'Partially paid')
-                      <div class="col-sm-4 text-right circle" ><span id="clabel1">Registered</span> </div>
-							 <div class="col-sm-6 text-right circle"><span id="clabel2"> Not Enrolled </span>  </div>
-                      <div class="col-sm-8 text-right circle" id="dcolor"> <span id="clabel3"> Partially Enrolled </span>  </div>
-                      <div class="col-sm-8 text-right circle" > <span id="clabel4"> Fully Enrolled </span> </div>
-                     @else
-                     <div class="col-sm-4 text-right circle" id="ccolor" ><span id="clabel1">Registered</span> </div>
-							 <div class="col-sm-6 text-right circle"><span id="clabel2"> Not Enrolled </span>  </div>
-                     <div class="col-sm-8 text-right circle" > <span id="clabel3"> Partially Enrolled </span>  </div>
-                     <div class="col-sm-8 text-right circle" > <span id="clabel4"> Fully Enrolled </span> </div>
-                      @endif
-							</div>
                 <p> You have outstanding  on the following invoices: </p>
                     <form action="">
                     @php 
