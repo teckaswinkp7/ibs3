@@ -5,6 +5,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"/>  
  
 <link rel="stylesheet" href="{{asset('assets/custom/profile.css')}}">
+<style>
+*{
+   list-style-type: none;
+}
+</style>
 <body>
     <div class="background-profile" style="margin-top: 100px;"> 
         <div class="profile-modal">
@@ -17,7 +22,10 @@
                     <div class="profile-course">
                         <a href="userprofile">Profile</a>
                         <a href="useroffer">Course</a>
-                        <a href="history">History</a>
+                        <li ><a href="proformainvoice">Pro-forma-invoice</a></li>
+                  <li><a href="salesinvoice">Sales Invoice</a></li>
+                  <li ><a href="payment">Payment</a></li>
+                  <li ><a href="history">History</a></li>
                         {{-- <a href="#"></a>
                         <a href="#"></a> --}}
                     </div>

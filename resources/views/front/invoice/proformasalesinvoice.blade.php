@@ -189,22 +189,11 @@ background: #488e2b;
                 <a href="#"><img src="profile-logo.png" alt="" width="100px"></a>
             </div>  
             <div class="row">
-         @if($statusis == 'Fully Paid')
-         <div class="col-sm-4 text-right circle" ><span id="clabel1">Registered</span> </div>
-							 <div class="col-sm-6 text-right circle"><span id="clabel2"> Not Enrolled </span>  </div>
-                      <div class="col-sm-8 text-right circle" > <span id="clabel3"> Partially Enrolled </span>  </div>
-                      <div class="col-sm-8 text-right circle" id="ecolor"> <span id="clabel4"> Fully Enrolled </span> </div>
-                      @elseif($statusis == 'Partially paid')
-                      <div class="col-sm-4 text-right circle" ><span id="clabel1">Registered</span> </div>
-							 <div class="col-sm-6 text-right circle"><span id="clabel2"> Not Enrolled </span>  </div>
-                      <div class="col-sm-8 text-right circle" id="dcolor"> <span id="clabel3"> Partially Enrolled </span>  </div>
-                      <div class="col-sm-8 text-right circle" > <span id="clabel4"> Fully Enrolled </span> </div>
-                     @else
                      <div class="col-sm-4 text-right circle" id="ccolor" ><span id="clabel1">Registered</span> </div>
 							 <div class="col-sm-6 text-right circle"><span id="clabel2"> Not Enrolled </span>  </div>
                      <div class="col-sm-8 text-right circle" > <span id="clabel3"> Partially Enrolled </span>  </div>
                      <div class="col-sm-8 text-right circle" > <span id="clabel4"> Fully Enrolled </span> </div>
-                      @endif
+                     
 							</div> 
             <h3> Sales invoice </h3>
             
@@ -231,7 +220,7 @@ background: #488e2b;
                         <img class="float-right" src="{{asset('assets/front/images/IBS-Logo.png')}}" alt="" width="150px"></img>
                         </br>
                         </br>
-                            <h4> Pro Forma Sales Invoice : {{$invoicedata[0]->invoiceno}}</h4>
+                            <h4> Sales Invoice : {{$invoicedata[0]->invoiceno}}</h4>
                             <p>  <?php echo date("M d Y"); ?></p>
                            
                             <div class="invoice-wrapper">
@@ -356,7 +345,6 @@ background: #488e2b;
             
             
             <div class="print-download-btn">
-            <a href="{{route('proformainvoice')}}"><button class="down"><img src="{{asset('assets/custom/edit-icon.png')}}" alt="" width="15px"> Edit  </a></button>
             <a href="{{route('invoice')}}"><button class="down"><img src="{{asset('assets/custom/download-icon.png')}}" alt="" width="15px"> Download </a></button>
               <button class="print"> Print <img src="{{asset('assets/custom/print-icon.png')}}" alt="" width="15px"></button>    
           </div>

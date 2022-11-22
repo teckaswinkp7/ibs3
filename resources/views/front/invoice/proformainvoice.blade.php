@@ -98,15 +98,6 @@ background: #488e2b;
     
 
    </style>
-    @php 
-                      
-                      $id= auth::id();
-                      $statuscheck = DB::table('payment')->select('status')->where('stu_id',$id)->get();
-                      $statusis = $statuscheck[0]->status;
-
-                  
-
-                      @endphp
     
 
 <div class="background-profile" style="margin-top: 100px;"> 
@@ -114,24 +105,6 @@ background: #488e2b;
         <div class="profile-logo">
             <a href="#"><img src="{{asset('assets/custom/profile-logo.png')}}" alt="" width="100px"></a>
          </div>  
-         <div class="row">
-         @if($statusis == 'Fully Paid')
-         <div class="col-sm-4 text-right circle" ><span id="clabel1">Registered</span> </div>
-							 <div class="col-sm-6 text-right circle"><span id="clabel2"> Not Enrolled </span>  </div>
-                      <div class="col-sm-8 text-right circle" > <span id="clabel3"> Partially Enrolled </span>  </div>
-                      <div class="col-sm-8 text-right circle" id="ecolor"> <span id="clabel4"> Fully Enrolled </span> </div>
-                      @elseif($statusis == 'Partially paid')
-                      <div class="col-sm-4 text-right circle" ><span id="clabel1">Registered</span> </div>
-							 <div class="col-sm-6 text-right circle"><span id="clabel2"> Not Enrolled </span>  </div>
-                      <div class="col-sm-8 text-right circle" id="dcolor"> <span id="clabel3"> Partially Enrolled </span>  </div>
-                      <div class="col-sm-8 text-right circle" > <span id="clabel4"> Fully Enrolled </span> </div>
-                     @else
-                     <div class="col-sm-4 text-right circle" id="ccolor" ><span id="clabel1">Registered</span> </div>
-							 <div class="col-sm-6 text-right circle"><span id="clabel2"> Not Enrolled </span>  </div>
-                     <div class="col-sm-8 text-right circle" > <span id="clabel3"> Partially Enrolled </span>  </div>
-                     <div class="col-sm-8 text-right circle" > <span id="clabel4"> Fully Enrolled </span> </div>
-                      @endif
-							</div>
         <h3>  Pro Forma Invoice </h3>
         <div class="row">
             <div class="col-sm-3">
@@ -140,16 +113,12 @@ background: #488e2b;
 
                    <li> <a href="userprofile">Profile</a></li>
                     <li><a href="useroffer">Course</a></li>
+                  <li ><a href="proformainvoice">Pro-forma-invoice</a></li>
+                  <li><a href="salesinvoice">Sales Invoice</a></li>
+                  <li ><a href="payment">Payment</a></li>
+                  <li ><a href="history">History</a></li>
+
                     
-                    <li><a class="bill-btn" href="#">bill
-                    <span class="fas fa-caret-down"> </span>
-                    <li class="bill-show">
-                  <li class="bill"><a href="proinvoice">Pro-forma-invoice</a></li>
-                  <li class="bill"><a href="salesinvoice">Sales Invoice</a></li>
-                  <li class="bill"><a href="payment">Payment</a></li>
-                  <li class="bill"><a href="history">History</a></li>
-</li>
-                    </a></li>
 
 
                     </ul>
