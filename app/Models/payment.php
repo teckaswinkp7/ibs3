@@ -12,3 +12,5 @@ class Payment extends Model
     protected $table = 'payment';
      protected $fillable =  ['refundpolicy','amountdue','duedate','status','payreciept','stu_id','amount_paid','balance_due','ibs_reciept','issue_date'];
 }
+
+// nothing  //
