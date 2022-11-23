@@ -40,7 +40,16 @@
                       @php
                         $course_list = DB::select( DB::raw("SELECT * FROM courseselections WHERE stu_id = '".Auth::user()->id."'"));
                       @endphp
-                      @if(!empty($course_list))
+                     
+                     @php
+                      $id = auth::id();
+                    $offer = DB::table('users')->select('offer_accepted')->where('id',$id)->get();
+                    $offeraccepted = $offer[0]->offer_accepted;
+                     @endphp
+                      @if($offeraccepted == 'yes')
+                     <span ><a class="badge badge-success">Selected Course : {{ $student_course_offer[0]->name}}</a> <span>
+                     @else
+                     @if(!empty($course_list))
                       @foreach($course_list as $cl)
                         @php 
                           $course_id = $cl->course_id;
@@ -54,18 +63,11 @@
                       @foreach ($course_id_arr as $key => $val)
                       @php
                       $course_name = DB::select(DB::raw("SELECT * FROM courses WHERE id = $val"));
-                     
-                      $id = auth::id();
-                    $offer = DB::table('users')->select('offer_accepted')->where('id',$id)->get();
-                    $offeraccepted = $offer[0]->offer_accepted;
                       @endphp
-                      @if($offeraccepted == 'yes')
-                     <span ><a class="badge badge-success">Selected Course : {{ $student_course_offer[0]->name}}</a> <span>
-                     @else
                      <a href="{{ route('coursestatus',$val) }}">{{ $course_name[0]->name }}</a>
-                     @endif
-
+                    
                      @endforeach
+                     @endif
                      @endif
                      {{-- <a href="#">Business and Management </a>
                      <a href="#">Economics and Development Studies </a>

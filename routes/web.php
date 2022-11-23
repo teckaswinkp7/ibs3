@@ -78,6 +78,9 @@ Route::post('coursedefersdate', [EducationController::class, 'coursedefersdate']
 
 /** Pro Forma Invoice  */
 
+Route::group(['middleware' => 'auth'], function () {
+   
+
 Route::get('proformainvoice', [Invoicecontroller::class, 'index'])->name('proformainvoice');
 Route::post('proformainvoicepost', [Invoicecontroller::class, 'store'])->name('proformainvoicepost');
 Route::get('proformainvoicepreview', [Invoicecontroller::class, 'preview'])->name('proformainvoicepreview');
@@ -93,7 +96,7 @@ Route::get('history', [Invoicecontroller::class, 'history'])->name('history');
 Route::get('/invoice',[Invoicecontroller::class, 'viewpdf'])->name('invoice');
 
 Route::get('generate-invoice/{id}', [PDFController::class, 'generateInvoicePDF'])->name('generate.invoice');
-
+});
 /**  Reciept Verification Admin  */
 
 Route::get('reciept', [Recieptverificationcontroller::class, 'index'])->name('reciept.index');
