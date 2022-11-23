@@ -9,7 +9,7 @@
       <title>@yield('title')</title>
       <link rel="stylesheet" href="{{asset('assets/front/css/bootstrap.min.css')}}">
       <link rel="stylesheet" href="{{asset('assets/front/css/jquery-ui.css')}}">
-      <link rel="stylesheet" href="{{asset('assets/front/fonts/icomoon/style.css')}}">
+<!--     <link rel="stylesheet" href="{{asset('assets/front/fonts/icomoon/style.css')}}"> !-->
       <link rel="stylesheet" href="{{asset('assets/front/css/owl.carousel.min.css')}}">
       <link rel="stylesheet" href="{{asset('assets/front/css/owl.theme.default.min.css')}}">
       <link rel="stylesheet" href="{{asset('assets/front/css/owl.theme.default.min.css')}}">
