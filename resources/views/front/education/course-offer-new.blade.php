@@ -47,7 +47,7 @@
                     $offeraccepted = $offer[0]->offer_accepted;
                      @endphp
                       @if($offeraccepted == 'yes')
-                     <span ><a class="badge badge-success">Selected Course : {{ $student_course_offer[0]->name}}</a> <span>
+                     <span><a class="badge badge-success">Selected Course : {{ $student_course_offer[0]->name}}</a> </span>
                      @else
                      @if(!empty($course_list))
                       @foreach($course_list as $cl)

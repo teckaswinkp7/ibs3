@@ -249,9 +249,6 @@ background: #488e2b;
                     <div class="profile-course">
                         <a href="userprofile">Profile</a>
                         <a href="useroffer">Course</a>
-                        <li><a class="bill-btn" href="#">bill
-                    <span class="fas fa-caret-down"> </span>
-                    <li class="bill-show">
                   <li class="bill"><a href="proformainvoice">Pro-forma-invoice</a></li>
                   <li class="bill"><a href="proformasalesinvoice">Sales Invoice</a></li>
                   <li class="bill"><a href="confirmpayment">Payment</a></li>
@@ -275,7 +272,7 @@ background: #488e2b;
                                 <tr>
                                 <td> $ {{$amountdue[0]->amountdue}} </td>
                                 <td>  @php 
-$date = $total[0]->updated_at;
+$date = $total->updated_at;
 $dt = new DateTime($date);
 echo $dt->format('Y-m-d');
 @endphp </td>
@@ -306,7 +303,7 @@ echo $dt->format('Y-m-d');
                                 <tr>
                                 <td> $ {{$amountdue[0]->amountdue}} </td>
                                 <td> @php 
-$date = $total[0]->updated_at;
+$date = $total->updated_at;
 $dt = new DateTime($date);
 echo $dt->format('Y-m-d');
 @endphp </td>

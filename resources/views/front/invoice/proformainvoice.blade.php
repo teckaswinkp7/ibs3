@@ -79,13 +79,13 @@ background: #488e2b;
         <div class="profile-logo">
             <a href="#"><img src="{{asset('assets/custom/profile-logo.png')}}" alt="" width="100px"></a>
          </div>
+         
          <div class="progress-bar">
-        
                <div class="row">
-                  @if($statusis == 'Registered')
+                  @if($statusis == 'Fully Paid')
                   
                   <div class="col-sm-3">
-                     <div class="circle" id="ccolor"></div>
+                     <div class="circle" ></div>
                      <span>Registered</span> 
                   </div>
                   <div class="col-sm-3 " >
@@ -98,7 +98,7 @@ background: #488e2b;
                      <span>Partially <br> Enrolled</span> 
                   </div>
                   <div class="col-sm-3 " >
-                     <div class="circle"></div>
+                     <div class="circle" id="ecolor"></div>
                      <span>Fully <br> Enrolled</span> 
                   </div> 
                   @elseif($statusis == 'Partially paid')
@@ -119,9 +119,9 @@ background: #488e2b;
                      <div class="circle"></div>
                      <span>Fully <br> Enrolled</span> 
                   </div> 
-                  @else($statusis == 'Fully paid')
+                  @else
                   <div class="col-sm-3">
-                     <div class="circle"></div>
+                     <div class="circle" id="ccolor"></div>
                      <span>Registered</span> 
                   </div>
                   <div class="col-sm-3 " >
@@ -134,7 +134,7 @@ background: #488e2b;
                      <span>Partially <br> Enrolled</span> 
                   </div>
                   <div class="col-sm-3 " >
-                     <div class="circle" id="ecolor"></div>
+                     <div class="circle" ></div>
                      <span>Fully <br> Enrolled</span> 
                   </div> 
                   @endif
@@ -145,6 +145,7 @@ background: #488e2b;
             </div>
             
          </div>
+    
        <h3>  Pro Forma Invoice </h3>
         <div class="row">
             <div class="col-sm-3">
@@ -166,11 +167,11 @@ background: #488e2b;
                 <form action="{{route('proformainvoicepost')}}" class="submission-form" method="post">
                     @csrf
 
-                   @foreach ($selectedcourse as $course)
+                  
 
-                     <a>{{ $course->name }}</a>
+                     <a>{{ $selectedcourse}}</a>
                      
-                     @endforeach
+                   
                      </div>
 </br>      
 
@@ -203,7 +204,7 @@ background: #488e2b;
                <label> All Units </label>
                  
 </br>
-                 <input type="checkbox" value="{{$selectedcourse[0]->name}}" name="allunits[]" > {{$selectedcourse[0]->name}} </input>
+                 <input type="checkbox" value="{{$selectedcourse}}" name="allunits[]" > {{$selectedcourse}} </input>
                  
                 
 </div>
@@ -245,8 +246,7 @@ background: #488e2b;
                 </div>
 
             </div>
-        </div>
-      
+        </div> 
     </div>
 </div>
 <div>

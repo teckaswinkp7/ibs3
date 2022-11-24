@@ -10,44 +10,46 @@ use App\Models\Performainvoice;
 use App\Models\Additionalfee;
 use App\Models\invoice;
 use App\Models\Profile;
+use App\Models\Courses;
 use App\Models\sem;
 use App\Models\Courseselection;
 use Session;
 use PDF;
 use Carbon\Carbon;
-
-
-
-
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use \Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class Invoicecontroller extends Controller
 {
     public function index(){
 
         $id= auth::id();
-        $selectedcourse = DB::table('courses')
-        ->select('courses.name','courses.id')
-        ->Join('courseselections','courseselections.StudentSelCid','=','courses.id')
-        ->where('courseselections.stu_id',$id)
-        ->get();
+       
 
-        $availableunits = DB::table('units')->select('units.id','units.title','units.slug','units.short_text','units.unit_price','units.course_id')->
-        join('courseselections','courseselections.StudentSelCid','=','units.course_id')->
-        where('courseselections.stu_id','=',$id)->
-        get();
-     
-        $statuscheck = DB::table('payment')->select('status')->where('stu_id',$id)->get();
-        $statusis = $statuscheck[0]->status;
+        try{
+            $selectedcourse = Courses::select('courses.name','courses.id')
+            ->Join('courseselections','courseselections.StudentSelCid','=','courses.id')
+            ->where('courseselections.stu_id',$id)->pluck('courses.name')
+            ->firstOrFail();
+        }
+        catch(\Exception $exception){
+ 
+            return view('front.invoice.proformainvoiceerror');
 
-
-        $sem = sem::all();
-        $additionalfee = Additionalfee::all();
-        $unitselectionid = DB::table('unitselection')->select('unitselection.units_id')->where('unitselection.stu_id','=',$id)->get();
-        $selectedid = explode(",", $unitselectionid);
-        return view('front.invoice.proformainvoice',compact('selectedcourse','availableunits','selectedid','additionalfee','sem','statusis'));
+        }
+            $availableunits = DB::table('units')->select('units.id','units.title','units.slug','units.short_text','units.unit_price','units.course_id')->
+            join('courseselections','courseselections.StudentSelCid','=','units.course_id')->
+            where('courseselections.stu_id','=',$id)->
+            get();
+            $sem = sem::all();
+            $additionalfee = Additionalfee::all();
+            $unitselectionid = DB::table('unitselection')->select('unitselection.units_id')->where('unitselection.stu_id','=',$id)->get();
+            $selectedid = explode(",", $unitselectionid);
+            $statuscheck = DB::table('payment')->select('status')->where('stu_id',$id)->get();
+            $statusis = $statuscheck[0]->status;
+          
+       return view('front.invoice.proformainvoice',compact('selectedcourse','availableunits','selectedid','additionalfee','sem','statusis'));
 
     }
 
@@ -208,8 +210,14 @@ class Invoicecontroller extends Controller
         ->get();        
         $unitselectionid = DB::table('unitselection')->select('unitselection.units_id')->where('unitselection.stu_id','=',$id)->get();
         $selectedid = explode(",", $unitselectionid);   
-        $invoicedata = invoice::where('stu_id',$id)->select('invoiceno','sem','allunits')->get();         
-        $exist = invoice::where('stu_id',$id)->first();  
+        $invoicedata = invoice::where('stu_id',$id)->select('invoiceno','sem','allunits')->get();   
+        try{
+            $exist = invoice::where('stu_id',$id)->firstOrFail(); 
+        }      
+        catch(\Exception $exception){
+            return view('front.invoice.salesinvoiceerror');
+        }
+       
         $unitsData = $exist->units;
         $courseData = $invoicedata[0]->sem;
      //   $courseData = json_decode($courseData);
@@ -238,7 +246,14 @@ class Invoicecontroller extends Controller
 
  
         $id = Auth::id();
-        $invoicedata = invoice::select('*')->where('stu_id',$id)->get();
+        try{
+            
+            $invoicedata = invoice::select('*')->where('stu_id',$id)->firstOrFail();
+            
+        }
+        catch(\Exception $exception){
+            return view('front.invoice.confirmpaymenterror');
+        }
         $total = payment::select('*')->where('stu_id',$id)->get();
         $date = invoice::select('updated_at')->where('stu_id',$id)->get();
         $date = $date->add(4);
@@ -371,7 +386,14 @@ class Invoicecontroller extends Controller
 
        
         $id=auth::id();
-        $total = payment::select('*')->where('stu_id',$id)->get();
+        try{
+            $total = payment::select('*')->where('stu_id',$id)->firstOrFail();
+        }
+        catch(\Exception $exception){
+
+            return view('front.invoice.historyerror');
+        }
+     
         $amountdue = payment::select('amountdue','status')->where('stu_id',$id)->get();
         $statuscheck = DB::table('payment')->select('status')->where('stu_id',$id)->get();
         $statusis = $statuscheck[0]->status;
@@ -380,6 +402,7 @@ class Invoicecontroller extends Controller
 
         return view('front.invoice.history',compact('amountdue','total','statusis'));
     }
+
 
     
 }

@@ -47,7 +47,7 @@ class AuthControllers extends Controller
      */
     public function postLogin(Request $request)
     {
-        $request->validate([
+      $validation =   $request->validate([
             'email' => 'required',
             'password' => 'required',
         ]);
@@ -76,8 +76,17 @@ class AuthControllers extends Controller
                 return redirect("admin/dashboard"); 
             }                    
         }
+
+        if ($validation) { 
+
+            return redirect()->back()->withErrors(
+                [
+                    'password' =>'Invalid Credentials!!'
+                ]
+            );
+        }
   
-        return redirect("login")->with('Oppes! You have entered invalid credentials');
+        
     }
       
     /**

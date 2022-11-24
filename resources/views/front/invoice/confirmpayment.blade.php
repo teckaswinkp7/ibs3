@@ -276,7 +276,7 @@ background: #488e2b;
 
                       @if($statusis != 'Fully Paid' )
                       <div class="edit-course">
-                        <p > invoice Number : {{$invoicedata[0]->invoiceno}} </p>
+                        <p > invoice Number : {{$invoicedata->invoiceno}} </p>
                         <p> Amount Due: ${{$total[0]->balance_due}} </p>
                         <p> Due Date: {{$total[0]->duedate}}  </p>
                         <p > Status: 

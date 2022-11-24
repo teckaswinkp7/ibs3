@@ -175,7 +175,7 @@ background: #488e2b;
             <a href="#"><img src="{{asset('assets/custom/profile-logo.png')}}" alt="" width="100px"></a>
          </div>
 
-<p> nothing found ! </p>
+<p>Oops Its a 404 !! Nothing Found Here !!!</p>
 
                
                                     </div>

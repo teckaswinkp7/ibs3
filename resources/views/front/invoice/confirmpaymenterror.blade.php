@@ -4,34 +4,10 @@
 <link rel="stylesheet" href="{{asset('assets/custom/common.css')}}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"/>  
 <link rel="stylesheet" href="{{asset('assets/custom/profile.css')}}">
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
 <style>
-
-.profile-modal{
+    .profile-modal{
 
 background:#EDEDED;
-}
-.required:after {
-    content:" *";
-    color: red;
-    
-  }
-  .required{
-    font-weight:bold;
-  }
-  #customFile .custom-file-control:lang(en)::after {
-  content: "Select file...";
-}
-/*when a value is selected, this class removes the content */
-.custom-file-control.selected:lang(en)::after {
-  content: "" !important;
-}
-
-.custom-file {
-  overflow: hidden;
-}
-.custom-file-control {
-  white-space: nowrap;
 }
 
 .edit-course {
@@ -41,9 +17,9 @@ background:#EDEDED;
     text-decoration: none;
     margin-bottom: 6px;
     border-radius: 6px;
-    line-height:20px;
+    line-height:5px;
     color: rgba(0, 0, 0, 0.8);
-    background-color: #e6e6e6;
+    background-color: rgba(255, 255, 255, 0.8);
     transition: all .3s ease;
     border: 1px solid #d9d9d9;
    }
@@ -98,7 +74,8 @@ font-weight:bold;
 
 .edit-btn{
 
-    
+    position:relative;
+    bottom:60px;
     padding: 15px 20px;
     background-color: #cc6600;
     color:white;
@@ -161,21 +138,67 @@ nav ul li a:hover span{
 
    transform:translateY(-50%) rotate(-180deg);
 }
+.circle{
+   width: 25px;
+      height: 25px;
+      -webkit-border-radius: 25px;
+      -moz-border-radius: 25px;
+      border-radius: 25px;
+      border:1px solid gray;
+    }
+#ccolor{
 
+   background: #2b3f8e;
+}
+#dcolor{
 
+background:  #FFC300 ;
+}
+#ecolor{
+
+background: #488e2b;
+}
+.progress-bar span{
+   font-size: 14px;
+}
+.progress-logo{
+    display: flex;
+    justify-content: space-between;
+}
 
 </style>
 
 
-
     <div class="background-profile" style="margin-top: 100px;"> 
         <div class="profile-modal">
-            <div class="profile-logo">
-                <a href="#"><img src="profile-logo.png" alt="" width="100px"></a>
-            </div> 
+        <div class="progress-logo">
+        <div class="profile-logo">
+            <a href="#"><img src="{{asset('assets/custom/profile-logo.png')}}" alt="" width="100px"></a>
+         </div>
+         <div class="progress-bar">
+               <div class="row">
+                  <div class="col-sm-3">
+                     <div class="circle" id="ccolor"></div>
+                     <span>Registered</span> 
+                  </div>
+                  <div class="col-sm-3 " >
+                     <div class="circle"></div>
+                     <span>Not <br> Enrolled </span> 
+                  </div>
+
+                  <div class="col-sm-3 " >
+                     <div class="circle"  ></div>
+                     <span>Partially <br> Enrolled</span> 
+                  </div>
+                  <div class="col-sm-3 " >
+                     <div class="circle" ></div>
+                     <span>Fully <br> Enrolled</span> 
+                  </div> 
+                </div>
+            </div>
             
-            <h3> Confirm Your Payment</h3>
-            
+         </div>
+            <h3> Payment</h3>
             
             <div class="row">
                 <div class="col-sm-3">
@@ -191,64 +214,20 @@ nav ul li a:hover span{
                   <li class="bill"><a href="history">History</a></li>
 </li>
                     </a></li>
+                    
                     </div>
+                    
                 </div>
+            
                 <div class="col-sm-9">
+                
+                    <form action="">
                   
-                <p> You have outstanding  on the following invoices: </p>
-                <form action="{{route('recieptpost')}}" method="post" enctype="multipart/form-data">
-                          @csrf
-                      <div class="edit-course">
-                        <p > Course : {{$student_course_offer[0]->courses_name}} </p>
-                        <p > invoice Number : {{$invoicedata[0]->invoiceno}} </p>
-                        <p> Amount Due: ${{$total[0]->amountdue}} </p>
-                        <p> Issue Date :  
-                        @php 
-$date = $total[0]->updated_at;
-$dt = new DateTime($date);
-echo $dt->format('Y-m-d');
-@endphp
-</p>
-                        <p> Due Date: {{$total[0]->duedate}}  </p>
-                        <p> Balance Due: ${{$total[0]->balance_due}}  </p> 
-                        <p > Status: <span class= "badge badge-danger " >{{$total[0]->status}} </span> </p>
-                        
-                       
-                        <div>
-                        <label class="required"> Enter Amount Deposited: </label></br>
-                        <input name="amount_paid" type="text " required >
-                        </div>
-</br>
-                        <div >
-                          <div class="reciept">
-                        <label  class="required" for="payreciept">Attach Bank Reciept: </label></br>
-                        <div class="custom-file">
-   <input id="logo" name="payreciept" type="file" class="custom-file-input" required>
-   <label for="logo" class="custom-file-label text-truncate">Choose file...</label>
-</div>
-</div>
-</div>        
-
-<div class="submission-btn text-center">
-                         <button type="submit" class="btn btn-primary  edit-btn" > Submit Reciept </button> 
-                        </div>
-                        
-</form>
+                    please create a sales invoice and make payment for the same. 
                
                                     </div>
                                     </div>
                                     </div>
-                        </div>
                   </div>
-
-                  <script>
-                   
-                   
-                   jquery('.custom-file-input').on('change', function() { 
-   let fileName = jquery(this).val().split('\\').pop(); 
-   jquery(this).next('.custom-file-label').addClass("selected").html(fileName); 
-});
-
-</script>
  @include('front/footer')      
 @endsection  

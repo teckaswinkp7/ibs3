@@ -59,8 +59,8 @@ nav ul li a:hover span{
                    <li> <a href="userprofile">Profile</a></li>
                     <li><a href="useroffer">Course</a></li>
                     <li class="bill"><a href="proformainvoice">Pro-forma-invoice</a></li>
-                  <li class="bill"><a href="salesinvoice">Sales Invoice</a></li>
-                  <li class="bill"><a href="payment">Payment</a></li>
+                  <li class="bill"><a href="proformasalesinvoice">Sales Invoice</a></li>
+                  <li class="bill"><a href="confirmpayment">Payment</a></li>
                   <li class="bill"><a href="history">History</a></li>
 
                     @php 
