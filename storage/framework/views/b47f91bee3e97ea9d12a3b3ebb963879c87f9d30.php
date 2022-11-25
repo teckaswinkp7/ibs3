@@ -186,8 +186,8 @@ nav ul li a:hover span{
                     <span class="fas fa-caret-down"> </span>
                     <li class="bill-show">
                   <li class="bill"><a href="proformainvoice">Pro-forma-invoice</a></li>
-                  <li class="bill"><a href="salesinvoice">Sales Invoice</a></li>
-                  <li class="bill"><a href="payment">Payment</a></li>
+                  <li class="bill"><a href="proformasalesinvoice">Sales Invoice</a></li>
+                  <li class="bill"><a href="confirmpayment">Payment</a></li>
                   <li class="bill"><a href="history">History</a></li>
 </li>
                     </a></li>

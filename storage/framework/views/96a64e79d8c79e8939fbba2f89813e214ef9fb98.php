@@ -1,0 +1,1 @@
+<h1>sfs</h1><?php /**PATH C:\xampp\htdocs\ibs\resources\views/home/index.blade.php ENDPATH**/ ?>

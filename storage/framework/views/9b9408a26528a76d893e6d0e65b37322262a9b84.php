@@ -46,7 +46,7 @@
                     $offeraccepted = $offer[0]->offer_accepted;
                      ?>
                       <?php if($offeraccepted == 'yes'): ?>
-                     <span ><a class="badge badge-success">Selected Course : <?php echo e($student_course_offer[0]->name); ?></a> <span>
+                     <span><a class="badge badge-success">Selected Course : <?php echo e($student_course_offer[0]->name); ?></a> </span>
                      <?php else: ?>
                      <?php if(!empty($course_list)): ?>
                       <?php $__currentLoopData = $course_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cl): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>

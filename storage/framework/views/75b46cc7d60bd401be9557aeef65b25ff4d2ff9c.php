@@ -276,7 +276,7 @@ background: #488e2b;
 
                       <?php if($statusis != 'Fully Paid' ): ?>
                       <div class="edit-course">
-                        <p > invoice Number : <?php echo e($invoicedata[0]->invoiceno); ?> </p>
+                        <p > invoice Number : <?php echo e($invoicedata->invoiceno); ?> </p>
                         <p> Amount Due: $<?php echo e($total[0]->balance_due); ?> </p>
                         <p> Due Date: <?php echo e($total[0]->duedate); ?>  </p>
                         <p > Status: 

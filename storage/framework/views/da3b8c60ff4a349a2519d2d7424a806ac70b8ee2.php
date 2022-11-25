@@ -86,10 +86,10 @@
                       $ext = explode('.',$val);
                       if($ext[1] == 'pdf')
                       { ?>
-                        <td><a href="<?php echo e(url('public/public/Image')); ?>/<?php echo e($user->id_image); ?>" target="_blank"><img src="<?php echo e(url('public/uploads/pdf_icon.png')); ?>" style="width:100px;height:100px;"></a></td>
+                        <td><a href="<?php echo e(url('public/Image')); ?>/<?php echo e($user->id_image); ?>" target="_blank"><img src="<?php echo e(url('public/uploads/pdf_icon.png')); ?>" style="width:100px;height:100px;"></a></td>
                       <?php }
                       else{ ?>
-                        <td><a href="<?php echo e(url('public/public/Image')); ?>/<?php echo e($user->id_image); ?>" target="_blank"><img src="<?php echo e(url('public/public/Image')); ?>/<?php echo e($user->id_image); ?>" style="width:100px;height:100px;"></a></td>
+                        <td><a href="<?php echo e(url('public/Image')); ?>/<?php echo e($user->id_image); ?>" target="_blank"><img src="<?php echo e(url('public/public/Image')); ?>/<?php echo e($user->id_image); ?>" style="width:100px;height:100px;"></a></td>
                       <?php }
                       ?>
 
@@ -98,10 +98,10 @@
                       $ext = explode('.',$val);
                       if($ext[1] == 'pdf')
                       { ?>
-                        <td><a href="<?php echo e(url('public/public/Image')); ?>/<?php echo e($user->highest_qualification); ?>" target="_blank"><img src="<?php echo e(url('public/uploads/pdf_icon.png')); ?>" style="width:100px;height:100px;"></a></td>
+                        <td><a href="<?php echo e(url('public/Image')); ?>/<?php echo e($user->highest_qualification); ?>" target="_blank"><img src="<?php echo e(url('public/uploads/pdf_icon.png')); ?>" style="width:100px;height:100px;"></a></td>
                       <?php }
                       else{ ?>
-                        <td><a href="<?php echo e(url('public/public/Image')); ?>/<?php echo e($user->highest_qualification); ?>" target="_blank"><img src="<?php echo e(url('public/public/Image')); ?>/<?php echo e($user->highest_qualification); ?>" style="width:100px;height:100px;"></a></td>
+                        <td><a href="<?php echo e(url('public/Image')); ?>/<?php echo e($user->highest_qualification); ?>" target="_blank"><img src="<?php echo e(url('public/public/Image')); ?>/<?php echo e($user->highest_qualification); ?>" style="width:100px;height:100px;"></a></td>
                       <?php }
                       ?>
 
@@ -110,10 +110,10 @@
                       $ext = explode('.',$val);
                       if($ext[1] == 'pdf')
                       { ?>
-                        <td><a href="<?php echo e(url('public/public/Image')); ?>/<?php echo e($user->course_syopsiy); ?>" target="_blank"><img src="<?php echo e(url('public/uploads/pdf_icon.png')); ?>" style="width:100px;height:100px;"></a></td>
+                        <td><a href="<?php echo e(url('public/Image')); ?>/<?php echo e($user->course_syopsiy); ?>" target="_blank"><img src="<?php echo e(url('public/uploads/pdf_icon.png')); ?>" style="width:100px;height:100px;"></a></td>
                       <?php }
                       else{ ?>
-                        <td><a href="<?php echo e(url('public/public/Image')); ?>/<?php echo e($user->course_syopsiy); ?>" target="_blank"><img src="<?php echo e(url('public/public/Image')); ?>/<?php echo e($user->course_syopsiy); ?>" style="width:100px;height:100px;"></a></td>
+                        <td><a href="<?php echo e(url('public/Image')); ?>/<?php echo e($user->course_syopsiy); ?>" target="_blank"><img src="<?php echo e(url('public/public/Image')); ?>/<?php echo e($user->course_syopsiy); ?>" style="width:100px;height:100px;"></a></td>
                       <?php }
                       ?>
                       
