@@ -247,9 +247,6 @@ background: #488e2b;
                     <div class="profile-course">
                         <a href="userprofile">Profile</a>
                         <a href="useroffer">Course</a>
-                        <li><a class="bill-btn" href="#">bill
-                    <span class="fas fa-caret-down"> </span>
-                    <li class="bill-show">
                   <li class="bill"><a href="proformainvoice">Pro-forma-invoice</a></li>
                   <li class="bill"><a href="proformasalesinvoice">Sales Invoice</a></li>
                   <li class="bill"><a href="confirmpayment">Payment</a></li>

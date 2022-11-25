@@ -46,23 +46,33 @@ class Recieptverificationcontroller extends Controller
         ->where('payment.status','waiting Reconcillation')
         ->get();
 
-        foreach($id as $stuid){
+        $payment = payment::all();
 
+       
+foreach($id as $stuid){
             $reciept = payment::updateOrCreate([
                
                 'stu_id' => $stuid->id
     
              ],[
-                 'status' => $request->status
+                 
+                
+                'status' => $request->status
     
-            ]
-        
-        );
-
+            ]);
+           
         }
 
-       
-         
+        $invocecopy = payment::create([
+
+            'stu_id' => auth::id(),
+            'amount_paid' =>$payment[0]->amount_paid,
+            "payreciept" =>$payment[0]->payreciept,
+            'balance_due' =>$payment[0]->balance_due,
+            'status'   => $request->status,
+        ]);
+
+            
 
     return redirect()->route('reciept.index');
 

@@ -66,17 +66,17 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <?php $_SESSION['i'] = 0; ?>                        
-                  @foreach ($reciepts as $reciept)
+                  <?php $_SESSION['i'] = 0; ?>  
+               
                   
                   <?php $_SESSION['i']=$_SESSION['i']+1; ?>
                     <tr>
                       <?php $dash=''; ?>
                       <td>{{$_SESSION['i']}}</td>
                       <td> Download </td>
-                <td><a href="{{url('payreciept')}}/{{ $reciept->payreciept }}" target="_blank"><img src="{{url('public/uploads/pdf_icon.png')}}" style="width:100px;height:100px;"></a></td>
+                <td><a href="{{url('payreciept')}}/{{ $reciepts[0]->payreciept }}" target="_blank"><img src="{{url('public/uploads/pdf_icon.png')}}" style="width:100px;height:100px;"></a></td>
                     </tr> 
-                  @endforeach
+               
                   <?php unset($_SESSION['i']); ?>    
                   </tbody>
                 </table>
