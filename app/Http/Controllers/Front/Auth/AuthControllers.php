@@ -12,6 +12,7 @@ use App\Models\Courses;
 use App\Models\Education;
 use App\Models\Courseselection;
 use App\Mail\SendEmail;
+use App\Mail\sponsorcredentials;
 use App\Models\Studentcourse;
 use App\Models\Studentcourseoffer;
 use App\Models\Profile;
@@ -221,6 +222,9 @@ class AuthControllers extends Controller
 
         if(Auth::user()->user_role == 3)
         {
+        $data = array('name'=>$name,'phone'=>$phone,'email'=>$email,'password'=>$request->password,'user_role'=>$request->user_role,'is_email_verified'=>1);
+        Mail::to($email)->send(new sponsorcredentials($data));
+       // dd($data);
         return redirect("dashboard");
         }
         else
@@ -466,5 +470,11 @@ class AuthControllers extends Controller
             return redirect()->back(); 
             
         }        
+    }
+
+    public function sponsorlogin(){
+
+
+        return view('front.auth.sponsorlogin');
     }
 }

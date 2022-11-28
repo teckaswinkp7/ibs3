@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class SendEmail extends Mailable
+class sponsorcredentials extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -16,11 +16,11 @@ class SendEmail extends Mailable
      *
      * @return void
      */
-    private $data;
-    public function __construct($req)
+  private $data;
+    public function __construct($data)
     {
-        $this->data=$req;
         //
+        $this->data=$data;
     }
 
     /**
@@ -28,9 +28,9 @@ class SendEmail extends Mailable
      *
      * @return $this
      */
-
     public function build()
     {
-        return $this->from('info@supertyreguy.com')->view('emails.orders.shipped',['data'=>$this->data])->subject('VERIFICATION CODE');
+        return $this->from('ibs@university.com')->markdown('emails.sponsorregistered')
+        ->with('data', $this->data)->subject('Welcome To IBS');
     }
 }

@@ -110,6 +110,7 @@ Route::get('admin/login', [AuthController::class, 'index'])->name('admin_login')
 Route::get('setpassword', [AuthController::class, 'set_password'])->name('setpassword');
 Route::post('admin/post-login', [AuthController::class, 'postLogin'])->name('admin/login.post'); 
 Route::get('login', [AuthControllers::class, 'index'])->name('login');
+Route::get('sponsorlogin', [AuthControllers::class, 'sponsorlogin'])->name('sponsorlogin');
 Route::post('post-login', [AuthControllers::class, 'postLogin'])->name('login.post');
 Route::post('admin/post-registration', [AuthController::class, 'postRegistration'])->name('admin/register.post'); 
 Route::get('admin/dashboard', [AuthController::class, 'dashboard'])->name('admin-dashboard'); 

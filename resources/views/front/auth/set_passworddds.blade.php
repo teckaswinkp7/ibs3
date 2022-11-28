@@ -28,9 +28,17 @@
             <h3>Create your account</h3>
             <form action="{{route('register.final')}}" method="POST" class="register-form">
                 @csrf
-               
-                    
-                    <input type="hidden" id="user_role" name="user_role" value="2">
+
+                <div>
+        <label for="email">I am a <span style="color:red !important;font-weight:700;">*</span></label>
+        <select id="user_role" class="form-select form-select-lg mb-3" name="user_role">
+          <option value="2">Student</option>
+          <option value="3">Sponsor</option>
+        </select>  
+        @if ($errors->has('user_role'))
+                        <span class="text-danger">{{ $errors->first('user_role') }}</span>
+                    @endif      
+      </div>
                         
                 <div>
                     <label for="">Password</label>

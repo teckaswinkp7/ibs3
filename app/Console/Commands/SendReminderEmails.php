@@ -64,7 +64,7 @@ foreach($data as $userid => $reminders){
     $this->sendEmailToUser($userid,$reminders);
 }
 
-dd($data);
+//dd($data);
     }
 
 private function sendEmailToUser($userid, $reminders) {
