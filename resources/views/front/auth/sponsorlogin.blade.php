@@ -22,7 +22,7 @@
                 <h5> iConnect | Sponsor Portal  </h5>
             
                         <p>
-                        <h5> Welcome! </h5>​
+                        <h6> Welcome! </h6>​
 
 
 <div class="parastyle"> 

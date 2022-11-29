@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Session;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Courses;
+use App\Models\Sponsor;
 use App\Models\Education;
 use App\Models\Courseselection;
 use App\Mail\SendEmail;
@@ -61,7 +62,7 @@ class AuthControllers extends Controller
             if($user->user_role == 3)
             {
                 //return redirect("dashboard")->with('Oppes! You have entered invalid credentials'); 
-                return redirect("dashboard"); 
+                return redirect("sponsorprofile"); 
             }
 
             else if($user->user_role == 2)
@@ -224,8 +225,18 @@ class AuthControllers extends Controller
         {
         $data = array('name'=>$name,'phone'=>$phone,'email'=>$email,'password'=>$request->password,'user_role'=>$request->user_role,'is_email_verified'=>1);
         Mail::to($email)->send(new sponsorcredentials($data));
+        
+        $sponsordata = Sponsor::create([
+
+            'id' =>auth::id(),
+            'sponsor_name' => $name,
+            'sponsor_email' => $email,
+            'sponsor_phone' => $phone,
+            'sponsor_id'    =>  'IBS-'.rand(00000,99999),
+
+        ]);
        // dd($data);
-        return redirect("dashboard");
+        return redirect("sponsorprofile");
         }
         else
         {
@@ -476,5 +487,39 @@ class AuthControllers extends Controller
 
 
         return view('front.auth.sponsorlogin');
+    }
+
+    public function sponsorprofile(){
+
+        $sponsordata = Sponsor::all();
+
+        return view('front.auth.sponsorprofile',compact('sponsordata'));
+    }
+
+    public function sponsorprofilepost(Request $request){
+
+
+        $sponsordata= Sponsor::updateorcreate([
+
+            'id' => auth::id(),
+        ],[
+
+
+            'title'            =>  $request->title,
+            'middle_name'      =>  $request->middle_name,
+            'last_name'        =>  $request->last_name,
+            'position'         =>  $request->position,
+            'alt_email'        =>  $request->alt_email,
+            'province'         =>  $request->province,
+            'address'          =>  $request->address,
+            'main_phone_line'  =>  $request->main_phone_line,
+            'alt_phone_line'   =>  $request->alt_phone_line,
+            'company_name'     =>  $request->company_name,
+            'alt_phone'        =>  $request->alt_phone
+
+
+        ]);
+
+        return redirect()->route('sponsorprofile')->with('success','Profile Updated !');
     }
 }
