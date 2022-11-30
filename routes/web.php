@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\Reportingcontroller;
 use App\Http\Controllers\Admin\Recieptverificationcontroller;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\Front\AssignmentsubmissionController;
+use App\Http\Controllers\Front\Sponsorstudentcontroller;
 use App\Http\Controllers\Front\StudentAssignmentController;
 use App\Http\Controllers\Admin\ExamController;
 use App\Http\Controllers\Front\Invoicecontroller;
@@ -86,6 +87,7 @@ Route::post('proformainvoicepost', [Invoicecontroller::class, 'store'])->name('p
 Route::get('proformainvoicepreview', [Invoicecontroller::class, 'preview'])->name('proformainvoicepreview');
 Route::get('proformasalesinvoice', [Invoicecontroller::class, 'salesinvoice'])->name('proformasalesinvoice');
 Route::get('confirmpayment', [Invoicecontroller::class, 'payment'])->name('confirmpayment');
+Route::get('sponsorlist', [Invoicecontroller::class, 'sponsorlist'])->name('sponsorlist');
 Route::post('refundpolicypost', [Invoicecontroller::class, 'refund'])->name('refundpolicypost');
 Route::post('totalpost', [Invoicecontroller::class, 'total'])->name('totalpost');
 Route::get('attachreciept', [Invoicecontroller::class, 'recieptsubmit'])->name('recieptsubmit');
@@ -110,9 +112,6 @@ Route::get('admin/login', [AuthController::class, 'index'])->name('admin_login')
 Route::get('setpassword', [AuthController::class, 'set_password'])->name('setpassword');
 Route::post('admin/post-login', [AuthController::class, 'postLogin'])->name('admin/login.post'); 
 Route::get('login', [AuthControllers::class, 'index'])->name('login');
-Route::get('sponsorlogin', [AuthControllers::class, 'sponsorlogin'])->name('sponsorlogin');
-Route::get('sponsorprofile', [AuthControllers::class, 'sponsorprofile'])->name('sponsorprofile');
-Route::post('sponsorprofilepost', [AuthControllers::class, 'sponsorprofilepost'])->name('sponsorprofilepost');
 Route::post('post-login', [AuthControllers::class, 'postLogin'])->name('login.post');
 Route::post('admin/post-registration', [AuthController::class, 'postRegistration'])->name('admin/register.post'); 
 Route::get('admin/dashboard', [AuthController::class, 'dashboard'])->name('admin-dashboard'); 
@@ -129,6 +128,15 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('admin/user', UserController::class);
 });
+
+/*  Sponsor Front     */
+Route::get('sponsorlogin', [AuthControllers::class, 'sponsorlogin'])->name('sponsorlogin');
+Route::get('sponsorprofile', [AuthControllers::class, 'sponsorprofile'])->name('sponsorprofile');
+Route::post('sponsorprofilepost', [AuthControllers::class, 'sponsorprofilepost'])->name('sponsorprofilepost');
+Route::get('sponsorstudentview', [Sponsorstudentcontroller::class, 'index'])->name('sponsorstudentview');
+
+
+
 Route::get('admin/screening', 'App\Http\Controllers\Admin\ScreeningController@index')->name('screening.index');
 Route::get('admin/enrollment/', 'App\Http\Controllers\Admin\DocumentVerificationController@index')->name('enrollment.index');
 Route::get('admin/enrollment/verify/{id}', 'App\Http\Controllers\Admin\DocumentVerificationController@verify')->name('enroll.verify');

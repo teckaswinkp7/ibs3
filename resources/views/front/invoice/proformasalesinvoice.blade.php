@@ -382,7 +382,8 @@ background: #488e2b;
 
                                                         
 
-
+              <form action="{{route('refundpolicypost')}}" method="POST" >
+        @csrf
                    <div class="row">
 			<div class="col-md-12">
                 <h4> Select Your Payment Method option </h4> 
@@ -398,6 +399,8 @@ background: #488e2b;
                 <label for="payment" > Online Transfer </label>
                 <input data-toggle="modal" data-target="#refundmodal" type="radio" name="payment" value="4"> 
                 <label for="payment" > BSP Pay </label>
+                <input data-toggle="modal" data-target="#refundmodal" type="radio" name="payment" value="5"> 
+                <label for="payment" > Opt a Sponsor </label>
                                     </div>
                                     </div>
 
@@ -418,8 +421,7 @@ background: #488e2b;
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="{{route('refundpolicypost')}}" method="POST" >
-        @csrf
+     
       <div class="modal-body">
      
       ​

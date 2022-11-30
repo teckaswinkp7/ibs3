@@ -11,6 +11,7 @@ use App\Models\Additionalfee;
 use App\Models\invoice;
 use App\Models\Profile;
 use App\Models\Courses;
+use App\Models\Sponsor;
 use App\Models\sem;
 use App\Models\Courseselection;
 use Session;
@@ -282,14 +283,21 @@ class Invoicecontroller extends Controller
 
             'stu_id' => auth::id(),
             'refundpolicy' =>implode(',',$request->refund),
-            'duedate' => $dueDate
-
-
+            'duedate' => $dueDate,
 
         ]);
 
+        if($request->payment ='5'){
+            return redirect()->route('sponsorlist');
+        }
 
-        return redirect()->route('confirmpayment');
+        else{
+
+            return redirect()->route('confirmpayment');
+        }
+        
+
+       
 
     }
     public function total(Request $request){
@@ -403,6 +411,11 @@ class Invoicecontroller extends Controller
         return view('front.invoice.history',compact('amountdue','total','statusis'));
     }
 
+public function sponsorlist(){
+
+    $sponsordata = Sponsor::all();
+    return view('front.invoice.sponsorlist',compact('sponsordata'));
+}
 
     
 }

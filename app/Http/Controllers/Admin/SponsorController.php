@@ -33,8 +33,9 @@ class SponsorController extends Controller
     */
     public function index()
     {
-    $data['sponsorDetails'] = Sponsor::select('users.name as student_name','courses.name as course_name','sponsors.*')->join('users','users.id', '=','sponsors.stu_id')->join('courses','courses.id','=','sponsors.course_id')->get();   
-    return view('admin.sponsor.index', $data);    
+        $sponsors = Sponsor::all();
+    $sponsorDetails = Sponsor::select('users.name as student_name','courses.name as course_name','sponsors.*')->join('users','users.id', '=','sponsors.stu_id')->join('courses','courses.id','=','sponsors.course_id')->get();   
+    return view('admin.sponsor.index',compact('sponsorDetails','sponsors'));    
     }
     /**
     * Show the form for creating a new resource.

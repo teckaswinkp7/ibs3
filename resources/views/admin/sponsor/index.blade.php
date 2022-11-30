@@ -43,7 +43,7 @@
                   </thead>
                   <tbody>
                   <?php $_SESSION['i'] = 0; ?>                        
-                  @foreach ($sponsorDetails as $value)
+                  @foreach ($sponsors as $value)
                   <?php $_SESSION['i']=$_SESSION['i']+1; ?>
                     <tr>
                       <?php $dash=''; ?>
@@ -51,8 +51,8 @@
                       <td>{{ $value->sponsor_name }}</td>
                       <td>{{ $value->sponsor_email }}</td>
                       <td>{{ $value->sponsor_phone }}</td>
-                      <td>{{ $value->student_name }}</td>
-                      <td>{{ $value->course_name }}</td>
+                      <td></td>
+                      <td></td>
                       
                       <!-- <td>                        
                           <a  href="{{ route('bank.edit',$value->id) }}"> 

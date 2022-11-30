@@ -25,7 +25,7 @@
                   <ul>
 
                    <li> <a href="sponsorprofile">Profile</a></li>
-                    <li><a href="viewstudents">View Students</a></li>
+                    <li><a href="sponsorstudentview">View Students</a></li>
                     <li class="bill"><a href="payment">Payment</a></li>
                   <li class="bill"><a href="sponsorhistory">History</a></li>
                     </ul>
