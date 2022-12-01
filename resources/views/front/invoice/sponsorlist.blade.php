@@ -226,7 +226,7 @@ background: #488e2b;
                         <th> Name </th>
                         <th> Email </th>
                         <th> Info </th>
-                        <th> Action </th>
+                        <th> Actio </th>
 </thead>
 
 
