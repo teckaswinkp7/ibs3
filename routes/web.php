@@ -88,6 +88,7 @@ Route::get('proformainvoicepreview', [Invoicecontroller::class, 'preview'])->nam
 Route::get('proformasalesinvoice', [Invoicecontroller::class, 'salesinvoice'])->name('proformasalesinvoice');
 Route::get('confirmpayment', [Invoicecontroller::class, 'payment'])->name('confirmpayment');
 Route::get('sponsorlist', [Invoicecontroller::class, 'sponsorlist'])->name('sponsorlist');
+Route::post('sponsorrequest', [Invoicecontroller::class, 'sponsorrequest'])->name('sponsorrequest');
 Route::post('refundpolicypost', [Invoicecontroller::class, 'refund'])->name('refundpolicypost');
 Route::post('totalpost', [Invoicecontroller::class, 'total'])->name('totalpost');
 Route::get('attachreciept', [Invoicecontroller::class, 'recieptsubmit'])->name('recieptsubmit');

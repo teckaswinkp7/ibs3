@@ -91,9 +91,10 @@
       <th >Approval</th>
     </tr>
   </thead>
+  @foreach($sponsorstudentdata as $sponsorstudent)
   <tbody>
-      <td>-</td>
-      <td>-</td>
+      <td>{{$sponsorstudent->id}}</td>
+      <td>{{$sponsorstudent->name}}</td>
       <td>-</td>
       <td>-</td>
       <td>-</td>
@@ -102,6 +103,7 @@
       <td>-</td>
       <td>-</td>
     <tbody>
+      @endforeach
 </table>
 </div>
                       

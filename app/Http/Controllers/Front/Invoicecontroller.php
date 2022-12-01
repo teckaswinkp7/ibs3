@@ -287,7 +287,9 @@ class Invoicecontroller extends Controller
 
         ]);
 
-        if($request->payment ='5'){
+   //     dd($request->payment);
+
+        if($request->payment == '5'){
             return redirect()->route('sponsorlist');
         }
 
@@ -415,6 +417,44 @@ public function sponsorlist(){
 
     $sponsordata = Sponsor::all();
     return view('front.invoice.sponsorlist',compact('sponsordata'));
+}
+
+public function sponsorrequest(Request $request){
+
+    $userid = $request->userid;
+    $sponsorid = $request->sponsor_id;
+    $studid = DB::table('sponsors')->select('stu_id')->where('id',$request->sponsor_id)->get();
+    $stuid = $studid[0]->stu_id;
+    $st = $stuid;
+    if($st == null ){
+        $st = array(0,$userid);
+        $stdin = array_filter($st);
+        $studentid = implode($stdin);
+    }
+    else{
+
+      
+
+       $stdd = array($st,$userid);
+       $studentid = implode(',',$stdd);
+    
+
+    }
+   // dd($studentid);
+   //dd($sponsorid);
+    $sponsorrequest = Sponsor::updateorcreate([
+
+        'id' => $request->sponsor_id,
+    ]
+,[
+
+           'stu_id' => $studentid
+]
+
+);
+
+return redirect()->route('sponsorlist');
+
 }
 
     

@@ -228,17 +228,27 @@ background: #488e2b;
                         <th> Info </th>
                         <th> Action </th>
 </thead>
+
+
+@foreach($sponsordata as $sponsor)
+
 <tbody>
-    <form>
- @foreach($sponsordata as $sponsor)
-    <td> {{$sponsor->sponsor_id}} </td>
+<form action="{{route('sponsorrequest')}}" method="POST">
+   @csrf
+    <td> <input type="hidden" name="sponsor_id" value="{{$sponsor->id}}">{{$sponsor->sponsor_id}} </input></td>
     <td>{{$sponsor->sponsor_name}}  </td>
     <td>{{$sponsor->sponsor_email}}  </td> 
     <td> Something about the sponsor </td> 
+    @if($sponsor->stu_id == auth::id())
+    <td><button class="btn btn-warning">Requested</button> </td> 
+    @else
     <td><button type="submit" class="btn btn-success">Request</button> </td> 
-    @endforeach
+    @endif
+    <input type="hidden" name="userid" value="{{auth::id()}}">
+   
 </form>
 </tbody>
+@endforeach
 </table>
                
                                     </div>
