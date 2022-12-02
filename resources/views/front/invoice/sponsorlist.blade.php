@@ -226,11 +226,20 @@ background: #488e2b;
                         <th> Name </th>
                         <th> Email </th>
                         <th> Info </th>
-                        <th> Actio </th>
+                        <th> Action </th>
 </thead>
 
 
 @foreach($sponsordata as $sponsor)
+
+@php 
+
+$id = auth::id();
+$spo = $sponsor->stu_id;
+$std = $spo;
+$st = explode(',', $std);
+
+@endphp 
 
 <tbody>
 <form action="{{route('sponsorrequest')}}" method="POST">
@@ -239,7 +248,7 @@ background: #488e2b;
     <td>{{$sponsor->sponsor_name}}  </td>
     <td>{{$sponsor->sponsor_email}}  </td> 
     <td> Something about the sponsor </td> 
-    @if($sponsor->stu_id == auth::id())
+    @if(in_array($id,$st))
     <td><button class="btn btn-warning">Requested</button> </td> 
     @else
     <td><button type="submit" class="btn btn-success">Request</button> </td> 

@@ -39,8 +39,8 @@
                         @endphp 
                       @php
                         $course_list = DB::select( DB::raw("SELECT * FROM courseselections WHERE stu_id = '".Auth::user()->id."'"));
+                        
                       @endphp
-                     
                      @php
                       $id = auth::id();
                     $offer = DB::table('users')->select('offer_accepted')->where('id',$id)->get();

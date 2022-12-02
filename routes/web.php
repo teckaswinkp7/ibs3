@@ -135,6 +135,8 @@ Route::get('sponsorlogin', [AuthControllers::class, 'sponsorlogin'])->name('spon
 Route::get('sponsorprofile', [AuthControllers::class, 'sponsorprofile'])->name('sponsorprofile');
 Route::post('sponsorprofilepost', [AuthControllers::class, 'sponsorprofilepost'])->name('sponsorprofilepost');
 Route::get('sponsorstudentview', [Sponsorstudentcontroller::class, 'index'])->name('sponsorstudentview');
+Route::post('sponsoredstudent', [Sponsorstudentcontroller::class, 'sponsoredstudent'])->name('sponsoredstudent');
+Route::get('sponsoredstudents', [Sponsorstudentcontroller::class, 'sponsoredstudentview'])->name('sponsoredstudents');
 
 
 

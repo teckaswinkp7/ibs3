@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Front;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Storage;
 use DB;
 use App\Models\User;
 use App\Models\unit;
@@ -188,7 +190,16 @@ class Invoicecontroller extends Controller
         $student_course_offer= Courseselection::select("courses.name as courses_name")->join("courses","courses.id", "=", "courseselections.studentSelCid")->where('courseselections.stu_id','=',$id)->get();
 
         $pdf = \PDF::loadView('front.invoice.invoice',compact('student_course_offer','user','exist','location','communication','invoicedata','selectedcourse','unitsData','courseData'));
-        return $pdf->download($name.'proformainvoice.pdf');
+        Storage::put($name.'salesinvoice.pdf', $pdf->output());
+        $dbstore = payment::updateOrCreate([
+
+            'stu_id'=> auth::id(),
+
+        ],[
+
+            'ibs_reciept' => $name.'salesinvoice.pdf'
+        ]);
+        return $pdf->download($name.'salesinvoice.pdf');
 
    //     PDF::Output(uniqid().'_SamplePDF.pdf', 'D');
         
@@ -435,11 +446,13 @@ public function sponsorrequest(Request $request){
 
       
 
-       $stdd = array($st,$userid);
-       $studentid = implode(',',$stdd);
+      $stdd = array($st,$userid);
+      $studentid = implode(',',$stdd);
     
 
-    }
+   }
+
+
    // dd($studentid);
    //dd($sponsorid);
     $sponsorrequest = Sponsor::updateorcreate([

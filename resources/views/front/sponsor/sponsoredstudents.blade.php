@@ -23,7 +23,7 @@
         <div class="profile-logo">
             <a href="#"><img src="{{asset('assets/custom/profile-logo.png')}}" alt="" width="100px"></a>
         </div>  
-        <h3>Students Request</h3>
+        <h3>Confirmed Students Sponsored List</h3>
 
         <div class="row">
             <div class="col-sm-2">
@@ -32,7 +32,7 @@
 
                    <li> <a href="sponsorprofile">Profile</a></li>
                     <li><a href="sponsorstudentview">View Students</a></li>
-                    <li class="bill"><a href="sponsoredstudents">Payment</a></li>
+                    <li class="bill"><a href="payment">Payment</a></li>
                   <li class="bill"><a href="sponsorhistory">History</a></li>
                     </ul>
 </nav>
@@ -41,7 +41,7 @@
 <div class="col-sm-10">
 <table>
     <thead>
-    <p class="inst">Instruction: Confirm those students that you will sponsor fundings from the following list by clicking on the “Accept” Button. If you decline a student, the student will be removed from your list to sponsor. Those whom you will accept will move from this list to the Payment list awaiting funding​</p>
+    <p class="inst">Instruction: Check the checkboxes next to the ID Column of those students that you either would like to make payment now and click the pay button on the accumulated invoice total to perform payment transection; or you have already made payment and would like to confirm their payment by clicking on the Confirm Payment Button </p>
     <tr class="filt">
         <form>
         <th scope="col"> <label for="date-range"> Date: </label> <input type='text' name="date-range"  class="datepicker form-control" placeholder="Date" ></input> </th>
@@ -67,7 +67,7 @@
         </form>
         <form action="">
         <th> <label for="search"> Search: </label><div class="input-group">
-      <input class="form-control py-2" type="search" name="search" value="{{$search}}" id="example-search-input">
+      <input class="form-control py-2" type="search" name="search" value="" id="example-search-input">
       <span class="input-group-append">
         <button class="btn btn-outline-secondary" type="submit" style="background-color: #cc6600; color:white;">
             <i class="fa fa-search" ></i>
@@ -82,59 +82,30 @@
     <table class="table table-striped">
     <thead>
     <tr>
+        <th> </th>
       <th>ID</th>
       <th >Name</th>
       <th >Course</th>
       <th >Date Submitted</th>
       <th >Invoice</th>
-      <th >Amount</th>
       <th >Institute</th>
       <th >Type of student</th>
-      <th >Approval</th>
+      <th >Amount</th>
     </tr>
   </thead>
-  @foreach ($std as $key => $val)
-                      @php
-                      
-                      
-                      if(!empty($search)){
-                      $student = DB::table('users')->select('users.name','users.email','users.id')
-                      ->where('name','LIKE','%'.$search.'%')->get();
-
-                 
-                      $student_course_offer= DB::table('courseselections')->select("courses.name")->join("courses","courses.id", "=", "courseselections.studentSelCid")->where('courseselections.stu_id','=',$student[0]->id)->get(); 
-                      $studentinvoicedata = DB::table('payment')->select('*')->where('stu_id',$val)->get();
-                      $studentinvoice = DB::table('invoice')->select('*')->where('stu_id',$val)->get();
-                      $date = $studentinvoicedata[0]->updated_at;
-                      $dateo =  date('Y-m-d', strtotime($date));                      
-                      }
-                      else{
-                        $student = DB::table('users')->select('users.name','users.email','users.id')->where('id',$val)->get();
-                      $student_course_offer= DB::table('courseselections')->select("courses.name")->join("courses","courses.id", "=", "courseselections.studentSelCid")->where('courseselections.stu_id','=',$student[0]->id)->get(); 
-                      $studentinvoicedata = DB::table('payment')->select('*')->where('stu_id',$val)->get();
-                      $studentinvoice = DB::table('invoice')->select('*')->where('stu_id',$val)->get();
-                      $date = $studentinvoicedata[0]->updated_at;
-                      $dateo =  date('Y-m-d', strtotime($date));      
-                      }
-                      
-                      @endphp
-                      
+               
   <tbody>
-  <form action="{{route('sponsoredstudent')}}" method="POST">
-  @csrf
-      <td><input type="hidden" name="stu_id" value="{{$student[0]->id}}">{{$student[0]->id}}</input></td>
-      <td>{{$student[0]->name}}</td>
-      <td>{{$student_course_offer[0]->name}}</td>
-      <td>{{$dateo}}</td>
-      <td><a href="{{url('storage/app')}}/{{ $studentinvoicedata[0]->ibs_reciept }}" target="_blank">{{$studentinvoice[0]->invoiceno}} </a></td>
-      <td>{{$studentinvoicedata[0]->amountdue}}</td>
+  <td><input type="checkbox"> </input> </td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
       <td>-</td>
       <td>-</td>
-      <td><button type="submit" value="yes" name="request_accepted" class="col-md-6 btn btn-success"><i class="fa-solid fa-check"></i></button><button type="button" name="request_accepted" value="no" class="col-md-4 btn btn-danger"style="margin-left:5px;" ><i class="fa-solid fa-xmark" style="margin-right:30px;"></i></button></td>
-</form>
 
       <tbody>
-      @endforeach
       
 </table>
 
