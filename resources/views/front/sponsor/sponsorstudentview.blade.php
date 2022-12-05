@@ -15,6 +15,8 @@
 
     font-size:10px;
 }
+
+
    </style>
     
 
@@ -93,48 +95,86 @@
       <th >Approval</th>
     </tr>
   </thead>
-  @foreach ($std as $key => $val)
-                      @php
-                      
-                      
-                      if(!empty($search)){
-                      $student = DB::table('users')->select('users.name','users.email','users.id')
-                      ->where('name','LIKE','%'.$search.'%')->get();
 
-                 
-                      $student_course_offer= DB::table('courseselections')->select("courses.name")->join("courses","courses.id", "=", "courseselections.studentSelCid")->where('courseselections.stu_id','=',$student[0]->id)->get(); 
-                      $studentinvoicedata = DB::table('payment')->select('*')->where('stu_id',$val)->get();
-                      $studentinvoice = DB::table('invoice')->select('*')->where('stu_id',$val)->get();
-                      $date = $studentinvoicedata[0]->updated_at;
-                      $dateo =  date('Y-m-d', strtotime($date));                      
-                      }
+
+
+  @foreach ($std as $val)
+                      @php
+                      if(!empty($search)){
+                        $student = DB::table('users')
+            ->join('payment','users.id','=','payment.stu_id')
+            ->join('invoice','users.id','=','invoice.stu_id')
+            ->join('courses','invoice.course_id','=','courses.id')
+            ->join('sponsoredstudents','sponsoredstudents.stu_id','=','payment.stu_id')
+            ->select('users.id','users.name','users.email','payment.amountdue','payment.balance_due','payment.ibs_reciept','invoice.course_id','invoice.invoiceno','invoice.updated_at','courses.name as course_name','sponsoredstudents.request_accepted')
+            ->where('users.name','LIKE','%'.$search.'%')
+            ->get()->toArray();
+              }
                       else{
-                        $student = DB::table('users')->select('users.name','users.email','users.id')->where('id',$val)->get();
-                      $student_course_offer= DB::table('courseselections')->select("courses.name")->join("courses","courses.id", "=", "courseselections.studentSelCid")->where('courseselections.stu_id','=',$student[0]->id)->get(); 
-                      $studentinvoicedata = DB::table('payment')->select('*')->where('stu_id',$val)->get();
-                      $studentinvoice = DB::table('invoice')->select('*')->where('stu_id',$val)->get();
-                      $date = $studentinvoicedata[0]->updated_at;
-                      $dateo =  date('Y-m-d', strtotime($date));      
+                        $student = DB::table('users')
+            ->join('payment','users.id','=','payment.stu_id')
+            ->join('invoice','users.id','=','invoice.stu_id')
+            ->join('courses','invoice.course_id','=','courses.id')
+            ->join('sponsoredstudents','sponsoredstudents.stu_id','=','payment.stu_id')
+            ->select('users.id','users.name','users.email','payment.amountdue','payment.balance_due','payment.ibs_reciept','invoice.course_id','invoice.invoiceno','invoice.updated_at','courses.name as course_name','sponsoredstudents.request_accepted')
+            ->where('users.id',$val)
+            ->get()->toArray();
+                           
                       }
                       
-                      @endphp
-                      
+                      foreach($student as $st){
+
+
+                        $name = $st->name;
+                        $course = $st->course_name;
+                        $date = date('d-m-Y', strtotime($st->updated_at));
+                        $invoice = $st->ibs_reciept;
+                        $amountdue = $st->amountdue;
+                        $id = $st->id;
+                        $request= $st->request_accepted;
+                         }
+@endphp
+
+             
+             
+             
+<form action="{{route('sponsoredstudent')}}" method="POST">           
   <tbody>
-  <form action="{{route('sponsoredstudent')}}" method="POST">
+  
   @csrf
-      <td><input type="hidden" name="stu_id" value="{{$student[0]->id}}">{{$student[0]->id}}</input></td>
-      <td>{{$student[0]->name}}</td>
-      <td>{{$student_course_offer[0]->name}}</td>
-      <td>{{$dateo}}</td>
-      <td><a href="{{url('storage/app')}}/{{ $studentinvoicedata[0]->ibs_reciept }}" target="_blank">{{$studentinvoice[0]->invoiceno}} </a></td>
-      <td>{{$studentinvoicedata[0]->amountdue}}</td>
+      
+      @if($request == 'yes')
+      
+     @elseif($request == 'no')
+     <td><input type="hidden" name="stu_id" value="{{$id}}"></input></td>
+      <td>{{$name}}</td>
+      <td>{{$course}}</td>
+      <td>{{$date}}</td>
+      <td><a href="{{url('storage/app')}}/{{ $invoice }}" target="_blank">{{$invoice}}</a></td>
+      <td>{{$amountdue}}</td>
       <td>-</td>
       <td>-</td>
-      <td><button type="submit" value="yes" name="request_accepted" class="col-md-6 btn btn-success"><i class="fa-solid fa-check"></i></button><button type="button" name="request_accepted" value="no" class="col-md-4 btn btn-danger"style="margin-left:5px;" ><i class="fa-solid fa-xmark" style="margin-right:30px;"></i></button></td>
-</form>
+     <td><span class="badge badge-danger">Declined</span></td>
+     @else
+     <td><input type="hidden" name="stu_id" value="{{$id}}"></input></td>
+      <td>{{$name}}</td>
+      <td>{{$course}}</td>
+      <td>{{$date}}</td>
+      <td><a href="{{url('storage/app')}}/{{ $invoice }}" target="_blank">{{$invoice}}</a></td>
+      <td>{{$amountdue}}</td>
+      <td>-</td>
+      <td>-</td>
+    <td><button type="submit" value="yes" name="request_accepted" class="col-md-6 btn btn-success"><i class="fa-solid fa-check"></i></button><button type="submit" name="request_accepted" value="no" class="col-md-4 btn btn-danger"style="margin-left:5px;" ><i class="fa-solid fa-xmark" style="margin-right:30px;"></i></button></td>
+     @endif
+
+     
+  
 
       <tbody>
-      @endforeach
+      </form>
+ 
+      @endforeach   
+
       
 </table>
 

@@ -15,6 +15,42 @@
 
     font-size:10px;
 }
+.total-amount{
+    display: block;
+   
+    padding: 40px 10px;
+    width:40%;
+    text-decoration: none;
+    margin-bottom: 6px;
+    border-radius: 6px;
+    line-height:5px;
+    color: rgba(0, 0, 0, 0.8);
+    background-color: var(--bs-table-bg);
+    transition: all .3s ease;
+    border: 1px solid #d9d9d9;
+}
+.button{
+
+    padding: 10px 10px;
+    background-color: #cc6600;
+    color:white;
+    border-radius: 5px;
+    border-color: #cc6600;
+}
+
+.button >a{
+    color:white;
+    text-decoration:none;
+}
+
+.styletotal{
+
+    border:none;
+    font-size: 30px;
+    color:black;
+    background-color: var(--bs-table-bg);
+}
+
    </style>
     
 
@@ -32,16 +68,42 @@
 
                    <li> <a href="sponsorprofile">Profile</a></li>
                     <li><a href="sponsorstudentview">View Students</a></li>
-                    <li class="bill"><a href="payment">Payment</a></li>
+                    <li class="bill"><a href="sponsoredstudents">Payment</a></li>
                   <li class="bill"><a href="sponsorhistory">History</a></li>
                     </ul>
 </nav>
             </div>
             
 <div class="col-sm-10">
-<table>
+<form action="{{route('confirmpaymentpost')}}" method="post">
+    @csrf
+<table >
     <thead>
     <p class="inst">Instruction: Check the checkboxes next to the ID Column of those students that you either would like to make payment now and click the pay button on the accumulated invoice total to perform payment transection; or you have already made payment and would like to confirm their payment by clicking on the Confirm Payment Button </p>
+    <tr>
+    
+  
+    <span style="top:60px;"> Accumilative Invoice Total: <span>
+    <div class="total-amount">
+        <div class="row">
+        <div>
+        <button type="submit" class="col-md-4 button float-right" style="margin-bottom:10px;" value="1" > <a href=""> Pay </button></a>  
+</div>    
+        <div class="col-md-4">
+        <input class="styletotal" id="total" disabled></input>
+        
+</div>
+
+    <div class="col">
+      <button class="button float-right" type="submit" > Confirm payment </button>
+</div>
+
+     </div>
+    
+</div>
+
+
+</tr>
     <tr class="filt">
         <form>
         <th scope="col"> <label for="date-range"> Date: </label> <input type='text' name="date-range"  class="datepicker form-control" placeholder="Date" ></input> </th>
@@ -93,22 +155,40 @@
       <th >Amount</th>
     </tr>
   </thead>
-               
+           
   <tbody>
-  <td><input type="checkbox"> </input> </td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td>-</td>
-      <td>-</td>
+    @foreach($sponsoredstudentdata as $sponsor)
+@php 
 
+$student = DB::table('users')->where('users.id',$sponsor->stu_id)
+->join('sponsoredstudents','sponsoredstudents.stu_id','=','users.id')
+->join('payment','users.id','=','payment.stu_id')
+->join('invoice','users.id','=','invoice.stu_id')
+->join('courses','invoice.course_id','=','courses.id')
+->select('users.id','users.name','users.email','courses.name as course_name','invoice.updated_at','payment.amountdue','sponsoredstudents.stu_id','invoice.invoiceno')
+->where('request_accepted','yes')->get();
+
+
+
+@endphp
+@foreach($student as $st)
+
+
+  <td><input name="sponsored[]" id="sponsored" value="{{$st->stu_id}},{{$st->amountdue}}" type="checkbox"> </input></td>
+      <td>{{$st->stu_id}}</td>
+      <td>{{$st->name}}</td>
+      <td>{{$st->course_name}}</td>
+      <td>{{date('y-m-d',strtotime($st->updated_at))}}</td>
+      <td>{{$st->invoiceno}}</td>
+      <td></td>
+      <td>-</td>
+      <td>{{$st->amountdue}}</td>
       <tbody>
-      
+      @endforeach
+        
+      @endforeach
 </table>
-
+</form>
 </div>
                       
                 </div>
@@ -120,7 +200,19 @@
 
     
     @include('front/footer')  
+<script>
+    $('input:checkbox').change(function ()
+{
 
+      var total = 0;
+      $('input:checkbox:checked').each(function(){
+       total += isNaN(parseInt($(this).val())) ? 0 : parseInt($(this).val());
+      });   
+  
+      $("#total").val(total);
+
+});
+</script>
     
     @endsection   
   

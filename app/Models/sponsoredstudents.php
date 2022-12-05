@@ -10,6 +10,6 @@ class sponsoredstudents extends Model
     use HasFactory;
 
     protected $fillable = [
-        'stu_id','sponsor_id','request_accepted'
+        'stu_id','sponsor_id','request_accepted','confirmpay'
     ];
 }
