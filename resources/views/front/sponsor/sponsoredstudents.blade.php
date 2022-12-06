@@ -18,7 +18,7 @@
 .total-amount{
     display: block;
    
-    padding: 40px 10px;
+    padding: 20px 10px;
     width:40%;
     text-decoration: none;
     margin-bottom: 6px;
@@ -165,8 +165,10 @@ $student = DB::table('users')->where('users.id',$sponsor->stu_id)
 ->join('payment','users.id','=','payment.stu_id')
 ->join('invoice','users.id','=','invoice.stu_id')
 ->join('courses','invoice.course_id','=','courses.id')
-->select('users.id','users.name','users.email','courses.name as course_name','invoice.updated_at','payment.amountdue','sponsoredstudents.stu_id','invoice.invoiceno')
-->where('request_accepted','yes')->get();
+->select('users.id','users.name','users.email','courses.name as course_name','invoice.updated_at','payment.balance_due','sponsoredstudents.stu_id','invoice.invoiceno')
+->where('request_accepted','yes')
+->where('payment.balance_due','!=','0')
+->get();
 
 
 
@@ -174,7 +176,7 @@ $student = DB::table('users')->where('users.id',$sponsor->stu_id)
 @foreach($student as $st)
 
 
-  <td><input name="sponsored[]" id="sponsored" value="{{$st->stu_id}},{{$st->amountdue}}" type="checkbox"> </input></td>
+  <td><input name="sponsored[]" id="sponsored" value="{{$st->balance_due}},{{$st->stu_id}}" type="checkbox"> </input></td>
       <td>{{$st->stu_id}}</td>
       <td>{{$st->name}}</td>
       <td>{{$st->course_name}}</td>
@@ -182,7 +184,7 @@ $student = DB::table('users')->where('users.id',$sponsor->stu_id)
       <td>{{$st->invoiceno}}</td>
       <td></td>
       <td>-</td>
-      <td>{{$st->amountdue}}</td>
+      <td>{{$st->balance_due}}</td>
       <tbody>
       @endforeach
         

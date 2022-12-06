@@ -41,10 +41,10 @@ class Invoicecontroller extends Controller
             return view('front.invoice.proformainvoiceerror');
 
         }
-            $availableunits = DB::table('units')->select('units.id','units.title','units.slug','units.short_text','units.unit_price','units.course_id')->
-            join('courseselections','courseselections.StudentSelCid','=','units.course_id')->
-            where('courseselections.stu_id','=',$id)->
-            get();
+            $availableunits = DB::table('units')->select('units.id','units.title','units.slug','units.short_text','units.unit_price','units.course_id')
+            ->join('courseselections','courseselections.StudentSelCid','=','units.course_id')
+            ->where('courseselections.stu_id','=',$id)
+            ->get();
             $sem = sem::all();
             $additionalfee = Additionalfee::all();
             $unitselectionid = DB::table('unitselection')->select('unitselection.units_id')->where('unitselection.stu_id','=',$id)->get();

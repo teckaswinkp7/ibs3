@@ -100,23 +100,25 @@
 
   @foreach ($std as $val)
                       @php
+                      
+                     
+                      
                       if(!empty($search)){
                         $student = DB::table('users')
             ->join('payment','users.id','=','payment.stu_id')
             ->join('invoice','users.id','=','invoice.stu_id')
             ->join('courses','invoice.course_id','=','courses.id')
-            ->join('sponsoredstudents','sponsoredstudents.stu_id','=','payment.stu_id')
-            ->select('users.id','users.name','users.email','payment.amountdue','payment.balance_due','payment.ibs_reciept','invoice.course_id','invoice.invoiceno','invoice.updated_at','courses.name as course_name','sponsoredstudents.request_accepted')
+            ->select('users.id','users.name','users.email','payment.amountdue','payment.balance_due','payment.ibs_reciept','invoice.course_id','invoice.invoiceno','invoice.updated_at','courses.name as course_name',payment.sponsor_accepted)
             ->where('users.name','LIKE','%'.$search.'%')
             ->get()->toArray();
+
               }
                       else{
                         $student = DB::table('users')
             ->join('payment','users.id','=','payment.stu_id')
             ->join('invoice','users.id','=','invoice.stu_id')
             ->join('courses','invoice.course_id','=','courses.id')
-            ->join('sponsoredstudents','sponsoredstudents.stu_id','=','payment.stu_id')
-            ->select('users.id','users.name','users.email','payment.amountdue','payment.balance_due','payment.ibs_reciept','invoice.course_id','invoice.invoiceno','invoice.updated_at','courses.name as course_name','sponsoredstudents.request_accepted')
+            ->select('users.id','users.name','users.email','payment.amountdue','payment.balance_due','payment.ibs_reciept','invoice.course_id','invoice.invoiceno','invoice.updated_at','courses.name as course_name','payment.sponsor_accepted')
             ->where('users.id',$val)
             ->get()->toArray();
                            
@@ -131,22 +133,21 @@
                         $invoice = $st->ibs_reciept;
                         $amountdue = $st->amountdue;
                         $id = $st->id;
-                        $request= $st->request_accepted;
+                        $request = $st->sponsor_accepted;
                          }
+                         
 @endphp
 
              
              
              
-<form action="{{route('sponsoredstudent')}}" method="POST">           
+<form action="{{route('sponsoredstudent')}}" method="POST">  
+@csrf         
   <tbody>
-  
-  @csrf
-      
-      @if($request == 'yes')
-      
-     @elseif($request == 'no')
-     <td><input type="hidden" name="stu_id" value="{{$id}}"></input></td>
+    @if($request == 'yes')
+
+    @elseif($request == 'no')
+  <td><input type="hidden" name="stu_id" value="{{$id}}"></input></td>
       <td>{{$name}}</td>
       <td>{{$course}}</td>
       <td>{{$date}}</td>
@@ -165,7 +166,7 @@
       <td>-</td>
       <td>-</td>
     <td><button type="submit" value="yes" name="request_accepted" class="col-md-6 btn btn-success"><i class="fa-solid fa-check"></i></button><button type="submit" name="request_accepted" value="no" class="col-md-4 btn btn-danger"style="margin-left:5px;" ><i class="fa-solid fa-xmark" style="margin-right:30px;"></i></button></td>
-     @endif
+    @endif
 
      
   

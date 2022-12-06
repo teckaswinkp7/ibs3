@@ -28,6 +28,14 @@ border-color: #cc6600;
 color:white;
 text-decoration:none;
 }
+ a > .fa-circle-minus{
+   color: #cc6600;
+
+}
+.strong{
+
+    font-weight:600;
+}
 
    </style>
     
@@ -57,6 +65,7 @@ text-decoration:none;
     <thead>
     <p class="inst">Instruction: Check the checkboxes next to the ID Column of those students that you either would like to make payment now and click the pay button on the accumulated invoice total to perform payment transection; or you have already made payment and would like to confirm their payment by clicking on the Confirm Payment Button </p>
 <table>
+    
     <table class="table table-striped">
     <thead>
     <tr>
@@ -72,50 +81,82 @@ text-decoration:none;
       <th> Amount Paid </th>
     </tr>
   </thead>
-           
+  <form action="{{route('payrecieptpost')}}" method="post">
+        @csrf      
   <tbody>
     
 
+  @foreach($stu_id as $key => $select)
 
+  @php 
+  $valid = explode(',',$select);
 
-  <td><input type="checkbox"> </input> </td>
+        $val = $valid[1];
+
+  $student = DB::table('users')->where('users.id',$val)
+->join('sponsoredstudents','sponsoredstudents.stu_id','=','users.id')
+->join('payment','users.id','=','payment.stu_id')
+->join('invoice','users.id','=','invoice.stu_id')
+->join('courses','invoice.course_id','=','courses.id')
+->select('users.id','users.name','users.email','courses.name as course_name','invoice.updated_at','payment.balance_due','sponsoredstudents.stu_id','invoice.invoiceno','payment.status')
+->where('request_accepted','yes')
+->where('payment.balance_due','!=','0')
+->get();
+
+  @endphp 
+
+@foreach($student as $st)
+  <td><a href="#"><i class="fa-solid fa-circle-minus"></a></i></td>
+      <td> <input type="hidden" name="stu_id[]" value="{{$st->stu_id}}"></input>{{$st->stu_id}}</td>
+      <td name="name" value="{{$st->name}}">{{$st->name}}</td>
+      <td name="course_name" value="{{$st->course_name}}">{{$st->course_name}}</td>
       <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td>{{$st->invoiceno}}</td>
       <td>-</td>
-      <td></td>
-      <td> </td>
+      <td>{{$st->status}}</td>
+      <td class="price" name="totalamount" value="{{$st->balance_due}}">{{$st->balance_due}} </td>
+      <td><input class="price2" name="amount_paid" value="" type="text">  </input></td>
 
-      <tbody>
+</tbody>
+@endforeach
+@endforeach
         <tfoot>
-      <td> Total: </td>
+      <td>  </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> <strong> Total: </strong></td>
+      <td id="total"> </td>
+      <td id="total2" class="strong"> </td>
+
 </tfoot>
 </table>
-<button class="button" type="button"> Edit </button> 
+<button class="button" type="button"><a href="sponsoredstudents"> Edit </button></a> 
 <div class="row">
+
    <label required> <strong> Attach Remittance Advice* </strong> </label>
    <p>Please rename your receipt title in the following naming convention: ​
 
 CorporateSponsorName_Remittance_Advice_CurrentDate(ddmmyy). For example, OKTediLTD_Remittance_Advise_15112022.pdf</p>
 
-<form>
+
   <div class="custom-file col-sm-6">
-    <input type="file" class="custom-file-input" id="customFile">
+    <input type="file" name="payreciept" class="custom-file-input" id="customFile">
     <label class="custom-file-label" for="customFile">Choose file</label>
   </div>
-</form>
+
 
 <div class="row">
     <div class="">
         <button class="button float-right" style="margin-left:2px;"> Cancel </button>
-        <button class="button float-right"> Submit Recipet </button>
+        <button type="submit" class="button float-right"> Submit Recipet </button>
         
 
 </div>
-
+</form>
 </div>
 </div>
                       
@@ -134,6 +175,33 @@ $(".custom-file-input").on("change", function() {
   var fileName = $(this).val().split("\\").pop();
   $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 });
+</script>
+<script>
+    function getTotal(){
+    var total = 0;
+    $('.price').each(function(){
+        total += parseFloat(this.innerHTML)
+    });
+    $('#total').text(total);
+}
+
+getTotal();
+
+</script>
+<script>
+  $('.price2').blur(function () {
+    var sum = 0;
+    $('.price2').each(function() {
+        if($(this).val()!="")
+         {
+            sum += parseFloat($(this).val());
+         }
+
+    });
+    $('#total2').text(sum);
+});
+
+
 </script>
 
     

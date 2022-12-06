@@ -28,7 +28,19 @@ border-color: #cc6600;
 color:white;
 text-decoration:none;
 }
+ a > .fa-circle-minus{
+   color: #cc6600;
 
+}
+.strong{
+
+    font-weight:600;
+}
+
+.edit-btn >a{
+
+    color:white;
+}
    </style>
     
 
@@ -37,7 +49,7 @@ text-decoration:none;
         <div class="profile-logo">
             <a href="#"><img src="{{asset('assets/custom/profile-logo.png')}}" alt="" width="100px"></a>
         </div>  
-        <h3>History</h3>
+        <h3>Confirm Payment</h3>
 
         <div class="row">
             <div class="col-sm-2">
@@ -46,36 +58,40 @@ text-decoration:none;
 
                    <li> <a href="sponsorprofile">Profile</a></li>
                     <li><a href="sponsorstudentview">View Students</a></li>
-                    <li class="bill"><a href="confirmsponsorpayment">Payment</a></li>
+                    <li class="bill"><a href="sponsoredstudents">Payment</a></li>
                   <li class="bill"><a href="sponsorhistory">History</a></li>
                     </ul>
 </nav>
             </div>
             
-<div class="col-sm-10">
-    <table class="table table-striped">
-    <thead>
-    <tr>
-      <th>Amount</th>
-      <th >Invoices</th>
-      <th >Date Paid</th>
-      <th >Types</th>
-      <th >Reciept</th>
-    
-    </tr>
-  </thead>
-  @foreach($paidstudents as $ps )
-  <tbody>
-      <td></td>
-      <td></td>
-      <td>{{date('y-m-d',strtotime($ps->updated_at))}}</td>
-      <td></td>
-      <td>{{$ps->paid_reciept}}</td>
-      <tbody>
-   @endforeach    
-</table>
+            <div class="col-sm-9">
+<div class="row">
+<div class="edit-course">
+</br>
+<img class="d-flex" style="width:150px; position:relative; left:350px;" src="{{asset('assets/front/images/accept.png')}}"></img>
+</br>
+</br>
+ <h4 style = "text-align:center;"> Reciept Submitted Succesfully </h4>
+ <p> Thank you for submitting your payment receipt form. 
+     Your invoice and payment will now be sent to the Finance team for reconciliation. 
+     Once your payment has been reconciled, your payment status will be updated, 
+     and you will receive your IBS receipt here in your iConnect
+ 
+</p>
+</div>
+
+<div class="submission-btn text-center">
+          <button  class="btn btn-primary edit-btn" > <a href="confirmsponsorpayment"> Submit Another  Reciept </button> </a>
+         </div>
+         </div>
+         </div>
 
 
+
+
+
+
+</div>
 </div>
                       
                 </div>
