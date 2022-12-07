@@ -222,10 +222,10 @@ echo $dt->format('Y-m-d');
                         <div >
                           <div class="reciept">
                         <label  class="required" for="payreciept">Attach Bank Reciept: </label></br>
-                        <div class="custom-file">
-   <input id="logo" name="payreciept" type="file" class="custom-file-input" required>
-   <label for="logo" class="custom-file-label text-truncate">Choose file...</label>
-</div>
+                        <div class="custom-file col-sm-6">
+    <input type="file" name="payreciept" class="custom-file-input" id="customFile">
+    <label class="custom-file-label" for="customFile">Choose file</label>
+  </div>
 </div>
 </div>        
 
@@ -241,14 +241,13 @@ echo $dt->format('Y-m-d');
                         </div>
                   </div>
 
-                  <script>
-                   
-                   
-                   jquery('.custom-file-input').on('change', function() { 
-   let fileName = jquery(this).val().split('\\').pop(); 
-   jquery(this).next('.custom-file-label').addClass("selected").html(fileName); 
+               
+ @include('front/footer')  
+ <script>
+// Add the following code if you want the name of the file appear on select
+$(".custom-file-input").on("change", function() {
+  var fileName = $(this).val().split("\\").pop();
+  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 });
-
-</script>
- @include('front/footer')      
+</script> 
 @endsection  

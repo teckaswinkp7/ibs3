@@ -45,19 +45,22 @@
     <thead>
     <p class="inst">Instruction: Confirm those students that you will sponsor fundings from the following list by clicking on the “Accept” Button. If you decline a student, the student will be removed from your list to sponsor. Those whom you will accept will move from this list to the Payment list awaiting funding​</p>
     <tr class="filt">
-        <form>
-        <th scope="col"> <label for="date-range"> Date: </label> <input type='text' name="date-range"  class="datepicker form-control" placeholder="Date" ></input> </th>
+        <form action="" method="get">
+        <th scope="col"> <label for="date"> Date: </label> <input type='text' name="date"  class="datepicker form-control" placeholder="Date" ></input> </th>
         <th scope="col" > <label>Course :</label>
-         <select id='course' class="form-control" style="width:200px">
-         <option value="">All</option>
-         <option value="1">Active</option>
+         <select name="courseid" id='course' class="form-control" style="width:200px">
+         <option>All</option>
+         @foreach($courses as $course)
+        <option  value="{{$course->id}}" >{{$course->name}} </option>
+         @endforeach
          </select>
          </th>
 
         <th scope="col"> <label>Institute:</label>
          <select id='institute' class="form-control" style="width:200px">
          <option value="">All</option>
-         <option value="1">Active</option>
+         <option value="ibsuniversity">IBS University</option>
+         <option value="southerncrossuniversity">Southern Cross University</option>
          </select> </th>
 
         <th> <label>Type of Student:</label>
@@ -108,9 +111,9 @@
             ->join('payment','users.id','=','payment.stu_id')
             ->join('invoice','users.id','=','invoice.stu_id')
             ->join('courses','invoice.course_id','=','courses.id')
-            ->select('users.id','users.name','users.email','payment.amountdue','payment.balance_due','payment.ibs_reciept','invoice.course_id','invoice.invoiceno','invoice.updated_at','courses.name as course_name',payment.sponsor_accepted)
+            ->select('users.id','users.name','users.email','payment.amountdue','payment.balance_due','payment.ibs_reciept','invoice.course_id','invoice.invoiceno','invoice.updated_at','courses.name as course_name','payment.sponsor_accepted')
             ->where('users.name','LIKE','%'.$search.'%')
-            ->get()->toArray();
+            ->get();
 
               }
                       else{
@@ -120,7 +123,7 @@
             ->join('courses','invoice.course_id','=','courses.id')
             ->select('users.id','users.name','users.email','payment.amountdue','payment.balance_due','payment.ibs_reciept','invoice.course_id','invoice.invoiceno','invoice.updated_at','courses.name as course_name','payment.sponsor_accepted')
             ->where('users.id',$val)
-            ->get()->toArray();
+            ->get();
                            
                       }
                       
@@ -135,7 +138,8 @@
                         $id = $st->id;
                         $request = $st->sponsor_accepted;
                          }
-                         
+
+                       
 @endphp
 
              
@@ -147,7 +151,7 @@
     @if($request == 'yes')
 
     @elseif($request == 'no')
-  <td><input type="hidden" name="stu_id" value="{{$id}}"></input></td>
+  <td><input type="hidden" name="stu_id" value="{{$id}}"></input>{{$id}}</td>
       <td>{{$name}}</td>
       <td>{{$course}}</td>
       <td>{{$date}}</td>
@@ -157,7 +161,7 @@
       <td>-</td>
      <td><span class="badge badge-danger">Declined</span></td>
      @else
-     <td><input type="hidden" name="stu_id" value="{{$id}}"></input></td>
+     <td><input type="hidden" name="stu_id" value="{{$id}}"></input>{{$id}}</td>
       <td>{{$name}}</td>
       <td>{{$course}}</td>
       <td>{{$date}}</td>

@@ -87,7 +87,7 @@
     <div class="total-amount">
         <div class="row">
         <div>
-        <button type="submit" class="col-md-4 button float-right" style="margin-bottom:10px;" value="1" > <a href=""> Pay </button></a>  
+        <button type="submit" class="col-md-4 button float-right" style="margin-bottom:10px;" name="paybutton" value="online" > <a href="onlinesponsorpayment"> Pay </button></a>  
 </div>    
         <div class="col-md-4">
         <input class="styletotal" id="total" disabled></input>
@@ -95,7 +95,7 @@
 </div>
 
     <div class="col">
-      <button class="button float-right" type="submit" > Confirm payment </button>
+      <button class="button float-right" type="submit" name="paybutton" value="offline" > Confirm payment </button>
 </div>
 
      </div>
@@ -105,12 +105,13 @@
 
 </tr>
     <tr class="filt">
-        <form>
-        <th scope="col"> <label for="date-range"> Date: </label> <input type='text' name="date-range"  class="datepicker form-control" placeholder="Date" ></input> </th>
+    <th scope="col"> <label for="date"> Date: </label> <input type='text' name="date"  class="datepicker form-control" placeholder="Date" ></input> </th>
         <th scope="col" > <label>Course :</label>
-         <select id='course' class="form-control" style="width:200px">
-         <option value="">All</option>
-         <option value="1">Active</option>
+        <select name="courseid" id='course' class="form-control" style="width:200px">
+         <option>All</option>
+         @foreach($courses as $course)
+        <option  value="{{$course->id}}" >{{$course->name}} </option>
+         @endforeach
          </select>
          </th>
 
@@ -125,8 +126,7 @@
          <option value="">All</option>
          <option value="1">Active</option>
          </select></th>
-<th> <button class="btn btn-primary" type="submit"  style=" padding: 5px 15px; background-color: #cc6600; border-color:#cc6600; color: white; margin-top:20px; margin-left:5px; margin-right:5px;"> Apply </button> </th>
-        </form>
+<th> <button class="btn btn-primary" value="filter" type="submit" name="paybutton" style=" padding: 5px 15px; background-color: #cc6600; border-color:#cc6600; color: white; margin-top:20px; margin-left:5px; margin-right:5px;"> Apply </button> </th>
         <form action="">
         <th> <label for="search"> Search: </label><div class="input-group">
       <input class="form-control py-2" type="search" name="search" value="" id="example-search-input">

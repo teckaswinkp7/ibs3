@@ -135,24 +135,35 @@ text-decoration:none;
 </tfoot>
 </table>
 <button class="button" type="button"><a href="sponsoredstudents"> Edit </button></a> 
+
+
 <div class="row">
+			<div class="col-md-12">
+                <h4> Select Your Payment Method option </h4> 
+                <p> Note: IBS does not accept any form of payment in cash or cheque.kindly deposit this form of payment at the bank</p>
+                <input data-toggle="modal" data-target="#refundmodal" type="radio" name="payment" value="0"> 
+                <label for="payment" > Bank Direct Deposit </label>
+                <input data-toggle="modal" data-target="#refundmodal" type="radio" name="payment" value="1"> 
+                <label  for="payment" > Mobile Banking </label>
+                <input data-toggle="modal" data-target="#refundmodal" type="radio" name="payment" value="2"> 
+                <label for="payment" > Visa Payment </label>
+                                    </br>
+                <input data-toggle="modal" data-target="#refundmodal" type="radio" name="payment" value="3"> 
+                <label for="payment" > Online Transfer </label>
+                <input data-toggle="modal" data-target="#refundmodal" type="radio" name="payment" value="4"> 
+                <label for="payment" > BSP Pay </label>
+                                    </div>
+                                    </div>
 
-   <label required> <strong> Attach Remittance Advice* </strong> </label>
-   <p>Please rename your receipt title in the following naming convention: ​
-
-CorporateSponsorName_Remittance_Advice_CurrentDate(ddmmyy). For example, OKTediLTD_Remittance_Advise_15112022.pdf</p>
-
-
-  <div class="custom-file col-sm-6">
-    <input type="file" name="payreciept" class="custom-file-input" id="customFile">
-    <label class="custom-file-label" for="customFile">Choose file</label>
-  </div>
+                                    </div>
+                          </div>
+                        
 
 
 <div class="row">
     <div class="">
-        <button class="button float-right" style="margin-left:2px;"> Cancel </button>
-        <button type="submit" class="button float-right"> Submit Recipet </button>
+        <button type="submit" class="button float-right"> Next </button>
+        </div>
         </div>
 
 </div>
@@ -168,13 +179,7 @@ CorporateSponsorName_Remittance_Advice_CurrentDate(ddmmyy). For example, OKTediL
   
     
     @include('front/footer')  
-    <script>
-// Add the following code if you want the name of the file appear on select
-$(".custom-file-input").on("change", function() {
-  var fileName = $(this).val().split("\\").pop();
-  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-});
-</script>
+   
 <script>
     function getTotal(){
     var total = 0;
