@@ -86,14 +86,11 @@ text-decoration:none;
   <tbody>
     
 
-  @foreach($stu_id as $key => $select)
+  @foreach($der as $key => $val)
 
   @php 
-  $valid = explode(',',$select);
-
-        $val = $valid[1];
-
-  $student = DB::table('users')->where('users.id',$val)
+ 
+$student = DB::table('users')->where('users.id',$val)
 ->join('sponsoredstudents','sponsoredstudents.stu_id','=','users.id')
 ->join('payment','users.id','=','payment.stu_id')
 ->join('invoice','users.id','=','invoice.stu_id')
@@ -103,10 +100,11 @@ text-decoration:none;
 ->where('payment.balance_due','!=','0')
 ->get();
 
-  @endphp 
+@endphp 
 
 @foreach($student as $st)
-  <td><a href="#"><i class="fa-solid fa-circle-minus"></a></i></td>
+  <td><input type="hidden" value="{{$st->stu_id}}" name="derid" ><a href=""><i class="fa-solid fa-circle-minus"></i></a></td>
+
       <td> <input type="hidden" name="stu_id[]" value="{{$st->stu_id}}"></input>{{$st->stu_id}}</td>
       <td name="name" value="{{$st->name}}">{{$st->name}}</td>
       <td name="course_name" value="{{$st->course_name}}">{{$st->course_name}}</td>
@@ -134,7 +132,7 @@ text-decoration:none;
 
 </tfoot>
 </table>
-<button class="button" type="button"><a href="sponsoredstudents"> Edit </button></a> 
+<button class="button" type="button"><a href="{{route('sponsoredstudents')}}"> Edit </button></a> 
 <div class="row">
 
    <label required> <strong> Attach Remittance Advice* </strong> </label>

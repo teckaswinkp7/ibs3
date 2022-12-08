@@ -19,34 +19,40 @@ class Sponsorstudentcontroller extends Controller
 
     public function index(Request $request){
         
-       
+      // dd(Carbon::parse($request->date)->format('Y-m-d'));
+     
+
+      $id=auth::id();
+      $search = $request->search ?? "";
  
   try{
    
-        
-        $sponsorstudentdata = 
-            DB::table('sponsors')
-            ->join('users','users.id','=','sponsors.stu_id')
+  //  dd(Carbon::parse($request->date)->format('Y-m-d'));
+
+      $sponsorstudentdata = 
+            DB::table('sponsorrequesteds')
+            ->join('users','users.id','=','sponsorrequesteds.stu_id')
             ->join('invoice','users.id','=','invoice.stu_id')
-            ->join('courseselections','sponsors.stu_id','=','courseselections.stu_id')
-            ->select('sponsors.stu_id','users.name','users.id','invoice.updated_at')
-            ->when($request->date !=null, function($q) use ($request){
+            ->join('courseselections','sponsorrequesteds.stu_id','=','courseselections.stu_id')
+            ->join('payment','payment.stu_id','=','invoice.stu_id')
+            ->join('courses','invoice.course_id','=','courses.id')
+            ->select('sponsorrequesteds.stu_id','users.name','users.id','payment.amountdue','payment.balance_due','payment.ibs_reciept','invoice.course_id','invoice.invoiceno','invoice.updated_at','courses.name as course_name','payment.sponsor_accepted')
+            ->when($request->date != null, function($q) use ($request){
 
-             return $q->where('invoice.updated_at',Carbon::parse($request->date)->format('Y-m-d'));
+                return $q->whereDate('invoice.updated_at',Carbon::parse($request->date)->format('Y-m-d'));
             })
-            ->when($request->courseid !=null, function($q) use ($request){
+            ->when($request->courseid != null, function($q) use ($request){
 
-                return $q->where('courseselections.studentSelCid',$request->courseid);
-               })
-            ->where('sponsors.id',auth::id())
-            ->pluck('sponsors.stu_id')
-            ->firstOrFail();
+                return $q->where('invoice.course_id',$request->courseid);
+            })
+            ->when($request->search != null, function($q) use ($request){
 
-       
-            
-   
-    
- }
+                return $q->where('users.name','LIKE', '%'.$request->search.'%');
+            })
+            ->where('sponsorrequesteds.sponsor_id',auth::id())
+            ->get();
+            //dd($sponsorstudentdata);
+      }
  catch(\Exception $exception){
 
     $courses = Courses::all();
@@ -54,11 +60,12 @@ class Sponsorstudentcontroller extends Controller
      return view('front.sponsor.sponsorstudentviewerror',compact('courses'));
  }
 
-
-   
-    $studid = $sponsorstudentdata;
-     $std = explode(',',$studid);
-    $search = $request->search ?? "";
+ //dd($sponsorstudentdata);
+     
+   //  $studid = $sponsorstudentdata;
+   //  $std = explode(',',$studid);
+    
+     
 
     $courses = Courses::all();
 
@@ -70,7 +77,7 @@ class Sponsorstudentcontroller extends Controller
     
    //  dd($stdata);
      
-        return view('front.sponsor.sponsorstudentview',compact('sponsorstudentdata','std','search','courses'));
+        return view('front.sponsor.sponsorstudentview',compact('sponsorstudentdata','search','courses'));
     }
 
 
@@ -112,23 +119,49 @@ class Sponsorstudentcontroller extends Controller
 
         $id = auth::id();
         $courses = Courses::all();
+        $search = $request->search ?? "";
+        
 
-       // dd(Session::get($request->date));
+        
 
-        $sponsoredstudentdata = DB::table('sponsoredstudents')
-        ->select('id','stu_id','sponsor_id','request_accepted')
-        ->when($request->date != null,function($q) use ($request){
+        
 
-            return $q->where('invoice.updated_at',$request->date);
+      // Session::forget('courseid');
+
+       $sponsoredstudentdata = DB::table('sponsoredstudents')
+                ->join('users','users.id','=','sponsoredstudents.stu_id')
+                ->join('invoice','invoice.stu_id','=','sponsoredstudents.stu_id')
+                ->join('payment','payment.stu_id','=','invoice.stu_id')
+                ->join('courses','courses.id','=','invoice.course_id')
+                ->join('courseselections','courseselections.stu_id','=','sponsoredstudents.stu_id')
+                ->select('sponsoredstudents.id','sponsoredstudents.stu_id','sponsoredstudents.sponsor_id','sponsoredstudents.request_accepted','users.name','users.id','payment.amountdue','payment.balance_due','payment.ibs_reciept','invoice.course_id','invoice.invoiceno','invoice.updated_at','courses.name as course_name','payment.sponsor_accepted')
+                ->when(Session::get('date') != null, function($q) use ($request){
+
+            return $q->whereDate('invoice.updated_at',Carbon::parse(Session::get('date'))->format('Y-m-d'));
         })
-        ->where('sponsor_id',$id)->get();
+        ->when(Session::get('courseid') != null, function ($q) use ($request){
 
-    
+            return $q->where('invoice.course_id',Session::get('courseid'));
+        })
+        ->when($request->search != null, function($q) use ($request){
 
-        return view('front.sponsor.sponsoredstudents',compact('sponsoredstudentdata','courses'));
+            return $q->where('users.name','LIKE', '%'.$request->search.'%');
+        })
+        ->where('sponsoredstudents.sponsor_id',$id)
+        ->where('payment.balance_due','!=','0')
+        ->get();
+
+        
+      //  dd($sponsoredstudentdata);
+
+        return view('front.sponsor.sponsoredstudents',compact('sponsoredstudentdata','courses','search'))->with(Session::forget('date'))->with(Session::forget('course_id'));
+       
+       
     }
     public function confirmpaymentpost(Request $request){
-
+         
+      $filterdate = Session::put('date',$request->date);
+      $filtercourse = Session::put('courseid',$request->courseid);
 
         $value = Sponsor::updateOrCreate([
 
@@ -148,6 +181,7 @@ class Sponsorstudentcontroller extends Controller
             return redirect()->route('confirmsponsorpayment');
             break;  
             case 'filter':
+                
             return redirect()->route('sponsoredstudents');
         }
         
@@ -158,30 +192,21 @@ class Sponsorstudentcontroller extends Controller
      
 
         $selected = Session::get('selected');
+       // dd($selected);
         
       $stu_id = json_decode($selected);
 
-     foreach($stu_id as $key => $select){
- 
-     
-        $valid = explode(',',$select);
+      $stid = implode(',',$stu_id);
 
-        $val = $valid[1];
+      $der = explode(',',$stid);
 
- $student = DB::table('users')->where('users.id',$val)
-->join('sponsoredstudents','sponsoredstudents.stu_id','=','users.id')
-->join('payment','users.id','=','payment.stu_id')
-->join('invoice','users.id','=','invoice.stu_id')
-->join('courses','invoice.course_id','=','courses.id')
-->select('users.id','users.name','users.email','courses.name as course_name','invoice.updated_at','payment.amountdue','sponsoredstudents.stu_id','invoice.invoiceno')
-->where('request_accepted','yes')->get();
-     
+     // if (($key = array_search('139', $der)) !== false) {
+   //     unset($der[$key]);
+  //  }
 
+   // dd($der);
 
-
-}
-
-return view('front.sponsor.confirmsponsorpayment',compact('selected','stu_id'));
+return view('front.sponsor.confirmsponsorpayment',compact('selected','stu_id','der'));
 
     }
 

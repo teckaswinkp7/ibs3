@@ -8,6 +8,7 @@ use DB;
 use App\Models\User;
 use App\Models\unit;
 use App\Models\payment;
+use App\Models\sponsorrequested;
 use App\Models\Performainvoice;
 use App\Models\Additionalfee;
 use App\Models\invoice;
@@ -462,6 +463,13 @@ public function sponsorrequest(Request $request){
 ,[
 
            'stu_id' => $studentid
+]
+
+);
+$sponsorrequested = sponsorrequested::create([
+
+    'stu_id' => $userid,
+    'sponsor_id' =>$request->sponsor_id
 ]
 
 );

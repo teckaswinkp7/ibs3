@@ -49,7 +49,7 @@
         <th scope="col"> <label for="date"> Date: </label> <input type='text' name="date"  class="datepicker form-control" placeholder="Date" ></input> </th>
         <th scope="col" > <label>Course :</label>
          <select name="courseid" id='course' class="form-control" style="width:200px">
-         <option>All</option>
+         <option value="">All</option>
          @foreach($courses as $course)
         <option  value="{{$course->id}}" >{{$course->name}} </option>
          @endforeach
@@ -101,35 +101,12 @@
 
 
 
-  @foreach ($std as $val)
+  
+                      
+                      @foreach($sponsorstudentdata as $st)
+
+
                       @php
-                      
-                     
-                      
-                      if(!empty($search)){
-                        $student = DB::table('users')
-            ->join('payment','users.id','=','payment.stu_id')
-            ->join('invoice','users.id','=','invoice.stu_id')
-            ->join('courses','invoice.course_id','=','courses.id')
-            ->select('users.id','users.name','users.email','payment.amountdue','payment.balance_due','payment.ibs_reciept','invoice.course_id','invoice.invoiceno','invoice.updated_at','courses.name as course_name','payment.sponsor_accepted')
-            ->where('users.name','LIKE','%'.$search.'%')
-            ->get();
-
-              }
-                      else{
-                        $student = DB::table('users')
-            ->join('payment','users.id','=','payment.stu_id')
-            ->join('invoice','users.id','=','invoice.stu_id')
-            ->join('courses','invoice.course_id','=','courses.id')
-            ->select('users.id','users.name','users.email','payment.amountdue','payment.balance_due','payment.ibs_reciept','invoice.course_id','invoice.invoiceno','invoice.updated_at','courses.name as course_name','payment.sponsor_accepted')
-            ->where('users.id',$val)
-            ->get();
-                           
-                      }
-                      
-                      foreach($student as $st){
-
-
                         $name = $st->name;
                         $course = $st->course_name;
                         $date = date('d-m-Y', strtotime($st->updated_at));
@@ -137,7 +114,7 @@
                         $amountdue = $st->amountdue;
                         $id = $st->id;
                         $request = $st->sponsor_accepted;
-                         }
+                         
 
                        
 @endphp

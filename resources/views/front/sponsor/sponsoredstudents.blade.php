@@ -105,10 +105,11 @@
 
 </tr>
     <tr class="filt">
+        <form action="" method="get">
     <th scope="col"> <label for="date"> Date: </label> <input type='text' name="date"  class="datepicker form-control" placeholder="Date" ></input> </th>
         <th scope="col" > <label>Course :</label>
         <select name="courseid" id='course' class="form-control" style="width:200px">
-         <option>All</option>
+         <option value="">All</option>
          @foreach($courses as $course)
         <option  value="{{$course->id}}" >{{$course->name}} </option>
          @endforeach
@@ -127,9 +128,10 @@
          <option value="1">Active</option>
          </select></th>
 <th> <button class="btn btn-primary" value="filter" type="submit" name="paybutton" style=" padding: 5px 15px; background-color: #cc6600; border-color:#cc6600; color: white; margin-top:20px; margin-left:5px; margin-right:5px;"> Apply </button> </th>
-        <form action="">
+</form>        
+<form action="">
         <th> <label for="search"> Search: </label><div class="input-group">
-      <input class="form-control py-2" type="search" name="search" value="" id="example-search-input">
+      <input class="form-control py-2" type="search" name="search" value="{{$search}}" id="example-search-input">
       <span class="input-group-append">
         <button class="btn btn-outline-secondary" type="submit" style="background-color: #cc6600; color:white;">
             <i class="fa fa-search" ></i>
@@ -157,23 +159,8 @@
   </thead>
            
   <tbody>
-    @foreach($sponsoredstudentdata as $sponsor)
-@php 
-
-$student = DB::table('users')->where('users.id',$sponsor->stu_id)
-->join('sponsoredstudents','sponsoredstudents.stu_id','=','users.id')
-->join('payment','users.id','=','payment.stu_id')
-->join('invoice','users.id','=','invoice.stu_id')
-->join('courses','invoice.course_id','=','courses.id')
-->select('users.id','users.name','users.email','courses.name as course_name','invoice.updated_at','payment.balance_due','sponsoredstudents.stu_id','invoice.invoiceno')
-->where('request_accepted','yes')
-->where('payment.balance_due','!=','0')
-->get();
-
-
-
-@endphp
-@foreach($student as $st)
+   
+@foreach($sponsoredstudentdata as $st)
 
 
   <td><input name="sponsored[]" id="sponsored" value="{{$st->balance_due}},{{$st->stu_id}}" type="checkbox"> </input></td>
@@ -188,7 +175,7 @@ $student = DB::table('users')->where('users.id',$sponsor->stu_id)
       <tbody>
       @endforeach
         
-      @endforeach
+      
 </table>
 </form>
 </div>

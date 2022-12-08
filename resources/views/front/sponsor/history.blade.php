@@ -46,7 +46,7 @@ text-decoration:none;
 
                    <li> <a href="sponsorprofile">Profile</a></li>
                     <li><a href="sponsorstudentview">View Students</a></li>
-                    <li class="bill"><a href="confirmsponsorpayment">Payment</a></li>
+                    <li class="bill"><a href="sponsoredstudents">Payment</a></li>
                   <li class="bill"><a href="sponsorhistory">History</a></li>
                     </ul>
 </nav>

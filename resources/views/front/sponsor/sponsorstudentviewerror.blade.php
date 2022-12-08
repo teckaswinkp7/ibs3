@@ -46,7 +46,7 @@
     <p class="inst">Instruction: Confirm those students that you will sponsor fundings from the following list by clicking on the “Accept” Button. If you decline a student, the student will be removed from your list to sponsor. Those whom you will accept will move from this list to the Payment list awaiting funding​</p>
     <tr class="filt">
         <form action="" method="get">
-        <th scope="col"> <label for="date-range"> Date: </label> <input type='text' name="date"  class="datepicker form-control" placeholder="Date" ></input> </th>
+        <th scope="col"> <label for="date"> Date: </label> <input type='text' name="date"  class="datepicker form-control" placeholder="Date" ></input> </th>
         <th scope="col" > <label>Course :</label>
         <select name="courseid" id='course' class="form-control" style="width:200px">
          <option>All</option>
