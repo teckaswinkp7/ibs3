@@ -59,18 +59,18 @@ text-decoration:none;
       <th>Amount</th>
       <th >Invoices</th>
       <th >Date Paid</th>
-      <th >Types</th>
-      <th >Reciept</th>
+   <!--   <th >Types</th> 
+      <th >Reciept</th>-->
     
     </tr>
   </thead>
   @foreach($paidstudents as $ps )
   <tbody>
-      <td></td>
-      <td></td>
+      <td>{{$ps->amountdue}}</td>
+      <td>{{$ps->paid_reciept}}</td>
       <td>{{date('y-m-d',strtotime($ps->updated_at))}}</td>
       <td></td>
-      <td>{{$ps->paid_reciept}}</td>
+      <td></td>
       <tbody>
    @endforeach    
 </table>

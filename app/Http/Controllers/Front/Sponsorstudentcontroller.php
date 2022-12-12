@@ -189,7 +189,10 @@ class Sponsorstudentcontroller extends Controller
 
     public function confirmsponsorpayment(Request $request){
 
+
+     // dd(Session::get('dataVal'));
      
+  
 
         $selected = Session::get('selected');
        // dd($selected);
@@ -200,62 +203,130 @@ class Sponsorstudentcontroller extends Controller
 
       $der = explode(',',$stid);
 
-     // if (($key = array_search('139', $der)) !== false) {
-   //     unset($der[$key]);
-  //  }
+      $deslct = $der;
 
-   // dd($der);
+   //   $deselectedid = Session::get('derid');
+      
+  //    if($deselectedid != null){
+ 
+        //dd($deselectedid);
+  //     if (($key = array_search($deselectedid, $der)) !== false) {
+ //    unset($der[$key]);
+ //   }
+ //     }
+    
+    
+ //$aswin =  $request->derid;
 
-return view('front.sponsor.confirmsponsorpayment',compact('selected','stu_id','der'));
+   // dd($aswin);   
+
+  // dd(Session::get('select'));
+   
+return view('front.sponsor.confirmsponsorpayment',compact('selected','deslct'));
+
+
+
 
     }
 
     public function payrecieptpost(Request $request){
 
-       
-        if ($request->hasFile('payreciept')) {
-            $fileName = $request->payreciept->getClientOriginalName();
-            $path = $request->payreciept->move(public_path('/payreciept'), $fileName);
-        }
-        $recieptpost = paymentsession::Create([
+        switch($request->confirmsponsorpay){
+            case 'deselect':
 
 
-            'sponsor_id' => auth::id(),
-            'paid_stu_id' => json_encode($request->stu_id),
-            'paid_reciept' =>$fileName
-            
-        ]);
-    //    dd($request->payreciept);
+                $selected = Session::get('selected');
+                // dd($selected);
+                 
+               $stu_id = json_decode($selected);
+         
+               $stid = implode(',',$stu_id);
+         
+               $der = explode(',',$stid);
 
-        $stu_id = $request->stu_id;
-       
-       foreach($stu_id as $stid){
+               $deslct = $der;
 
-        $amountdue = payment::select('balance_due')->where('stu_id',$stid)->get();
-        $amountpaid =  payment::select('amount_paid')->where('stu_id',$stid)->get();
+               $deselectedid = $request->derid;
 
-        $paymentupdate = payment::updateOrCreate(
-            [
-
-              'stu_id' => $stid
-
-            ],[
-
-                'amount_paid' =>$request->amount_paid + $amountpaid[0]->amount_paid,
-                'balance_due' =>   $amountdue[0]->balance_due - $request->amount_paid,
-                'status'   => 'waiting Reconcillation',
-
-        ]);
-
-       }
-       
-       
-       
-      //  dd($paymentupdate);
-
-
+             //  dd($deselectedid);
+         
+           //    if($deselectedid != null){
  
-      return redirect()->route('sponsorrecieptsubmitsuccess');
+                //dd($deselectedid);
+         //      if (($key = array_search($deselectedid, $der)) !== false) {
+         //  unset($der[$key]);
+         //   }
+         //     }
+         //     else{
+
+         //       $deslct = $der;
+         //     }
+                
+           
+        
+               
+
+              //  dd($request->derid);
+
+      //  $sponsordeselectid = Session::put('derid',$request->derid);
+
+            return redirect()->route('confirmsponsorpayment',compact('deslct'));
+            break;
+            case 'reciept':
+                
+       
+                if ($request->hasFile('payreciept')) {
+                    $fileName = $request->payreciept->getClientOriginalName();
+                    $path = $request->payreciept->move(public_path('/payreciept'), $fileName);
+                }
+                $recieptpost = paymentsession::Create([
+        
+        
+                    'sponsor_id' => auth::id(),
+                    'paid_stu_id' => json_encode($request->stu_id),
+                    'paid_reciept' =>$fileName
+                    
+                ]);
+            //    dd($request->payreciept);
+        
+                $stu_id = $request->stu_id;
+               
+               foreach($stu_id as $stid){
+        
+                $amountdue = payment::select('balance_due')->where('stu_id',$stid)->get();
+                $amountpaid =  payment::select('amount_paid')->where('stu_id',$stid)->get();
+        
+                $paymentupdate = payment::updateOrCreate(
+                    [
+        
+                      'stu_id' => $stid
+        
+                    ],[
+        
+                        'amount_paid' =>$request->amount_paid + $amountpaid[0]->amount_paid,
+                        'balance_due' =>   $amountdue[0]->balance_due - $request->amount_paid,
+                        'status'   => 'waiting Reconcillation',
+        
+                ]);
+        
+               }
+               
+               
+               
+              //  dd($paymentupdate);
+        
+        
+         
+              return redirect()->route('sponsorrecieptsubmitsuccess');
+            break;  
+            case 'cancel':
+                
+            return redirect()->route('sponsoredstudents');
+            break;
+        }
+ 
+
+        
 
        
     }
@@ -271,9 +342,14 @@ return view('front.sponsor.confirmsponsorpayment',compact('selected','stu_id','d
     public function history(){
 
         $id = auth::id();
-        $paidstudents = DB::table('paymentsession')->select('*')->where('sponsor_id',$id)->get();
+        $paidstudents = DB::table('paymentsession')
+        ->join('sponsorrequesteds','paymentsession.sponsor_id','=','sponsorrequesteds.sponsor_id')
+        ->join('payment','sponsorrequesteds.stu_id','=','payment.stu_id')
+        ->select('*')
+        ->where('paymentsession.sponsor_id',$id)
+        ->get();
 
-
+    // dd($paidstudents);
 
         return view('front.sponsor.history',compact('paidstudents'));
     }

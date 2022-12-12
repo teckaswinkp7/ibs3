@@ -138,6 +138,7 @@ Route::get('sponsorstudentview', [Sponsorstudentcontroller::class, 'index'])->na
 Route::post('sponsoredstudent', [Sponsorstudentcontroller::class, 'sponsoredstudent'])->name('sponsoredstudent');
 Route::get('sponsoredstudents', [Sponsorstudentcontroller::class, 'sponsoredstudentview'])->name('sponsoredstudents');
 Route::get('confirmsponsorpayment', [Sponsorstudentcontroller::class, 'confirmsponsorpayment'])->name('confirmsponsorpayment');
+Route::post('confirmsponsorajax', [Sponsorstudentcontroller::class, 'ajax'])->name('confirmsponsorajax');
 Route::post('confirmpaymentpost', [Sponsorstudentcontroller::class, 'confirmpaymentpost'])->name('confirmpaymentpost');
 Route::get('onlinesponsorpayment', [Sponsorstudentcontroller::class, 'onlinesponsor'])->name('onlinesponsorpayment');
 Route::post('payrecieptpost', [Sponsorstudentcontroller::class, 'payrecieptpost'])->name('payrecieptpost');

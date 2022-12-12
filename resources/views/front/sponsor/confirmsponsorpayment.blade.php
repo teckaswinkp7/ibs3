@@ -5,6 +5,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"/>  
  
 <link rel="stylesheet" href="{{asset('assets/custom/profile.css')}}">
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 
 <style>
 *{
@@ -81,12 +83,13 @@ text-decoration:none;
       <th> Amount Paid </th>
     </tr>
   </thead>
-  <form action="{{route('payrecieptpost')}}" method="post" enctype="multipart/form-data">
-        @csrf      
+    
   <tbody>
+  <form action="{{route('payrecieptpost')}}" method="post" enctype="multipart/form-data">
+        @csrf  
     
 
-  @foreach($der as $key => $val)
+  @foreach($deslct as $key => $val)
 
   @php 
  
@@ -103,7 +106,13 @@ $student = DB::table('users')->where('users.id',$val)
 @endphp 
 
 @foreach($student as $st)
-  <td><input type="hidden" value="{{$st->stu_id}}" name="derid" ><a href=""><i class="fa-solid fa-circle-minus"></i></a></td>
+
+  <td>
+  <input type="hidden" name="derid" value="{{$st->stu_id}}"></input>
+ <button class="deleteRecord" value="deselect" data-id="{{$st->stu_id}}" type="submit" name="confirmsponsorpay">
+ <a ><i class="fa-solid fa-circle-minus"></i></a>
+ </button>
+  </td>
 
       <td> <input type="hidden" name="stu_id[]" value="{{$st->stu_id}}"></input>{{$st->stu_id}}</td>
       <td name="name" value="{{$st->name}}">{{$st->name}}</td>
@@ -149,8 +158,8 @@ CorporateSponsorName_Remittance_Advice_CurrentDate(ddmmyy). For example, OKTediL
 
 <div class="row">
     <div class="">
-        <button class="button float-right" style="margin-left:2px;"> Cancel </button>
-        <button type="submit" class="button float-right"> Submit Recipet </button>
+        <button value="cancel" type="submit" name="confirmsponsorpay" class="button float-right" style="margin-left:2px;"> Cancel </button>
+        <button value="reciept" type="submit" name="confirmsponsorpay"  class="button float-right"> Submit Recipet </button>
         </div>
 
 </div>
@@ -200,6 +209,46 @@ getTotal();
 
 
 </script>
+
+<script type="text/javascript">
+
+  $(".deleteRecord").submit(function(e){
+
+ // e.preventDefault();
+  $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+            }
+        });
+   
+    var id = $(this).data("id");
+
+  // alert(id);
+  
+
+    $.ajax({
+    
+        
+        url : "{{route('payrecieptpost')}}",
+       method : 'POST',
+        data: {id: id},
+        success: function(data){
+
+          console.log(data);
+        },
+        error: function(data){
+          alert(data);
+        }
+
+  });
+
+});
+
+
+</script>
+
+
+
 
     
     @endsection   
