@@ -478,11 +478,18 @@ Any refunds for students, it will be reimbursed directly to the original account
 On admission into this institution, I hereby accept to abide by the code of conduct, policies and procedures.
       </div>
       <div class="modal-footer ">
-        <button type="submit" class="btn text-center btn-primary agree-btn"> I Agree</button>
+       <button type="submit" id="myButton" class="btn text-center btn-primary agree-btn"> I Agree </button>
       </div>
     </div>
     </form> 
   </div>
 </div>
  @include('front/footer')      
+ <script type="text/javascript">
+    document.getElementById("myButton").onclick = function () {
+        
+      var url = "{{url('invoice')}}";
+    window.open(url);
+    };
+</script>
 @endsection  

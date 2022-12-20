@@ -86,26 +86,7 @@ text-decoration:none;
   <tbody>
     
 
-  @foreach($stu_id as $key => $select)
-
-  @php 
-  $valid = explode(',',$select);
-
-        $val = $valid[1];
-
-  $student = DB::table('users')->where('users.id',$val)
-->join('sponsoredstudents','sponsoredstudents.stu_id','=','users.id')
-->join('payment','users.id','=','payment.stu_id')
-->join('invoice','users.id','=','invoice.stu_id')
-->join('courses','invoice.course_id','=','courses.id')
-->select('users.id','users.name','users.email','courses.name as course_name','invoice.updated_at','payment.balance_due','sponsoredstudents.stu_id','invoice.invoiceno','payment.status')
-->where('request_accepted','yes')
-->where('payment.balance_due','!=','0')
-->get();
-
-  @endphp 
-
-@foreach($student as $st)
+@foreach($studentpayment as $st)
   <td><a href="#"><i class="fa-solid fa-circle-minus"></a></i></td>
       <td> <input type="hidden" name="stu_id[]" value="{{$st->stu_id}}"></input>{{$st->stu_id}}</td>
       <td name="name" value="{{$st->name}}">{{$st->name}}</td>
@@ -118,7 +99,6 @@ text-decoration:none;
       <td><input class="price2" name="amount_paid" value="" type="text">  </input></td>
 
 </tbody>
-@endforeach
 @endforeach
         <tfoot>
       <td>  </td>

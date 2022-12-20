@@ -67,7 +67,7 @@ text-decoration:none;
   @foreach($paidstudents as $ps )
   <tbody>
       <td>{{$ps->amountdue}}</td>
-      <td>{{$ps->paid_reciept}}</td>
+      <td><a href="{{url('/payreciept')}}/{{$ps->paid_reciept}}" target="_blank"> {{$ps->paid_reciept}} </a></td>
       <td>{{date('y-m-d',strtotime($ps->updated_at))}}</td>
       <td></td>
       <td></td>

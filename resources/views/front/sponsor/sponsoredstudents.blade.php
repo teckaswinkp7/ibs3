@@ -95,7 +95,7 @@
 </div>
 
     <div class="col">
-      <button class="button float-right" type="submit" name="paybutton" value="offline" > Confirm payment </button>
+      <button class="col-md-6 button float-right" type="submit" name="paybutton" value="offline" > Confirm pay </button>
 </div>
 
      </div>
@@ -104,10 +104,11 @@
 
 
 </tr>
-    <tr class="filt">
+<table class="table">
+    <tr>
         <form action="" method="get">
-    <th scope="col"> <label for="date"> Date: </label> <input type='text' name="date"  class="datepicker form-control" placeholder="Date" ></input> </th>
-        <th scope="col" > <label>Course :</label>
+    <th > <label for="date"> Date: </label> <input type='text' name="date"  class="datepicker form-control" placeholder="Date" ></input> </th>
+    <th > <label>Course :</label>
         <select name="courseid" id='course' class="form-control" style="width:200px">
          <option value="">All</option>
          @foreach($courses as $course)
@@ -115,23 +116,22 @@
          @endforeach
          </select>
          </th>
-
-        <th scope="col"> <label>Institute:</label>
+        <th > <label>Institute:</label>
          <select id='institute' class="form-control" style="width:200px">
          <option value="">All</option>
          <option value="1">Active</option>
          </select> </th>
 
-        <th> <label>Type of Student:</label>
-         <select id='typeofstudent' class="form-control" style="width:210px">
+        <th> <label>Type of Student: </label>
+         <select id='typeofstudent' class="form-control" style="width:170px">
          <option value="">All</option>
          <option value="1">Active</option>
          </select></th>
-<th> <button class="btn btn-primary" value="filter" type="submit" name="paybutton" style=" padding: 5px 15px; background-color: #cc6600; border-color:#cc6600; color: white; margin-top:20px; margin-left:5px; margin-right:5px;"> Apply </button> </th>
+<th> <button class="btn btn-primary" value="filter" type="submit" name="paybutton" style=" padding: 5px 15px; background-color: #cc6600; border-color:#cc6600; color: white; margin-top:30px; margin-left:5px; margin-right:5px;"> Apply </button> </th>
 </form>        
 <form action="">
         <th> <label for="search"> Search: </label><div class="input-group">
-      <input class="form-control py-2" type="search" name="search" value="{{$search}}" id="example-search-input">
+      <input  placeholder="search here" class="form-control py-1" type="search" name="search" value="{{$search}}" id="example-search-input">
       <span class="input-group-append">
         <button class="btn btn-outline-secondary" type="submit" style="background-color: #cc6600; color:white;">
             <i class="fa fa-search" ></i>
@@ -142,7 +142,7 @@
 </form>
 
 </tr>
-<table>
+</table>
     <table class="table table-striped">
     <thead>
     <tr>

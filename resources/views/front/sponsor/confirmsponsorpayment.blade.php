@@ -38,6 +38,52 @@ text-decoration:none;
 
     font-weight:600;
 }
+.deleteRecord{
+
+  border:none;
+ background:transparent;
+ padding: 0.001%;
+ cursor:default!important;
+
+}
+
+.orange-color {
+        color:orange;
+    }
+
+    .form-group {
+  display: block;
+  margin-bottom: 15px;
+}
+
+.form-group input {
+  content:'-';
+  color:white;
+  -webkit-appearance: none;
+  background-color: orange;
+  border: 0px solid transparent;
+  border-radius:50px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+  padding: 0.1px 8px;
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+input:before{
+  content:"-";
+  color:white;
+  font-size:900;
+}
+
+
+
+
+
+
+
 
    </style>
     
@@ -88,32 +134,24 @@ text-decoration:none;
   <form action="{{route('payrecieptpost')}}" method="post" enctype="multipart/form-data">
         @csrf  
     
+       
+@foreach($studentpayment as $st)
 
-  @foreach($deslct as $key => $val)
 
-  @php 
- 
-$student = DB::table('users')->where('users.id',$val)
-->join('sponsoredstudents','sponsoredstudents.stu_id','=','users.id')
-->join('payment','users.id','=','payment.stu_id')
-->join('invoice','users.id','=','invoice.stu_id')
-->join('courses','invoice.course_id','=','courses.id')
-->select('users.id','users.name','users.email','courses.name as course_name','invoice.updated_at','payment.balance_due','sponsoredstudents.stu_id','invoice.invoiceno','payment.status')
-->where('request_accepted','yes')
-->where('payment.balance_due','!=','0')
-->get();
-
-@endphp 
-
-@foreach($student as $st)
 
   <td>
-  <input type="hidden" name="derid" value="{{$st->stu_id}}"></input>
- <button class="deleteRecord" value="deselect" data-id="{{$st->stu_id}}" type="submit" name="confirmsponsorpay">
- <a ><i class="fa-solid fa-circle-minus"></i></a>
- </button>
+  
+  <div class="form-group">
+  <button type="submit"  data-id="{{$st->stu_id}}" class="deleteRecord" name="confirmsponsorpay" value="deselect" >
+  <input class="checkboxx minus"  type="checkbox" name="derid[]" value="{{$st->balance_due}},{{$st->stu_id}}" ></input> 
+    </button>
+    </div>
+  
+  
+   <!-- <a ><i class="fa-solid fa-circle-minus"></i></a> -->
+ 
   </td>
-
+ 
       <td> <input type="hidden" name="stu_id[]" value="{{$st->stu_id}}"></input>{{$st->stu_id}}</td>
       <td name="name" value="{{$st->name}}">{{$st->name}}</td>
       <td name="course_name" value="{{$st->course_name}}">{{$st->course_name}}</td>
@@ -122,10 +160,9 @@ $student = DB::table('users')->where('users.id',$val)
       <td>-</td>
       <td>{{$st->status}}</td>
       <td class="price" name="totalamount" value="{{$st->balance_due}}">{{$st->balance_due}} </td>
-      <td><input class="price2" name="amount_paid" value="" type="text">  </input></td>
+      <td><input class="price2" name="amount[]" value="" type="text">  </input></td>
 
 </tbody>
-@endforeach
 @endforeach
         <tfoot>
       <td>  </td>
@@ -137,7 +174,7 @@ $student = DB::table('users')->where('users.id',$val)
       <td> </td>
       <td> <strong> Total: </strong></td>
       <td id="total"> </td>
-      <td id="total2" class="strong"> </td>
+      <td name="amount_paid" id="total2"  class="strong"> </td>
 
 </tfoot>
 </table>
@@ -214,7 +251,7 @@ getTotal();
 
   $(".deleteRecord").submit(function(e){
 
- // e.preventDefault();
+e.preventDefault();
   $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
@@ -229,16 +266,19 @@ getTotal();
     $.ajax({
     
         
-        url : "{{route('payrecieptpost')}}",
+       url : "{{route('payrecieptpost')}}",
        method : 'POST',
         data: {id: id},
+        dataType: 'text',
         success: function(data){
 
-          console.log(data);
+          console.log(id);
+          
         },
         error: function(data){
           alert(data);
         }
+        
 
   });
 

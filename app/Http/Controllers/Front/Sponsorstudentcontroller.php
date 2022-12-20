@@ -12,6 +12,7 @@ use App\Models\sponsoredstudents;
 use App\Models\Sponsor;
 use App\Models\Courses;
 use App\Models\paymentsession;
+use App\Models\selectedstusession;
 use App\Models\payment;
 
 class Sponsorstudentcontroller extends Controller
@@ -36,7 +37,7 @@ class Sponsorstudentcontroller extends Controller
             ->join('courseselections','sponsorrequesteds.stu_id','=','courseselections.stu_id')
             ->join('payment','payment.stu_id','=','invoice.stu_id')
             ->join('courses','invoice.course_id','=','courses.id')
-            ->select('sponsorrequesteds.stu_id','users.name','users.id','payment.amountdue','payment.balance_due','payment.ibs_reciept','invoice.course_id','invoice.invoiceno','invoice.updated_at','courses.name as course_name','payment.sponsor_accepted')
+            ->select('sponsorrequesteds.stu_id','users.name','users.id','payment.amountdue','payment.balance_due','payment.ibs_reciept','invoice.course_id','invoice.invoiceno','invoice.updated_at','courses.name as course_name','payment.sponsor_accepted','payment.invoice')
             ->when($request->date != null, function($q) use ($request){
 
                 return $q->whereDate('invoice.updated_at',Carbon::parse($request->date)->format('Y-m-d'));
@@ -134,7 +135,7 @@ class Sponsorstudentcontroller extends Controller
                 ->join('payment','payment.stu_id','=','invoice.stu_id')
                 ->join('courses','courses.id','=','invoice.course_id')
                 ->join('courseselections','courseselections.stu_id','=','sponsoredstudents.stu_id')
-                ->select('sponsoredstudents.id','sponsoredstudents.stu_id','sponsoredstudents.sponsor_id','sponsoredstudents.request_accepted','users.name','users.id','payment.amountdue','payment.balance_due','payment.ibs_reciept','invoice.course_id','invoice.invoiceno','invoice.updated_at','courses.name as course_name','payment.sponsor_accepted')
+                ->select('sponsoredstudents.id','sponsoredstudents.stu_id','sponsoredstudents.sponsor_id','sponsoredstudents.request_accepted','users.name','users.id','payment.amountdue','payment.balance_due','payment.ibs_reciept','invoice.course_id','invoice.invoiceno','invoice.updated_at','courses.name as course_name','payment.sponsor_accepted','payment.invoice')
                 ->when(Session::get('date') != null, function($q) use ($request){
 
             return $q->whereDate('invoice.updated_at',Carbon::parse(Session::get('date'))->format('Y-m-d'));
@@ -163,21 +164,31 @@ class Sponsorstudentcontroller extends Controller
       $filterdate = Session::put('date',$request->date);
       $filtercourse = Session::put('courseid',$request->courseid);
 
-        $value = Sponsor::updateOrCreate([
-
-            'id' =>auth::id()
-
-        ],[
-
-
-            'selected_stu_id' => Session::put('selected',json_encode($request->sponsored))
-        ]);
+      
          
         switch($request->paybutton){
             case 'online':
+                $value = selectedstusession::updateOrCreate([
+
+
+                    'sponsorid'  => auth::id()
+                ],[
+        
+                    'sponsorid' => auth::id(),
+                    'selstu' => json_encode($request->sponsored)
+                ]);
             return redirect()->route('onlinesponsorpayment');
             break;
             case 'offline':
+                $value = selectedstusession::updateOrCreate([
+
+
+                    'sponsorid'  => auth::id()
+                ],[
+        
+                    'sponsorid' => auth::id(),
+                    'selstu' => json_encode($request->sponsored)
+                ]);
             return redirect()->route('confirmsponsorpayment');
             break;  
             case 'filter':
@@ -192,37 +203,131 @@ class Sponsorstudentcontroller extends Controller
 
      // dd(Session::get('dataVal'));
      
+     $id = auth::id();
   
 
-        $selected = Session::get('selected');
+        $sel = selectedstusession::select('selstu')->where('sponsorid',$id)->get();
+
+        $selected = $sel[0]->selstu;
        // dd($selected);
         
+        
       $stu_id = json_decode($selected);
+
+    //  dd($stu_id);
 
       $stid = implode(',',$stu_id);
 
       $der = explode(',',$stid);
-
-      $deslct = $der;
-
-   //   $deselectedid = Session::get('derid');
       
-  //    if($deselectedid != null){
+      $deselct = Session::get('deletedid');
+
+      //dd($deselct);
+
+     if($deselct != null){
+
+        //dd($deselct);
+
+     $desel = json_decode($deselct);
+
+      $ddl = implode(',',$desel);
+
+      $deselctd = explode(',',$ddl);
+
+
+      $dest = array_diff($der,$deselctd);
+
+      //dd($dest);
+     // print_r($dest);
+        
+        $destr = selectedstusession::updateOrCreate([
+
+            'sponsorid' => auth::id(),
+        ],[
+
+            'sponsorid' => auth::id(),
+            'selstu' => $dest
+        ]);
  
-        //dd($deselectedid);
-  //     if (($key = array_search($deselectedid, $der)) !== false) {
- //    unset($der[$key]);
- //   }
- //     }
-    
-    
- //$aswin =  $request->derid;
+        //die();
+       // dd($der);
 
-   // dd($aswin);   
+      $updatedsel = selectedstusession::select('selstu')->where('sponsorid',$id)->get();
 
-  // dd(Session::get('select'));
+
+      $updatedselstu = $updatedsel[0]->selstu;
+
+      $selstua = json_decode($updatedselstu);
+
+      //dd($selstua);
+
+       //$destrt = $destr->selstu;
+
+      // dd($destrt);
+      
+      $des = $selstua;
+
+    //  dd($des);
+
+    }
+    elseif($deselct = null ){
+
+        //dd($deselct);
+
+    
+      
+      $des = $der;
+
+    //  dd($des);
+
+    }
+    else{
+
+        $des = $der;
+
+    }
+      
+
+
+        //$des = \array_diff($der,$deselctd);
+
+       
+
+  //  dd($des);
+      
+      $studentpayment = DB::table('users')
+      ->whereIn('users.id',$des)
+      ->join('sponsoredstudents','sponsoredstudents.stu_id','=','users.id')
+      ->join('payment','users.id','=','payment.stu_id')
+      ->join('invoice','users.id','=','invoice.stu_id')
+      ->join('courses','invoice.course_id','=','courses.id')
+      ->select('users.id','users.name','users.email','courses.name as course_name','invoice.updated_at','payment.balance_due','sponsoredstudents.stu_id','invoice.invoiceno','payment.status')
+      ->where('request_accepted','yes')
+      ->where('payment.balance_due','!=','0')
+      ->get();
+
+
+
+      
+      //dd($studentpayment);
+
+      //dump($student);
+
+      
+
+        
+      //  dd($selectedforpayment);
+
+     
+    
+
+     
+
+          
+
    
-return view('front.sponsor.confirmsponsorpayment',compact('selected','deslct'));
+   
+return view('front.sponsor.confirmsponsorpayment',compact('studentpayment'))->with(Session::forget('deletedid'));
 
 
 
@@ -233,46 +338,18 @@ return view('front.sponsor.confirmsponsorpayment',compact('selected','deslct'));
 
         switch($request->confirmsponsorpay){
             case 'deselect':
-
-
-                $selected = Session::get('selected');
-                // dd($selected);
-                 
-               $stu_id = json_decode($selected);
-         
-               $stid = implode(',',$stu_id);
-         
-               $der = explode(',',$stid);
-
-               $deslct = $der;
-
-               $deselectedid = $request->derid;
-
-             //  dd($deselectedid);
-         
-           //    if($deselectedid != null){
- 
-                //dd($deselectedid);
-         //      if (($key = array_search($deselectedid, $der)) !== false) {
-         //  unset($der[$key]);
-         //   }
-         //     }
-         //     else{
-
-         //       $deslct = $der;
-         //     }
-                
-           
-        
                
-
-              //  dd($request->derid);
-
-      //  $sponsordeselectid = Session::put('derid',$request->derid);
-
-            return redirect()->route('confirmsponsorpayment',compact('deslct'));
+               $deselctd = Session::put('deletedid',json_encode($request->derid));
+               
+             //dd(Session::get('deletedid'));
+               
+            return redirect()->route('confirmsponsorpayment');
             break;
             case 'reciept':
+
+                $request->validate([
+                    'payreciept' => 'required'
+                ]);
                 
        
                 if ($request->hasFile('payreciept')) {
@@ -284,32 +361,62 @@ return view('front.sponsor.confirmsponsorpayment',compact('selected','deslct'));
         
                     'sponsor_id' => auth::id(),
                     'paid_stu_id' => json_encode($request->stu_id),
-                    'paid_reciept' =>$fileName
+                    'paid_reciept' =>$fileName,
+                    'amount_paid'  => json_encode($request->amount)
                     
                 ]);
             //    dd($request->payreciept);
         
                 $stu_id = $request->stu_id;
-               
-               foreach($stu_id as $stid){
-        
-                $amountdue = payment::select('balance_due')->where('stu_id',$stid)->get();
-                $amountpaid =  payment::select('amount_paid')->where('stu_id',$stid)->get();
-        
+                $amount = $request->amount;
+
+                $collection = collect($stu_id);
+                $zipped = $collection->zip($amount);
+                $zipped->toArray();
+
+                foreach($zipped as $zip){
+
+                $amountdue = payment::select('balance_due')->where('stu_id',$zip[0])->get();
+                $amountpaid =  payment::select('amount_paid')->where('stu_id',$zip[0])->get();
+
                 $paymentupdate = payment::updateOrCreate(
-                    [
+                                        [
+                            
+                                          'stu_id' => $zip[0]
+                            
+                                        ],[
+                            
+                                            'amount_paid' =>$zip[1] + $amountpaid[0]->amount_paid,
+                                            'balance_due' =>   $amountdue[0]->balance_due - $zip[1],
+                                            'status'   => 'waiting Reconcillation',
+                            
+                                    ]);
+
+                    
+                }
+
+
+               
+               
+//               foreach($stu_id as $stid){
         
-                      'stu_id' => $stid
+//                $amountdue = payment::select('balance_due')->where('stu_id',$stid)->get();
+ //               $amountpaid =  payment::select('amount_paid')->where('stu_id',$stid)->get();
         
-                    ],[
+//                $paymentupdate = payment::updateOrCreate(
+//                    [
         
-                        'amount_paid' =>$request->amount_paid + $amountpaid[0]->amount_paid,
-                        'balance_due' =>   $amountdue[0]->balance_due - $request->amount_paid,
-                        'status'   => 'waiting Reconcillation',
+//                      'stu_id' => $stid
         
-                ]);
+//                    ],[
         
-               }
+//                        'amount_paid' =>$request->amount[0] + $amountpaid[0]->amount_paid,
+//                        'balance_due' =>   $amountdue[0]->balance_due - $request->amount[0],
+//                        'status'   => 'waiting Reconcillation',
+        
+//                ]);
+        
+//               }
                
                
                
@@ -345,7 +452,7 @@ return view('front.sponsor.confirmsponsorpayment',compact('selected','deslct'));
         $paidstudents = DB::table('paymentsession')
         ->join('sponsorrequesteds','paymentsession.sponsor_id','=','sponsorrequesteds.sponsor_id')
         ->join('payment','sponsorrequesteds.stu_id','=','payment.stu_id')
-        ->select('*')
+        ->select('paymentsession.paid_reciept','payment.amountdue','payment.updated_at')
         ->where('paymentsession.sponsor_id',$id)
         ->get();
 
@@ -356,30 +463,94 @@ return view('front.sponsor.confirmsponsorpayment',compact('selected','deslct'));
 
     public function onlinesponsor(){
 
-        $selected = Session::get('selected');
+        $id = auth::id();
+  
+
+        $sel = selectedstusession::select('selstu')->where('sponsorid',$id)->get();
+
+        $selected = $sel[0]->selstu;
+       // dd($selected);
+        
         
       $stu_id = json_decode($selected);
 
-     foreach($stu_id as $key => $select){
+    //  dd($stu_id);
+
+      $stid = implode(',',$stu_id);
+
+      $der = explode(',',$stid);
+      
+      $deselct = Session::get('deletedid');
+
+     if($deselct != null){
+
+       // dd($deselct);
+
+     $desel = json_decode($deselct);
+
+      $ddl = implode(',',$desel);
+
+      $deselctd = explode(',',$ddl);
+
+
+      $dest = array_diff($der,$deselctd);
+
+     // print_r($dest);
+        
+        $destr = selectedstusession::updateOrCreate([
+
+            'sponsorid' => auth::id(),
+        ],[
+
+            'sponsorid' => auth::id(),
+            'selstu' => $dest
+        ]);
  
-     
-        $valid = explode(',',$select);
+        //die();
+       // dd($der);
 
-        $val = $valid[1];
-
- $student = DB::table('users')->where('users.id',$val)
-->join('sponsoredstudents','sponsoredstudents.stu_id','=','users.id')
-->join('payment','users.id','=','payment.stu_id')
-->join('invoice','users.id','=','invoice.stu_id')
-->join('courses','invoice.course_id','=','courses.id')
-->select('users.id','users.name','users.email','courses.name as course_name','invoice.updated_at','payment.amountdue','sponsoredstudents.stu_id','invoice.invoiceno')
-->where('request_accepted','yes')->get();
-     
+      $updatedsel = selectedstusession::select('selstu')->where('sponsorid',$id)->get();
 
 
+      $updatedselstu = $updatedsel[0]->selstu;
 
-}
+      $selstua = json_decode($updatedselstu);
 
-        return view('front.sponsor.onlinesponsorpayment',compact('selected','stu_id'));
+      //dd($selstua);
+
+       //$destrt = $destr->selstu;
+
+      // dd($destrt);
+      
+      $des = $selstua;
+
+    //  dd($des);
+
+    }
+    else{
+
+        $des = $der;
+
+    }
+      
+
+
+        //$des = \array_diff($der,$deselctd);
+
+       
+
+  //  dd($des);
+      
+      $studentpayment = DB::table('users')
+      ->whereIn('users.id',$des)
+      ->join('sponsoredstudents','sponsoredstudents.stu_id','=','users.id')
+      ->join('payment','users.id','=','payment.stu_id')
+      ->join('invoice','users.id','=','invoice.stu_id')
+      ->join('courses','invoice.course_id','=','courses.id')
+      ->select('users.id','users.name','users.email','courses.name as course_name','invoice.updated_at','payment.balance_due','sponsoredstudents.stu_id','invoice.invoiceno','payment.status')
+      ->where('request_accepted','yes')
+      ->where('payment.balance_due','!=','0')
+      ->get();
+        return view('front.sponsor.onlinesponsorpayment',compact('studentpayment'))->with(Session::forget('deletedid'));
     }
 }

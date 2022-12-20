@@ -41,13 +41,13 @@
             </div>
             
 <div class="col-sm-10">
-<table>
+<table class="table">
     <thead>
     <p class="inst">Instruction: Confirm those students that you will sponsor fundings from the following list by clicking on the “Accept” Button. If you decline a student, the student will be removed from your list to sponsor. Those whom you will accept will move from this list to the Payment list awaiting funding​</p>
     <tr class="filt">
         <form action="" method="get">
-        <th scope="col"> <label for="date"> Date: </label> <input type='text' name="date"  class="datepicker form-control" placeholder="Date" ></input> </th>
-        <th scope="col" > <label>Course :</label>
+        <th > <label for="date"> Date: </label> <input type='text' name="date"  class="datepicker form-control" placeholder="Date" ></input> </th>
+        <th> <label>Course :</label>
          <select name="courseid" id='course' class="form-control" style="width:200px">
          <option value="">All</option>
          @foreach($courses as $course)
@@ -56,7 +56,7 @@
          </select>
          </th>
 
-        <th scope="col"> <label>Institute:</label>
+        <th> <label>Institute:</label>
          <select id='institute' class="form-control" style="width:200px">
          <option value="">All</option>
          <option value="ibsuniversity">IBS University</option>
@@ -83,7 +83,7 @@
 </form>
 
 </tr>
-<table>
+</table>
     <table class="table table-striped">
     <thead>
     <tr>
@@ -110,7 +110,8 @@
                         $name = $st->name;
                         $course = $st->course_name;
                         $date = date('d-m-Y', strtotime($st->updated_at));
-                        $invoice = $st->ibs_reciept;
+                        $invoice = $st->invoiceno;
+                        $invoicefile = $st->invoice;
                         $amountdue = $st->amountdue;
                         $id = $st->id;
                         $request = $st->sponsor_accepted;
@@ -132,7 +133,7 @@
       <td>{{$name}}</td>
       <td>{{$course}}</td>
       <td>{{$date}}</td>
-      <td><a href="{{url('storage/app')}}/{{ $invoice }}" target="_blank">{{$invoice}}</a></td>
+      <td><a href="{{url('storage/app')}}/{{$invoicefile}}" target="_blank">{{$invoice}}</a></td>
       <td>{{$amountdue}}</td>
       <td>-</td>
       <td>-</td>
@@ -142,7 +143,7 @@
       <td>{{$name}}</td>
       <td>{{$course}}</td>
       <td>{{$date}}</td>
-      <td><a href="{{url('storage/app')}}/{{ $invoice }}" target="_blank">{{$invoice}}</a></td>
+      <td><a href="{{url('/pdf')}}/{{$invoicefile}}" target="_blank">{{$invoice}}</a></td>
       <td>{{$amountdue}}</td>
       <td>-</td>
       <td>-</td>

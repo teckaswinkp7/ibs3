@@ -191,14 +191,15 @@ class Invoicecontroller extends Controller
         $student_course_offer= Courseselection::select("courses.name as courses_name")->join("courses","courses.id", "=", "courseselections.studentSelCid")->where('courseselections.stu_id','=',$id)->get();
 
         $pdf = \PDF::loadView('front.invoice.invoice',compact('student_course_offer','user','exist','location','communication','invoicedata','selectedcourse','unitsData','courseData'));
-        Storage::put($name.'salesinvoice.pdf', $pdf->output());
+        $path = public_path('pdf/');
+        $pdf->save($path.'/'.$name.'salesinvoice.pdf', $pdf->output());
         $dbstore = payment::updateOrCreate([
 
             'stu_id'=> auth::id(),
 
         ],[
 
-            'ibs_reciept' => $name.'salesinvoice.pdf'
+            'invoice' => $name.'salesinvoice.pdf'
         ]);
         return $pdf->download($name.'salesinvoice.pdf');
 
@@ -318,6 +319,7 @@ class Invoicecontroller extends Controller
 
         
         $id= Auth::id();
+        $invoicenoid = invoice::select('invoiceno')->where('stu_id',auth::id())->first();
         $amountdue = payment::updateorcreate([
 
 
