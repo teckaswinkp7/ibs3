@@ -26,6 +26,13 @@ class Additionalfeecontroller extends Controller
     
     public function store(Request $request){
 
+        $request->validate([
+            'title' => 'required',
+            'description'      => 'string|required',
+            'price'=>'required',
+            'status' => 'required',
+            ]);
+
      $createadditionalfee = Additionalfee::create([
 
            
@@ -35,6 +42,17 @@ class Additionalfeecontroller extends Controller
             'status' => $request->status,
 
      ]);
+
+
+     if($createadditionalfee){
+
+        request()->session()->flash('success','Additionalfee Created Successfully!');
+     }
+     else{
+
+
+        request()->session()->flash('error','Something went wrong!');
+     }
 
 
      return redirect()->route('admin.additionalfee.index')->with('Success','Additional Fee Added');

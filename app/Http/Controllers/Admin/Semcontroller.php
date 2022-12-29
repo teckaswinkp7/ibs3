@@ -26,6 +26,16 @@ public function create(){
 
 public function store(Request $request){
 
+
+    $validation = $this->validate($request,[
+
+        'name' => 'string|required',
+        'course_id' => 'required',
+        'info'  => 'string|required',
+        'price' => 'required'
+
+    ]);
+
     $sem = sem::create([
    
 
@@ -40,7 +50,17 @@ public function store(Request $request){
 
 
     ]);
-    return redirect()->route('admin.sem.index')->with('Success','Sem Added');
+
+    if($sem){
+
+        request()->session()->flash('success','Sem Added Successfully !');
+    }
+    else{
+
+        request()->session()->flash('error','Error Adding Sem!');
+
+    }
+    return redirect()->route('admin.sem.index');
 
 }
 public function edit($id){

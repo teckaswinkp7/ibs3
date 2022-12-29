@@ -37,7 +37,12 @@
                          </div>
                     </div>
             <div class="submission-btn">
+               
+                @if($user[0]->user_role == '2')
                 <button><a href="userprofile" style="color: #fff; text-decoration:none;">Back</a></button>
+                @else($user[0]->user_role == '3')
+                <button><a href="sponsorprofile" style="color: #fff; text-decoration:none;">Back</a></button>
+                @endif
                 <button type="submit">Save</button>
             </div>
                 

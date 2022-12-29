@@ -9,10 +9,58 @@
 *{
    list-style-type: none;
 }
+/*Profile Pic Start*/
+.picture-container{
+    position: relative;
+    cursor: pointer;
+    text-align: center;
+}
+.picture{
+    width: 106px;
+    height: 106px;
+    background-color: #999999;
+    border: 4px solid #CCCCCC;
+    color: #FFFFFF;
+    border-radius: 50%;
+    margin: 0px 20px;
+    overflow: hidden;
+    transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+}
+.picture:hover{
+    border-color: #2ca8ff;
+}
+.content.ct-wizard-green .picture:hover{
+    border-color: #05ae0e;
+}
+.content.ct-wizard-blue .picture:hover{
+    border-color: #3472f7;
+}
+.content.ct-wizard-orange .picture:hover{
+    border-color: #ff9500;
+}
+.content.ct-wizard-red .picture:hover{
+    border-color: #ff3b30;
+}
+.picture input[type="file"] {
+    cursor: pointer;
+    display: block;
+    height: 100%;
+    left: 0;
+    opacity: 0 !important;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
 
+
+
+
+/*Profile Pic End*/
    </style>
     
-
+    <form action="{{route('sponsorprofilepost')}}" class="submission-form" method="post" enctype="multipart/form-data">
+                    @csrf
 <div class="background-profile" style="margin-top: 100px;"> 
     <div class="profile-modal" style="width: 100%;">
         <div class="profile-logo">
@@ -37,32 +85,37 @@
                     <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>        
                     @endif  
                 <div class="profile-box">
-                    <div class="profile-photo">
-                       <img src="{{asset('assets/custom/profile-photo.jpg')}}" alt="" width="100px">
-                       <img src="{{asset('assets/custom/edit-icon.jpg')}}" alt="" width="18px" height="auto">
-                    </div>
+                <div class="picture-container">
+                <div class="picture">
+    <img src="image/{{$sponsordata[0]->sponsor_image}}" class="rounded-circle" id="wizard-picture" alt="example placeholder" style="width: 150px;" title="" />
+            <input type="file" name="sponsor_image" class="" id="wizard-picture" />
+            
+            
+</div>
+<h6 class="display">Choose Picture</h6>
+
+</div>
+
                     
                     <div class="profile-details">
                        <div>
-                          <label for="">ID : </label>
-                          <input name="sponsor_id" type="text" value="{{$sponsordata[0]->sponsor_id}}">
+                          <label for="">ID : {{$sponsordata[0]->sponsor_id}} </label>
+                          
                        </div>
                        <div>
-                        <label for="sponsor_email">Username : </label>
-                        <input name="sponsor_email" type="email" value="{{$sponsordata[0]->sponsor_email}}" style="width: 100%;">
+                        <label for="sponsor_email">Username : {{$sponsordata[0]->sponsor_email}} </label>
+                        
                         <a href="changeuser">(Update)</a>
                      </div>
                      <div>
-                        <label for="">Password</label>
-                        <input type="text" value="********">
+                        <label for="">Password: ********</label>
                         <a href="changepassword">(Reset)</a>
                      </div>
                     </div>
                 </div>
 
 
-                <form action="{{route('sponsorprofilepost')}}" class="submission-form" method="post">
-                    @csrf
+                
                     <input type="hidden" name="id" value="{{Auth::id()}}">
                     <div class="row">
                     <div class="col-sm-6" >

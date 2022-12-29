@@ -270,7 +270,7 @@ class Sponsorstudentcontroller extends Controller
     //  dd($des);
 
     }
-    elseif($deselct = null ){
+    elseif($deselct = "null"){
 
         //dd($deselct);
 
@@ -362,10 +362,12 @@ return view('front.sponsor.confirmsponsorpayment',compact('studentpayment'))->wi
                     'sponsor_id' => auth::id(),
                     'paid_stu_id' => json_encode($request->stu_id),
                     'paid_reciept' =>$fileName,
-                    'amount_paid'  => json_encode($request->amount)
+                    'amount_paid'  => array_sum($request->amount)
                     
                 ]);
             //    dd($request->payreciept);
+
+           
         
                 $stu_id = $request->stu_id;
                 $amount = $request->amount;
@@ -450,13 +452,11 @@ return view('front.sponsor.confirmsponsorpayment',compact('studentpayment'))->wi
 
         $id = auth::id();
         $paidstudents = DB::table('paymentsession')
-        ->join('sponsorrequesteds','paymentsession.sponsor_id','=','sponsorrequesteds.sponsor_id')
-        ->join('payment','sponsorrequesteds.stu_id','=','payment.stu_id')
-        ->select('paymentsession.paid_reciept','payment.amountdue','payment.updated_at')
+        ->select('paymentsession.paid_reciept','paymentsession.amount_paid','paymentsession.updated_at')
         ->where('paymentsession.sponsor_id',$id)
         ->get();
 
-    // dd($paidstudents);
+    //dd($paidstudents);
 
         return view('front.sponsor.history',compact('paidstudents'));
     }

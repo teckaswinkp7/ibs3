@@ -37,6 +37,17 @@ class Unitcontroller extends Controller
     }
 
     public function store(Request $request){
+
+
+        $unitvalidate = $this->validate($request,[
+
+            'course_id'  => 'required',
+            'title'      => 'string|required',
+            'embed_id'   => 'required',
+            'short_text' => 'required',
+            'full_text'  => 'required',
+            'unit_price' => 'required',
+        ]);
     
   
               $units = new unit;

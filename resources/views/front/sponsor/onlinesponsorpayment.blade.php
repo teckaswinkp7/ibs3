@@ -5,6 +5,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"/>  
  
 <link rel="stylesheet" href="{{asset('assets/custom/profile.css')}}">
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 
 <style>
 *{
@@ -36,6 +38,52 @@ text-decoration:none;
 
     font-weight:600;
 }
+.deleteRecord{
+
+  border:none;
+ background:transparent;
+ padding: 0.001%;
+ cursor:default!important;
+
+}
+
+.orange-color {
+        color:orange;
+    }
+
+    .form-group {
+  display: block;
+  margin-bottom: 15px;
+}
+
+.form-group input {
+  content:'-';
+  color:white;
+  -webkit-appearance: none;
+  background-color: orange;
+  border: 0px solid transparent;
+  border-radius:50px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+  padding: 0.1px 8px;
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+input:before{
+  content:"-";
+  color:white;
+  font-size:900;
+}
+
+
+
+
+
+
+
 
    </style>
     
@@ -81,13 +129,29 @@ text-decoration:none;
       <th> Amount Paid </th>
     </tr>
   </thead>
-  <form action="{{route('payrecieptpost')}}" method="post" enctype="multipart/form-data">
-        @csrf      
-  <tbody>
     
-
+  <tbody>
+  <form action="{{route('payrecieptpost')}}" method="post" enctype="multipart/form-data">
+        @csrf  
+    
+       
 @foreach($studentpayment as $st)
-  <td><a href="#"><i class="fa-solid fa-circle-minus"></a></i></td>
+
+
+
+  <td>
+  
+  <div class="form-group">
+  <button type="submit"  data-id="{{$st->stu_id}}" class="deleteRecord" name="confirmsponsorpay" value="deselect" >
+  <input class="checkboxx minus"  type="checkbox" name="derid[]" value="{{$st->balance_due}},{{$st->stu_id}}" ></input> 
+    </button>
+    </div>
+  
+  
+   <!-- <a ><i class="fa-solid fa-circle-minus"></i></a> -->
+ 
+  </td>
+ 
       <td> <input type="hidden" name="stu_id[]" value="{{$st->stu_id}}"></input>{{$st->stu_id}}</td>
       <td name="name" value="{{$st->name}}">{{$st->name}}</td>
       <td name="course_name" value="{{$st->course_name}}">{{$st->course_name}}</td>
@@ -96,7 +160,7 @@ text-decoration:none;
       <td>-</td>
       <td>{{$st->status}}</td>
       <td class="price" name="totalamount" value="{{$st->balance_due}}">{{$st->balance_due}} </td>
-      <td><input class="price2" name="amount_paid" value="" type="text">  </input></td>
+      <td><input class="price2" name="amount[]" value="" type="text">  </input></td>
 
 </tbody>
 @endforeach
@@ -110,11 +174,11 @@ text-decoration:none;
       <td> </td>
       <td> <strong> Total: </strong></td>
       <td id="total"> </td>
-      <td id="total2" class="strong"> </td>
+      <td name="amount_paid" id="total2"  class="strong"> </td>
 
 </tfoot>
 </table>
-<button class="button" type="button"><a href="sponsoredstudents"> Edit </button></a> 
+<button class="button" type="button"><a href="{{route('sponsoredstudents')}}"> Edit </button></a> 
 
 
 <div class="row">

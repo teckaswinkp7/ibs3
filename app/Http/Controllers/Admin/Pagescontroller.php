@@ -26,6 +26,13 @@ class Pagescontroller extends Controller
 
 public function store(Request $request){
 
+
+    $request->validate([
+        'titlw' => 'required',
+        'slug'      => 'required',
+        'body'=>'required',
+        ]);
+
     $pages = pages::create([
 
         'title' => $request->title,
@@ -34,8 +41,18 @@ public function store(Request $request){
 
     ]);
 
-    return redirect()->route('admin.pages.index')
-        ->with('success','Courses has been created successfully.');
+    if($pages){
+
+        request()->session()->flash('success','Page Created Succesfully !');
+    }
+    else{
+
+        request()->session()->flash('error','Error creating page !');
+    }
+
+
+
+    return redirect()->route('admin.pages.index');
 }
 
 public function edit($id){

@@ -143,7 +143,7 @@ input:before{
   
   <div class="form-group">
   <button type="submit"  data-id="{{$st->stu_id}}" class="deleteRecord" name="confirmsponsorpay" value="deselect" >
-  <input class="checkboxx minus"  type="checkbox" name="derid[]" value="{{$st->balance_due}},{{$st->stu_id}}" ></input> 
+  <input class="checkboxx minus"   type="checkbox" name="derid[]" value="{{$st->balance_due}},{{$st->stu_id}}" ></input> 
     </button>
     </div>
   
@@ -188,8 +188,11 @@ CorporateSponsorName_Remittance_Advice_CurrentDate(ddmmyy). For example, OKTediL
 
 
   <div class="custom-file col-sm-6">
-    <input type="file" name="payreciept" class="custom-file-input" id="customFile">
+    <input type="file" name="payreciept" class="custom-file-input" id="customFile @if ($errors->has('exam_duration')) inputError @endif">
     <label class="custom-file-label" for="customFile">Choose file</label>
+    @error('payreciept')
+                              <span class="error invalid-feedback">{{ $message }}</span>
+                            @enderror
   </div>
 
 

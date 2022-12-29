@@ -441,10 +441,11 @@ class AuthControllers extends Controller
     public function change_user()
     {
         $id = Auth::id();   
+        $user = User::select('user_role')->where('id',$id)->get();
         
         //$existData['val'] = User::where('id',$id)->get();
         $existData['val'] = User::where('id',$id)->first();
-        return view('front.auth.username_update',$existData);
+        return view('front.auth.username_update',$existData,compact('user'));
     }
 
     public function change_pass()
@@ -498,6 +499,13 @@ class AuthControllers extends Controller
 
     public function sponsorprofilepost(Request $request){
 
+        if($request->hasFile('sponsor_image')){
+
+            $sponsor_image = $request->sponsor_image->getClientOriginalname();
+            $path = $request->sponsor_image->move(public_path('/image'),$sponsor_image);
+        }
+
+        
 
         $sponsordata= Sponsor::updateorcreate([
 
@@ -515,7 +523,8 @@ class AuthControllers extends Controller
             'main_phone_line'  =>  $request->main_phone_line,
             'alt_phone_line'   =>  $request->alt_phone_line,
             'company_name'     =>  $request->company_name,
-            'alt_phone'        =>  $request->alt_phone
+            'alt_phone'        =>  $request->alt_phone,
+            'sponsor_image'    =>  $sponsor_image
 
 
         ]);
