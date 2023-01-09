@@ -340,6 +340,17 @@ class Invoicecontroller extends Controller
 
         ]);
 
+        $reminderdate = User::updateOrCreate([
+
+            'id' =>$id
+
+        ],[
+
+
+            'reminderdate'  => now()->addDays(5),
+            'paymentduedate' => now()->addDays(10)
+        ]);
+
 
         return redirect()->route('proformasalesinvoice');
 

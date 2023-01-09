@@ -73,7 +73,8 @@ private function sendEmailToUser($userid, $reminders) {
     Mail::to($reminders)->send(new ReminderEmailDigest($reminders));
 }
 
-        // send email 
+
+
 
     
     

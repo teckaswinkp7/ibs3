@@ -54,7 +54,7 @@ class ScreeningController extends Controller
             'course_id'         => json_encode($request->course_id),
             //'offer_generated'   =>1,
         ]);
-        $status = User::where('id', $id)->update(array('status' => 4));
+        $status = User::where('id', $id)->update(array('status' => 4,'reminderdate' => now()->addDays(5)));
         return redirect()->route('screening.index')
         ->with('success','created successfully.');
     }

@@ -13,7 +13,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        
+       
+
     ];
 
     /**
@@ -26,6 +28,9 @@ class Kernel extends ConsoleKernel
     {
 
         $schedule->command('reminder:emails')->daily();
+        $schedule->command('coursereminder:emails')->daily();
+        $schedule->command('proformareminder:emails')->daily();
+        $schedule->command('raisinvoice:emails')->daily();
 
         
     }

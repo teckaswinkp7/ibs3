@@ -444,7 +444,6 @@ class EducationController extends Controller
         $id = Auth::id();
         $user = User::where('id',$id)->first();
         $email = $user->email;
-        
         $student_course_offer= Courseselection::select("courses.name as courses_name")->join("courses","courses.id", "=", "courseselections.studentSelCid")->where('courseselections.stu_id','=',$id)->get();
         $data = array('offer_desc'=>"",'offer'=> 'Offer Email','filename'=>'ABC.txt','uname'=>$user->name);  
         //Mail::to('vedmanimoudgal@virtualemployee.com')->send(new OfferEmail($data));

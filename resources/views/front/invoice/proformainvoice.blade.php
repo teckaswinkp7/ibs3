@@ -189,14 +189,16 @@ background: #488e2b;
                 <div id="div1" class="hide">
                <label> Units </label>
                  
-                 @foreach ($availableunits as $units)
+                 
 
 </br>
                  
-                 <input type="checkbox" value="{{$units->title}}" name="units[]" >{{$units->title}}</input>
+                 <input type="radio" value="" name="units" >2 Units </input>
+                 <input type="radio" value="" name="units" >4 units </input>
+                 <input type="radio" value="" name="units" >8 units </input>
                  
                 
-                 @endforeach
+              
 </div>
 
 <div class="col-sm-9">

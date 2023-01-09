@@ -35,7 +35,47 @@
       <link href="{{asset('assets/admin/css/component-custom-switch.css')}}" rel="stylesheet" />
       <meta name="csrf-token" content="{{ csrf_token() }}" />
     </head>
-    <body class="sidebar-mini layout-fixed">  
+    <style>
+
+#navbarNavDropdown li {
+	border-right: 1px solid #4f4f4f;
+  opacity:0.10px;
+	}
+  #navbarNavDropdown li:last-child {
+	border-right: none
+	}
+
+  #vrline li{
+    border-right: 1px solid #4f4f4f;
+  opacity:0.10px;
+
+  }
+  #vrline li:last-child {
+	border-right: none
+	}
+
+  .dropdown-header{
+
+    color:orange!important;
+  }
+
+  .dropdown-header:hover{
+
+    color:orange!important;
+  }
+
+  .dropdown-item{
+
+    color:white;
+  }
+
+  .content-wrapper{
+
+    margin-left:auto!important;
+  }
+ 
+</style>
+    <body >  
         <!--<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <a class="navbar-brand ps-3" href="index.html">Start Bootstrap</a>
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
@@ -81,133 +121,164 @@
                 </div>
             </div>
         </nav>-->
+        <nav class="navbar navbar-light btco-hover-menu">
+        <div class="profile-logo">
+            <a href="#"><img src="{{asset('assets/custom/profile-logo.png')}}" alt="" width="100px"></a>
+        </div>  
+        @php 
+
+        $user = Auth::user();
+
+        @endphp 
+        <div class="row">
+       <span class="nav-link"> Logged in as, {{$user->name}} </span> <a class="nav-link" href="{{ route('logout') }}">Logout</a>
+</div>
+</nav>
         <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <nav class="navbar navbar-expand-md navbar-dark btco-hover-menu">
         <!-- Left navbar links -->
         <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <li class="nav-item">
+                <a href="{{route('admin-dashboard')}}" class="nav-link {{ request()->is('admin-dashboard') ? 'active' : '' }}">
+                  <p>
+                    Dashboard
+                  </p>
+                </a>
+            </li>
+           
+           <li class="nav-item dropdown">
+           <a class="nav-link" data-toggle="dropdown" href="#"><p>Enrollment</p> </a>
+           <div class="dropdown-menu navbar-dark dropdown-menu-lg dropdown-menu-left">
+           <div class="container">
+           <div class="row">
+            <div class="col-md-6">
+           <span class="dropdown-header">Schedule</span>
+           
+           <a href="#" class="dropdown-item">
+          <p> Application </p>
+               </a>
+               <a href="#" class="dropdown-item">
+          <p> Courseselection </p>
+               </a>
+               <a href="#" class="dropdown-item">
+          <p> Offer </p>
+               </a>
+               <a href="#" class="dropdown-item">
+          <p>Enrollment </p>
+               </a>
+               <span class=" dropdown-header">Pay</span>
+               <a href="#" class="dropdown-item">
+          <p>Invoice </p>
+               </a>
+               <a href="#" class="dropdown-item">
+          <p>Payment</p>
+               </a>
+               <a href="#" class="dropdown-item">
+          <p>Reciept</p>
+               </a>
+</div>
+<div class="col-md-6">
+               <span class="dropdown-header">Manage Courses</span>
+               <a href="#" class="dropdown-item">
+          <p>Class Schedule </p>
+               </a>
+               <a href="#" class="dropdown-item">
+          <p>Study Venue </p>
+               </a>
+               <a href="#" class="dropdown-item">
+          <p>Study Plan</p>
+               </a>
+               <a href="#" class="dropdown-item">
+          <p>Attendance</p>
+               </a>
+               <a href="#" class="dropdown-item">
+          <p>Unit Enrollments</p>
+               </a>
+          </div>
+</div>
+</div>
+</div>
+
           </li>
-        </ul>
-        <!-- Right navbar links -->
-        <ul class="navbar-nav ml-auto">
-          <!-- Navbar Search -->
-          <li class="nav-item">
-            <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-              <i class="fas fa-search"></i>
-            </a>
-            <div class="navbar-search-block">
-              <form class="form-inline">
-                <div class="input-group input-group-sm">
-                  <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                  <div class="input-group-append">
-                    <button class="btn btn-navbar" type="submit">
-                      <i class="fas fa-search"></i>
-                    </button>
-                    <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                      <i class="fas fa-times"></i>
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </li>
-          <!-- Messages Dropdown Menu -->
           <li class="nav-item dropdown">
-            <a class="nav-link" data-toggle="dropdown" href="#">
-              <i class="far fa-comments"></i>
-              <span class="badge badge-danger navbar-badge">3</span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-              <a href="#" class="dropdown-item">
-                <!-- Message Start -->
-                <div class="media">
-                  <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-                  <div class="media-body">
-                    <h3 class="dropdown-item-title">
-                      Brad Diesel
-                      <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                    </h3>
-                    <p class="text-sm">Call me whenever you can...</p>
-                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                  </div>
-                </div>
-                <!-- Message End -->
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item">
-                <!-- Message Start -->
-                <div class="media">
-                  <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                  <div class="media-body">
-                    <h3 class="dropdown-item-title">
-                      John Pierce
-                      <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                    </h3>
-                    <p class="text-sm">I got your message bro</p>
-                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                  </div>
-                </div>
-                <!-- Message End -->
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item">
-                <!-- Message Start -->
-                <div class="media">
-                  <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                  <div class="media-body">
-                    <h3 class="dropdown-item-title">
-                      Nora Silvester
-                      <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                    </h3>
-                    <p class="text-sm">The subject goes here</p>
-                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                  </div>
-                </div>
-                <!-- Message End -->
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-            </div>
+           <a class="nav-link" data-toggle="dropdown" href="#"><p>Courses</p> </a>
+           <div class="dropdown-menu navbar-dark dropdown-menu-lg dropdown-menu-left">
+            
+           <span class="dropdown-header">Programmes</span>
+               <a href="#" class="dropdown-item">
+          <p>Courses </p>
+               </a>
+               <a href="#" class="dropdown-item">
+          <p>Units</p>
+               </a>
+          
+</div>
           </li>
-          <!-- Notifications Dropdown Menu -->
+
           <li class="nav-item dropdown">
-            <a class="nav-link" data-toggle="dropdown" href="#">
-              <i class="far fa-bell"></i>
-              <span class="badge badge-warning navbar-badge">15</span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-              <span class="dropdown-item dropdown-header">15 Notifications</span>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item">
-                <i class="fas fa-envelope mr-2"></i> 4 new messages
-                <span class="float-right text-muted text-sm">3 mins</span>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item">
-                <i class="fas fa-users mr-2"></i> 8 friend requests
-                <span class="float-right text-muted text-sm">12 hours</span>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item">
-                <i class="fas fa-file mr-2"></i> 3 new reports
-                <span class="float-right text-muted text-sm">2 days</span>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-            </div>
+           <a class="nav-link" data-toggle="dropdown" href="#"><p>Reports</p> </a>
+</div>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-              <i class="fas fa-expand-arrows-alt"></i>
-            </a>
+          <div id="vrline">
+          <li class="nav-item dropdown" >
+           <a class="nav-link" data-toggle="dropdown" href="#"><p>Setup</p> </a>
+           <div class="dropdown-menu navbar-dark dropdown-menu-lg dropdown-menu-left">
+           <div class="container">
+           <div class="row">
+            <div class="col-md-6">
+           <span class="dropdown-header">Manage Account</span>
+           
+           <a href="#" class="dropdown-item">
+          <p> My Account </p>
+               </a>
+               <a href="#" class="dropdown-item">
+          <p> Main Branding </p>
+               </a>
+               <a href="#" class="dropdown-item">
+          <p> Sub Branding </p>
+               </a>
+               <a href="#" class="dropdown-item">
+          <p> System Defaults </p>
+               </a>
+               <a href="#" class="dropdown-item">
+          <p> Alert Settings </p>
+               </a>
+               <a href="#" class="dropdown-item">
+          <p> Billing Settings </p>
+               </a>
+               <a href="#" class="dropdown-item">
+          <p> Templates </p>
+               </a>
+</div>
+<div class="col-md-6">
+               <span class="dropdown-header">Manage Users</span>
+               <a href="#" class="dropdown-item">
+          <p>Sales Executive</p>
+               </a>
+               <a href="#" class="dropdown-item">
+          <p>Enrolment </p>
+               </a>
+               <a href="#" class="dropdown-item">
+          <p>Admission</p>
+               </a>
+               <a href="#" class="dropdown-item">
+          <p>Admin</p>
+               </a>
+          </div>
+</div>
+</div>
+</div>
+</div>
+
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('admin/logout') }}">
-            <i class="fas fa-sign-out" aria-hidden="true"></i>
-            </a>
-          </li>
+
+        
+         
+                
+           
         </ul>
+</div>
         </nav>
         <!-- /.navbar -->  
     @yield('content')    

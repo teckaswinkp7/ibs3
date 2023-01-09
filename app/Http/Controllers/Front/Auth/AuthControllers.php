@@ -210,7 +210,7 @@ class AuthControllers extends Controller
         $email = Session::get('email');
         $phone = Session::get('phone');
         $otp = Session::get('otp');
-        $data = array('name'=>$name,'phone'=>$phone,'email'=>$email,'password'=>$request->password,'user_role'=>$request->user_role,'is_email_verified'=>1);
+        $data = array('name'=>$name,'phone'=>$phone,'email'=>$email,'password'=>$request->password,'user_role'=>$request->user_role,'is_email_verified'=>1,'status'=>0);
         $check = $this->create($data);
         
         //dd($check);
