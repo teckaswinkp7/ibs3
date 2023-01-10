@@ -7,6 +7,7 @@ use Session;
 use App\Models\User;
 use App\Models\Role;
 use Hash;
+use DB;
 class AuthController extends Controller
 {
     //
@@ -43,6 +44,7 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
         $userVal = User::where('email',$request->email)->first();
+       
         //dd($userVal);
         if(!empty($userVal))
         {
@@ -51,6 +53,8 @@ class AuthController extends Controller
             {
                 $credentials = $request->only('email', 'password');
                 if (Auth::attempt($credentials)) {
+
+                   
                     
                     return redirect()->intended('admin\dashboard')
                                 ->withSuccess('You have Successfully loggedin');
@@ -71,7 +75,9 @@ class AuthController extends Controller
             Session::flash('message', 'User does not exist!'); 
             Session::flash('alert-class', 'alert-danger');
             return redirect('admin\login');  
-        }        
+        }
+        
+       
     }
       
     /**
@@ -138,6 +144,7 @@ class AuthController extends Controller
     public function logout() {
         Session::flush();
         Auth::logout();
+        
         return Redirect('admin\login');
     }
 }

@@ -19,6 +19,7 @@ use App\Models\Studentcourseoffer;
 use App\Models\Profile;
 use Illuminate\Support\Facades\Mail;
 use Hash;
+use DB;
 class AuthControllers extends Controller
 {
     /**
@@ -59,6 +60,7 @@ class AuthControllers extends Controller
             $userid = Auth::id();
             $user = User::where('id','=',$userid)->first();
             //dd($userRole);
+            DB::table('active_users')->insert(array('user_id' =>   Auth::id()));
             if($user->user_role == 3)
             {
                 //return redirect("dashboard")->with('Oppes! You have entered invalid credentials'); 
@@ -341,9 +343,10 @@ class AuthControllers extends Controller
      * @return response()
      */
     public function logout() {
+        
+        DB::table('active_users')->where('user_id', '=', Auth::id())->delete();
         Session::flush();
         Auth::logout();
-  
         return Redirect('login');
     }
 

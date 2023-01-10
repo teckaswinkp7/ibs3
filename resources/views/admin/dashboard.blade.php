@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            
+            <h6> Dashboard </h6>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="float-sm-right">
@@ -24,20 +24,105 @@
         <!-- Small boxes (Stat box) -->
       
 
-        <div class="container">
+        <div class="row">
           @php 
 
           $date = now()->isoFormat('MMM Do YYYY');
+
+          $courseselection = DB::table('users')->where('offer_accepted','yes')->count();
+          $invoices = DB::table('invoice')->count();
+          $application = DB::table('users')->where('status','3')->count();
+          $iconnectaccounts = DB::table('users')->where('user_role','!=','1')->count();
+          $activeusers = DB::table('active_users')->join('users','users.id','=','active_users.user_id')->where('users.user_role','!=','1')->count();
+          $activeenrollment = DB::table('active_users')
+          ->join('users','users.id','=','active_users.user_id')
+          ->leftjoin('sponsors','sponsors.stu_id','=','users.id')
+          ->where('users.user_role','=','1')->get();
+
+          $payment = DB::table('payment')->where('balance_due','0')->count();
+
           @endphp
   <!-- Responsive Arrow Progress Bar -->
+  <div class="col-12">
   <div class="d-flex p-2 justify-content-center">{{$date}} </div>
   <div class="arrow-steps clearfix">
-    <div class="step"> <span> Application <a href="#" >1</a></span> </div>
-    <div class="step"> <span>Offer <a href="#" >2</a></span> </div>
-    <div class="step"> <span> Invoice <a href="#" >3</a><span> </div>
-    <div class="step"> <span>Payment <a href="#" >4</a><span> </div>
-    <div class="step"> <span>Enrollment <a href="#" >5</a><span> </div>
+    <div class="step"> <span class="text-start"> Application </span>  <div > <a href="#" class="numberclass" >{{$application}}</a> </div> </div>
+    <div class="step"> <span>Course Selection </span> <div> <a href="#" class="numberclass" >{{$courseselection}}</a> </div></div>
+    <div class="step"> <span>Offer </span> <div> <a href="#" class="numberclass" >2</a> </div></div>
+    <div class="step"> <span> Invoice</span> <div> <a href="#" class="numberclass" >{{$invoices}}</a> </div> </div>
+    <div class="step"> <span>Payment </span> <div> <a href="#" class="numberclass" >4</a> </div></div>
+    <div class="step"> <span>Enrollment</span> <div> <a href="#" class="numberclass" >{{$payment}}</a> </div> </div>
   </div>
+</div>
+</div>
+<br>
+
+<div class="container">
+<div class="row">
+
+<div class="col-md-4">
+  <div class="card">
+<span> Total iconnect Accounts Created.</span>
+<div class="card">
+<div class="card-body "> 
+
+<div class="text-center numberclass" > {{$iconnectaccounts}} </div>
+
+</div>
+</div>
+
+</div>
+</div>
+<div class="col-md-4">
+  <div class="card">
+<span> Daily iconnect Active Accounts.</span>
+<div class="card">
+<div class="card-body "> 
+
+<div class="text-center numberclass" > {{$activeusers}} </div>
+
+</div>
+</div>
+
+
+</div>
+</div>
+<div class="col-md-4">
+  <div class="card">
+<span>Active Enrollment Officer</span>
+<div class="card">
+<div class="card-body "> 
+
+<div class="row">
+
+<div class="col-md-4">
+
+@foreach ($activeenrollment as $activeenroll)
+<div class="text-center" > <img src="image/{{$activeenroll->sponsor_image}}" alt="" width="100px"> </img>
+
+</div>
+</div>
+<div class="col-md-4">
+
+<div class="text-center" > {{ $activeenroll->name}}</div>
+<div class="text-center" > @if( $activeenroll->user_role == '1') Admin @else Enrollment Officer @endif </div>
+</div>
+@endforeach
+
+</div>
+
+
+</div>
+</div>
+
+
+</div>
+</div>
+
+
+
+
+<div>
 </div>
 
 
@@ -136,8 +221,8 @@
   color: #777;
   cursor: default;
   margin: 0 1px 0 0;
-  padding: 20px 0px 20px 0px;
-  width: 15%;
+  padding: 30px 0px 30px 0px;
+  width: 16%;
   float: left;
   position: relative;
   background-color: #ddd;
@@ -244,6 +329,15 @@
    border: none;
    border-left: none;
    cursor: pointer;
+
+}
+
+.numberclass{
+
+  font-size:25px;
+  font-weight:800;
+  color:black;
+
 
 }
   </style>
