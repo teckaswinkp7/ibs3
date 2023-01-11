@@ -11,7 +11,9 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="float-sm-right">
+              <form>
              <input type="search" placeholder="search"> </input> <button class="searchbtn"> <i class="fa-solid fa-magnifying-glass"></i></button>
+</form>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->

@@ -155,7 +155,7 @@
             <div class="col-md-6">
            <span class="dropdown-header">Schedule</span>
            
-           <a href="#" class="dropdown-item">
+           <a href="{{route('application.index')}}" class="dropdown-item">
           <p> Application </p>
                </a>
                <a href="#" class="dropdown-item">

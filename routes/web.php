@@ -148,8 +148,8 @@ Route::get('sponsorhistory', [Sponsorstudentcontroller::class, 'history'])->name
 
 
 Route::get('admin/screening', 'App\Http\Controllers\Admin\ScreeningController@index')->name('screening.index');
-Route::get('admin/enrollment/', 'App\Http\Controllers\Admin\DocumentVerificationController@index')->name('enrollment.index');
-Route::get('admin/enrollment/verify/{id}', 'App\Http\Controllers\Admin\DocumentVerificationController@verify')->name('enroll.verify');
+Route::get('admin/application/', 'App\Http\Controllers\Admin\DocumentVerificationController@index')->name('application.index');
+Route::get('admin/application/verify/{id}', 'App\Http\Controllers\Admin\DocumentVerificationController@verify')->name('application.verify');
 Route::post('admin/enrollment/store', [DocumentVerificationController::class, 'store'])->name('enrollment.store');
 Route::post('admin/screening/store', [ScreeningController::class, 'store'])->name('screening.store');
 Route::get('admin/screening/course/{id}', [ScreeningController::class, 'course'])->name('screening.course');

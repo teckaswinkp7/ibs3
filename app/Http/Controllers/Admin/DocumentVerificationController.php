@@ -12,6 +12,7 @@ use App\Models\Role;
 use App\Models\Education;
 use App\Models\Document;
 use Hash;
+use DB;
 class DocumentVerificationController extends Controller
 {
     public function __construct() {       
@@ -33,9 +34,13 @@ class DocumentVerificationController extends Controller
     //
     public function index()
     {
-     $users = User::where('user_role',2)->where('status',2)->get();
+     $users = DB::table('users')
+     ->join('education','users.id','=','education.stu_id')
+     ->select('users.name','education.updated_at','users.id')
+     ->where('users.user_role',2)
+     ->where('users.status',2)->get();
      //$educat = Document::all();
-    return view('admin.enrollment.index',compact('users'));
+    return view('admin.application.index',compact('users'));
     }
     public function verify($id)
     {
@@ -47,7 +52,7 @@ class DocumentVerificationController extends Controller
      //$student_edu =  Education::join('documents','documents.edu_id','education.id')->where('education.stu_id',$id)->where('documents.status',1)->get();   
      $student_edu =  Education::where('stu_id',$id)->where('verification_status',null)->get();
      //dd($student_edu);  
-     return view('admin.enrollment.verify',compact('user','student_edu'));
+     return view('admin.application.verify',compact('user','student_edu'));
     }
     public function store(Request $request)
     {
@@ -65,7 +70,7 @@ class DocumentVerificationController extends Controller
         // $docum->edu_id = $request->edu_id;
         // $docum->save();
         $status = User::where('id', $id)->update(array('status' => 3));
-        return redirect()->route('enrollment.index')
+        return redirect()->route('application.index')
         ->with('success','created successfully.');
     }
 }
