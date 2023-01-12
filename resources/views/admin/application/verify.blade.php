@@ -1,7 +1,7 @@
 @extends('admin.header')  
 @section('content')
  <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="content-wrapper" style="min-height:1500px;">
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <div class="container-fluid">
@@ -20,140 +20,242 @@
         </section>
         <!-- Main content -->
         <section class="content">
-          <div class="container-fluid">
+          <div class="container-fluid" >
             <!-- SELECT2 EXAMPLE -->
-            <div class="card card-default">
-              <div class="card-header">
-                <h3 class="card-title">Verify Document</h3>
-              </div>
+            <div class="row">
+                <h3 class="card-title">Application Review Panel</h3>
+</div>
                <!-- /.card-header -->
                
                 <form action="{{ route('enrollment.store') }}" method="POST" enctype="multipart/form-data" class="mb-0" id="catform">
                 @csrf   
-                  <div class="card-body">
+                
                         @if(session('status'))
                             <div class="alert alert-success mb-1 mt-1">
                             {{ session('status') }}
                             </div>
                         @endif
-                        <div class="row"> 
-                        <div class="col-md-12">
+                        <div class="row">
+                      <div class="col-md-4">
                               <div class="form-group">
                                 <label>Name</label>
                                 <input type="text" value="{{ $user->name }}" name="name" class="form-control"  readonly>
                                 <input type="hidden" value="{{ $user->id }}" name="stu_id" class="form-control"  readonly>
                               </div>
-                            </div> 
-                            <div class="col-md-12">
+                             
+                           
                               <div class="form-group">
                                 <label>Email</label>
                                 <input type="text" value="{{ $user->email }}" name="email" class="form-control"  readonly>
                               </div>
-                            </div> 
-                            <div class="col-md-12">
+                            
+                            
                               <div class="form-group">
-                                <label>Phone</label>
+                                <label>Highest Qualification</label>
+                                <input type="text" value="{{$user->highest_qualification }}" name="phone" class="form-control"  readonly>
+                              </div>
+                              <div class="form-group">
+                                <label>Stream</label>
                                 <input type="text" value="{{ $user->phone }}" name="phone" class="form-control"  readonly>
                               </div>
-                            </div> 
-                            <table  class="table table-bordered table-striped">
-                  <thead>
-                  <tr>
-                  <th>Sl.No.</th>
-                  {{-- <th>Qualification</th> --}}
-                  <th>Board</th>
-                  {{-- <th>Percentage</th> --}}
-                  <th>ID Image</th>
-                  <th>Heighest Qualification</th>
-                  <th>Course Synopsis</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <?php $_SESSION['i'] = 0; ?>                        
+                            
+</div>
+<div class="col-md-8">
+  
+                    
                   @foreach ($student_edu as $user)
                   
-                  <?php $_SESSION['i']=$_SESSION['i']+1; ?>
-                    <tr>
-                      <?php $dash=''; ?>
-                      <td>{{$_SESSION['i']}}</td>
-                      {{-- <td>{{ $user->qualification }}</td> --}}
-                      <td>{{ $user->board }}</td>
-                      {{-- <td>{{ $user->percentage }}</td> --}}
+                  
                       <?php 
                       $val = $user->id_image;
                       $ext = explode('.',$val);
-                      if($ext[1] == 'pdf')
-                      { ?>
-                        <td><a href="{{url('public/Image')}}/{{ $user->id_image }}" target="_blank"><img src="{{url('public/uploads/pdf_icon.png')}}" style="width:100px;height:100px;"></a></td>
-                      <?php }
-                      else{ ?>
-                        <td><a href="{{url('public/Image')}}/{{ $user->id_image }}" target="_blank"><img src="{{url('public/public/Image')}}/{{ $user->id_image }}" style="width:100px;height:100px;"></a></td>
-                      <?php }
+                     // dd($val);
                       ?>
+                    
+                     
+                     <embed src="{{url('public/Image')}}/{{ $user->id_image }}" height="500" width="800"> 
+                     @endforeach       
+                  
+</div>
+</div>
 
-                      <?php 
-                      $val = $user->id_image;
-                      $ext = explode('.',$val);
-                      if($ext[1] == 'pdf')
-                      { ?>
-                        <td><a href="{{url('public/Image')}}/{{ $user->highest_qualification }}" target="_blank"><img src="{{url('public/uploads/pdf_icon.png')}}" style="width:100px;height:100px;"></a></td>
-                      <?php }
-                      else{ ?>
-                        <td><a href="{{url('public/Image')}}/{{ $user->highest_qualification }}" target="_blank"><img src="{{url('public/public/Image')}}/{{ $user->highest_qualification }}" style="width:100px;height:100px;"></a></td>
-                      <?php }
-                      ?>
+<div class="row">
+  <div class="col-md-4">
+<h6> Qualification Ranking </h6>
+<table class="table table-striped marginbtm">
+<th class="text-center"> Select Subjects Taken </th>
+                  </table>
 
-                      <?php 
-                      $val = $user->id_image;
-                      $ext = explode('.',$val);
-                      if($ext[1] == 'pdf')
-                      { ?>
-                        <td><a href="{{url('public/Image')}}/{{ $user->course_syopsiy }}" target="_blank"><img src="{{url('public/uploads/pdf_icon.png')}}" style="width:100px;height:100px;"></a></td>
-                      <?php }
-                      else{ ?>
-                        <td><a href="{{url('public/Image')}}/{{ $user->course_syopsiy }}" target="_blank"><img src="{{url('public/public/Image')}}/{{ $user->course_syopsiy }}" style="width:100px;height:100px;"></a></td>
-                      <?php }
-                      ?>
-                      
-                    </tr> 
-                  @endforeach
-                  <?php unset($_SESSION['i']); ?>    
+<table class="table table-bordered table-striped">
+
+  <tr>
+<th> </th>
+<th> Major Subjects Taken </th>
+  <th> Grade </th>
+
+                  </tr>
+
+<tbody>
+                  <tr> 
+
+
+                  <td><input type="checkbox" class="checksubject" name="checksubject"> </td>
+                  <td> Language And Literature </td>
+                  <td><input type="text" style="width:40px;" class="grade">  </td>
+
+                  </tr>
+                  <tr> 
+
+
+<td><input type="checkbox" class="checksubject" name="checksubject"> </td>
+<td> Applied English </td>
+<td><input type="text" style="width:40px;" class="grade">  </td>
+
+</tr>
+<tr> 
+
+
+                  <td><input type="checkbox" class="checksubject" name="checksubject"> </td>
+                  <td> General Mathemathics </td>
+                  <td><input type="text" style="width:40px;" class="grade">  </td>
+
+                  </tr>
+                  <tr> 
+
+
+                  <td><input type="checkbox" class="checksubject" name="checksubject"> </td>
+                  <td> Economics </td>
+                  <td><input type="text" style="width:40px;" class="grade">  </td>
+
+                  </tr>
+                  <tr> 
+
+
+                  <td><input type="checkbox" class="checksubject" name="checksubject"> </td>
+                  <td> Accounting </td>
+                  <td><input type="text" style="width:40px;" class="grade">  </td>
+
+                  </tr>
+                  <tr> 
+
+
+                  <td><input type="checkbox" class="checksubject" name="checksubject"> </td>
+                  <td> Business Studies </td>
+                  <td><input type="text" style="width:40px;" class="grade">  </td>
+
+                  </tr>
+                  <tr> 
+
+
+                  <td><input type="checkbox" class="checksubject" name="checksubject"> </td>
+                  <td> Geography </td>
+                  <td><input type="text" style="width:40px;" class="grade">  </td>
+
+                  </tr>
+                  <tr> 
+
+
+                  <td><input type="checkbox" class="checksubject" name="checksubject"> </td>
+                  <td> History </td>
+                  <td><input type="text" style="width:40px;" class="grade">  </td>
+
+                  </tr>
+                  <tr> 
+
+
+                  <td><input type="checkbox" class="checksubject" name="checksubject"> </td>
+                  <td> Legal Studies </td>
+                  <td><input type="text" style="width:40px;" class="grade">  </td>
+
+                  </tr>
+                  <tr> 
+
+
+                  <td><input type="checkbox" class="checksubject" name="checksubject"> </td>
+                  <td> Information Communication Technologies. </td>
+                  <td><input type="text" style="width:40px;" class="grade">  </td>
+
+                  </tr>
+                  
+
+
+
+
+
                   </tbody>
-                  <tfoot>
-                  {{-- <tr>
-                  <th>Sl.No.</th>
-                  <th>Qualification</th>
-                  <th>Board</th>
-                  <th>Percentage</th>
-                  <th>Document</th>
-                  </tr> --}}
-                  </tfoot>
+                  </table>
+
+<table class="table table-bordered table-striped">
+
+  <tr>
+
+
+  <th> </th>
+
+  <th> Minor Subjects Taken </th>
+  <th> Grade </th>
+
+                  </tr>
+
+<tbody>
+                  <tr> 
+
+
+                  <td><input type="checkbox" class="checksubject" name="checksubject"> </td>
+                  <td> Practical Skills </td>
+                  <td><input type="text" style="width:40px;" class="grade">  </td>
+
+                  </tr>
+                  <tr> 
+
+
+<td><input type="checkbox" class="checksubject" name="checksubject"> </td>
+<td> Home Economics  </td>
+<td><input type="text" style="width:40px;" class="grade">  </td>
+
+</tr>
+<tr> 
+
+
+                  <td><input type="checkbox" class="checksubject" name="checksubject"> </td>
+                  <td> Personal Development </td>
+                  <td><input type="text" style="width:40px;" class="grade">  </td>
+
+                  </tr>
+                
+                  
+
+
+
+
+
+                  </tbody>
                 </table>
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label>Document Verified</label>
-                    <div class="form-check">
-                    <label class="form-check-label" for="radio1">
-                    <input type="radio" class="form-check-input" id="status" name="status" value="1">Yes
-                    </label>
-                    </div>
-                    <div class="form-check">
-                    <label class="form-check-label" for="radio2">
-                    <input type="radio" class="form-check-input" id="status" name="status" value="2">No
-                    </label>
-                    </div>
+                <div>
+<button class="btn btn-primary float-right btncolor"> obtain </button>
+</div>    
+</div>            
+<br>
+<br>
+<div class="col-md-8" style="margin-top:30px;">
+<div class="card">
+  <div class="card-body cardcolor">
+    <p> GPA - </p>
+    <p>Attainment Points -  </p>
+    <p>Eligibility -  </p>
+    <p>Institute -  </p>
+    <p>Programme/Course -  </p>
+    
+  </div>
+
+</div>
+<button class="btn btn-primary  btncolor">send-eligibility </button>
+  <button class="btn btn-primary  btncolor">save & Send-later </button>
+</div>
+
                   </div>
-                  </div> 
-                  </div>
-                </div>
-                    <!-- /.card-body -->
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-</form>
-            </div>
-            <!-- /.card -->
-          </div>
+</div>
+               
           <!-- /.container-fluid -->
         </section>
         <!-- /.content -->
@@ -162,4 +264,19 @@
 @include('admin.footer')
 @endsection
 </body>
+<style>
+
+  .marginbtm{
+    margin-bottom:0px!important;
+  }
+.btncolor{
+  background: radial-gradient(circle at 10% 20%, rgb(255, 197, 61) 0%, rgb(255, 94, 7) 90%); 
+  border:none!important;
+  
+}
+
+.cardcolor{
+  background:#D3D3D3;
+}
+  </style>
 </html>   

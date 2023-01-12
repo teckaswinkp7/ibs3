@@ -99,17 +99,15 @@
 
 <div class="col-md-4">
 
-@foreach ($activeenrollment as $activeenroll)
-<div class="text-center" > <img src="image/{{$activeenroll->sponsor_image}}" alt="" width="100px"> </img>
+<div class="text-center" > <img src="image/{{$activeenrollment[0]->sponsor_image}}" alt="" width="100px"> </img>
 
 </div>
 </div>
 <div class="col-md-4">
 
-<div class="text-center" > {{ $activeenroll->name}}</div>
-<div class="text-center" > @if( $activeenroll->user_role == '1') Admin @else Enrollment Officer @endif </div>
+<div class="text-center" > {{ $activeenrollment[0]->name}}</div>
+<div class="text-center" > @if( $activeenrollment[0]->user_role == '1') Admin @else Enrollment Officer @endif </div>
 </div>
-@endforeach
 
 </div>
 
