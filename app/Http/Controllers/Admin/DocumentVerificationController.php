@@ -52,7 +52,56 @@ class DocumentVerificationController extends Controller
      //$student_edu =  Education::join('documents','documents.edu_id','education.id')->where('education.stu_id',$id)->where('documents.status',1)->get();   
      $student_edu =  Education::where('stu_id',$id)->where('verification_status',null)->get();
      //dd($student_edu);  
-     return view('admin.application.verify',compact('user','student_edu'));
+     $cgpa = Session::get('cgpa');
+     return view('admin.application.verify',compact('user','student_edu'),compact('cgpa'));
+    }
+
+
+    public function obtain(Request $request){
+
+        $id = auth::id();
+
+        $grades = $request->grade;
+
+        $gradelength = count($grades);
+        $a=$grades;
+       
+       $newarray = (array_map(function($v){
+        if ($v==="A")
+        {
+        return "5";
+        }
+      elseif($v === "B"){
+
+        return "4";
+      }
+      elseif($v === "C"){
+        return "3";
+      }
+      elseif($v === "D"){
+
+        return "2";
+      }
+      elseif($v === "E"){
+
+        return "1";
+      }
+      elseif($v === "F"){
+        return "0";
+      }
+      return $v;
+
+       },$a));
+
+ $cgpa = array_sum($newarray)/$gradelength;
+      
+    return redirect()->back()->with(compact('cgpa'));
+
+
+
+
+
+
     }
     public function store(Request $request)
     {

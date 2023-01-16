@@ -158,7 +158,7 @@
            <a href="{{route('application.index')}}" class="dropdown-item">
           <p> Application </p>
                </a>
-               <a href="#" class="dropdown-item">
+               <a href="{{route('screening.index')}}" class="dropdown-item">
           <p> Courseselection </p>
                </a>
                <a href="#" class="dropdown-item">
