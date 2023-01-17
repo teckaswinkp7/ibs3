@@ -69,13 +69,14 @@
       <th >Course Spec</th>
     </tr>
   </thead>
+  <?php $_SESSION['i'] = 0; ?>   
+        @foreach ($users as $user)
+        <?php $_SESSION['i']=$_SESSION['i']+1; ?>
    
   <tbody>
   <form action="" method="post" enctype="multipart/form-data">
         @csrf  
-        <?php $_SESSION['i'] = 0; ?>   
-        @foreach ($users as $user)
-        <?php $_SESSION['i']=$_SESSION['i']+1; ?>
+        
       <td>{{$_SESSION['i']}}</td>
       <td>{{$user->name}}</td>
       <td>{{date('d-m-Y', strtotime($user->updated_at));}}</td>

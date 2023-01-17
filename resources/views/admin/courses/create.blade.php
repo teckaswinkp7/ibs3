@@ -1,6 +1,5 @@
 @extends('admin.header')  
 @section('content')
-@include('admin.leftsidebar') 
  <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper" style="min-height:1545px !important;">
         <!-- Content Header (Page header) -->
@@ -79,6 +78,15 @@
                               @enderror  
                             </div>
                           </div>
+                          <div class="col-md-12">
+                          <div class="form-group">
+                            <label>Course Start Date<span class="required">*</span></label>
+                            <input type="date" name="start_date" id="@if ($errors->has('start_date')) inputError @endif" class="form-control @if ($errors->has('start_date')) is-invalid @endif" placeholder="Start Date">
+                            @error('start_date')
+                            <span class="error invalid-feedback">{{ $message }}</span>
+                             @enderror
+                          </div>
+                        </div>
                           <div class="col-md-12">
                           <div class="form-group">
                             <label>Course Duration<span class="required">*</span></label>

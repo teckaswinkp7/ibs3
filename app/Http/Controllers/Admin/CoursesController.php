@@ -2,6 +2,8 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Courses;
+use App\Models\User;
+use DB;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,8 +33,14 @@ class CoursesController extends Controller
     */
     public function index()
     {
-        $data['courses'] = Courses::orderBy('id','desc')->paginate(5);
-        return view('admin.courses.index', $data);
+        $courses = Courses::orderBy('id','desc')->paginate();
+        $users = DB::table('users')
+        ->join('education','users.id','=','education.stu_id')
+        ->select('users.name','education.updated_at','users.id')
+        ->where('users.user_role',2)
+        ->where('users.status',2)->get();
+        
+        return view('admin.courses.index',compact('courses','users'));
         //return view('categories.index', compact('categories'));
     }
     /**
@@ -76,6 +84,7 @@ class CoursesController extends Controller
         $courses = new Courses;
         $courses->name = $request->name;
         $courses->slug = $request->slug;
+        $courses->start_date = $request->start_date;
         $courses->course_duration = $request->course_duration;
         $courses->course_id = $request->course_id;
         $courses->price = $request->price;
