@@ -10,7 +10,7 @@
           <div class="col-sm-6">
           
             
-            <h3 class="card-title">Offer List Panel</h3>
+            <h3 class="card-title">Payment List Panel</h3>
           
           </div>
           <div class="col-sm-6">
@@ -31,36 +31,19 @@
       <div class="container-fluid">
         <div class="row">
         <div class="col-md-4">
-            <p style="font-size:15px;"> Main Filter Summary </p>
-            <div class="card">
-                <div class="card-body cardcolor" style="font-size:10px;">
-               
-                <p > Institute: </p>
-                <p> Qualification: </p>
-                <p> Date Range: </p>
-                <p> Programme:  </p>
-                <p> Study Period:  </p> 
-                <p> Level of Study: </p>
 
-                </div>
-
-</div>
 </div>
          
               <!-- /.card-header -->
               
-              <table class="table col-md-8 tableheight">
+              <table class="table col-md-8 tableheight ">
     <tr style="border-top:none;" >
     
         <form action="" method="get">
 
           <th > </th>
     <th style="vertical-align:bottom;"> <label for="date"> Date: </label> <input type='date' name="date"  class="datepicker form-control" placeholder="Date" ></input> </th>
-         <th style="vertical-align:bottom;" > <label>Study Batch</label>
-         <select id='institute' class="form-control" style="width:200px">
-         <option value="">Semester 2</option>
-         <option value="">Active</option>
-         </select> </th>
+         
          <th style="vertical-align:bottom;"> <button class="btn btn-primary btnreview" value="filter" type="submit" name="paybutton" style=" padding: 5px 15px; background-color: #cc6600; border-color:#cc6600; color: white; margin-top:30px; margin-left:5px; margin-right:5px;"> Apply </button> </th>
 </form>   
 <form action="">
@@ -76,40 +59,42 @@
 </form>     
 
 
+
+
 </tr>
 </table>
 
                 <table class="table table-striped">
     <thead>
+        <tr>
+            {{$paymentcount}} Applicants Found.
+</tr>
     <tr>
       <th>ID</th>
       <th >Name</th>
       <th >Course</th>
-      
-      <th> </th>
-      <th >Status</th>
-      <th> </th>
-      <th >Offer Spec</th>
+      <th> Date Submitted</th>
+      <th> Total Amount </th>
+      <th >Amount due</th>
+      <th>Invoice </th>
+      <th >Sync Invoice</th>
       
     </tr>
   </thead>
   <?php $_SESSION['i'] = 0; ?>   
-  @foreach ($registeredstudents as $user)
+  @foreach ($paymentlist as $user)
     <?php $_SESSION['i']=$_SESSION['i']+1; ?>
   <tbody>
   <form action="" method="post" enctype="multipart/form-data">
         @csrf  
       <td>{{$_SESSION['i']}}</td>
       <td>{{ $user->name }} </td>
-      <td></td>
-      <td></td>
-      @if( $user->offer_accepted == 'yes')
-      <td> Offer Accepted </td>
-      @else
-      <td> Pending Acceptance </td>
-      @endif
-      <td>  </td>
-      <td><button class="btnreview" id="desktop"><i class="fa-sharp fa-solid fa-bars backgroundclass"></i></button></td>
+      <td>{{$user->coursename}}</td>
+      <td>{{$user->updated_at->format('d/m/y')}}</td>
+      <td> {{$user->amountdue}}</td>
+     <td>{{$user->balance_due}} </td>
+      <td><a href="{{url('/pdf')}}/{{$user->invoice}}" target=_blank><button class="btn btn-primary btnreview"><i class="fa-regular fa-eye backgroundclass"> </i></a></button> </td>
+      <td><a href=""><button class="btn btn-primary btnreview" id="desktop">sync</a></button></td>
       
       @endforeach
       <?php unset($_SESSION['i']); ?>    
@@ -121,7 +106,7 @@
    
 </table>
 <div class="ml-auto">
-{!! $registeredstudents->links() !!} 
+
 </div>
 
      
@@ -142,6 +127,12 @@
   @endsection
 </body>
 <style>
+    .bacgroundclass{
+        background: radial-gradient(circle at 10% 20%, rgb(255, 197, 61) 0%, rgb(255, 94, 7) 90%); 
+        padding:30px;
+    border-radius: 50%;
+  
+    }
 .btnreview{
 
   background: radial-gradient(circle at 10% 20%, rgb(255, 197, 61) 0%, rgb(255, 94, 7) 90%); 
@@ -180,12 +171,6 @@ cursor: pointer;
   border-width:10px;
 }
 
-.tableheight{
-
-    height:30px;
-    margin-top:60px;
-   
-}
 
   </style>
 </html>  

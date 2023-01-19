@@ -171,10 +171,10 @@
                <a href="#" class="dropdown-item">
           <p>Invoice </p>
                </a>
-               <a href="#" class="dropdown-item">
+               <a href="{{route('paymentlist.index')}}" class="dropdown-item">
           <p>Payment</p>
                </a>
-               <a href="#" class="dropdown-item">
+               <a href="" class="dropdown-item">
           <p>Reciept</p>
                </a>
 </div>

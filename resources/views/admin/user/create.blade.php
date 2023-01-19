@@ -1,6 +1,5 @@
 @extends('admin.header')  
 @section('content')
-@include('admin.leftsidebar') 
  <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper" style="min-height:1545px !important;">
         <!-- Content Header (Page header) -->
@@ -8,7 +7,7 @@
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <a class="btn btn-primary" href="{{ route('user.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('courses.index') }}"> Back</a>
               </div>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">

@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\StudentcourseController;
 use App\Http\Controllers\Admin\BankController;
 use App\Http\Controllers\Admin\SponsorController;
 use App\Http\Controllers\Admin\PDFController;
+use App\Http\Controllers\Admin\PaymentlistController;
 use App\Http\Controllers\Admin\Registeredstudentscontroller;
 use App\Http\Controllers\Admin\confirmedstudentscontroller;
 use App\Http\Controllers\Admin\GradeController;
@@ -165,6 +166,7 @@ Route::get('admin/studentcourse/viewReceipt/', [StudentcourseController::class, 
 Route::get('admin/studentcourse/viewStudent/', [StudentcourseController::class, 'view_student'])->name('studentcourse.viewStudent');
 Route::get('admin/studentcourse/viewInvoice/', [StudentcourseController::class, 'view_invoice'])->name('studentcourse.viewInvoice');
 Route::get('admin/studentcourse/viewOffer/', [StudentcourseController::class, 'view_offer'])->name('studentcourse.viewOffer');
+Route::get('admin/payment', [PaymentlistController::class, 'index'])->name('paymentlist.index');
 
 Route::post('admin/studentcourse/store/', [StudentcourseController::class, 'store'])->name('studentcourse.store');
 Route::post('admin/studentcourse/storeInvoice/', [StudentcourseController::class, 'storeInvoice'])->name('studentcourse.storeInvoice');

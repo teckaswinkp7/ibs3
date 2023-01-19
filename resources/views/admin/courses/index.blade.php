@@ -30,6 +30,32 @@
          
               <!-- /.card-header -->
               <div class="col-sm-12 ">
+                <div class="row">
+                  <div class="col-sm-2">
+                  <label style="font-size:10px;">Institute:</label>
+         <select id='institute' class="form-control" style="width:200px">
+         <option value="">All</option>
+         <option value="">College of TVET</option>
+         <option value="">Southern Cross University</option>
+         <option value="">IBS University</option>
+         <option value="">Career Development Studies. </option>
+         </select>
+
+                  </div>
+                  <div class="col-sm-2">
+                  <label style="font-size:10px;">Qualification:</label>
+         <select id='institute' class="form-control" style="width:200px">
+         <option value="">All</option>
+         <option value="">Certificate</option>
+         <option value="">Diploma</option>
+         <option value="">Associate Degree</option>
+         <option value="">Bachelor</option>
+         </select>
+
+                  </div>
+              
+       
+</div>
               <h1><a class="btn btn-success float-right colorbtn" href="{{ route('courses.create') }}"> Create Course</a></h1>
 </div>
               <table class="table">
@@ -108,7 +134,7 @@
       <td>{{ $course->name }}</td>
       <td>{{ strip_tags(Str::limit($course->description,30,'...')) }}</td>
       <td> </td>
-      <td><button class="btnreview" id="desktop"><i class="fa-regular fa-user backgroundclass"></i></button>&nbsp;<button class="btnreview"> <i class="fa-solid fa-hourglass-start backgroundclass"></i></button>&nbsp;<button class="btnreview"> <i class="fa-solid fa-plus backgroundclass"></i></button></td>
+      <td><button class="btnreview" id="desktop"><i class="fa-regular fa-user backgroundclass"></i></button>&nbsp;<button class="btnreview"> <a href="{{route('reports.offer_accepted')}}"> <i class="fa-solid fa-hourglass-start backgroundclass"></i></button>&nbsp; <button class="btnreview" ><a href="{{route('user.create')}}"> <i class="fa-solid fa-plus backgroundclass"></i></button></a></td>
       
       @endforeach
       <?php unset($_SESSION['i']); ?>    
