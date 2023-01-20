@@ -17,6 +17,8 @@ use App\Http\Controllers\Admin\BankController;
 use App\Http\Controllers\Admin\SponsorController;
 use App\Http\Controllers\Admin\PDFController;
 use App\Http\Controllers\Admin\PaymentlistController;
+use App\Http\Controllers\Admin\EnrolmentController;
+use App\Http\Controllers\Admin\InvoicelistController;
 use App\Http\Controllers\Admin\Registeredstudentscontroller;
 use App\Http\Controllers\Admin\confirmedstudentscontroller;
 use App\Http\Controllers\Admin\GradeController;
@@ -108,6 +110,12 @@ Route::get('recieptconfirm', [Recieptverificationcontroller::class, 'confirm'])-
 Route::post('recieptconfirmstore', [Recieptverificationcontroller::class, 'store'])->name('confirm.store');
 
 
+/**Admin New  */
+
+Route::get('admin/payment', [PaymentlistController::class, 'index'])->name('paymentlist.index');
+Route::get('admin/enrollment', [EnrolmentController::class, 'index'])->name('manageenrollment.index');
+Route::get('admin/invoicelistpanel', [InvoicelistController::class, 'index'])->name('invoicelist.index');
+
 Route::post('post-registration', [AuthControllers::class, 'postRegistration'])->name('register.post'); 
 Route::post('final-registration', [AuthControllers::class, 'confirm_register'])->name('register.final'); 
 Route::get('admin/login', [AuthController::class, 'index'])->name('admin_login');
@@ -166,7 +174,7 @@ Route::get('admin/studentcourse/viewReceipt/', [StudentcourseController::class, 
 Route::get('admin/studentcourse/viewStudent/', [StudentcourseController::class, 'view_student'])->name('studentcourse.viewStudent');
 Route::get('admin/studentcourse/viewInvoice/', [StudentcourseController::class, 'view_invoice'])->name('studentcourse.viewInvoice');
 Route::get('admin/studentcourse/viewOffer/', [StudentcourseController::class, 'view_offer'])->name('studentcourse.viewOffer');
-Route::get('admin/payment', [PaymentlistController::class, 'index'])->name('paymentlist.index');
+
 
 Route::post('admin/studentcourse/store/', [StudentcourseController::class, 'store'])->name('studentcourse.store');
 Route::post('admin/studentcourse/storeInvoice/', [StudentcourseController::class, 'storeInvoice'])->name('studentcourse.storeInvoice');

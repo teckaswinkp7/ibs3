@@ -164,11 +164,11 @@
                <a href="#" class="dropdown-item">
           <p> Offer </p>
                </a>
-               <a href="#" class="dropdown-item">
+               <a href="{{route('manageenrollment.index')}}" class="dropdown-item">
           <p>Enrollment </p>
                </a>
                <span class=" dropdown-header">Pay</span>
-               <a href="#" class="dropdown-item">
+               <a href="{{route('invoicelist.index')}}" class="dropdown-item">
           <p>Invoice </p>
                </a>
                <a href="{{route('paymentlist.index')}}" class="dropdown-item">
