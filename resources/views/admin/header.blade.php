@@ -37,23 +37,11 @@
     </head>
     <style>
 
-#navbarNavDropdown li {
+.dropdown {
 	border-right: 1px solid #4f4f4f;
   opacity:0.10px;
+  
 	}
-  #navbarNavDropdown li:last-child {
-	border-right: none
-	}
-
-  #vrline li{
-    border-right: 1px solid #4f4f4f;
-  opacity:0.10px;
-
-  }
-  #vrline li:last-child {
-	border-right: none
-	}
-
   .dropdown-header{
 
     color:orange!important;
@@ -67,13 +55,66 @@
   .dropdown-item{
 
     color:white;
+    
   }
 
   .content-wrapper{
 
     margin-left:auto!important;
+    
   }
- 
+
+  .dropbtn {
+
+     background-color:transparent;
+     color:white;
+  padding: 6px;
+  font-size: 16px;
+  border: none;
+  margin-right:10px;
+  margin-left:10px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown2{
+
+     position: relative;
+  display: inline-block;
+} 
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+ box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+ z-index: 999;
+ color:white;
+}
+
+.dropdown-content a {
+  color: white;
+  padding: 40px;
+  text-decoration: none;
+  display: block;
+  z-index: 999;
+}
+
+.dropbtn:hover{
+
+
+     color:white;
+}
+
+
+.dropdown:hover .dropdown-content {display: block;}
+
+
+
+
+
+  
 </style>
     <body >  
         <!--<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -135,22 +176,14 @@
 </div>
 </nav>
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-md navbar-dark btco-hover-menu">
-        <!-- Left navbar links -->
-        <ul class="navbar-nav">
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <li class="nav-item">
-                <a href="{{route('admin-dashboard')}}" class="nav-link {{ request()->is('admin-dashboard') ? 'active' : '' }}">
-                  <p>
-                    Dashboard
-                  </p>
-                </a>
-            </li>
-           
-           <li class="nav-item dropdown">
-           <a class="nav-link" data-toggle="dropdown" href="#"><p>Enrollment</p> </a>
-           <div class="dropdown-menu navbar-dark dropdown-menu-lg dropdown-menu-left">
-           <div class="container">
+
+<nav class="navbar navbar-expand-md navbar-dark btco-hover-menu">
+        <div class="dropdown">
+  <button class="dropbtn" ><a href="{{route('admin-dashboard')}}" class="dropbtn">Dashboard</a></button>
+</div>
+<div class="dropdown">
+  <button class="dropbtn">Enrollment</button>
+  <div class="dropdown-content dropdown-menu navbar-dark dropdown-menu-lg dropdown-menu-left">
            <div class="row">
             <div class="col-md-6">
            <span class="dropdown-header">Schedule</span>
@@ -199,33 +232,33 @@
 </div>
 </div>
 </div>
-
-          </li>
-          <li class="nav-item dropdown">
-           <a class="nav-link" data-toggle="dropdown" href="#"><p>Courses</p> </a>
-           <div class="dropdown-menu navbar-dark dropdown-menu-lg dropdown-menu-left">
-            
-           <span class="dropdown-header">Programmes</span>
+<div class="dropdown">
+  <button class="dropbtn">courses</button>
+  <div class="dropdown-content dropdown-menu navbar-dark dropdown-menu-lg dropdown-menu-left">
+  <span class="dropdown-header">Programmes</span>
                <a href="#" class="dropdown-item">
           <p>Courses </p>
                </a>
                <a href="#" class="dropdown-item">
           <p>Units</p>
                </a>
-          
+               
 </div>
-          </li>
+</div>
 
-          <li class="nav-item dropdown">
-           <a class="nav-link" data-toggle="dropdown" href="#"><p>Reports</p> </a>
+<div class="dropdown">
+  <button class="dropbtn">Reports</button>
+  <div class="dropdown-content dropdown-menu navbar-dark dropdown-menu-lg dropdown-menu-left">
+ 
+               
 </div>
-          </li>
-          <div id="vrline">
-          <li class="nav-item dropdown" >
-           <a class="nav-link" data-toggle="dropdown" href="#"><p>Setup</p> </a>
-           <div class="dropdown-menu navbar-dark dropdown-menu-lg dropdown-menu-left">
-           <div class="container">
-           <div class="row">
+</div>
+
+
+<div class="dropdown">
+  <button class="dropbtn">Setup</button>
+  <div class="dropdown-content dropdown-menu navbar-dark dropdown-menu-lg dropdown-menu-left">
+  <div class="row">
             <div class="col-md-6">
            <span class="dropdown-header">Manage Account</span>
            
@@ -268,18 +301,18 @@
           </div>
 </div>
 </div>
+               
 </div>
 </div>
 
-          </li>
 
-        
-         
-                
-           
-        </ul>
-</div>
-        </nav>
+
+
+
+
+
+</nav>
+
         <!-- /.navbar -->  
     @yield('content')    
     

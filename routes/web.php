@@ -39,6 +39,7 @@ use App\Http\Controllers\Admin\Unitcontroller;
 use App\Http\Controllers\Admin\Additionalfeecontroller;
 use App\Http\Controllers\Admin\Unitselectioncontroller;
 use App\Http\Controllers\Admin\Semcontroller;
+use App\Http\Controllers\Admin\Searchcontroller;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,6 +78,8 @@ Route::post('coursesdefer', [EducationController::class, 'coursesdefer'])->name(
 Route::get('useroffercongrats', [EducationController::class, 'user_offer_congrats'])->name('useroffercongrats');
 Route::get('coursedeferdate', [EducationController::class, 'coursedeferdate'])->name('coursedeferdate');
 Route::post('coursedefersdate', [EducationController::class, 'coursedefersdate'])->name('coursedefersdate');
+Route::get('search', [Searchcontroller::class, 'index'])->name('search.index');
+
 
 
 

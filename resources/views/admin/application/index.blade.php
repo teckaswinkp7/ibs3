@@ -12,8 +12,10 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
+            <form action="{{route('search.index')}}" method="GET">
             <input type="search" placeholder="search"> </input> <button class="searchbtn"> <i class="fa-solid fa-magnifying-glass"></i></button>
-            </ol>
+</form>  
+          </ol>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -37,17 +39,20 @@
 
 <th> <button class="btn btn-primary btnreview" value="filter" type="submit" name="paybutton" style=" padding: 5px 15px; background-color: #cc6600; border-color:#cc6600; color: white; margin-top:30px; margin-left:5px; margin-right:5px;"> Apply </button> </th>
 </form>        
-<form action="">
+<form >
         <th> <label for="search"> Search: </label><div class="input-group">
+        
       <input  placeholder="search here" class="form-control py-1" type="search" name="search" value="" id="example-search-input">
+      
       <span class="input-group-append">
         <button class="btn btn-outline-secondary btnreview" type="submit" style="background-color: #cc6600; color:white;">
             <i class="fa fa-search" ></i>
         </button>
       </span>
+      </form>
 </div>
 </th>
-</form>
+
 
 </tr>
 </table>

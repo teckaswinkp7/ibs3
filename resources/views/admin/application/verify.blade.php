@@ -11,8 +11,10 @@
               </div>
               <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
+                <form action="{{route('search.index')}}">
             <input type="search" placeholder="search"> </input> <button class="searchbtn"> <i class="fa-solid fa-magnifying-glass"></i></button>
-            </ol>
+</form>  
+          </ol>
               </div>
             </div>
           </div>

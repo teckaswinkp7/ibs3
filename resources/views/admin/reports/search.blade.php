@@ -10,15 +10,13 @@
           <div class="col-sm-6">
           
             
-            <h3 class="card-title">Invoice List Panel</h3>
+            <h3 class="card-title">Manage Enrolments</h3>
           
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-            <form action="{{route('search.index')}}" method="GET">
             <input type="search" placeholder="search"> </input> <button class="searchbtn"> <i class="fa-solid fa-magnifying-glass"></i></button>
-</form>  
-        </ol>
+           </ol>
            
           </div>
           <div class="col-sm-12" style="margin-top:30px;">
@@ -33,19 +31,40 @@
       <div class="container-fluid">
         <div class="row">
         <div class="col-md-4">
+            <p style="font-size:15px;"> Main Filter Summary </p>
+            <div class="card">
+                <div class="card-body cardcolor" style="font-size:10px;">
+               
+                <p > Institute: </p>
+                <p> Qualification: </p>
+                <p> Date Range: </p>
+                <p> Programme:  </p>
+                <p> Study Period:  </p> 
+                <p> Level of Study: </p>
 
+                </div>
+
+</div>
 </div>
          
               <!-- /.card-header -->
               
-              <table class="table col-md-8 tableheight ">
+              <table class="table col-md-8 tableheight">
     <tr style="border-top:none;" >
     
         <form action="" method="get">
 
           <th > </th>
-    <th style="vertical-align:bottom;"> <label for="date"> Date: </label> <input type='date' name="date"  class="datepicker form-control" placeholder="Date" ></input> </th>
-         
+          <th style="vertical-align:bottom;" > <label>Number of Units: </label>
+         <select id='institute' class="form-control" style="width:200px">
+         <option value="">Semester 2</option>
+         <option value="">Active</option>
+         </select> </th>
+         <th style="vertical-align:bottom;" > <label>Payment Status: </label>
+         <select id='institute' class="form-control" style="width:200px">
+         <option value="">Semester 2</option>
+         <option value="">Active</option>
+         </select> </th>
          <th style="vertical-align:bottom;"> <button class="btn btn-primary btnreview" value="filter" type="submit" name="paybutton" style=" padding: 5px 15px; background-color: #cc6600; border-color:#cc6600; color: white; margin-top:30px; margin-left:5px; margin-right:5px;"> Apply </button> </th>
 </form>   
 <form action="">
@@ -61,23 +80,20 @@
 </form>     
 
 
-
-
 </tr>
 </table>
 
                 <table class="table table-striped">
     <thead>
-        <tr>
-            {{$paymentcount}} Applicants Found.
-</tr>
     <tr>
       <th>ID</th>
       <th >Name</th>
-      <th >Invoice</th>
-      <th> Amount </th>
-      <th> Status </th>
-      <th> Sync</th>
+      <th >Course</th>
+      
+      <th> No of Units </th>
+      <th > Payment Status</th>
+      <th> </th>
+      <th >More Details</th>
       
     </tr>
   </thead>
@@ -87,21 +103,22 @@
   <tbody>
   <form action="" method="post" enctype="multipart/form-data">
         @csrf  
-      <td>{{$user->id}}</td>
+      <td>{{$_SESSION['i']}}</td>
       <td>{{ $user->name }} </td>
-      <td>{{$user->coursename}}</td>
-      <td>{{$user->amountdue}}</td>
-      @if($user->balance_due == '0')
-      <td>Payment completed</td>
-      @elseif($user->balance_due < $user->amountdue)
-      <td> 60% paid</td>
+      <td></td>
+      <td></td>
+      @if( $user->offer_accepted == 'yes')
+      <td> Offer Accepted </td>
+      @else
+      <td> Pending Acceptance </td>
       @endif
-     <td><i class="fa-solid fa-check"></i></td>
+      <td>  </td>
+      <td><button class="btnreview" id="desktop"><i class="fa-sharp fa-solid fa-bars backgroundclass"></i></button></td>
       
-         
+      @endforeach
+      <?php unset($_SESSION['i']); ?>    
 </tbody>
-@endforeach
-      <?php unset($_SESSION['i']); ?> 
+
         <tfoot>
 
 </tfoot>
@@ -129,12 +146,6 @@
   @endsection
 </body>
 <style>
-    .bacgroundclass{
-        background: radial-gradient(circle at 10% 20%, rgb(255, 197, 61) 0%, rgb(255, 94, 7) 90%); 
-        padding:30px;
-    border-radius: 50%;
-  
-    }
 .btnreview{
 
   background: radial-gradient(circle at 10% 20%, rgb(255, 197, 61) 0%, rgb(255, 94, 7) 90%); 
@@ -173,6 +184,12 @@ cursor: pointer;
   border-width:10px;
 }
 
+.tableheight{
+
+    height:30px;
+    margin-top:60px;
+   
+}
 
   </style>
 </html>  

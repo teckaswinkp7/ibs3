@@ -11,8 +11,8 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="float-sm-right">
-              <form>
-             <input type="search" placeholder="search"> </input> <button class="searchbtn"> <i class="fa-solid fa-magnifying-glass"></i></button>
+              <form action="{{route('search.index')}}" method="GET">
+             <input type="search" name="search" placeholder="search"> </input> <button class="searchbtn"> <i class="fa-solid fa-magnifying-glass"></i></button>
 </form>
             </ol>
           </div><!-- /.col -->
@@ -40,8 +40,9 @@
           ->join('users','users.id','=','active_users.user_id')
           ->leftjoin('sponsors','sponsors.stu_id','=','users.id')
           ->where('users.user_role','=','1')->get();
+          $enrollment = DB::table('payment')->where('balance_due','0')->count();
+          $payment = DB::table('payment')->where('amountdue','!=','balance_due')->count();
 
-          $payment = DB::table('payment')->where('balance_due','0')->count();
 
           @endphp
   <!-- Responsive Arrow Progress Bar -->
@@ -52,8 +53,8 @@
     <div class="step"> <span>Course Selection </span> <div> <a href="#" class="numberclass" >{{$courseselection}}</a> </div></div>
     <div class="step"> <span>Offer </span> <div> <a href="#" class="numberclass" >2</a> </div></div>
     <div class="step"> <span> Invoice</span> <div> <a href="#" class="numberclass" >{{$invoices}}</a> </div> </div>
-    <div class="step"> <span>Payment </span> <div> <a href="#" class="numberclass" >4</a> </div></div>
-    <div class="step"> <span>Enrollment</span> <div> <a href="#" class="numberclass" >{{$payment}}</a> </div> </div>
+    <div class="step"> <span>Payment </span> <div> <a href="#" class="numberclass" >{{$payment}}</a> </div></div>
+    <div class="step"> <span>Enrollment</span> <div> <a href="#" class="numberclass" >{{$enrollment}}</a> </div> </div>
   </div>
 </div>
 </div>
@@ -99,7 +100,7 @@
 
 <div class="col-md-4">
 
-<div class="text-center" > <img src="image/{{$activeenrollment[0]->sponsor_image}}" alt="" width="100px"> </img>
+<div class="text-center" > <img src="image/{{$activeenrollment[0]->user_image}}" alt="" width="100px"> </img>
 
 </div>
 </div>
