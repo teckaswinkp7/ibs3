@@ -164,6 +164,9 @@ Route::get('admin/application/', 'App\Http\Controllers\Admin\DocumentVerificatio
 Route::get('admin/application/verify/{id}', 'App\Http\Controllers\Admin\DocumentVerificationController@verify')->name('application.verify');
 Route::post('admin/application/obtain', [DocumentVerificationController::class, 'obtain'])->name('application.obtain');
 Route::post('admin/application/store', [DocumentVerificationController::class, 'store'])->name('application.store');
+Route::get('admin/application/search', 'App\Http\Controllers\Admin\DocumentVerificationController@search')->name('application.search');
+Route::get('admin/application/searchname', 'App\Http\Controllers\Admin\DocumentVerificationController@searchname')->name('application.searchname');
+Route::get('admin/application/userexport', 'App\Http\Controllers\Admin\DocumentVerificationController@userexport')->name('application.export');
 Route::post('admin/screening/store', [ScreeningController::class, 'store'])->name('screening.store');
 Route::get('admin/screening/course/{id}', [ScreeningController::class, 'course'])->name('screening.course');
 Route::post('admin/subcat', 'App\Http\Controllers\Admin\CoursesController@subCat')->name('subcat');

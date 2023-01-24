@@ -24,25 +24,32 @@
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-         
+          <form action="{{route('application.export')}}" method="GET">
+         <button class="btn btn-primary"> Export Order </button>
+</form>
               <!-- /.card-header -->
               <table class="table">
     <tr>
-        <form action="" method="get">
-          <th class="col-6"></th> 
-    <th > <label for="date"> Date: </label> <input type='text' name="date"  class="datepicker form-control" placeholder="Date" ></input> </th>
-        <th > <label>Institute:</label>
+        <form action="{{route('application.search')}}" method="GET">
+          <th class="col-4"> Filter: </th> 
+          
+    <th > <label for="fromdate"> From Date: </label> <input type='date' name="fromdate"  class="datepicker form-control" placeholder="Date" ></input></th>
+<th> <label for="fromdate"> To Date: </label> <input type='date' name="todate"  class="datepicker form-control" placeholder="Date" ></input></th>
+    <th > <label>Institute:</label>
          <select id='institute' class="form-control" style="width:200px">
          <option value="">All</option>
-         <option value="1">Active</option>
+         @foreach ($institute as $inst)
+         <option name="institute" value="">{{$inst->title}}</option>
+         @endforeach
          </select> </th>
 
 <th> <button class="btn btn-primary btnreview" value="filter" type="submit" name="paybutton" style=" padding: 5px 15px; background-color: #cc6600; border-color:#cc6600; color: white; margin-top:30px; margin-left:5px; margin-right:5px;"> Apply </button> </th>
-</form>        
-<form >
+       
+</form>
+<form action="{{route('application.searchname')}}" method="get">
         <th> <label for="search"> Search: </label><div class="input-group">
         
-      <input  placeholder="search here" class="form-control py-1" type="search" name="search" value="" id="example-search-input">
+      <input  placeholder="search here" class="form-control py-1" type="search" name="searchname" value="" id="example-search-input">
       
       <span class="input-group-append">
         <button class="btn btn-outline-secondary btnreview" type="submit" style="background-color: #cc6600; color:white;">

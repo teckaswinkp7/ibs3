@@ -13,6 +13,7 @@ use App\Models\Education;
 use App\Models\Document;
 use Hash;
 use DB;
+
 class DocumentVerificationController extends Controller
 {
     public function __construct() {       
@@ -34,13 +35,20 @@ class DocumentVerificationController extends Controller
     //
     public function index()
     {
+
+
+
+
      $users = DB::table('users')
      ->join('education','users.id','=','education.stu_id')
      ->select('users.name','education.updated_at','users.id')
      ->where('users.user_role',2)
-     ->where('users.status',2)->get();
+     ->where('users.status',2)
+     ->get();
+
+     $institute = DB::table('institute')->select('title','type','description')->get();
      //$educat = Document::all();
-    return view('admin.application.index',compact('users'));
+    return view('admin.application.index',compact('users','institute'));
     }
     public function verify($id)
     {
@@ -122,4 +130,61 @@ class DocumentVerificationController extends Controller
         return redirect()->route('application.index')
         ->with('success','created successfully.');
     }
+
+
+
+    public function search(Request $request){
+
+
+      $fromdate = $request->fromdate;
+      $todate = $request->todate;
+
+      $users = DB::table('users')
+     ->join('education','users.id','=','education.stu_id')
+     ->select('users.name','education.updated_at','users.id')
+     ->where('users.user_role',2)
+     ->where('users.status',2)
+     ->whereBetween('education.updated_at',[$fromdate,$todate])
+     ->get();
+     //$educat = Document::all();
+    return view('admin.application.index',compact('users'));
+
+
+
+    }
+
+    
+    public function searchname(Request $request){
+
+      $search = $request->searchname;
+
+      $users = DB::table('users')
+     ->join('education','users.id','=','education.stu_id')
+     ->select('users.name','education.updated_at','users.id')
+     ->where('users.user_role',2)
+     ->where('users.status',2)
+     ->where('users.name','LIKE','%'.$search.'%')
+     ->get();
+     //$educat = Document::all();
+    return view('admin.application.index',compact('users'));
+
+
+
+    }
+
+
+    public function userexport(){
+
+
+
+
+      return Excel::download(new UsersExport, 'users.xlsx');
+
+
+    }
+
+
+
+
+
 }
