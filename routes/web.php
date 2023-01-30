@@ -116,8 +116,16 @@ Route::post('recieptconfirmstore', [Recieptverificationcontroller::class, 'store
 /**Admin New  */
 
 Route::get('admin/payment', [PaymentlistController::class, 'index'])->name('paymentlist.index');
+Route::get('admin/payment/searchdate', [PaymentlistController::class, 'paymentlistdatesearch'])->name('paymentlistdatesearch');
+Route::get('admin/payment/searchname', [PaymentlistController::class, 'paymentlistnamesearch'])->name('paymentlistnamesearch');
+Route::get('admin/payment/exportpaymentlist', [PaymentlistController::class, 'exportpaymentlist'])->name('exportpaymentlist');
 Route::get('admin/enrollment', [EnrolmentController::class, 'index'])->name('manageenrollment.index');
+Route::get('admin/enrollment/search', [EnrolmentController::class, 'searchnameenrollment'])->name('searchnameenrollment');
+Route::get('admin/enrollment/exportenrolled', [EnrolmentController::class, 'EnrolledUsers'])->name('EnrolledUsers');
 Route::get('admin/invoicelistpanel', [InvoicelistController::class, 'index'])->name('invoicelist.index');
+Route::get('admin/invoicelistpanel/searchdate', [InvoicelistController::class, 'invoicedatesearch'])->name('invoicedatesearch');
+Route::get('admin/invoicelistpanel/search', [InvoicelistController::class, 'invoicesearch'])->name('invoicesearch');
+Route::get('admin/invoicelistpanel/export', [InvoicelistController::class, 'invoicelistExport'])->name('invoicelistExport');
 
 Route::post('post-registration', [AuthControllers::class, 'postRegistration'])->name('register.post'); 
 Route::post('final-registration', [AuthControllers::class, 'confirm_register'])->name('register.final'); 
@@ -166,10 +174,12 @@ Route::post('admin/application/obtain', [DocumentVerificationController::class, 
 Route::post('admin/application/store', [DocumentVerificationController::class, 'store'])->name('application.store');
 Route::get('admin/application/search', 'App\Http\Controllers\Admin\DocumentVerificationController@search')->name('application.search');
 Route::get('admin/application/searchname', 'App\Http\Controllers\Admin\DocumentVerificationController@searchname')->name('application.searchname');
-Route::get('admin/application/userexport', 'App\Http\Controllers\Admin\DocumentVerificationController@userexport')->name('application.export');
+Route::get('application_export',[DocumentVerificationController::class, 'userexport'])->name('application.export');
 Route::post('admin/screening/store', [ScreeningController::class, 'store'])->name('screening.store');
 Route::get('admin/screening/course/{id}', [ScreeningController::class, 'course'])->name('screening.course');
 Route::post('admin/subcat', 'App\Http\Controllers\Admin\CoursesController@subCat')->name('subcat');
+Route::get('admin/search', [CoursesController::class, 'searchcoursedate'])->name('courses.searchcoursedate');
+Route::get('admin/searchcourse', [CoursesController::class, 'coursesearch'])->name('courses.coursesearch');
 Route::get('education-profile', [EducationController::class, 'index']);
 Route::post('education-receipt', [EducationController::class, 'upload_invoice'])->name('education.receipt');
 Route::post('education-receipt-sponsor', [EducationController::class, 'upload_invoice_sponsor'])->name('education.sponsor.receipt');
@@ -346,3 +356,6 @@ Route::get('admin/reports/documented', 'App\Http\Controllers\Admin\Reportingcont
 Route::get('admin/reports/offerd', 'App\Http\Controllers\Admin\Reportingcontroller@offer')->name('reports.offerd');
 Route::get('admin/reports/invoice', 'App\Http\Controllers\Admin\Reportingcontroller@sent_invoice')->name('reports.invoice');
 Route::get('admin/reports/offer_accepted', 'App\Http\Controllers\Admin\Reportingcontroller@offer_accepted')->name('reports.offer_accepted');
+Route::get('admin/reports/offer_accepted/search', 'App\Http\Controllers\Admin\Reportingcontroller@searchofferaccepted')->name('reports.searchofferaccepted');
+Route::get('admin/reports/offer_accepted/namesearch', 'App\Http\Controllers\Admin\Reportingcontroller@namesearchofferaccepted')->name('reports.namesearchofferaccepted');
+Route::get('admin/reports/exportusers',[Reportingcontroller::class,'exportUsers'])->name('exportUsers');

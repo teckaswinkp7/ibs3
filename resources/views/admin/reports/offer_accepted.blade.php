@@ -20,7 +20,7 @@
            
           </div>
           <div class="col-sm-12" style="margin-top:30px;">
-          <h1><a class="btn btn-success float-right colorbtn" href="{{ route('courses.create') }}"> Export Order</a></h1>
+          <h1><a class="btn btn-success float-right colorbtn" href="{{ route('exportUsers') }}"> Export Order</a></h1>
           </div>
           
         </div>
@@ -52,10 +52,11 @@
               <table class="table col-md-8 tableheight">
     <tr style="border-top:none;" >
     
-        <form action="" method="get">
+        <form action="{{route('reports.searchofferaccepted')}}" method="get">
 
           <th > </th>
-    <th style="vertical-align:bottom;"> <label for="date"> Date: </label> <input type='date' name="date"  class="datepicker form-control" placeholder="Date" ></input> </th>
+          <th > <label for="fromdate"> From Date: </label> <input style="width:100px" type='date' name="fromdate"  class="datepicker form-control" placeholder="Date" ></input></th>
+<th> <label for="fromdate"> To Date: </label> <input style="width:100px" type='date' name="todate"  class="datepicker form-control" placeholder="Date" ></input></th>
          <th style="vertical-align:bottom;" > <label>Study Batch</label>
          <select id='institute' class="form-control" style="width:200px">
          <option value="">Semester 2</option>
@@ -63,7 +64,7 @@
          </select> </th>
          <th style="vertical-align:bottom;"> <button class="btn btn-primary btnreview" value="filter" type="submit" name="paybutton" style=" padding: 5px 15px; background-color: #cc6600; border-color:#cc6600; color: white; margin-top:30px; margin-left:5px; margin-right:5px;"> Apply </button> </th>
 </form>   
-<form action="">
+<form action="{{route('reports.namesearchofferaccepted')}}" method="GET">
         <th style="vertical-align:bottom;"><label> Search: </label> <div class="input-group">
       <input  placeholder="search here" class="form-control py-1" type="search" name="search" value="" id="example-search-input">
       <span class="input-group-append">

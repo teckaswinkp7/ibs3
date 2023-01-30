@@ -24,9 +24,10 @@
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          <form action="{{route('application.export')}}" method="GET">
-         <button class="btn btn-primary"> Export Order </button>
-</form>
+         
+        <div class="ml-auto backgroundcolor">
+        <a href="{{route('application.export')}}"> <button class="btn btn-primary btnreview"> Export Order </button></a>
+</div>
               <!-- /.card-header -->
               <table class="table">
     <tr>
@@ -129,6 +130,8 @@
   background: radial-gradient(circle at 10% 20%, rgb(255, 197, 61) 0%, rgb(255, 94, 7) 90%); 
   border:none!important;
 }
+
+
 
 .searchbtn{
 

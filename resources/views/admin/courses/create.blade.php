@@ -56,7 +56,7 @@
                                 <select type="text" name="cat_id" id="cat_id"  class="form-control">
                                     <option value="">None</option>
                                      @foreach($category as $key=>$cat_data)
-                                      <option value='{{$cat_data->id}}'>{{$cat_data->name}}</option>
+                                      <option value='{{$cat_data->name}}'>{{$cat_data->name}}</option>
                                      @endforeach
                                 </select>
                             </div>
@@ -69,6 +69,18 @@
                           </select>
                         </div>
                       </div>
+
+                      <div class="col-md-12">
+                            <div class="form-group">
+                              <label>Select Study Period</label>
+                                <select type="text" name="study_type" id="study_type"  class="form-control">
+                                    <option value="">None</option>
+                                     @foreach($studytype as $studtype)
+                                      <option value='{{$studtype->title}}'>{{$studtype->title}}</option>
+                                     @endforeach
+                                </select>
+                            </div>
+                          </div>
                           <div class="col-md-12">
                             <div class="form-group">
                               <label>Course Image<span class="required">*</span></label>

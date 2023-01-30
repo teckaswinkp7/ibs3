@@ -16,6 +16,7 @@ class AddCourseDateToCoursesTable extends Migration
         Schema::table('courses', function (Blueprint $table) {
             
             $table->string('start_date')->after('university');
+           
 
         });
     }

@@ -33,14 +33,16 @@ class CoursesController extends Controller
     */
     public function index()
     {
-        $courses = Courses::orderBy('id','desc')->paginate();
+        $courses = DB::table('courses')->select('*')->paginate(5);
         $users = DB::table('users')
         ->join('education','users.id','=','education.stu_id')
         ->select('users.name','education.updated_at','users.id')
         ->where('users.user_role',2)
         ->where('users.status',2)->get();
+        $programme = DB::table('categories')->get();
+        $studytype = DB::table('study_period')->get();
         
-        return view('admin.courses.index',compact('courses','users'));
+        return view('admin.courses.index',compact('courses','users','programme','studytype'));
         //return view('categories.index', compact('categories'));
     }
     /**
@@ -52,7 +54,8 @@ class CoursesController extends Controller
     {
        $category=Category::where('parent_id', null)->orderby('name', 'asc')->get();
        $subcategory=Category::whereNotNull('parent_id')->get();
-       return view('admin.courses.create')->with('category',$category)->with('subcategory',$subcategory);
+       $studytype = DB::table('study_period')->get();
+       return view('admin.courses.create',compact('studytype'))->with('category',$category)->with('subcategory',$subcategory);
         //return view('categories.create');
     }
     public function subCat(Request $request)
@@ -90,6 +93,7 @@ class CoursesController extends Controller
         $courses->price = $request->price;
         $courses->cat_id = $request->cat_id;
         $courses->subcat_id = $request->subcat_id;
+        $courses->study_type = $request->study_type;
         if($request->file('course_image')){
         $file= $request->file('course_image');
         $filename= date('YmdHi').$file->getClientOriginalName();
@@ -198,5 +202,59 @@ class CoursesController extends Controller
     $products = Courses::destroy($id);    
     return redirect()->route('courses.index')
     ->with('success','Courses has been deleted successfully');
+    }
+
+
+
+    public function searchcoursedate(Request $request){
+
+
+        $fromdate = $request->fromdate;
+        $todate = $request->todate;
+        $studytype = $request->studytype;
+
+
+ 
+
+        $courses = DB::table('courses')->select('*')
+        ->whereBetween('start_date',[$fromdate,$todate])
+        ->orwhere('study_type',$studytype)
+        ->paginate(5);
+       $users = DB::table('users')
+       ->join('education','users.id','=','education.stu_id')
+       ->select('users.name','education.updated_at','users.id')
+       ->where('users.user_role',2)
+       ->where('users.status',2)->get();
+       $programme = DB::table('categories')->get();
+       $studytype = DB::table('study_period')->get();
+       
+       return view('admin.courses.index',compact('courses','users','programme','studytype'));
+
+
+
+
+    }
+
+
+    public function coursesearch(Request $request){
+
+
+        $search = $request->search;
+
+        $courses = DB::table('courses')->select('*')
+        ->where('name','LIKE','%'.$search.'%')
+        ->paginate(5);
+       $users = DB::table('users')
+       ->join('education','users.id','=','education.stu_id')
+       ->select('users.name','education.updated_at','users.id')
+       ->where('users.user_role',2)
+       ->where('users.status',2)->get();
+       $programme = DB::table('categories')->get();
+       $studytype = DB::table('study_period')->get();
+       
+       return view('admin.courses.index',compact('courses','users','programme','studytype'));
+
+
+
     }
 }

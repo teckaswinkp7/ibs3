@@ -7,7 +7,7 @@
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <a class="btn btn-primary" href="{{route('application.index')}}"> Back</a>
+                
               </div>
               <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
@@ -215,6 +215,7 @@
 </form>   
 <br>
 <br>
+<form action="" method="POST">
 <div class="card">
   <div class="card-body cardcolor">
     <div id="total"> GPA - {{$cgpa}}
@@ -228,9 +229,10 @@
     
   </div>
 </div>
-<button class="btn btn-primary  btncolor">send-eligibility </button>
-  <button class="btn btn-primary  btncolor">save & Send-later </button>
+<button value="sendel" type="submit" class="btn btn-primary btncolor">send-eligibility </button>
+  <button value="saveandsend" type="submit" class="btn btn-primary  btncolor">save & Send-later </button>
 </div>
+</form>
 <div class="col-md-4">
 @foreach ($student_edu as $user)
                   
@@ -242,13 +244,13 @@
                   ?>
                 
                  
-                 <embed src="{{url('public/Image')}}/{{ $user->id_image}}#toolbar=0" height="1000" width="860"> 
+                 <embed src="{{url('Image')}}/{{ $user->id_image}}#toobar=0" height="1000" width="860" alt="pdf"> 
                  @endforeach       
 
 
 </div>
 </div>                     
-               
+ <a href="{{route('application.index')}}" class="btn btn-primary  btncolor float-right"> close</a>             
           <!-- /.container-fluid -->
         </section>
         <!-- /.content -->

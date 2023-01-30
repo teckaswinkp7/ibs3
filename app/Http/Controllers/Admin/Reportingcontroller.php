@@ -9,6 +9,8 @@ use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Models\Education;
 use DB;
+use App\Exports\ExportUser;
+use Maatwebsite\Excel\Facades\Excel;
 class Reportingcontroller extends Controller
 {
     public function __construct() {       
@@ -57,6 +59,58 @@ class Reportingcontroller extends Controller
         ->paginate(5);
         
         return view('admin.reports.offer_accepted',$data1,compact('registeredstudents'));
+    }
+
+
+
+
+    public function searchofferaccepted(Request $request){
+
+
+        $fromdate = $request->fromdate;
+        $todate = $request->todate;
+
+       
+
+        $registeredstudents = User::select('users.*')
+        ->where('user_role', 2)
+        ->whereBetween('users.updated_at',[$fromdate,$todate])
+        ->groupBy('users.id')      
+        ->paginate(5);
+
+
+        return view('admin.reports.offer_accepted',compact('registeredstudents'));
+
+
+
+    }
+
+
+    public function namesearchofferaccepted(Request $request){
+
+
+        $search = $request->search;
+
+       
+
+        $registeredstudents = User::select('users.*')
+        ->where('user_role', 2)
+        ->where('users.name', 'LIKE','%'.$search.'%')
+        ->groupBy('users.id')      
+        ->paginate(5);
+
+
+        return view('admin.reports.offer_accepted',compact('registeredstudents'));
+
+
+
+    }
+
+
+    public function exportUsers(Request $request){
+        
+        
+        return Excel::download(new ExportUser, 'users.xlsx');
     }
 
     public function sent_invoice(){

@@ -13,6 +13,8 @@ use App\Models\Education;
 use App\Models\Document;
 use Hash;
 use DB;
+use App\Exports\ApplicationExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DocumentVerificationController extends Controller
 {
@@ -61,7 +63,7 @@ class DocumentVerificationController extends Controller
      $student_edu =  Education::where('stu_id',$id)->where('verification_status',null)->get();
      //dd($student_edu);  
      $cgpa = Session::get('cgpa');
-     return view('admin.application.verify',compact('user','student_edu'),compact('cgpa'));
+     return view('admin.application.verify',compact('user','student_edu','cgpa'));
     }
 
 
@@ -147,7 +149,8 @@ class DocumentVerificationController extends Controller
      ->whereBetween('education.updated_at',[$fromdate,$todate])
      ->get();
      //$educat = Document::all();
-    return view('admin.application.index',compact('users'));
+     $institute = DB::table('institute')->select('title','type','description')->get();
+    return view('admin.application.index',compact('users','institute'));
 
 
 
@@ -166,7 +169,8 @@ class DocumentVerificationController extends Controller
      ->where('users.name','LIKE','%'.$search.'%')
      ->get();
      //$educat = Document::all();
-    return view('admin.application.index',compact('users'));
+     $institute = DB::table('institute')->select('title','type','description')->get();
+    return view('admin.application.index',compact('users','institute'));
 
 
 
@@ -178,7 +182,7 @@ class DocumentVerificationController extends Controller
 
 
 
-      return Excel::download(new UsersExport, 'users.xlsx');
+      return Excel::download(new ApplicationExport, 'applicationlist.xlsx');
 
 
     }

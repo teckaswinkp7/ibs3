@@ -60,31 +60,34 @@
 </div>
               <table class="table">
     <tr>
-        <form action="" method="get">
-          <th >Filter:</th> 
+        <form action="{{route('courses.searchcoursedate')}}" method="GET">
+          <th> Filter: </th>
           <th> </th>
-    <th > <label for="date"> Date: </label> <input type='date' name="date"  class="datepicker form-control" placeholder="Date" ></input> </th>
+          <th > <label for="fromdate"> From Date: </label> <input style="width:100px" type='date' name="fromdate"  class="datepicker form-control" placeholder="Date" ></input></th>
+<th> <label for="fromdate"> To Date: </label> <input style="width:100px" type='date' name="todate"  class="datepicker form-control" placeholder="Date" ></input></th>
         <th > <label>programme/course</label>
-         <select id='institute' class="form-control" style="width:200px">
-         <option value="">Accounting</option>
-         <option value="">Active</option>
+         <select id='institute' class="form-control" style="width:150px">
+         @foreach($programme as $prog)
+         <option value="{{$prog->name}}">{{$prog->name}}</option>
+         @endforeach
          </select> </th>
          <th > <label>Study Period</label>
-         <select id='institute' class="form-control" style="width:200px">
-         <option value="">Semester 2</option>
-         <option value="">Active</option>
+         <select id='institute' name="studytype" class="form-control" style="width:150px">
+         @foreach($studytype as $stud)
+         <option  value="{{$stud->title}}">{{$stud->title}}</option>
+         @endforeach
          </select> </th>
          <th > <label>Level of Study</label>
-         <select id='institute' class="form-control" style="width:200px">
+         <select id='institute' class="form-control" style="width:150px">
          <option value="">Year 1</option>
          <option value="">Active</option>
          </select> </th>
          <th > <label>Study Batch</label>
-         <select id='institute' class="form-control" style="width:200px">
+         <select id='institute' class="form-control" >
          <option value="">Semester 2</option>
          <option value="">Active</option>
          </select> </th>
-         <th> <button class="btn btn-primary btnreview" value="filter" type="submit" name="paybutton" style=" padding: 5px 15px; background-color: #cc6600; border-color:#cc6600; color: white; margin-top:30px; margin-left:5px; margin-right:5px;"> Apply </button> </th>
+         <th> <button class="btn btn-primary btnreview" value="filter" type="submit" name="paybutton" style=" padding: 5px 15px; background-color: #cc6600; border-color:#cc6600; color: white; margin-top:30px;  margin-right:5px;"> Apply </button> </th>
 </form>        
 
 
@@ -97,7 +100,7 @@
   <th></th>
   <th></th>
   <th></th>
-<form action="">
+<form action="{{route('courses.coursesearch')}}" method="get">
         <th> <div class="input-group">
       <input  placeholder="search here" class="form-control py-1" type="search" name="search" value="" id="example-search-input">
       <span class="input-group-append">
@@ -141,9 +144,13 @@
 </tbody>
 
         <tfoot>
-
+      
 </tfoot>
+
 </table>
+<div class="ml-auto">
+        {!! $courses->links() !!} 
+</div>
                 
               
               <!-- /.card-body -->
