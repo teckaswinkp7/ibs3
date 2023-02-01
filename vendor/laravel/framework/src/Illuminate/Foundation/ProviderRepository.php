@@ -5,6 +5,7 @@ namespace Illuminate\Foundation;
 use Exception;
 use Illuminate\Contracts\Foundation\Application as ApplicationContract;
 use Illuminate\Filesystem\Filesystem;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProviderRepository
 {
