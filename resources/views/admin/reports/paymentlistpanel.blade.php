@@ -44,8 +44,8 @@
         <form action="{{route('paymentlistdatesearch')}}" method="get">
 
           <th > </th>
-          <th > <label for="fromdate"> From Date: </label> <input style="width:100px" type='date' name="fromdate"  class="datepicker form-control" placeholder="Date" ></input></th>
-<th> <label for="fromdate"> To Date: </label> <input style="width:100px" type='date' name="todate"  class="datepicker form-control" placeholder="Date" ></input></th>   
+          <th > <label for="fromdate"> From Date: </label> <input style="width:120px" type='date' name="fromdate"  class="datepicker form-control" placeholder="Date" ></input></th>
+<th> <label for="fromdate"> To Date: </label> <input style="width:120px" type='date' name="todate"  class="datepicker form-control" placeholder="Date" ></input></th>   
          <th style="vertical-align:bottom;"> <button class="btn btn-primary btnreview" value="filter" type="submit" name="paybutton" style=" padding: 5px 15px; background-color: #cc6600; border-color:#cc6600; color: white; margin-top:30px; margin-left:5px; margin-right:5px;"> Apply </button> </th>
 </form>   
 <form action="{{route('paymentlistnamesearch')}}" method="GET">
