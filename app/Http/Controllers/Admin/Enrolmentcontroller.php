@@ -56,6 +56,6 @@ class Enrolmentcontroller extends Controller
     public function EnrolledUsers(Request $request){
         
         
-        return Excel::download(new EnrolledUser, 'enrolledusers.xlsx');
+        return Excel::download(new EnrolledUser,'enrolledusers.xlsx');
     }
 }

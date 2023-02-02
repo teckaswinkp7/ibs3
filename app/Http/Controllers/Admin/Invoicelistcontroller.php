@@ -95,7 +95,7 @@ class Invoicelistcontroller extends Controller
 
 
 
-    return Excel::download(new InvoicelistExport,'invoicelist.xlsx');
+    return Excel::download(new InvoicelistExport, 'invoicelist.xlsx');
 
 }
 }
