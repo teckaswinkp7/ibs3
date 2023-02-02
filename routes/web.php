@@ -17,8 +17,8 @@ use App\Http\Controllers\Admin\BankController;
 use App\Http\Controllers\Admin\SponsorController;
 use App\Http\Controllers\Admin\PDFController;
 use App\Http\Controllers\Admin\PaymentlistController;
-use App\Http\Controllers\Admin\EnrolmentController;
-use App\Http\Controllers\Admin\InvoicelistController;
+use App\Http\Controllers\Admin\Enrolmentcontroller;
+use App\Http\Controllers\Admin\Invoicelistcontroller;
 use App\Http\Controllers\Admin\Registeredstudentscontroller;
 use App\Http\Controllers\Admin\confirmedstudentscontroller;
 use App\Http\Controllers\Admin\GradeController;
@@ -122,10 +122,10 @@ Route::get('admin/payment/exportpaymentlist', [PaymentlistController::class, 'ex
 Route::get('admin/enrollment', [EnrolmentController::class, 'index'])->name('manageenrollment.index');
 Route::get('admin/enrollment/search', [EnrolmentController::class, 'searchnameenrollment'])->name('searchnameenrollment');
 Route::get('admin/enrollment/exportenrolled', [EnrolmentController::class, 'EnrolledUsers'])->name('EnrolledUsers');
-Route::get('admin/invoicelistpanel', [InvoicelistController::class, 'index'])->name('invoicelist.index');
-Route::get('admin/invoicelistpanel/searchdate', [InvoicelistController::class, 'invoicedatesearch'])->name('invoicedatesearch');
-Route::get('admin/invoicelistpanel/search', [InvoicelistController::class, 'invoicesearch'])->name('invoicesearch');
-Route::get('admin/invoicelistpanel/export', [InvoicelistController::class, 'invoicelistExport'])->name('invoicelistExport');
+Route::get('admin/invoicelistpanel', [Invoicelistcontroller::class, 'index'])->name('invoicelist.index');
+Route::get('admin/invoicelistpanel/searchdate', [Invoicelistcontroller::class, 'invoicedatesearch'])->name('invoicedatesearch');
+Route::get('admin/invoicelistpanel/search', [Invoicelistcontroller::class, 'invoicesearch'])->name('invoicesearch');
+Route::get('admin/invoicelistpanel/export', [Invoicelistcontroller::class, 'invoicelistExport'])->name('invoicelistExport');
 
 Route::post('post-registration', [AuthControllers::class, 'postRegistration'])->name('register.post'); 
 Route::post('final-registration', [AuthControllers::class, 'confirm_register'])->name('register.final'); 
