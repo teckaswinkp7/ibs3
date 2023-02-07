@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Session;
 use App\Models\User;
 use App\Models\Education;
+use App\Models\Courses;
 use App\Models\Role;
 use Hash;
 class UserController extends Controller
@@ -46,8 +47,9 @@ class UserController extends Controller
     public function create(Request $request)
     {
         $urole = Role::all();
+        $courses = Courses::all();
         //return view('categories.create', compact('categories'));
-        return view('admin.user.create',compact('urole'));
+        return view('admin.user.create',compact('urole','courses'));
     }
     /**
     * Store a newly created resource in storage.

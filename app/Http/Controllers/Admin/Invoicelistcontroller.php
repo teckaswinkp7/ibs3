@@ -15,6 +15,8 @@ class Invoicelistcontroller extends Controller
     public function index(){
 
 
+        $fromdate = "NULL";
+        $todate = "NULL";
         $paymentlist = User::where('users.offer_accepted','yes')
         ->join('payment','users.id','payment.stu_id')
         ->join('courseselections','users.id','courseselections.stu_id')
@@ -32,7 +34,7 @@ class Invoicelistcontroller extends Controller
 
 
 
-        return view('admin.reports.invoicelist',compact('paymentlist','paymentcount'));
+        return view('admin.reports.invoicelist',compact('paymentlist','paymentcount','fromdate','todate'));
     }
 
 
@@ -61,7 +63,7 @@ class Invoicelistcontroller extends Controller
 
 
 
-        return view('admin.reports.invoicelist',compact('paymentlist','paymentcount'));
+        return view('admin.reports.invoicelist',compact('paymentlist','paymentcount','fromdate','todate'));
     }
 
     public function invoicesearch(Request $request){

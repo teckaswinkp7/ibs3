@@ -40,6 +40,10 @@ class DocumentVerificationController extends Controller
 
 
 
+      $fromdate = "NULL";
+      $todate = "NULL";
+      $search ="NULL";
+     
 
      $users = DB::table('users')
      ->join('education','users.id','=','education.stu_id')
@@ -50,7 +54,7 @@ class DocumentVerificationController extends Controller
 
      $institute = DB::table('institute')->select('title','type','description')->get();
      //$educat = Document::all();
-    return view('admin.application.index',compact('users','institute'));
+    return view('admin.application.index',compact('users','institute','fromdate','todate'));
     }
     public function verify($id)
     {
@@ -62,19 +66,50 @@ class DocumentVerificationController extends Controller
      //$student_edu =  Education::join('documents','documents.edu_id','education.id')->where('education.stu_id',$id)->where('documents.status',1)->get();   
      $student_edu =  Education::where('stu_id',$id)->where('verification_status',null)->get();
      //dd($student_edu);  
+     $language = Session::get('language');
+     $english = Session::get('english');
+     $maths = Session::get('maths');
+     $economics = Session::get('economics');
+     $accounting = Session::get('accounting');
+     $business = Session::get('business');
+     $geography = Session::get('geography');
+     $history = Session::get('history');
+     $legal = Session::get('legal');
+     $techno = Session::get('techno');
+     $practical = Session::get('practical'); 
+     $home = Session::get('home');
+     $personal = Session::get('personal');
      $cgpa = Session::get('cgpa');
-     return view('admin.application.verify',compact('user','student_edu','cgpa'));
+     return view('admin.application.verify',compact('user','student_edu','cgpa','language','english','maths','economics','accounting','business','geography','history','legal','techno','practical','home','personal'));
     }
 
 
     public function obtain(Request $request){
 
         $id = auth::id();
+        $language = $request->language;
+        $english = $request->english;
+        $maths = $request->maths;
+        $economics = $request->economics;
+        $accounting = $request->accounting;
+        $business = $request->business;
+        $geography = $request->geography;
+        $history = $request->history;
+        $legal = $request->legal;
+        $techno = $request->techno;
+        $practical = $request->practical;
+        $home = $request->home;
+        $personal = $request->personal;
+        
 
-        $grades = $request->grade;
+        
+        
+        
 
-        $gradelength = count($grades);
-        $a=$grades;
+  $array = [$language,$english,$maths,$economics,$accounting,$business,$geography,$history,$legal,$techno,$practical,$home,$personal];
+ $gradelength = count($array);
+ $a=$array;
+
        
        $newarray = (array_map(function($v){
         if ($v==="A")
@@ -103,10 +138,12 @@ class DocumentVerificationController extends Controller
 
        },$a));
 
- $cgpa = array_sum($newarray)/$gradelength;
-      
-    return redirect()->back()->with(compact('cgpa'));
+ 
+       $cgpa = array_sum($newarray)/$gradelength;
 
+ 
+      
+    return redirect()->back()->with(compact('cgpa','language','english','maths','economics','accounting','business','geography','history','legal','techno','practical','home','personal'));
 
 
 
@@ -140,6 +177,7 @@ class DocumentVerificationController extends Controller
 
       $fromdate = $request->fromdate;
       $todate = $request->todate;
+      $search = "NULL";
 
       $users = DB::table('users')
      ->join('education','users.id','=','education.stu_id')
@@ -150,7 +188,7 @@ class DocumentVerificationController extends Controller
      ->get();
      //$educat = Document::all();
      $institute = DB::table('institute')->select('title','type','description')->get();
-    return view('admin.application.index',compact('users','institute'));
+    return view('admin.application.index',compact('users','institute','fromdate','todate','search'));
 
 
 
@@ -170,7 +208,7 @@ class DocumentVerificationController extends Controller
      ->get();
      //$educat = Document::all();
      $institute = DB::table('institute')->select('title','type','description')->get();
-    return view('admin.application.index',compact('users','institute'));
+    return view('admin.application.index',compact('users','institute','search'));
 
 
 

@@ -41,8 +41,10 @@ class CoursesController extends Controller
         ->where('users.status',2)->get();
         $programme = DB::table('categories')->get();
         $studytype = DB::table('study_period')->get();
+        $fromdate = "NULL";
+        $todate = "NULL";
         
-        return view('admin.courses.index',compact('courses','users','programme','studytype'));
+        return view('admin.courses.index',compact('courses','users','programme','studytype','fromdate','todate'));
         //return view('categories.index', compact('categories'));
     }
     /**
@@ -228,7 +230,7 @@ class CoursesController extends Controller
        $programme = DB::table('categories')->get();
        $studytype = DB::table('study_period')->get();
        
-       return view('admin.courses.index',compact('courses','users','programme','studytype'));
+       return view('admin.courses.index',compact('courses','users','programme','studytype','fromdate','todate'));
 
 
 

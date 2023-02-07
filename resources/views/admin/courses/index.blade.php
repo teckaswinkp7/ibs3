@@ -63,8 +63,8 @@
         <form action="{{route('courses.searchcoursedate')}}" method="GET">
           <th> Filter: </th>
           <th> </th>
-          <th > <label for="fromdate"> From Date: </label> <input style="width:120px" type='date' name="fromdate"  class="datepicker form-control" placeholder="Date" ></input></th>
-<th> <label for="fromdate"> To Date: </label> <input style="width:120px" type='date' name="todate"  class="datepicker form-control" placeholder="Date" ></input></th>
+          <th > <label for="fromdate"> From Date: </label> <input style="width:120px" type='date' name="fromdate" value="{{$fromdate}}" class="datepicker form-control" placeholder="Date" ></input></th>
+<th> <label for="fromdate"> To Date: </label> <input style="width:120px" type='date' name="todate" value="{{$todate}}"  class="datepicker form-control" placeholder="Date" ></input></th>
         <th > <label>programme/course</label>
          <select id='institute' class="form-control" style="width:150px">
          @foreach($programme as $prog)

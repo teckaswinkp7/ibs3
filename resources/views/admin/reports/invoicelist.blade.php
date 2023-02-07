@@ -22,7 +22,7 @@
            
           </div>
           <div class="col-sm-12" style="margin-top:30px;">
-          <h1><a class="btn btn-success float-right colorbtn" href="{{ route('invoicelistExport') }}"> Export Order</a></h1>
+          <h1><a class="btn btn-success float-right colorbtn" href="{{ route('invoicelistExport') }}"> Export Report</a></h1>
           </div>
           
         </div>
@@ -44,8 +44,8 @@
         <form action="{{route('invoicedatesearch')}}" method="GET">
 
           <th > </th>
-          <th > <label for="fromdate"> From Date: </label> <input style="width:120px" type='date' name="fromdate"  class="datepicker form-control" placeholder="Date" ></input></th>
-<th> <label for="fromdate"> To Date: </label> <input style="width:120px" type='date' name="todate"  class="datepicker form-control" placeholder="Date" ></input></th>
+          <th > <label for="fromdate"> From Date: </label> <input style="width:120px" type='date' value="{{$fromdate}}" name="fromdate"  class="datepicker form-control" placeholder="Date" ></input></th>
+<th> <label for="fromdate"> To Date: </label> <input style="width:120px" type='date' value="{{$todate}}" name="todate"  class="datepicker form-control" placeholder="Date" ></input></th>
          
          <th style="vertical-align:bottom;"> <button class="btn btn-primary btnreview" value="filter" type="submit" name="paybutton" style=" padding: 5px 15px; background-color: #cc6600; border-color:#cc6600; color: white; margin-top:30px; margin-left:5px; margin-right:5px;"> Apply </button> </th>
 </form>   

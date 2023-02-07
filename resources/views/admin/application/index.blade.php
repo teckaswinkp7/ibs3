@@ -26,7 +26,7 @@
         <div class="row">
          
         <div class="ml-auto backgroundcolor">
-        <a href="{{route('application.export')}}"> <button class="btn btn-primary btnreview"> Export Order </button></a>
+        <a href="{{route('application.export')}}"> <button class="btn btn-primary btnreview"> Export Report </button></a>
 </div>
               <!-- /.card-header -->
               <table class="table">
@@ -34,8 +34,8 @@
         <form action="{{route('application.search')}}" method="GET">
           <th class="col-4"> Filter: </th> 
           
-    <th > <label for="fromdate"> From Date: </label> <input type='date' name="fromdate"  class="datepicker form-control" placeholder="Date" ></input></th>
-<th> <label for="fromdate"> To Date: </label> <input type='date' name="todate"  class="datepicker form-control" placeholder="Date" ></input></th>
+    <th > <label for="fromdate"> From Date: </label> <input type='date' value="{{$fromdate}}" name="fromdate"  class="datepicker form-control" placeholder="Date" ></input></th>
+<th> <label for="fromdate"> To Date: </label> <input type='date' name="todate" value="{{$todate}}"  class="datepicker form-control" placeholder="Date" ></input></th>
     <th > <label>Institute:</label>
          <select id='institute' class="form-control" style="width:200px">
          <option value="">All</option>

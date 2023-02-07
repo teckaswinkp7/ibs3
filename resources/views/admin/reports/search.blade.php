@@ -20,7 +20,7 @@
            
           </div>
           <div class="col-sm-12" style="margin-top:30px;">
-          <h1><a class="btn btn-success float-right colorbtn" href="{{ route('courses.create') }}"> Export Order</a></h1>
+          <h1><a class="btn btn-success float-right colorbtn" href="{{ route('courses.create') }}"> Export Report</a></h1>
           </div>
           
         </div>

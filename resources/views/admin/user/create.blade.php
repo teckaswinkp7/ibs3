@@ -63,6 +63,20 @@
                               @enderror
                             </div>
                           </div>
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <label>Select Course to be enrolled.<span class="required">*</span></label>
+                                <select type="text" name="user_role" id="user_role"  class="form-control">
+                                    <option value="">None</option>
+                                     @foreach($courses as $key=>$course)
+                                      <option value='{{$course->id}}'>{{$course->name}}</option>
+                                     @endforeach
+                                </select>
+                              @error('user_role')
+                              <span class="error invalid-feedback" style="color:#dc3545;display:block !important;">{{ $message }}</span>
+                              @enderror
+                            </div>
+                          </div>
                         <div class="col-md-12">
                           <div class="form-group">
                             <label>Email<span class="required">*</span></label>

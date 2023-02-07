@@ -24,7 +24,7 @@
     <section class="content">
       <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
-      
+        
 
         <div class="row">
           @php 
@@ -47,8 +47,10 @@
           @endphp
   <!-- Responsive Arrow Progress Bar -->
   <div class="col-12">
+  
   <div class="d-flex p-2 justify-content-center">{{$date}} </div>
   <div class="arrow-steps clearfix">
+  <div class="d-flex" > Enrollment Progress Bar.  </div>
     <div class="step"> <span class="text-start"> Application </span>  <div > <a href="#" class="numberclass" >{{$application}}</a> </div> </div>
     <div class="step"> <span>Course Selection </span> <div> <a href="#" class="numberclass" >{{$courseselection}}</a> </div></div>
     <div class="step"> <span>Offer </span> <div> <a href="#" class="numberclass" >2</a> </div></div>
