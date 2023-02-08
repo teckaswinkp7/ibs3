@@ -5,8 +5,11 @@ use DB;
 use App\Models\User;
 
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Events\AfterSheet;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class EnrolledUser implements FromCollection
+class EnrolledUser implements FromCollection,WithHeadings,WithEvents
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -17,8 +20,44 @@ class EnrolledUser implements FromCollection
         ->join('payment','users.id','payment.stu_id')
         ->join('courseselections','users.id','courseselections.stu_id')
         ->join('courses','courseselections.studentSelCid','courses.id')
-        ->select('users.id','users.name','users.updated_at','payment.amountdue','payment.balance_due','payment.invoice','courses.name as coursename')
+        ->select('users.id','users.name','payment.amountdue','payment.balance_due','courses.name as coursename')
         ->get();
+
+    }
+    public function headings(): array
+    {
+        return [
+            [
+                'ID', 
+        'Name',
+        'Amount Due',
+        'Course Name'
+      
+            ]
+        ];
+    }
+
+    public function registerEvents(): array
+
+    {
+
+        return [
+
+            AfterSheet::class    => function(AfterSheet $event) {
+
+   
+
+                $event->sheet->getDelegate()->getStyle('A1:D1')
+
+                                ->getFont()
+
+                                ->setBold(true);
+
+   
+
+            },
+
+        ];
 
     }
 }

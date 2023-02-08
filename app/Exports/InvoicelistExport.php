@@ -3,10 +3,12 @@
 namespace App\Exports;
 use App\Models\User;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Events\AfterSheet;
 
 use Maatwebsite\Excel\Concerns\FromCollection;
 
-class InvoicelistExport implements FromCollection, WithHeadings
+class InvoicelistExport implements FromCollection, WithHeadings,WithEvents
 {
     
     /**
@@ -37,5 +39,29 @@ class InvoicelistExport implements FromCollection, WithHeadings
         'Course Name',
             ]
         ];
+    }
+
+    public function registerEvents(): array
+
+    {
+
+        return [
+
+            AfterSheet::class    => function(AfterSheet $event) {
+
+   
+
+                $event->sheet->getDelegate()->getStyle('A1:E1')
+
+                                ->getFont()
+
+                                ->setBold(true);
+
+   
+
+            },
+
+        ];
+
     }
 }

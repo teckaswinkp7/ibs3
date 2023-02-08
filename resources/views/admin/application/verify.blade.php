@@ -86,7 +86,7 @@
                   <tr> 
 
 
-                  <td><input type="checkbox" class="checksubject" name="checksubject"> </td>
+                  <td><input type="checkbox" class="grade" name="language"> </td>
                   <td> Language And Literature </td>
                   <td><input type="text" style="width:40px;" value="{{$language}}"  name="language" id="lit" class="grade">  </td>
 

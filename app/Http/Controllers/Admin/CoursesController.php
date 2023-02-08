@@ -242,6 +242,8 @@ class CoursesController extends Controller
 
 
         $search = $request->search;
+        $fromdate = $request->fromdate;
+        $todate = $request->todate;
 
         $courses = DB::table('courses')->select('*')
         ->where('name','LIKE','%'.$search.'%')
@@ -254,7 +256,7 @@ class CoursesController extends Controller
        $programme = DB::table('categories')->get();
        $studytype = DB::table('study_period')->get();
        
-       return view('admin.courses.index',compact('courses','users','programme','studytype'));
+       return view('admin.courses.index',compact('courses','users','programme','studytype','fromdate','todate'));
 
 
 
