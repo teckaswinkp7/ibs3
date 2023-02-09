@@ -43,6 +43,7 @@ class DocumentVerificationController extends Controller
       $fromdate = "NULL";
       $todate = "NULL";
       $search ="NULL";
+      $university = "NULL";
      
 
      $users = DB::table('users')
@@ -54,7 +55,7 @@ class DocumentVerificationController extends Controller
 
      $institute = DB::table('institute')->select('title','type','description')->get();
      //$educat = Document::all();
-    return view('admin.application.index',compact('users','institute','fromdate','todate'));
+    return view('admin.application.index',compact('users','institute','fromdate','todate','university'));
     }
     public function verify($id)
     {
@@ -178,17 +179,21 @@ class DocumentVerificationController extends Controller
       $fromdate = $request->fromdate;
       $todate = $request->todate;
       $search = "NULL";
+      $university = $request->university;
 
       $users = DB::table('users')
      ->join('education','users.id','=','education.stu_id')
+     ->join('courseselections','courseselections.stu_id','=','users.id')
+     ->join('courses','courses.id','=','courseselections.studentSelCid')
      ->select('users.name','education.updated_at','users.id')
      ->where('users.user_role',2)
      ->where('users.status',2)
      ->whereBetween('education.updated_at',[$fromdate,$todate])
+     ->orWhere('courses.university',$university)
      ->get();
      //$educat = Document::all();
      $institute = DB::table('institute')->select('title','type','description')->get();
-    return view('admin.application.index',compact('users','institute','fromdate','todate','search'));
+    return view('admin.application.index',compact('users','institute','fromdate','todate','search','university'));
 
 
 

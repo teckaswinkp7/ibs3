@@ -92,6 +92,20 @@
                           </div>
                           <div class="col-md-12">
                           <div class="form-group">
+                            <label>University <span class="required">*</span></label>
+                            <select name="university" id="@if ($errors->has('university')) inputError @endif" class="form-control @if ($errors->has('university')) is-invalid @endif" placeholder="Select University">
+                            <option>-----</option>  
+                            <option name="university" value="IBS college of TVET"> IBS college of TVET </option>
+                              <option name="university" value="IBS University"> IBS University </option>
+                              <option name="university" value="Southern Cross University"> Southern Cross University </option>
+</select>
+                            @error('university')
+                            <span class="error invalid-feedback">{{ $message }}</span>
+                             @enderror
+                          </div>
+                        </div>
+                          <div class="col-md-12">
+                          <div class="form-group">
                             <label>Course Start Date<span class="required">*</span></label>
                             <input type="date" name="start_date" id="@if ($errors->has('start_date')) inputError @endif" class="form-control @if ($errors->has('start_date')) is-invalid @endif" placeholder="Start Date">
                             @error('start_date')

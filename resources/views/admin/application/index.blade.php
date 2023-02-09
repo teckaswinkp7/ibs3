@@ -37,10 +37,10 @@
     <th > <label for="fromdate"> From Date: </label> <input type='date' value="{{$fromdate}}" name="fromdate"  class="datepicker form-control" placeholder="Date" ></input></th>
 <th> <label for="fromdate"> To Date: </label> <input type='date' name="todate" value="{{$todate}}"  class="datepicker form-control" placeholder="Date" ></input></th>
     <th > <label>Institute:</label>
-         <select id='institute' class="form-control" style="width:200px">
+         <select id='institute' name="university" class="form-control" style="width:200px">
          <option value="">All</option>
          @foreach ($institute as $inst)
-         <option name="institute" value="">{{$inst->title}}</option>
+         <option name="university"  value="{{$inst->title}}">{{$inst->title}}</option>
          @endforeach
          </select> </th>
 

@@ -55,8 +55,8 @@
         <form action="{{route('reports.searchofferaccepted')}}" method="get">
 
           <th > </th>
-          <th > <label for="fromdate"> From Date: </label> <input style="width:100px" type='date' name="fromdate"  class="datepicker form-control" placeholder="Date" ></input></th>
-<th> <label for="fromdate"> To Date: </label> <input style="width:100px" type='date' name="todate"  class="datepicker form-control" placeholder="Date" ></input></th>
+          <th > <label for="fromdate"> From Date: </label> <input style="width:150px" type='date' name="fromdate"  class="datepicker form-control" placeholder="Date" ></input></th>
+<th> <label for="fromdate"> To Date: </label> <input style="width:150px" type='date' name="todate"  class="datepicker form-control" placeholder="Date" ></input></th>
          <th style="vertical-align:bottom;" > <label>Study Batch</label>
          <select id='institute' class="form-control" style="width:200px">
          <option value="">Semester 2</option>

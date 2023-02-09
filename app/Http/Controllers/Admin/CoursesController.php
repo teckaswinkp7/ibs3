@@ -43,8 +43,9 @@ class CoursesController extends Controller
         $studytype = DB::table('study_period')->get();
         $fromdate = "NULL";
         $todate = "NULL";
+        $category = "---";
         
-        return view('admin.courses.index',compact('courses','users','programme','studytype','fromdate','todate'));
+        return view('admin.courses.index',compact('courses','users','programme','studytype','fromdate','todate','category'));
         //return view('categories.index', compact('categories'));
     }
     /**
@@ -85,6 +86,7 @@ class CoursesController extends Controller
         'slug'      => 'required|unique:courses',
         'course_image'=>'required',
         'parent_id' => 'nullable|numeric',
+        'university' => 'required'
         ]);
         $courses = new Courses;
         $courses->name = $request->name;
@@ -96,6 +98,7 @@ class CoursesController extends Controller
         $courses->cat_id = $request->cat_id;
         $courses->subcat_id = $request->subcat_id;
         $courses->study_type = $request->study_type;
+        $courses->university = $request->university;
         if($request->file('course_image')){
         $file= $request->file('course_image');
         $filename= date('YmdHi').$file->getClientOriginalName();
@@ -214,13 +217,15 @@ class CoursesController extends Controller
         $fromdate = $request->fromdate;
         $todate = $request->todate;
         $studytype = $request->studytype;
+        $category = $request->cat_id;
+        $university = $request->university;
 
-
- 
+        
 
         $courses = DB::table('courses')->select('*')
         ->whereBetween('start_date',[$fromdate,$todate])
-        ->orwhere('study_type',$studytype)
+        ->orWhere('study_type',$studytype)
+        ->orWhere('cat_id',$category)
         ->paginate(5);
        $users = DB::table('users')
        ->join('education','users.id','=','education.stu_id')
@@ -230,7 +235,7 @@ class CoursesController extends Controller
        $programme = DB::table('categories')->get();
        $studytype = DB::table('study_period')->get();
        
-       return view('admin.courses.index',compact('courses','users','programme','studytype','fromdate','todate'));
+       return view('admin.courses.index',compact('courses','users','programme','studytype','fromdate','todate','category','university'));
 
 
 

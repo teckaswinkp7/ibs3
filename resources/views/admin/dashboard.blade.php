@@ -102,7 +102,7 @@
 
 <div class="col-md-4">
 
-<div class="text-center" > <img src="image/{{$activeenrollment[0]->user_image}}" alt="" width="100px"> </img>
+<div class="text-center" > <img src="{{asset('public/Image')}}/{{$activeenrollment[0]->user_image}}" alt="" width="50px" style="border-radius:50px;border:4px solid #fd7e14;"> </img>
 
 </div>
 </div>

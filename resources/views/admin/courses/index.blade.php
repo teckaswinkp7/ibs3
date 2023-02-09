@@ -33,7 +33,7 @@
                 <div class="row">
                   <div class="col-sm-2">
                   <label style="font-size:10px;">Institute:</label>
-         <select id='institute' class="form-control" style="width:200px">
+         <select name="university" id='institute' class="form-control" style="width:200px">
          <option value="">All</option>
          <option value="">College of TVET</option>
          <option value="">Southern Cross University</option>
@@ -66,8 +66,10 @@
           <th > <label for="fromdate"> From Date: </label> <input style="width:120px" type='date' name="fromdate" value="{{$fromdate}}" class="datepicker form-control" placeholder="Date" ></input></th>
 <th> <label for="fromdate"> To Date: </label> <input style="width:120px" type='date' name="todate" value="{{$todate}}"  class="datepicker form-control" placeholder="Date" ></input></th>
         <th > <label>programme/course</label>
-         <select id='institute' class="form-control" style="width:150px">
+         <select name="cat_id" id='institute' class="form-control"  style="width:150px">
+         <option value="{{$category}}" selected> {{$category}} </option>
          @foreach($programme as $prog)
+        
          <option value="{{$prog->name}}">{{$prog->name}}</option>
          @endforeach
          </select> </th>
