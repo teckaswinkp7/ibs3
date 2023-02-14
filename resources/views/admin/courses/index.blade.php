@@ -32,24 +32,23 @@
               <div class="col-sm-12 ">
                 <div class="row">
                   <div class="col-sm-2">
+                  <form action="{{route('courses.searchcoursedate')}}" method="GET">
                   <label style="font-size:10px;">Institute:</label>
-         <select name="university" id='institute' class="form-control" style="width:200px">
-         <option value="">All</option>
-         <option value="">College of TVET</option>
-         <option value="">Southern Cross University</option>
-         <option value="">IBS University</option>
-         <option value="">Career Development Studies. </option>
+         <select name="institute" id='institute' class="form-control" style="width:200px">
+         <option style="font-size:20px; color:orange; font:800;" value="{{$university}}" selected> {{$university}} </option>
+         @foreach($institute as $inst)
+         <option value="{{$inst->univ_name}}">{{$inst->univ_name}}</option>
+         @endforeach
          </select>
 
                   </div>
                   <div class="col-sm-2">
                   <label style="font-size:10px;">Qualification:</label>
-         <select id='institute' class="form-control" style="width:200px">
-         <option value="">All</option>
-         <option value="">Certificate</option>
-         <option value="">Diploma</option>
-         <option value="">Associate Degree</option>
-         <option value="">Bachelor</option>
+         <select name ="qualification" id='institute' class="form-control" style="width:200px">
+         <option style="font-size:20px; color:orange; font:800;" value="{{$quali}}" selected> {{$quali}} </option>
+         @foreach($qualification as $quali)
+         <option value="{{$quali->programme}}">{{$quali->programme}}</option>
+         @endforeach
          </select>
 
                   </div>
@@ -60,34 +59,38 @@
 </div>
               <table class="table">
     <tr>
-        <form action="{{route('courses.searchcoursedate')}}" method="GET">
+        
           <th> Filter: </th>
           <th> </th>
           <th > <label for="fromdate"> From Date: </label> <input style="width:120px" type='date' name="fromdate" value="{{$fromdate}}" class="datepicker form-control" placeholder="Date" ></input></th>
 <th> <label for="fromdate"> To Date: </label> <input style="width:120px" type='date' name="todate" value="{{$todate}}"  class="datepicker form-control" placeholder="Date" ></input></th>
         <th > <label>programme/course</label>
-         <select name="cat_id" id='institute' class="form-control"  style="width:150px">
-         <option value="{{$category}}" selected> {{$category}} </option>
+         <select name="field" id='institute' class="form-control"  style="width:150px">
+         <option style="font-size:20px; color:orange; font:800;" value="{{$category}}" selected> {{$category}} </option>
          @foreach($programme as $prog)
         
          <option value="{{$prog->name}}">{{$prog->name}}</option>
          @endforeach
          </select> </th>
          <th > <label>Study Period</label>
-         <select id='institute' name="studytype" class="form-control" style="width:150px">
+         <select id='institute' name="study_level" class="form-control" style="width:150px">
+         <option style="font-size:20px; color:orange; font:800;" value="{{$studylevel}}" selected> {{$studylevel}} </option>
          @foreach($studytype as $stud)
          <option  value="{{$stud->title}}">{{$stud->title}}</option>
          @endforeach
          </select> </th>
          <th > <label>Level of Study</label>
+         
          <select id='institute' class="form-control" style="width:150px">
-         <option value="">Year 1</option>
-         <option value="">Active</option>
+        
+         <option value="">Sem 1 </option>
+         <option value="">Sem 2 </option>
+         <option value="">Sem 3 </option>
+         <option value="">Sem 4 </option>
          </select> </th>
          <th > <label>Study Batch</label>
          <select id='institute' class="form-control" >
-         <option value="">Semester 2</option>
-         <option value="">Active</option>
+         <option value="">----</option>
          </select> </th>
          <th> <button class="btn btn-primary btnreview" value="filter" type="submit" name="paybutton" style=" padding: 5px 15px; background-color: #cc6600; border-color:#cc6600; color: white; margin-top:30px;  margin-right:5px;"> Apply </button> </th>
 </form>        

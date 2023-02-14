@@ -49,11 +49,34 @@
                              @enderror
                           </div>
                         </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                              <label>Select Institute<span class="required">*</span></label>
+                                <select type="text" name="institute"  class="form-control">
+                                    <option value="">None</option>
+                                     @foreach($institute as $inst)
+                                      <option value='{{$inst->univ_name}}'>{{$inst->univ_name}}</option>
+                                     @endforeach
+                                </select>
+                            </div>
+                          </div>
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <label>Select Programme<span class="required">*</span></label>
+                                <select type="text" name="prog"  class="form-control">
+                                    <option value="">None</option>
+                                     @foreach($programme as $prog)
+                                      <option value='{{$prog->programme}}'>{{$prog->programme}}</option>
+                                     @endforeach
+                                </select>
+                            </div>
+                          </div>
+                     
                           <!-- /.col -->
                           <div class="col-md-12">
                             <div class="form-group">
-                              <label>Select Course Category</label>
-                                <select type="text" name="cat_id" id="cat_id"  class="form-control">
+                              <label>Select Course Category<span class="required">*</span></label>
+                                <select type="text" name="field"   class="form-control">
                                     <option value="">None</option>
                                      @foreach($category as $key=>$cat_data)
                                       <option value='{{$cat_data->name}}'>{{$cat_data->name}}</option>
@@ -61,19 +84,10 @@
                                 </select>
                             </div>
                           </div>
-                            <!-- /.form-group -->
-                            <div class="col-md-12">
-                        <div class="form-group d-none" id="child_cat_div">
-                          <label>Select Course SubCategory</label>
-                          <select class="browser-default custom-select" name="subcat_id" id="subcat_id">
-                          </select>
-                        </div>
-                      </div>
-
                       <div class="col-md-12">
                             <div class="form-group">
-                              <label>Select Study Period</label>
-                                <select type="text" name="study_type" id="study_type"  class="form-control">
+                              <label>Select Study Period<span class="required">*</span></label>
+                                <select type="text" name="study_level"  class="form-control">
                                     <option value="">None</option>
                                      @foreach($studytype as $studtype)
                                       <option value='{{$studtype->title}}'>{{$studtype->title}}</option>
@@ -81,6 +95,7 @@
                                 </select>
                             </div>
                           </div>
+                          
                           <div class="col-md-12">
                             <div class="form-group">
                               <label>Course Image<span class="required">*</span></label>
@@ -92,32 +107,9 @@
                           </div>
                           <div class="col-md-12">
                           <div class="form-group">
-                            <label>University <span class="required">*</span></label>
-                            <select name="university" id="@if ($errors->has('university')) inputError @endif" class="form-control @if ($errors->has('university')) is-invalid @endif" placeholder="Select University">
-                            <option>-----</option>  
-                            <option name="university" value="IBS college of TVET"> IBS college of TVET </option>
-                              <option name="university" value="IBS University"> IBS University </option>
-                              <option name="university" value="Southern Cross University"> Southern Cross University </option>
-</select>
-                            @error('university')
-                            <span class="error invalid-feedback">{{ $message }}</span>
-                             @enderror
-                          </div>
-                        </div>
-                          <div class="col-md-12">
-                          <div class="form-group">
                             <label>Course Start Date<span class="required">*</span></label>
                             <input type="date" name="start_date" id="@if ($errors->has('start_date')) inputError @endif" class="form-control @if ($errors->has('start_date')) is-invalid @endif" placeholder="Start Date">
                             @error('start_date')
-                            <span class="error invalid-feedback">{{ $message }}</span>
-                             @enderror
-                          </div>
-                        </div>
-                          <div class="col-md-12">
-                          <div class="form-group">
-                            <label>Course Duration<span class="required">*</span></label>
-                            <input type="text" name="course_duration" id="@if ($errors->has('course_duration')) inputError @endif" class="form-control @if ($errors->has('course_duration')) is-invalid @endif" placeholder="Course Duration">
-                            @error('course_duration')
                             <span class="error invalid-feedback">{{ $message }}</span>
                              @enderror
                           </div>

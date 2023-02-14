@@ -41,11 +41,19 @@ class CoursesController extends Controller
         ->where('users.status',2)->get();
         $programme = DB::table('categories')->get();
         $studytype = DB::table('study_period')->get();
+        $institute = DB::table('university')->get();
+        $qualification = DB::table('programme')->get();
         $fromdate = "NULL";
         $todate = "NULL";
-        $category = "---";
+        $category = "";
+        $studyperiod = "";
+        $studylevel = "";
+        $university = "";
+        $quali = "";
+
+
         
-        return view('admin.courses.index',compact('courses','users','programme','studytype','fromdate','todate','category'));
+        return view('admin.courses.index',compact('courses','users','programme','studytype','fromdate','todate','category','qualification','institute','studyperiod','studylevel','university','quali'));
         //return view('categories.index', compact('categories'));
     }
     /**
@@ -56,9 +64,11 @@ class CoursesController extends Controller
     public function create()
     {
        $category=Category::where('parent_id', null)->orderby('name', 'asc')->get();
+       $institute = DB::table('university')->get();
        $subcategory=Category::whereNotNull('parent_id')->get();
        $studytype = DB::table('study_period')->get();
-       return view('admin.courses.create',compact('studytype'))->with('category',$category)->with('subcategory',$subcategory);
+       $programme = DB::table('programme')->get();
+       return view('admin.courses.create',compact('studytype','institute','programme'))->with('category',$category)->with('subcategory',$subcategory);
         //return view('categories.create');
     }
     public function subCat(Request $request)
@@ -81,33 +91,44 @@ class CoursesController extends Controller
     */
     public function store(Request $request)
     {
-        $request->validate([
-        'name' => 'required',
-        'slug'      => 'required|unique:courses',
-        'course_image'=>'required',
-        'parent_id' => 'nullable|numeric',
-        'university' => 'required'
+        
+        $this->validate($request,[
+
+
+            'name' => 'string|required',
+            'slug' => 'string|required',
+            'start_date' => 'required',
+            'field' => 'string|required',
+            'programme'
+
+
         ]);
-        $courses = new Courses;
-        $courses->name = $request->name;
-        $courses->slug = $request->slug;
-        $courses->start_date = $request->start_date;
-        $courses->course_duration = $request->course_duration;
-        $courses->course_id = $request->course_id;
-        $courses->price = $request->price;
-        $courses->cat_id = $request->cat_id;
-        $courses->subcat_id = $request->subcat_id;
-        $courses->study_type = $request->study_type;
-        $courses->university = $request->university;
-        if($request->file('course_image')){
-        $file= $request->file('course_image');
-        $filename= date('YmdHi').$file->getClientOriginalName();
-        $file-> move(public_path('public/Image'), $filename);
-        $courses->course_image= $filename;
+       
+        if ($request->hasFile('course_image')) {
+            $fileName = $request->course_image->getClientOriginalName();
+            $path = $request->course_image->move(public_path('/courseimage'), $fileName);
         }
-        $courses->short_description = $request->short_description;
-        $courses->description = $request->description;
-        $courses->save();
+
+
+        $courses = Courses::create([
+
+
+            'name' => $request->name,
+            'slug' => $request->slug,
+            'start_date' => $request->start_date,
+            'course_id' =>$request->course_id,
+            'course_image' => $request->course_image,
+            'field' =>$request->field,
+            'study_level' =>$request->study_level,
+            'institute' => $request->institute,
+            'programme' => $request->prog,
+            'short_description' => $request->short_description,
+            'description' =>$request->description
+
+
+
+        ]);
+
         return redirect()->route('courses.index')
         ->with('success','Courses has been created successfully.');
     }
@@ -216,17 +237,39 @@ class CoursesController extends Controller
 
         $fromdate = $request->fromdate;
         $todate = $request->todate;
-        $studytype = $request->studytype;
-        $category = $request->cat_id;
-        $university = $request->university;
+        $studylevel = $request->study_level;
+        $category = $request->field;
+        $university = $request->institute;
+        $quali = $request->qualification;
+        
+
+
+            $courses = DB::table('courses')->select('*')
+            
+            ->when($request->fromdate!= null, function($q) use ($request){
+
+                return $q->whereBetween('start_date',[$fromdate,$todate]);
+            })
+            ->when($request->institute!= null, function($q) use ($request){
+                return $q->where('institute',$request->institute);
+            })
+            ->when($request->qualification!= null,function($q) use ($request){
+
+                return $q->where('programme',$request->qualification);
+            })
+            ->when($request->field!=null, function($q) use ($request){
+
+                return $q->where('field',$request->field);
+            })
+            ->when($request->study_level!= null,function($q) use ($request){
+
+                return $q->where('study_level', $request->study_level);
+            })
+            ->paginate(5);
 
         
 
-        $courses = DB::table('courses')->select('*')
-        ->whereBetween('start_date',[$fromdate,$todate])
-        ->orWhere('study_type',$studytype)
-        ->orWhere('cat_id',$category)
-        ->paginate(5);
+       
        $users = DB::table('users')
        ->join('education','users.id','=','education.stu_id')
        ->select('users.name','education.updated_at','users.id')
@@ -234,8 +277,10 @@ class CoursesController extends Controller
        ->where('users.status',2)->get();
        $programme = DB::table('categories')->get();
        $studytype = DB::table('study_period')->get();
+       $institute = DB::table('university')->get();
+       $qualification = DB::table('programme')->get();
        
-       return view('admin.courses.index',compact('courses','users','programme','studytype','fromdate','todate','category','university'));
+       return view('admin.courses.index',compact('courses','users','programme','studytype','studylevel','fromdate','todate','category','institute','university','qualification','quali'));
 
 
 
