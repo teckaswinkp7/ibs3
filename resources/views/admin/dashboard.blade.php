@@ -33,7 +33,7 @@
 
           $courseselection = DB::table('users')->where('offer_accepted','yes')->count();
           $invoices = DB::table('invoice')->count();
-          $application = DB::table('users')->where('status','3')->count();
+         
           $iconnectaccounts = DB::table('users')->where('user_role','!=','1')->count();
           $activeusers = DB::table('active_users')->join('users','users.id','=','active_users.user_id')->where('users.user_role','!=','1')->count();
           $activeenrollment = DB::table('active_users')
@@ -42,6 +42,12 @@
           ->where('users.user_role','=','1')->get();
           $enrollment = DB::table('payment')->where('balance_due','0')->count();
           $payment = DB::table('payment')->where('amountdue','!=','balance_due')->count();
+          $application = DB::table('users')
+     ->join('education','users.id','=','education.stu_id')
+     ->select('users.name','education.updated_at','users.id')
+     ->where('users.user_role',2)
+     ->where('users.status',2)
+     ->count();
 
 
           @endphp
