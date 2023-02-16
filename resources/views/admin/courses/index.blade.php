@@ -62,8 +62,8 @@
         
           <th> Filter: </th>
           <th> </th>
-          <th > <label for="fromdate"> From Date: </label> <input style="width:120px" type='date' name="fromdate" value="{{$fromdate}}" class="datepicker form-control" placeholder="Date" ></input></th>
-<th> <label for="fromdate"> To Date: </label> <input style="width:120px" type='date' name="todate" value="{{$todate}}"  class="datepicker form-control" placeholder="Date" ></input></th>
+          <th > <label for="fromdate"> From Date: </label> <input style="width:160px" type='date' name="fromdate" value="{{$fromdate}}" class="datepicker form-control" placeholder="Date" ></input></th>
+<th> <label for="fromdate"> To Date: </label> <input style="width:160px" type='date' name="todate" value="{{$todate}}"  class="datepicker form-control" placeholder="Date" ></input></th>
         <th > <label>programme/course</label>
          <select name="field" id='institute' class="form-control"  style="width:150px">
          <option style="font-size:20px; color:orange; font:800;" value="{{$category}}" selected> {{$category}} </option>
@@ -142,8 +142,7 @@
       <td>{{ $course->name }}</td>
       <td>{{ strip_tags(Str::limit($course->description,30,'...')) }}</td>
       <td> </td>
-      <td><button class="btnreview" id="desktop"><i class="fa-regular fa-user backgroundclass"></i></button>&nbsp;<button class="btnreview"> <a href="{{route('reports.offer_accepted')}}"> <i class="fa-solid fa-hourglass-start backgroundclass"></i></button>&nbsp; <button class="btnreview" ><a href="{{route('user.create')}}"> <i class="fa-solid fa-plus backgroundclass"></i></button></a></td>
-      
+      <td> <a href="{{route('user.create')}}"><button class="btnreview"> <i class="fa-regular fa-user backgroundclass"></i></a></button> <a href="{{route('reports.offer_accepted')}}"><button class="btnreview"> <i class="fa-solid fa-hourglass-start backgroundclass"></i></a></button>&nbsp;<a href="{{route('user.create')}}"><button class="btnreview"> <i class="fa-solid fa-plus backgroundclass"></i></a></button> </td>
       @endforeach
       <?php unset($_SESSION['i']); ?>    
 </tbody>
@@ -178,6 +177,15 @@
 
   background: radial-gradient(circle at 10% 20%, rgb(255, 197, 61) 0%, rgb(255, 94, 7) 90%); 
   border:none!important;
+}
+.btnreviewicon{
+
+background: radial-gradient(circle at 10% 20%, rgb(255, 197, 61) 0%, rgb(255, 94, 7) 90%); 
+
+}
+a{
+
+  color:white!important;
 }
 .colorbtn{
     background: radial-gradient(circle at 10% 20%, rgb(255, 197, 61) 0%, rgb(255, 94, 7) 90%); 

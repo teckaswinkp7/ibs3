@@ -244,7 +244,7 @@
                   ?>
                 
                  
-                 <embed src="{{url('public/public/Image')}}/{{ $user->id_image}}#toobar=0" height="1000" width="860" alt="pdf"> 
+                 <embed src="{{url('public/Image')}}/{{ $user->id_image}}#toobar=0" height="1000" width="860" alt="pdf"> 
                  @endforeach       
 
 

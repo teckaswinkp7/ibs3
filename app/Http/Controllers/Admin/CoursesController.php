@@ -248,7 +248,7 @@ class CoursesController extends Controller
             
             ->when($request->fromdate!= null, function($q) use ($request){
 
-                return $q->whereBetween('start_date',[$fromdate,$todate]);
+                return $q->whereBetween('start_date',[$request->fromdate,$request->todate]);
             })
             ->when($request->institute!= null, function($q) use ($request){
                 return $q->where('institute',$request->institute);

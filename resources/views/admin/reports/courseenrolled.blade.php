@@ -102,7 +102,7 @@
         @csrf  
       <td>{{$_SESSION['i']}}</td>
       <td>{{ $user->name }} </td>
-      <td>{{$user->coursename}}</td>
+      <td></td>
       <td></td>
       @if( $user->offer_accepted == 'yes')
       <td> Offer Accepted </td>
