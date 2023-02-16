@@ -81,7 +81,8 @@ class DocumentVerificationController extends Controller
      $home = Session::get('home');
      $personal = Session::get('personal');
      $cgpa = Session::get('cgpa');
-     return view('admin.application.verify',compact('user','student_edu','cgpa','language','english','maths','economics','accounting','business','geography','history','legal','techno','practical','home','personal'));
+     $courses = Session::get('courses');
+     return view('admin.application.verify',compact('user','student_edu','cgpa','language','english','maths','economics','accounting','business','geography','history','legal','techno','practical','home','personal','courses'));
     }
 
 
@@ -142,34 +143,101 @@ class DocumentVerificationController extends Controller
  
        $cgpa = array_sum($newarray)/$gradelength;
 
- 
       
-    return redirect()->back()->with(compact('cgpa','language','english','maths','economics','accounting','business','geography','history','legal','techno','practical','home','personal'));
+
+       if($cgpa <= '5'){
+
+
+        $courses = DB::table('courses')->where('courses.field','Accounting and Finance')->select('courses.name')->get();
+
+       }
+
+     
+
+    
+    return redirect()->back()->with(compact('cgpa','language','english','maths','economics','accounting','business','geography','history','legal','techno','practical','home','personal','courses'));
 
 
 
 
 
     }
-    public function store(Request $request)
+    
+    public function send(Request $request)
     {
-        $docum = new Document;
+
+
+      switch($request->eligiblebutton){
+
+        case 'send-eligibility':
+          $data['invoice_id'] = '#INV-'.time();
+        $inv_id = $data['invoice_id'];
+        $id= $request->stu_id; 
+        $data['custom_price']= $request->custom_price; 
+        $data['users'] = User::where('id',$id)->get();        
+        $uid=(int) $id;        
+        $data['student_course_invoice']= Studentcourse::select(
+            "studentcourses.student_course_id", 
+            "studentcourses.stu_id",
+            "studentcourses.student_course_id", 
+            "courses.name as courses_name",
+            "courses.price"
+        )
+        ->join("courses", "courses.id", "=", "studentcourses.student_course_id")
+        ->where('studentcourses.stu_id','=',$uid)
+        ->get();
+
+        $path = public_path('uploads/attachment');        
+        $pdf = PDF::loadView('admin.myofferPDF',$data);
+        $filename= time().'_'.rand(0000,9999).'_'.'Offer.pdf';    
+        $ac = $pdf->save($path.'/'.$filename);
+        
+
+        $offer = new Studentcourseoffer;
+        $course_offer = $request->all();
+        $offer=$request->course_offer_description;
+        $cust_price = $request->custom_price; 
+
+        $course_offer=Studentcourseoffer::create([
+            'stu_id'         => $request->stu_id,
+            'offer_course_id'    => $request->offer_course_id,
+            'course_offer_description'    => $request->course_offer_description,
+        ]);
         $id=$request->stu_id;
-        $student_edu =  Education::where('stu_id',$id)->get();
-        foreach($student_edu as $val)
-        {
-            $vals = array('stu_id'=>$val->stu_id,'edu_id'=>$val->id,'status'=>$request->status);            
-            $docum->create($vals);
-            Education::where('id', $val->id)->update(array('verification_status' => $request->status));            
-        }
-        // $docum->stu_id =$request->stu_id;
-        // $docum->status = $request->status;
-        // $docum->edu_id = $request->edu_id;
-        // $docum->save();
-        $status = User::where('id', $id)->update(array('status' => 3));
-        return redirect()->route('application.index')
-        ->with('success','created successfully.');
+        //$id = 10;
+        //$status = User::where('id', $id)->update(array('status' => 6));
+        $status = Courseselection::where('stu_id', $id)->update(array('offer_generated' => 1,'custom_offer_price'=>$cust_price,'offer' => $filename));
+        $data = array('offer_desc'=>"$request->course_offer_description",'offer'=> $offer,'filename'=>$filename);  
+        Mail::to($request->stu_email)->send(new OfferEmail($data));
+        //Mail::to('vedmanimoudgal@virtualemployee.com')->send(new OfferEmail($data));
+        return redirect('admin/studentcourse');
+        //->with('success','created successfully.');
+
+          
+          break;
+          case 'save-sendlater':
+
+
+            $docum = new Document;
+            $id=$request->stu_id;
+            $student_edu =  Education::where('stu_id',$id)->get();
+            foreach($student_edu as $val)
+            {
+                $vals = array('stu_id'=>$val->stu_id,'edu_id'=>$val->id,'status'=>$request->status);            
+                $docum->create($vals);
+                Education::where('id', $val->id)->update(array('verification_status' => $request->status));            
+            }
+            // $docum->stu_id =$request->stu_id;
+            // $docum->status = $request->status;
+            // $docum->edu_id = $request->edu_id;
+            // $docum->save();
+            $status = User::where('id', $id)->update(array('status' => 3));
+            return redirect()->route('application.index')
+            ->with('success','created successfully.');
+
+       
     }
+  }
 
 
 

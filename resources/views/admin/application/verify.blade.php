@@ -215,9 +215,11 @@
 </form>   
 <br>
 <br>
-<form action="" method="POST">
+
 <div class="card">
   <div class="card-body cardcolor">
+  <form action="{{route('application.send')}}" method="POST">
+    @csrf
     <div id="total"> GPA - {{$cgpa}}
 
 
@@ -225,14 +227,21 @@
     <div>Attainment Points -  </div>
     <div>Eligibility -  </div>
     <div>Institute -  </div>
-    <div>Programme/Course -  </div>
-    
-  </div>
+    @if($courses != null)
+    @foreach($courses as $course)
+    <div>Programme/Course -{{$course->name}} </div>
+  @endforeach
+  @else
+  <div>Programme/Course -{{$courses}} </div>
+  @endif  
 </div>
-<button value="sendel" type="submit" class="btn btn-primary btncolor">send-eligibility </button>
-  <button value="saveandsend" type="submit" class="btn btn-primary  btncolor">save & Send-later </button>
 </div>
-</form>
+<button value="send-eligibility" name="eligiblebutton" type="submit" class="btn btn-primary btncolor">send-eligibility </button>
+  <button value="save-sendlater" name="eligiblebutton" type="submit" class="btn btn-primary  btncolor">save & Send-later </button>
+  </form>
+</div>
+
+
 <div class="col-md-4">
 @foreach ($student_edu as $user)
                   

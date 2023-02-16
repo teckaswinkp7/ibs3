@@ -53,11 +53,17 @@ class Reportingcontroller extends Controller
 
         $data1['role']= Role::all();
         DB::statement("SET SQL_MODE=''");
-        $registeredstudents = User::select('users.*')
+        $registeredstudents = DB::table('users')
+        ->leftjoin('courseselections','users.id','=','courseselections.stu_id')
+        ->leftjoin('courses','courseselections.studentSelCid','=','courses.id')
         ->where('user_role', 2)
-        ->groupBy('users.id')      
-        ->paginate(5);
+        ->groupBy('users.id')  
         
+        ->select('users.*','courses.name as coursename') 
+        ->paginate(5);
+
+        
+    
         return view('admin.reports.offer_accepted',$data1,compact('registeredstudents'));
     }
 

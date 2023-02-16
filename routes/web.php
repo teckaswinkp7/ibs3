@@ -171,6 +171,7 @@ Route::get('admin/screening', 'App\Http\Controllers\Admin\ScreeningController@in
 Route::get('admin/application/', 'App\Http\Controllers\Admin\DocumentVerificationController@index')->name('application.index');
 Route::get('admin/application/verify/{id}', 'App\Http\Controllers\Admin\DocumentVerificationController@verify')->name('application.verify');
 Route::post('admin/application/obtain', [DocumentVerificationController::class, 'obtain'])->name('application.obtain');
+Route::post('admin/application/send', [DocumentVerificationController::class, 'send'])->name('application.send');
 Route::post('admin/application/store', [DocumentVerificationController::class, 'store'])->name('application.store');
 Route::get('admin/application/search', 'App\Http\Controllers\Admin\DocumentVerificationController@search')->name('application.search');
 Route::get('admin/application/searchname', 'App\Http\Controllers\Admin\DocumentVerificationController@searchname')->name('application.searchname');
