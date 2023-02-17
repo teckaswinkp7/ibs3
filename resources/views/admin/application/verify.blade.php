@@ -235,6 +235,7 @@
   <div>Programme/Course -{{$courses}} </div>
   @endif  
 </div>
+<input type="hidden" name="stu_id" value="{{$user->id}}">
 </div>
 <button value="send-eligibility" name="eligiblebutton" type="submit" class="btn btn-primary btncolor">send-eligibility </button>
   <button value="save-sendlater" name="eligiblebutton" type="submit" class="btn btn-primary  btncolor">save & Send-later </button>
@@ -253,7 +254,7 @@
                   ?>
                 
                  
-                 <embed src="{{url('public/Image')}}/{{ $user->id_image}}#toobar=0" height="1000" width="860" alt="pdf"> 
+                 <embed src="{{url('public/Image')}}/{{ $user->id_image}}" height="1000" width="860" alt="pdf"> 
                  @endforeach       
 
 

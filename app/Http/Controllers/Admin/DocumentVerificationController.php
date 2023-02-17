@@ -48,9 +48,9 @@ class DocumentVerificationController extends Controller
 
      $users = DB::table('users')
      ->join('education','users.id','=','education.stu_id')
-     ->select('users.name','education.updated_at','users.id')
      ->where('users.user_role',2)
      ->where('users.status',2)
+     ->select('users.name','education.updated_at','users.id','education.verification_status as verificationstatus','users.status')
      ->get();
 
      $institute = DB::table('institute')->select('title','type','description')->get();
@@ -218,20 +218,21 @@ class DocumentVerificationController extends Controller
           case 'save-sendlater':
 
 
+          //  dd($request->stu_id);
             $docum = new Document;
             $id=$request->stu_id;
             $student_edu =  Education::where('stu_id',$id)->get();
             foreach($student_edu as $val)
             {
-                $vals = array('stu_id'=>$val->stu_id,'edu_id'=>$val->id,'status'=>$request->status);            
+                $vals = array('stu_id'=>$val->stu_id,'edu_id'=>$val->id,'status'=> 2 );            
                 $docum->create($vals);
-                Education::where('id', $val->id)->update(array('verification_status' => $request->status));            
+                Education::where('id', $val->id)->update(array('verification_status' => 3));            
             }
             // $docum->stu_id =$request->stu_id;
             // $docum->status = $request->status;
             // $docum->edu_id = $request->edu_id;
             // $docum->save();
-            $status = User::where('id', $id)->update(array('status' => 3));
+            $status = User::where('id', $id)->update(array('status' => 2));
             return redirect()->route('application.index')
             ->with('success','created successfully.');
 
@@ -257,7 +258,7 @@ class DocumentVerificationController extends Controller
      ->where('users.user_role',2)
      ->where('users.status',2)
      ->whereBetween('education.updated_at',[$fromdate,$todate])
-     ->orWhere('courses.university',$university)
+     ->orWhere('courses.institute',$university)
      ->get();
      //$educat = Document::all();
      $institute = DB::table('institute')->select('title','type','description')->get();

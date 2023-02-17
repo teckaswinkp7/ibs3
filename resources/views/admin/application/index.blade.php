@@ -83,9 +83,8 @@
     </tr>
   </thead>
   <?php $_SESSION['i'] = 0; ?>   
-        @foreach ($users as $user)
+        @foreach ($users as $key  => $user)
         <?php $_SESSION['i']=$_SESSION['i']+1; ?>
-   
   <tbody>
   <form action="" method="post" enctype="multipart/form-data">
         @csrf  
@@ -93,7 +92,13 @@
       <td>{{$_SESSION['i']}}</td>
       <td>{{$user->name}}</td>
       <td>{{date('d-m-Y', strtotime($user->updated_at));}}</td>
+      @if($user->verificationstatus == null )
       <td><a href="{{ route('application.verify',$user->id) }}" class="btn btn-primary btnreview" > Review </a></td>
+      @elseif($user->verificationstatus == 3)
+      <td><a href="{{ route('application.verify',$user->id) }}" class="btn btn-success" >Send-eligibility </a></td>
+      @else
+      <td><a href="{{ route('application.verify',$user->id) }}" class="btn btn-secondary btnreview" > Reviewed </a></td>
+      @endif
       <td></td>
       <td>-</td>
       <td></td>
