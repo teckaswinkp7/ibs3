@@ -97,7 +97,7 @@
       @elseif($user->verificationstatus == 3)
       <td><a href="{{ route('application.verify',$user->id) }}" class="btn btn-success" >Send-eligibility </a></td>
       @else
-      <td><a href="{{ route('application.verify',$user->id) }}" class="btn btn-secondary btnreview" > Reviewed </a></td>
+      <td><a id="point" class="btn btn-secondary " > Reviewed </a></td>
       @endif
       <td></td>
       <td>-</td>
@@ -155,6 +155,12 @@ cursor: pointer;
 #desktop{
 
   border-width:10px;
+}
+
+#point{
+
+ 
+ cursor:default;
 }
 
   </style>

@@ -10,7 +10,11 @@ use App\Models\User;
 use App\Models\Courses;
 use App\Models\Role;
 use App\Models\Education;
+use App\Models\Courseselection;
+use App\Models\Studentcourseoffer;
 use App\Models\Document;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OfferEmail;
 use Hash;
 use DB;
 use App\Exports\ApplicationExport;
@@ -64,6 +68,10 @@ class DocumentVerificationController extends Controller
      //$data1['role']= Role::all();
      //$data['users'] = User::where('user_role',2) ->get();
      $user = User::findOrFail($id);  
+     $users = DB::table('education')
+     ->where('education.stu_id', $user->id)
+     ->select('education.verification_status as verificationstatus')
+     ->get();
      //$student_edu =  Education::join('documents','documents.edu_id','education.id')->where('education.stu_id',$id)->where('documents.status',1)->get();   
      $student_edu =  Education::where('stu_id',$id)->where('verification_status',null)->get();
      //dd($student_edu);  
@@ -82,7 +90,7 @@ class DocumentVerificationController extends Controller
      $personal = Session::get('personal');
      $cgpa = Session::get('cgpa');
      $courses = Session::get('courses');
-     return view('admin.application.verify',compact('user','student_edu','cgpa','language','english','maths','economics','accounting','business','geography','history','legal','techno','practical','home','personal','courses'));
+     return view('admin.application.verify',compact('user','student_edu','cgpa','language','english','maths','economics','accounting','business','geography','history','legal','techno','practical','home','personal','courses','users'));
     }
 
 
@@ -145,14 +153,21 @@ class DocumentVerificationController extends Controller
 
       
 
-       if($cgpa <= '5'){
+       if($cgpa <= '2'){
 
 
-        $courses = DB::table('courses')->where('courses.field','Accounting and Finance')->select('courses.name')->get();
+        $courses = DB::table('courses')
+        ->where('courses.field','Business and Management')
+        ->orwhere('courses.field','Information Technology')
+        ->select('courses.name','courses.id','courses.description','courses.institute')
+        ->get();
 
        }
+       
 
+       
      
+      $courseoffer = Session::put('courseoffer', $courses);
 
     
     return redirect()->back()->with(compact('cgpa','language','english','maths','economics','accounting','business','geography','history','legal','techno','practical','home','personal','courses'));
@@ -163,54 +178,55 @@ class DocumentVerificationController extends Controller
 
     }
     
-    public function send(Request $request)
+    public function send(Request $request,$id)
     {
 
 
       switch($request->eligiblebutton){
 
         case 'send-eligibility':
-          $data['invoice_id'] = '#INV-'.time();
-        $inv_id = $data['invoice_id'];
-        $id= $request->stu_id; 
-        $data['custom_price']= $request->custom_price; 
-        $data['users'] = User::where('id',$id)->get();        
-        $uid=(int) $id;        
-        $data['student_course_invoice']= Studentcourse::select(
-            "studentcourses.student_course_id", 
-            "studentcourses.stu_id",
-            "studentcourses.student_course_id", 
-            "courses.name as courses_name",
-            "courses.price"
-        )
-        ->join("courses", "courses.id", "=", "studentcourses.student_course_id")
-        ->where('studentcourses.stu_id','=',$uid)
-        ->get();
 
-        $path = public_path('uploads/attachment');        
-        $pdf = PDF::loadView('admin.myofferPDF',$data);
-        $filename= time().'_'.rand(0000,9999).'_'.'Offer.pdf';    
-        $ac = $pdf->save($path.'/'.$filename);
-        
+        $courseid = $request->course_id;
+        $somename = 'somename';
+        $id = $request->stu_id;
+        $student_edu =  Education::where('stu_id',$id)->get();
+        $docum = new Document;
+        $email = DB::table('users')->where('users.id',$id)->select('users.email','users.name')->get();
+        $request->validate([
 
-        $offer = new Studentcourseoffer;
-        $course_offer = $request->all();
-        $offer=$request->course_offer_description;
-        $cust_price = $request->custom_price; 
 
-        $course_offer=Studentcourseoffer::create([
-            'stu_id'         => $request->stu_id,
-            'offer_course_id'    => $request->offer_course_id,
-            'course_offer_description'    => $request->course_offer_description,
+          'course_id' => 'required'
+
         ]);
-        $id=$request->stu_id;
+
+        $courseselect = Courseselection::updateOrCreate([
+
+
+          'stu_id' => $request->stu_id
+
+        ],[
+
+
+          'course_id' => json_encode($courseid),
+          'offer_generated' => 1,
+      
+        ]);
+        $course_offer=Studentcourseoffer::create([
+          'stu_id'         => $request->stu_id,
+          'offer_course_id'    => json_encode($courseid),
+      ]);
+      foreach($student_edu as $val)
+            {
+                $vals = array('stu_id'=>$val->stu_id,'edu_id'=>$val->id,'status'=> 2 );            
+                $docum->create($vals);
+                Education::where('id', $val->id)->update(array('verification_status' => 1));            
+            }
         //$id = 10;
         //$status = User::where('id', $id)->update(array('status' => 6));
-        $status = Courseselection::where('stu_id', $id)->update(array('offer_generated' => 1,'custom_offer_price'=>$cust_price,'offer' => $filename));
-        $data = array('offer_desc'=>"$request->course_offer_description",'offer'=> $offer,'filename'=>$filename);  
-        Mail::to($request->stu_email)->send(new OfferEmail($data));
+        $data = array('uname'=>$email[0]->name,'offer'=>$somename);  
+        Mail::to($email[0]->email)->send(new OfferEmail($data));
         //Mail::to('vedmanimoudgal@virtualemployee.com')->send(new OfferEmail($data));
-        return redirect('admin/studentcourse');
+        return redirect()->route('application.index');
         //->with('success','created successfully.');
 
           
@@ -221,7 +237,22 @@ class DocumentVerificationController extends Controller
           //  dd($request->stu_id);
             $docum = new Document;
             $id=$request->stu_id;
+            $courseoffer = Session::get('courseoffer');
+            $courseid = $request->course_id;
             $student_edu =  Education::where('stu_id',$id)->get();
+            
+
+             $request->validate([
+              'course_id' => 'required',
+       ]);
+            $courseselection = Courseselection::create([
+
+
+              'stu_id' => $id,
+              'course_id' => json_encode($courseid),
+
+
+            ]);
             foreach($student_edu as $val)
             {
                 $vals = array('stu_id'=>$val->stu_id,'edu_id'=>$val->id,'status'=> 2 );            

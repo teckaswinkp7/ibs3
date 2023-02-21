@@ -224,22 +224,31 @@
 
 
      </div>
+     @if($courses != null)
+    @foreach($courses as $course)
     <div>Attainment Points -  </div>
     <div>Eligibility -  </div>
-    <div>Institute -  </div>
-    @if($courses != null)
-    @foreach($courses as $course)
+    <div>Institute - {{$course->institute}} </div>
     <div>Programme/Course -{{$course->name}} </div>
+    <input type="hidden" name="course_id[]" value="{{$course->id}}" />
   @endforeach
   @else
+  <div>Attainment Points -  </div>
+    <div>Eligibility -  </div>
+    <div>Institute - </div>
   <div>Programme/Course -{{$courses}} </div>
   @endif  
 </div>
 <input type="hidden" name="stu_id" value="{{$user->id}}">
 </div>
+
 <button value="send-eligibility" name="eligiblebutton" type="submit" class="btn btn-primary btncolor">send-eligibility </button>
+@if($users[0]->verificationstatus == NUll)
   <button value="save-sendlater" name="eligiblebutton" type="submit" class="btn btn-primary  btncolor">save & Send-later </button>
-  </form>
+@else
+<div> </div>
+@endif
+</form>
 </div>
 
 
@@ -254,7 +263,22 @@
                   ?>
                 
                  
-                 <embed src="{{url('public/Image')}}/{{ $user->id_image}}" height="1000" width="860" alt="pdf"> 
+                 
+                 <iframe 
+    src="{{url('public/Image')}}/{{ $user->id_image}}" 
+    style="width:800px; height:500px;" 
+    frameborder="0">
+</iframe>
+<iframe 
+    src="{{url('public/Image')}}/{{ $user->highest_qualification}}" 
+    style="width:800px; height:500px;" 
+    frameborder="0">
+</iframe>
+<iframe 
+    src="{{url('public/Image')}}/{{ $user->course_syopsiy}}" 
+    style="width:800px; height:500px;" 
+    frameborder="0">
+</iframe>
                  @endforeach       
 
 
