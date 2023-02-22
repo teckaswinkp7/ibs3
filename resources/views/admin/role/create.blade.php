@@ -1,6 +1,5 @@
 @extends('admin.header')  
-@section('content')
-@include('admin.leftsidebar') 
+@section('content') 
  <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper" style="min-height:1545px !important;">
         <!-- Content Header (Page header) -->
@@ -8,7 +7,7 @@
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <a class="btn btn-primary" href="{{ route('role.index') }}"> Back</a>
+                <a class="btn btn-primary btnreview" href="{{ route('role.index') }}"> Back</a>
               </div>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -52,7 +51,7 @@
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary btnreview">Submit</button>
                     </div>
                 </form>
             </div>
@@ -66,4 +65,13 @@
 @include('admin.footer')
 @endsection
 </body>
+<style>
+  .btnreview{
+
+background: radial-gradient(circle at 10% 20%, rgb(255, 197, 61) 0%, rgb(255, 94, 7) 90%); 
+border:none!important;
+
+
+}
+  </style>
 </html>   

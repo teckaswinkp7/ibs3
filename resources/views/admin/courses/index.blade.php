@@ -183,9 +183,17 @@
 background: radial-gradient(circle at 10% 20%, rgb(255, 197, 61) 0%, rgb(255, 94, 7) 90%); 
 
 }
-a{
+a > .fa-user{
 
   color:white!important;
+}
+a > .fa-hourglass-start{
+
+color:white!important;
+}
+a > .fa-plus{
+
+color:white!important;
 }
 .colorbtn{
     background: radial-gradient(circle at 10% 20%, rgb(255, 197, 61) 0%, rgb(255, 94, 7) 90%); 

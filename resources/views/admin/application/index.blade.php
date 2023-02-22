@@ -99,8 +99,13 @@
       @else
       <td><a id="point" class="btn btn-secondary " > Reviewed </a></td>
       @endif
+      @if($user->verificationstatus == null )
       <td></td>
-      <td>-</td>
+      @else
+      <td>{{date('d-m-Y', strtotime($user->reviewdate));}}</td>
+      @endif
+      
+      <td>{{$user->cgpa}}</td>
       <td></td>
       <td><button class="btnreview" id="desktop"><i class="fa-sharp fa-solid fa-desktop backgroundclass"></i></button></td>
       

@@ -56,11 +56,13 @@ class AuthControllers extends Controller
         ]);
         
         $credentials = $request->only('email', 'password');
+        //dd($credentials);
         if ((Auth::attempt($credentials))&&(Auth::user()->is_email_verified == 1)) {  
             $userid = Auth::id();
             $user = User::where('id','=',$userid)->first();
-            //dd($userRole);
+            //dd($user->user_role);
             DB::table('active_users')->insert(array('user_id' =>   Auth::id()));
+           
             if($user->user_role == 3)
             {
                 //return redirect("dashboard")->with('Oppes! You have entered invalid credentials'); 

@@ -39,7 +39,10 @@
           $activeenrollment = DB::table('active_users')
           ->join('users','users.id','=','active_users.user_id')
           ->leftjoin('sponsors','sponsors.stu_id','=','users.id')
-          ->where('users.user_role','=','1')->get();
+          ->where('users.user_role','=','1')
+          ->orWhere('users.user_role','=','10')
+          ->orWhere('users.user_role','=','9')
+          ->get();
           $enrollment = DB::table('payment')->where('balance_due','0')->count();
           $payment = DB::table('payment')->where('amountdue','!=','balance_due')->count();
           $application = DB::table('users')

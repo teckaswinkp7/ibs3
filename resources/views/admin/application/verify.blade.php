@@ -86,7 +86,7 @@
                   <tr> 
 
 
-                  <td><input type="checkbox" class="grade" name="language"> </td>
+                  <td><input type="hidden" class="grade" name="language"> </td> 
                   <td> Language And Literature </td>
                   <td><input type="text" style="width:40px;" value="{{$language}}"  name="language" id="lit" class="grade">  </td>
 
@@ -94,7 +94,7 @@
                   <tr> 
 
 
-<td><input type="checkbox" class="checksubject" name="checksubject"> </td>
+<td><input type="hidden" class="checksubject" name="checksubject"> </td>
 <td> Applied English </td>
 <td><input type="text" style="width:40px;" value="{{$english}}" name="english" id="eng" class="grade">  </td>
 
@@ -102,7 +102,7 @@
 <tr> 
 
 
-                  <td><input type="checkbox" class="checksubject" name="checksubject"> </td>
+                  <td><input type="hidden" class="checksubject" name="checksubject"> </td>
                   <td> General Mathemathics </td>
                   <td><input type="text" style="width:40px;" value="{{$maths}}" name="maths" id="math" class="grade">  </td>
 
@@ -110,7 +110,7 @@
                   <tr> 
 
 
-                  <td><input type="checkbox" class="checksubject" name="checksubject"> </td>
+                  <td><input type="hidden" class="checksubject" name="checksubject"> </td>
                   <td> Economics </td>
                   <td><input type="text" style="width:40px;" value="{{$economics}}" name="economics" id="eco" class="grade">  </td>
 
@@ -118,7 +118,7 @@
                   <tr> 
 
 
-                  <td><input type="checkbox" class="checksubject" name="checksubject"> </td>
+                  <td><input type="hidden" class="checksubject" name="checksubject"> </td>
                   <td> Accounting </td>
                   <td><input type="text" style="width:40px;" value="{{$accounting}}" name="accounting" id="account" class="grade">  </td>
 
@@ -126,7 +126,7 @@
                   <tr> 
 
 
-                  <td><input type="checkbox" class="checksubject" name="checksubject"> </td>
+                  <td><input type="hidden" class="checksubject" name="checksubject"> </td>
                   <td> Business Studies </td>
                   <td><input type="text" style="width:40px;" value="{{$business}}" name="business" id="business" class="grade">  </td>
 
@@ -134,7 +134,7 @@
                   <tr> 
 
 
-                  <td><input type="checkbox" class="checksubject" name="checksubject"> </td>
+                  <td><input type="hidden" class="checksubject" name="checksubject"> </td>
                   <td> Geography </td>
                   <td><input type="text" style="width:40px;" value="{{$geography}}" name="geography" id="geo" class="grade">  </td>
 
@@ -142,7 +142,7 @@
                   <tr> 
 
 
-                  <td><input type="checkbox" class="checksubject" name="checksubject"> </td>
+                  <td><input type="hidden" class="checksubject" name="checksubject"> </td>
                   <td> History </td>
                   <td><input type="text" style="width:40px;" value="{{$history}}" name="history" id="hist"  class="grade">  </td>
 
@@ -150,7 +150,7 @@
                   <tr> 
 
 
-                  <td><input type="checkbox" class="checksubject" name="checksubject"> </td>
+                  <td><input type="hidden" class="checksubject" name="checksubject"> </td>
                   <td> Legal Studies </td>
                   <td><input type="text" style="width:40px;" value="{{$legal}}" name="legal" id="legal" class="grade">  </td>
 
@@ -158,7 +158,7 @@
                   <tr> 
 
 
-                  <td><input type="checkbox" class="checksubject" name="checksubject"> </td>
+                  <td><input type="hidden" class="checksubject" name="checksubject"> </td>
                   <td> Information Communication Technologies. </td>
                   <td><input type="text" style="width:40px;" value="{{$techno}}" name="techno" id="information" class="grade">  </td>
 
@@ -188,7 +188,7 @@
                   <tr> 
 
 
-                  <td><input type="checkbox" class="checksubject" name="checksubject"> </td>
+                  <td><input type="hidden" class="checksubject" name="checksubject"> </td>
                   <td> Practical Skills </td>
                   <td><input type="text" style="width:40px;" value="{{$practical}}" name="practical" class="grade">  </td>
 
@@ -196,7 +196,7 @@
                   <tr> 
 
 
-<td><input type="checkbox" class="checksubject" name="checksubject"> </td>
+<td><input type="hidden" class="checksubject" name="checksubject"> </td>
 <td> Home Economics  </td>
 <td><input type="text" style="width:40px;" value="{{$home}}" name="home" class="grade[]">  </td>
 
@@ -204,7 +204,7 @@
 <tr> 
 
 
-                  <td><input type="checkbox" class="checksubject" name="checksubject"> </td>
+                  <td><input type="hidden" class="checksubject" name="checksubject"> </td>
                   <td> Personal Development </td>
                   <td><input type="text" name="personal" value="{{$personal}}" style="width:40px;" class="grade[]">  </td>
 
@@ -220,10 +220,11 @@
   <div class="card-body cardcolor">
   <form action="{{route('application.send')}}" method="POST">
     @csrf
-    <div id="total"> GPA - {{$cgpa}}
+    <div id="total" > GPA - {{$cgpa}}
 
 
      </div>
+<input type="hidden" name="cgpa" value="{{$cgpa}}"/>
      @if($courses != null)
     @foreach($courses as $course)
     <div>Attainment Points -  </div>

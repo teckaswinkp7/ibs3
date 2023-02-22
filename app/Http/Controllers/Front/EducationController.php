@@ -206,12 +206,12 @@ class EducationController extends Controller
         
         $highest_qualifications = $request->file('highest_qualification');
         $highest_qualification = str_replace(' ', '', $highest_qualifications->getClientOriginalName());
-        $highest_qualification_file = date('YmdHi').$id_image;
-        $highest_qualifications->move(public_path('public/Image'), $highest_qualification);
+        $highest_qualification_file = date('YmdHi').$highest_qualification;
+        $highest_qualifications->move(public_path('public/Image'), $highest_qualification_file);
 
         $course_syopsiys = $request->file('course_syopsiy');
         $course_syopsiy = str_replace(' ', '', $course_syopsiys->getClientOriginalName());
-        $course_syopsiy_file = date('YmdHi').$id_image;
+        $course_syopsiy_file = date('YmdHi').$course_syopsiy;
         $course_syopsiys->move(public_path('public/Image'), $course_syopsiy_file);
         
         $data = array('stu_id'=>$id,'board'=>$board,'percentage'=>$percentage,'id_image'=>$id_image_file,'highest_qualification'=>$highest_qualification_file,'course_syopsiy'=>$course_syopsiy_file);

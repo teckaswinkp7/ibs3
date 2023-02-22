@@ -40,6 +40,7 @@ use App\Http\Controllers\Admin\Additionalfeecontroller;
 use App\Http\Controllers\Admin\Unitselectioncontroller;
 use App\Http\Controllers\Admin\Semcontroller;
 use App\Http\Controllers\Admin\Searchcontroller;
+use App\Http\Controllers\Admin\Officercontroller;
 
 /*
 |--------------------------------------------------------------------------
@@ -148,6 +149,9 @@ Route::group(['middleware' => 'auth'], function () {
 });
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('admin/user', UserController::class);
+});
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('admin/officer', Officercontroller::class);
 });
 
 /*  Sponsor Front     */

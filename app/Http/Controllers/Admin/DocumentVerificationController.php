@@ -11,6 +11,7 @@ use App\Models\Courses;
 use App\Models\Role;
 use App\Models\Education;
 use App\Models\Courseselection;
+use App\Models\review;
 use App\Models\Studentcourseoffer;
 use App\Models\Document;
 use Illuminate\Support\Facades\Mail;
@@ -54,9 +55,10 @@ class DocumentVerificationController extends Controller
      ->join('education','users.id','=','education.stu_id')
      ->where('users.user_role',2)
      ->where('users.status',2)
-     ->select('users.name','education.updated_at','users.id','education.verification_status as verificationstatus','users.status')
+     ->select('users.name','users.updated_at','users.id','education.verification_status as verificationstatus','users.status','education.updated_at as reviewdate','education.cgpa')
      ->get();
 
+  
      $institute = DB::table('institute')->select('title','type','description')->get();
      //$educat = Document::all();
     return view('admin.application.index',compact('users','institute','fromdate','todate','university'));
@@ -157,10 +159,19 @@ class DocumentVerificationController extends Controller
 
 
         $courses = DB::table('courses')
-        ->where('courses.field','Business and Management')
-        ->orwhere('courses.field','Information Technology')
+        ->wherein('courses.field',['Business and Management','Information Technology'])
         ->select('courses.name','courses.id','courses.description','courses.institute')
         ->get();
+
+       }
+       elseif($cgpa >= '2.5'){
+
+
+        $courses = DB::table('courses')
+        ->wherein('courses.field',['Accounting and Finance','Economic and Development studies'])
+        ->select('courses.name','courses.id','courses.description','courses.institute')
+        ->get();
+        
 
        }
        
@@ -178,7 +189,7 @@ class DocumentVerificationController extends Controller
 
     }
     
-    public function send(Request $request,$id)
+    public function send(Request $request)
     {
 
 
@@ -186,6 +197,7 @@ class DocumentVerificationController extends Controller
 
         case 'send-eligibility':
 
+        $cgpa = $request->cgpa;
         $courseid = $request->course_id;
         $somename = 'somename';
         $id = $request->stu_id;
@@ -211,6 +223,15 @@ class DocumentVerificationController extends Controller
           'offer_generated' => 1,
       
         ]);
+
+        $review = review::create([
+
+           'stu_id' => $request->stu_id,
+          'cgpa' => $cgpa,
+          'offer_id' => json_encode($courseid),
+
+
+        ]);
         $course_offer=Studentcourseoffer::create([
           'stu_id'         => $request->stu_id,
           'offer_course_id'    => json_encode($courseid),
@@ -219,7 +240,7 @@ class DocumentVerificationController extends Controller
             {
                 $vals = array('stu_id'=>$val->stu_id,'edu_id'=>$val->id,'status'=> 2 );            
                 $docum->create($vals);
-                Education::where('id', $val->id)->update(array('verification_status' => 1));            
+                Education::where('id', $val->id)->update(array('verification_status' => 1,'cgpa' => $cgpa));            
             }
         //$id = 10;
         //$status = User::where('id', $id)->update(array('status' => 6));
@@ -257,7 +278,7 @@ class DocumentVerificationController extends Controller
             {
                 $vals = array('stu_id'=>$val->stu_id,'edu_id'=>$val->id,'status'=> 2 );            
                 $docum->create($vals);
-                Education::where('id', $val->id)->update(array('verification_status' => 3));            
+                Education::where('id', $val->id)->update(array('verification_status' => 3,'cgpa' => $cgpa));            
             }
             // $docum->stu_id =$request->stu_id;
             // $docum->status = $request->status;
@@ -281,16 +302,17 @@ class DocumentVerificationController extends Controller
       $search = "NULL";
       $university = $request->university;
 
+    
       $users = DB::table('users')
-     ->join('education','users.id','=','education.stu_id')
-     ->join('courseselections','courseselections.stu_id','=','users.id')
-     ->join('courses','courses.id','=','courseselections.studentSelCid')
-     ->select('users.name','education.updated_at','users.id')
-     ->where('users.user_role',2)
-     ->where('users.status',2)
-     ->whereBetween('education.updated_at',[$fromdate,$todate])
-     ->orWhere('courses.institute',$university)
+      ->join('education','users.id','=','education.stu_id')
+      ->where('users.user_role',2)
+      ->where('users.status',2)
+      ->select('users.name','users.updated_at','users.id','education.verification_status as verificationstatus','users.status','education.updated_at as reviewdate','education.cgpa')
+      ->whereBetween('users.updated_at',[$fromdate,$todate])
      ->get();
+
+      
+     
      //$educat = Document::all();
      $institute = DB::table('institute')->select('title','type','description')->get();
     return view('admin.application.index',compact('users','institute','fromdate','todate','search','university'));

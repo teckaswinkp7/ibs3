@@ -298,6 +298,12 @@
                <a href="#" class="dropdown-item">
           <p>Admin</p>
                </a>
+               <a href="{{route('role.index')}}" class="dropdown-item">
+          <p>User Roles</p>
+               </a>
+               <a href="{{route('officer.index')}}" class="dropdown-item">
+          <p>Add Officers</p>
+               </a>
           </div>
 </div>
 </div>
