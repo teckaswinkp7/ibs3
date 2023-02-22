@@ -75,10 +75,7 @@ class Officercontroller extends Controller
         $user->user_role = $request->user_role;
         $user->email = $request->email;
         $user->phone = $request->phone;
-        if($request->user_role == 3)
-        {
-            $user->is_email_verified = 1;
-        }
+        $user->is_email_verified = 1;
         $user->password = Hash::make($request->password);
         $user->save();
         return redirect()->route('officer.index')
