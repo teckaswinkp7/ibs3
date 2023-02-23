@@ -39,9 +39,8 @@
           $activeenrollment = DB::table('active_users')
           ->join('users','users.id','=','active_users.user_id')
           ->leftjoin('sponsors','sponsors.stu_id','=','users.id')
-          ->where('users.user_role','=','1')
-          ->orWhere('users.user_role','=','10')
-          ->orWhere('users.user_role','=','9')
+          ->where('users.user_role','!=','2')
+          ->orWhere('users.user_role','!=','3')
           ->get();
           $enrollment = DB::table('payment')->where('balance_due','0')->count();
           $payment = DB::table('payment')->where('amountdue','!=','balance_due')->count();
@@ -101,28 +100,31 @@
 
 </div>
 </div>
+
 <div class="col-md-4">
   <div class="card">
 <span>Active Enrollment Officer</span>
 <div class="card">
 <div class="card-body "> 
-
+@foreach($activeenrollment as $active)
 <div class="row">
 
 <div class="col-md-4">
 
-<div class="text-center" > <img src="{{asset('public/Image')}}/{{$activeenrollment[0]->user_image}}" alt="" width="50px" style="border-radius:50px;border:4px solid #fd7e14;"> </img>
+<div class="text-center" > <img src="{{asset('public/Image')}}/{{$active->user_image}}" alt="" width="50px" style="border-radius:50px;border:4px solid #fd7e14;"> </img>
 
 </div>
 </div>
+
 <div class="col-md-4">
 
-<div class="text-center" > {{ $activeenrollment[0]->name}}</div>
-<div class="text-center" > @if( $activeenrollment[0]->user_role == '1') Admin @else Enrollment Officer @endif </div>
+<div class="text-center" > {{ $active->name}}</div>
+<div class="text-center" style="width:200px;" > @if( $active->user_role == '1') Admin @else Enrollment Officer @endif </div>
 </div>
 
 </div>
-
+<hr></hr>
+@endforeach
 
 </div>
 </div>
