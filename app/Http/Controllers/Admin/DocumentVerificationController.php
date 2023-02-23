@@ -325,17 +325,19 @@ class DocumentVerificationController extends Controller
     public function searchname(Request $request){
 
       $search = $request->searchname;
+      $fromdate = "NULL";
+      $todate = "NULL";
 
       $users = DB::table('users')
-     ->join('education','users.id','=','education.stu_id')
-     ->select('users.name','education.updated_at','users.id')
+      ->join('education','users.id','=','education.stu_id')
+      ->select('users.name','users.updated_at','users.id','education.verification_status as verificationstatus','users.status','education.updated_at as reviewdate','education.cgpa')
      ->where('users.user_role',2)
      ->where('users.status',2)
      ->where('users.name','LIKE','%'.$search.'%')
      ->get();
      //$educat = Document::all();
      $institute = DB::table('institute')->select('title','type','description')->get();
-    return view('admin.application.index',compact('users','institute','search'));
+    return view('admin.application.index',compact('users','institute','search','fromdate','todate'));
 
 
 

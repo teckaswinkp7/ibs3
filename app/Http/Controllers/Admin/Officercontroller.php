@@ -121,14 +121,14 @@ class Officercontroller extends Controller
         $validator = $request->validate([
          //   'uid' => 'required',
             'email' => 'required|email',
-            'password' => 'required|min:6',
+            
         ]);
 
     $user = User::findOrFail($id);
  //   $user->uid =$request->uid;
     $user->user_role = $request->user_role;
     $user->email =$request->email;
-    $user->password = Hash::make($request->password);
+   
     $user->save();
     return redirect()->route('officer.index')
     ->with('success','User Has Been updated successfully');   

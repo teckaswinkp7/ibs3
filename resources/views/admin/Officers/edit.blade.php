@@ -27,7 +27,7 @@
                 <h3 class="card-title">Update User</h3>
               </div>
                <!-- /.card-header -->
-               <form action="{{ route('user.update',$user->id) }}" method="POST" enctype="multipart/form-data" class="mb-0" id="catform">  
+               <form action="{{ route('officer.update',$user->id) }}" method="POST" enctype="multipart/form-data" class="mb-0" id="catform">  
                 @csrf
                 {{ method_field('PUT') }}    
                     <div class="card-body">
@@ -74,7 +74,7 @@
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label>Password</label>
-                                <input type="password" value="{{ $user->password }}" name="password" class="form-control" readonly>
+                                <input type="password" value="***********" name="password" class="form-control" readonly>
                               </div>
                             </div> 
                             </div>
