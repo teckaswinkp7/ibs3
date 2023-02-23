@@ -266,17 +266,17 @@
                  
                  
                  <iframe 
-    src="{{url('public/Image')}}/{{ $user->id_image}}" 
+    src="{{url('public/public/Image')}}/{{ $user->id_image}}" 
     style="width:800px; height:500px;" 
     frameborder="0">
 </iframe>
 <iframe 
-    src="{{url('public/Image')}}/{{ $user->highest_qualification}}" 
+    src="{{url('public/public/Image')}}/{{ $user->highest_qualification}}" 
     style="width:800px; height:500px;" 
     frameborder="0">
 </iframe>
 <iframe 
-    src="{{url('public/Image')}}/{{ $user->course_syopsiy}}" 
+    src="{{url('public/public/Image')}}/{{ $user->course_syopsiy}}" 
     style="width:800px; height:500px;" 
     frameborder="0">
 </iframe>
