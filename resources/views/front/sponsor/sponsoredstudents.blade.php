@@ -107,7 +107,7 @@
 <table class="table">
     <tr>
         <form action="" method="get">
-    <th > <label for="date"> Date: </label> <input type='text' name="date"  class="datepicker form-control" placeholder="Date" ></input> </th>
+    <th > <label for="date"> Date: </label> <input type='date' name="date"  class=" form-control" placeholder="Date" ></input> </th>
     <th > <label>Course :</label>
         <select name="courseid" id='course' class="form-control" style="width:200px">
          <option value="">All</option>

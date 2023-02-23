@@ -202,6 +202,7 @@ class Sponsorstudentcontroller extends Controller
 
 
      // dd(Session::get('dataVal'));
+    
      
      $id = auth::id();
   
@@ -214,7 +215,7 @@ class Sponsorstudentcontroller extends Controller
         
       $stu_id = json_decode($selected);
 
-    //  dd($stu_id);
+    // dd($stu_id);
 
       $stid = implode(',',$stu_id);
 
@@ -224,9 +225,10 @@ class Sponsorstudentcontroller extends Controller
 
       //dd($deselct);
 
-     if($deselct != null){
+     if( $deselct != null AND $deselct != "null"   ){
 
         //dd($deselct);
+        
 
      $desel = json_decode($deselct);
 
@@ -274,7 +276,7 @@ class Sponsorstudentcontroller extends Controller
 
         //dd($deselct);
 
-    
+       
       
       $des = $der;
 
@@ -293,7 +295,7 @@ class Sponsorstudentcontroller extends Controller
 
        
 
-  //  dd($des);
+  // dd($des);
       
       $studentpayment = DB::table('users')
       ->whereIn('users.id',$des)
@@ -474,7 +476,7 @@ return view('front.sponsor.confirmsponsorpayment',compact('studentpayment'))->wi
         
       $stu_id = json_decode($selected);
 
-    //  dd($stu_id);
+    // dd($stu_id);
 
       $stid = implode(',',$stu_id);
 
@@ -482,9 +484,12 @@ return view('front.sponsor.confirmsponsorpayment',compact('studentpayment'))->wi
       
       $deselct = Session::get('deletedid');
 
-     if($deselct != null){
+      //dd($deselct);
 
-       // dd($deselct);
+     if( $deselct != null AND $deselct != "null"   ){
+
+        //dd($deselct);
+        
 
      $desel = json_decode($deselct);
 
@@ -495,6 +500,7 @@ return view('front.sponsor.confirmsponsorpayment',compact('studentpayment'))->wi
 
       $dest = array_diff($der,$deselctd);
 
+      //dd($dest);
      // print_r($dest);
         
         $destr = selectedstusession::updateOrCreate([
@@ -527,6 +533,17 @@ return view('front.sponsor.confirmsponsorpayment',compact('studentpayment'))->wi
     //  dd($des);
 
     }
+    elseif($deselct = "null"){
+
+        //dd($deselct);
+
+       
+      
+      $des = $der;
+
+    //  dd($des);
+
+    }
     else{
 
         $des = $der;
@@ -539,7 +556,7 @@ return view('front.sponsor.confirmsponsorpayment',compact('studentpayment'))->wi
 
        
 
-  //  dd($des);
+  // dd($des);
       
       $studentpayment = DB::table('users')
       ->whereIn('users.id',$des)
@@ -551,6 +568,19 @@ return view('front.sponsor.confirmsponsorpayment',compact('studentpayment'))->wi
       ->where('request_accepted','yes')
       ->where('payment.balance_due','!=','0')
       ->get();
+
+
+
+      
+      //dd($studentpayment);
+
+      //dump($student);
+
+      
+
+        
+      //  dd($selectedforpayment);
+
         return view('front.sponsor.onlinesponsorpayment',compact('studentpayment'))->with(Session::forget('deletedid'));
     }
 }
