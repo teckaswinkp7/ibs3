@@ -3,6 +3,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Courses;
 use App\Models\User;
+use App\Models\Role;
+use Session;
 use DB;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -33,6 +35,15 @@ class CoursesController extends Controller
     */
     public function index()
     {
+        
+        $datesessionfrom = Session::forget('fromdate');
+        $datesessionto = Session::forget('todate');
+        $studeylevelsession = Session::forget('studylevel');
+        $fieldsession = Session::forget('field');
+        $universitysession = Session::forget('institute');
+        $quali = Session::forget('qualification');
+
+
         $courses = DB::table('courses')->select('*')->paginate(5);
         $users = DB::table('users')
         ->join('education','users.id','=','education.stu_id')
@@ -50,6 +61,8 @@ class CoursesController extends Controller
         $studylevel = "";
         $university = "";
         $quali = "";
+        //$enrollmentplaces = DB::table('courseselections')->join('courses','courses.id','courseselections.studentSelCid')->where('courseselections.studentSelCid','courses.id')->count();
+        //dd($enrollmentplaces);
 
 
         
@@ -242,7 +255,12 @@ class CoursesController extends Controller
         $university = $request->institute;
         $quali = $request->qualification;
         
-
+         $datesessionfrom = Session::put('fromdate',$fromdate);
+         $datesessionto = Session::put('todate',$todate);
+         $studeylevelsession = Session::put('studylevel',$studylevel);
+         $fieldsession = Session::put('field',$category);
+         $universitysession = Session::put('institute',$university);
+         $qualifsession = Session::put('qualification',$quali);
 
             $courses = DB::table('courses')->select('*')
             
@@ -294,6 +312,11 @@ class CoursesController extends Controller
         $search = $request->search;
         $fromdate = $request->fromdate;
         $todate = $request->todate;
+        $category = "";
+        $studyperiod = "";
+        $studylevel = "";
+        $university = "";
+        $quali = "";
 
         $courses = DB::table('courses')->select('*')
         ->where('name','LIKE','%'.$search.'%')
@@ -305,10 +328,240 @@ class CoursesController extends Controller
        ->where('users.status',2)->get();
        $programme = DB::table('categories')->get();
        $studytype = DB::table('study_period')->get();
+       $institute = DB::table('university')->get();
+       $qualification = DB::table('programme')->get();
        
-       return view('admin.courses.index',compact('courses','users','programme','studytype','fromdate','todate'));
+       return view('admin.courses.index',compact('courses','users','programme','institute','qualification','studytype','fromdate','todate','university','quali','studylevel','studyperiod','category'));
 
 
 
     }
+
+
+    public function offer_accepted($id){
+
+
+       //dd($id);
+        $fromdate = Session::get('fromdate');
+        $todate = Session::get('todate');
+        $category = Session::get('field');
+        $studyperiod = "";
+        $studylevel = Session::get('studylevel');
+        $university = Session::get('institute');
+        $quali = Session::get('qualification');
+        $idsession = Session::put('id',$id);
+       
+        $data1['role']= Role::all();
+        DB::statement("SET SQL_MODE=''");
+        $registeredstudents = DB::table('users')
+        ->leftjoin('courseselections','users.id','=','courseselections.stu_id')
+        ->leftjoin('courses','courseselections.studentSelCid','=','courses.id')
+        ->join('payment','users.id','=','payment.stu_id')
+        ->where('courses.id',$id)
+        ->where('users.user_role', 2)
+        ->where('payment.balance_due','!=','0')
+        ->groupBy('users.id')  
+        ->select('users.*','courses.name as coursename') 
+        ->paginate(5);
+
+        
+
+        
+    
+        return view('admin.reports.offer_accepted',$data1,compact('registeredstudents','fromdate','todate','studylevel','category','university','quali'));
+    }
+
+
+
+
+    public function searchofferaccepted(Request $request){
+
+
+        $fromdate = $request->fromdate;
+        $todate = $request->todate;
+        $category = Session::get('field');
+        $studyperiod = "";
+        $studylevel = Session::get('studylevel');
+        $university = Session::get('institute');
+        $quali = Session::get('qualification');
+        $id = Session::get('id');
+
+       
+
+        $registeredstudents = DB::table('users')
+        ->leftjoin('courseselections','users.id','=','courseselections.stu_id')
+        ->leftjoin('courses','courseselections.studentSelCid','=','courses.id')
+        ->join('payment','users.id','=','payment.stu_id')
+        ->where('courses.id',$id)
+        ->where('users.user_role', 2)
+        ->where('payment.balance_due','!=','0')
+        ->groupBy('users.id')  
+        ->whereBetween('users.updated_at',[$fromdate,$todate])
+        ->groupBy('users.id')    
+        ->select('users.*','courses.name as coursename')  
+        ->paginate(5);
+
+
+        return view('admin.reports.offer_accepted',compact('registeredstudents','fromdate','todate','category','studyperiod','studylevel','university','quali'));
+
+
+
+    }
+
+
+    public function namesearchofferaccepted(Request $request){
+
+
+        $search = $request->search;
+
+        
+
+        $fromdate = "NULL";
+        $todate = "NULL";
+        $category = "";
+        $studyperiod = "";
+        $studylevel = "";
+        $university = "";
+        $quali = "";
+        $id = Session::get('id');
+
+        //dd($id);
+
+        $registeredstudents = DB::table('users')
+        ->leftjoin('courseselections','users.id','=','courseselections.stu_id')
+        ->leftjoin('courses','courseselections.studentSelCid','=','courses.id')
+        ->join('payment','users.id','=','payment.stu_id')
+        ->where('courses.id',$id)
+        ->where('users.user_role', 2)
+        ->where('payment.balance_due','!=','0')
+        ->where('users.name', 'LIKE','%'.$search.'%')  
+        ->select('users.*','courses.name as coursename')     
+        ->paginate(5);
+
+
+        return view('admin.reports.offer_accepted',compact('registeredstudents','fromdate','todate','category','studyperiod','studylevel','university','quali'));
+
+
+
+    }
+
+
+    public function exportUsers(Request $request){
+        
+        
+        return Excel::download(new ExportUser, 'users.xlsx');
+    }
+
+    public function enrolledusers($id){
+
+
+        //dd($id);
+         $fromdate = Session::get('fromdate');
+         $todate = Session::get('todate');
+         $category = Session::get('field');
+         $studyperiod = "";
+         $studylevel = Session::get('studylevel');
+         $university = Session::get('institute');
+         $quali = Session::get('qualification');
+         $idsession = Session::put('id',$id);
+        
+         $data1['role']= Role::all();
+         DB::statement("SET SQL_MODE=''");
+         $registeredstudents = DB::table('users')
+         ->leftjoin('courseselections','users.id','=','courseselections.stu_id')
+         ->leftjoin('courses','courseselections.studentSelCid','=','courses.id')
+         ->join('payment','users.id','=','payment.stu_id')
+         ->where('courses.id',$id)
+         ->where('users.user_role', 2)
+         ->where('payment.balance_due','=','0')
+         ->groupBy('users.id')  
+         ->select('users.*','courses.name as coursename') 
+         ->paginate(5);
+ 
+         
+           
+         
+     
+         return view('admin.reports.enrolledusers',$data1,compact('registeredstudents','fromdate','todate','studylevel','category','university','quali'));
+     }
+ 
+ 
+ 
+ 
+     public function searchenrolledusers(Request $request){
+ 
+ 
+         $fromdate = $request->fromdate;
+         $todate = $request->todate;
+         $category = Session::get('field');
+         $studyperiod = "";
+         $studylevel = Session::get('studylevel');
+         $university = Session::get('institute');
+         $quali = Session::get('qualification');
+         $id = Session::get('id');
+ 
+        
+ 
+         $registeredstudents = DB::table('users')
+         ->leftjoin('courseselections','users.id','=','courseselections.stu_id')
+         ->leftjoin('courses','courseselections.studentSelCid','=','courses.id')
+         ->join('payment','users.id','=','payment.stu_id')
+         ->where('courses.id',$id)
+         ->where('users.user_role', 2)
+         ->where('payment.balance_due','=','0')
+         ->groupBy('users.id')  
+         ->whereBetween('users.updated_at',[$fromdate,$todate])
+         ->groupBy('users.id')    
+         ->select('users.*','courses.name as coursename')  
+         ->paginate(5);
+ 
+ 
+         return view('admin.reports.enrolledusers',compact('registeredstudents','fromdate','todate','category','studyperiod','studylevel','university','quali'));
+ 
+ 
+ 
+     }
+ 
+ 
+     public function namesearchenrolledusers(Request $request){
+ 
+ 
+         $search = $request->search;
+ 
+         $fromdate = "NULL";
+         $todate = "NULL";
+         $category = "";
+         $studyperiod = "";
+         $studylevel = "";
+         $university = "";
+         $quali = "";
+         $id = Session::get('id');
+ 
+         $registeredstudents = DB::table('users')
+         ->leftjoin('courseselections','users.id','=','courseselections.stu_id')
+         ->leftjoin('courses','courseselections.studentSelCid','=','courses.id')
+         ->join('payment','users.id','=','payment.stu_id')
+         ->where('courses.id',$id)
+         ->where('users.user_role', 2)
+         ->where('payment.balance_due','=','0')
+         ->groupBy('users.id')  
+         ->where('users.name', 'LIKE','%'.$search.'%')
+         ->groupBy('users.id')   
+         ->select('users.*','courses.name as coursename')     
+         ->paginate(5);
+ 
+ 
+         return view('admin.reports.enrolledusers',compact('registeredstudents','fromdate','todate','category','studyperiod','studylevel','university','quali'));
+ 
+ 
+ 
+     }
+ 
+ 
+     public function exportenrolledUsers(Request $request){
+         
+         
+         return Excel::download(new ExportUser, 'users.xlsx');
+     }
+
 }

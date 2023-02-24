@@ -183,6 +183,15 @@ Route::get('application_export',[DocumentVerificationController::class, 'userexp
 Route::post('admin/screening/store', [ScreeningController::class, 'store'])->name('screening.store');
 Route::get('admin/screening/course/{id}', [ScreeningController::class, 'course'])->name('screening.course');
 Route::post('admin/subcat', 'App\Http\Controllers\Admin\CoursesController@subCat')->name('subcat');
+Route::get('admin/courses/offer_accepted/{id}', [CoursesController::class,'offer_accepted'])->name('reports.offer_accepted');
+Route::get('admin/courseselected/offer_accepted/search', [CoursesController::class,'searchofferaccepted'])->name('reports.searchofferaccepted');
+Route::get('admin/courseselected/offer_accepted/namesearch',[CoursesController::class,'namesearchofferaccepted'])->name('reports.namesearchofferaccepted');
+Route::get('admin/courses/exportusers',[CoursesController::class,'exportUsers'])->name('exportUsers');
+Route::get('admin/courses/enrolledusers/{id}', [CoursesController::class,'enrolledusers'])->name('reports.enrolledusers');
+Route::get('admin/courseselected/enrolledusers/search', [CoursesController::class,'searchenrolledusers'])->name('reports.searchenrolledusers');
+Route::get('admin/courseselected/enrolledusers/namesearch', [CoursesController::class,'namesearchenrolledusers'])->name('reports.namesearchenrolledusers');
+Route::get('admin/courses/exportenrolledusers',[CoursesController::class,'exportUsers'])->name('exportUsers');
+
 Route::get('admin/search', [CoursesController::class, 'searchcoursedate'])->name('courses.searchcoursedate');
 Route::get('admin/searchcourse', [CoursesController::class, 'coursesearch'])->name('courses.coursesearch');
 Route::get('education-profile', [EducationController::class, 'index']);
@@ -360,7 +369,4 @@ Route::get('front/studentexam/show/{id}', 'App\Http\Controllers\Front\StudentExa
 Route::get('admin/reports/documented', 'App\Http\Controllers\Admin\Reportingcontroller@index')->name('reports.documented');
 Route::get('admin/reports/offerd', 'App\Http\Controllers\Admin\Reportingcontroller@offer')->name('reports.offerd');
 Route::get('admin/reports/invoice', 'App\Http\Controllers\Admin\Reportingcontroller@sent_invoice')->name('reports.invoice');
-Route::get('admin/reports/offer_accepted', 'App\Http\Controllers\Admin\Reportingcontroller@offer_accepted')->name('reports.offer_accepted');
-Route::get('admin/reports/offer_accepted/search', 'App\Http\Controllers\Admin\Reportingcontroller@searchofferaccepted')->name('reports.searchofferaccepted');
-Route::get('admin/reports/offer_accepted/namesearch', 'App\Http\Controllers\Admin\Reportingcontroller@namesearchofferaccepted')->name('reports.namesearchofferaccepted');
-Route::get('admin/reports/exportusers',[Reportingcontroller::class,'exportUsers'])->name('exportUsers');
+

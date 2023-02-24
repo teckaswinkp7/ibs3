@@ -10,7 +10,7 @@
           <div class="col-sm-6">
           
             
-            <h3 class="card-title">Offer List Panel</h3>
+            <h3 class="card-title">Enrolled List Panel</h3>
           
           </div>
           <div class="col-sm-6">
@@ -52,7 +52,7 @@
               <table class="table col-md-8 tableheight">
     <tr style="border-top:none;" >
     
-        <form action="{{route('reports.searchofferaccepted')}}" method="get">
+        <form action="{{route('reports.searchenrolledusers')}}" method="get">
 
           <th > </th>
           <th > <label for="fromdate"> From Date: </label> <input style="width:150px" type='date' name="fromdate" value="{{$fromdate}}"   class="datepicker form-control" placeholder="Date" ></input></th>
@@ -64,7 +64,7 @@
          </select> </th>
          <th style="vertical-align:bottom;"> <button class="btn btn-primary btnreview" value="filter" type="submit" name="paybutton" style=" padding: 5px 15px; background-color: #cc6600; border-color:#cc6600; color: white; margin-top:30px; margin-left:5px; margin-right:5px;"> Apply </button> </th>
 </form>   
-<form action="{{route('reports.namesearchofferaccepted')}}" method="GET">
+<form action="{{route('reports.namesearchenrolledusers')}}" method="GET">
         <th style="vertical-align:bottom;"><label> Search: </label> <div class="input-group">
       <input  placeholder="search here" class="form-control py-1" type="search" name="search" value="" id="example-search-input">
       <span class="input-group-append">

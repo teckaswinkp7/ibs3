@@ -131,6 +131,7 @@
       <th></th>
     </tr>
   </thead>
+ 
   <?php $_SESSION['i'] = 0; ?>   
     @foreach ($courses as $course)
     <?php $_SESSION['i']=$_SESSION['i']+1; ?>
@@ -141,8 +142,8 @@
       <td>{{$course->start_date}}</td>
       <td>{{ $course->name }}</td>
       <td>{{ strip_tags(Str::limit($course->description,30,'...')) }}</td>
-      <td> </td>
-      <td> <a href="{{route('user.create')}}"><button class="btnreview"> <i class="fa-regular fa-user backgroundclass"></i></a></button> <a href="{{route('reports.offer_accepted')}}"><button class="btnreview"> <i class="fa-solid fa-hourglass-start backgroundclass"></i></a></button>&nbsp;<a href="{{route('user.create')}}"><button class="btnreview"> <i class="fa-solid fa-plus backgroundclass"></i></a></button> </td>
+      <td></td>
+      <td> <a href="{{route('reports.enrolledusers',$course->id)}}"><button class="btnreview"> <i class="fa-regular fa-user backgroundclass"></i></a></button> <a href="{{route('reports.offer_accepted',$course->id)}}"><button class="btnreview"> <i class="fa-solid fa-hourglass-start backgroundclass"></i></a></button>&nbsp;<a href="{{route('user.create')}}"><button class="btnreview"> <i class="fa-solid fa-plus backgroundclass"></i></a></button> </td>
       @endforeach
       <?php unset($_SESSION['i']); ?>    
 </tbody>

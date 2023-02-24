@@ -164,7 +164,7 @@ class Sponsorstudentcontroller extends Controller
       $filterdate = Session::put('date',$request->date);
       $filtercourse = Session::put('courseid',$request->courseid);
 
-      
+      //dd($request->sponsored);
          
         switch($request->paybutton){
             case 'online':
@@ -223,9 +223,9 @@ class Sponsorstudentcontroller extends Controller
       
       $deselct = Session::get('deletedid');
 
-      //dd($deselct);
+     // dd($deselct);
 
-     if( $deselct != null AND $deselct != "null"   ){
+     if( $deselct != null AND $deselct != "null"  ){
 
         //dd($deselct);
         
@@ -236,10 +236,12 @@ class Sponsorstudentcontroller extends Controller
 
       $deselctd = explode(',',$ddl);
 
+       //dd($deselctd);
 
       $dest = array_diff($der,$deselctd);
 
-      //dd($dest);
+     //dd($dest);
+    
      // print_r($dest);
         
         $destr = selectedstusession::updateOrCreate([
@@ -256,6 +258,7 @@ class Sponsorstudentcontroller extends Controller
 
       $updatedsel = selectedstusession::select('selstu')->where('sponsorid',$id)->get();
 
+      
 
       $updatedselstu = $updatedsel[0]->selstu;
 
@@ -295,7 +298,7 @@ class Sponsorstudentcontroller extends Controller
 
        
 
-  // dd($des);
+  //dd($des);
       
       $studentpayment = DB::table('users')
       ->whereIn('users.id',$des)
@@ -347,6 +350,14 @@ return view('front.sponsor.confirmsponsorpayment',compact('studentpayment'))->wi
                
             return redirect()->route('confirmsponsorpayment');
             break;
+            case 'deselect2':
+               
+                $deselctd = Session::put('deletedid',json_encode($request->derid));
+                
+              //dd(Session::get('deletedid'));
+                
+             return redirect()->route('onlinesponsorpayment');
+             break;
             case 'reciept':
 
                 $request->validate([
@@ -471,7 +482,7 @@ return view('front.sponsor.confirmsponsorpayment',compact('studentpayment'))->wi
         $sel = selectedstusession::select('selstu')->where('sponsorid',$id)->get();
 
         $selected = $sel[0]->selstu;
-       // dd($selected);
+       //dd($selected);
         
         
       $stu_id = json_decode($selected);
@@ -482,13 +493,14 @@ return view('front.sponsor.confirmsponsorpayment',compact('studentpayment'))->wi
 
       $der = explode(',',$stid);
       
-      $deselct = Session::get('deletedid');
+     //dd($der);
+      $deselct = Session::forget('deletedid');
 
       //dd($deselct);
 
-     if( $deselct != null AND $deselct != "null"   ){
+     if( $deselct != null   ){
 
-        //dd($deselct);
+       // dd($deselct);
         
 
      $desel = json_decode($deselct);
@@ -500,7 +512,7 @@ return view('front.sponsor.confirmsponsorpayment',compact('studentpayment'))->wi
 
       $dest = array_diff($der,$deselctd);
 
-      //dd($dest);
+     // dd($ddl);
      // print_r($dest);
         
         $destr = selectedstusession::updateOrCreate([

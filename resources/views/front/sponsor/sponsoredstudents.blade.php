@@ -87,7 +87,7 @@
     <div class="total-amount">
         <div class="row">
         <div>
-        <button type="submit" class="col-md-4 button float-right" style="margin-bottom:10px;" name="paybutton" value="online" > <a href="onlinesponsorpayment"> Pay </button></a>  
+        <button type="submit" class="col-md-4 button float-right" style="margin-bottom:10px;" name="paybutton" value="online" >  Pay </button>
 </div>    
         <div class="col-md-4">
         <input class="styletotal" id="total" disabled></input>

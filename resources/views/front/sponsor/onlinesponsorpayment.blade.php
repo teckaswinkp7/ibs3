@@ -142,7 +142,7 @@ input:before{
   <td>
   
   <div class="form-group">
-  <button type="submit"  data-id="{{$st->stu_id}}" class="deleteRecord" name="confirmsponsorpay" value="deselect" >
+  <button type="submit"  data-id="{{$st->stu_id}}" class="deleteRecord" name="confirmsponsorpay" value="deselect2" >
   <input class="checkboxx minus"  type="checkbox" name="derid[]" value="{{$st->balance_due}},{{$st->stu_id}}" ></input> 
     </button>
     </div>
