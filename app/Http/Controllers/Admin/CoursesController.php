@@ -112,7 +112,7 @@ class CoursesController extends Controller
             'slug' => 'string|required',
             'start_date' => 'required',
             'field' => 'string|required',
-            'programme'
+            'price' =>'required|unique:courses',
 
 
         ]);
@@ -136,7 +136,8 @@ class CoursesController extends Controller
             'institute' => $request->institute,
             'programme' => $request->prog,
             'short_description' => $request->short_description,
-            'description' =>$request->description
+            'description' =>$request->description,
+            'price'       => $request->price
 
 
 

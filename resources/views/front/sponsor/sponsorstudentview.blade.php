@@ -46,9 +46,9 @@
     <p class="inst">Instruction: Confirm those students that you will sponsor fundings from the following list by clicking on the “Accept” Button. If you decline a student, the student will be removed from your list to sponsor. Those whom you will accept will move from this list to the Payment list awaiting funding​</p>
     <tr class="filt">
         <form action="" method="get">
-        <th > <label for="date"> Date: </label> <input type='date' name="date"  class=" form-control" placeholder="Date" ></input> </th>
+        <th > <label for="date"> Date: </label> <input type='date' name="date"  class=" form-control" placeholder="Date"  ></input></th>
         <th> <label>Course :</label>
-         <select name="courseid" id='course' class="form-control" style="width:200px">
+         <select name="courseid" id='course' class="form-control" style="width:150px">
          <option value="">All</option>
          @foreach($courses as $course)
         <option  value="{{$course->id}}" >{{$course->name}} </option>
@@ -57,19 +57,21 @@
          </th>
 
         <th> <label>Institute:</label>
-         <select id='institute' class="form-control" style="width:200px">
+         <select id='institute' name="institute" class="form-control" style="width:100px">
          <option value="">All</option>
-         <option value="ibsuniversity">IBS University</option>
-         <option value="southerncrossuniversity">Southern Cross University</option>
+         @foreach($institute as $inst)
+         <option value="ibsuniversity">{{$inst->univ_name}}</option>
+         @endforeach
          </select> </th>
 
         <th> <label>Type of Student:</label>
-         <select id='typeofstudent' class="form-control" style="width:210px">
+         <select id='typeofstudent' class="form-control" style="width:150px">
          <option value="">All</option>
          <option value="1">Active</option>
          </select></th>
 <th> <button class="btn btn-primary" type="submit"  style=" padding: 5px 15px; background-color: #cc6600; border-color:#cc6600; color: white; margin-top:20px; margin-left:5px; margin-right:5px;"> Apply </button> </th>
         </form>
+
         <form action="">
         <th> <label for="search"> Search: </label><div class="input-group">
       <input class="form-control py-2" type="search" name="search" value="{{$search}}" id="example-search-input">

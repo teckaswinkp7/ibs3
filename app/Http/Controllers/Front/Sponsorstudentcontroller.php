@@ -57,8 +57,9 @@ class Sponsorstudentcontroller extends Controller
  catch(\Exception $exception){
 
     $courses = Courses::all();
+    $institute = DB::table('university')->get();
 
-     return view('front.sponsor.sponsorstudentviewerror',compact('courses'));
+     return view('front.sponsor.sponsorstudentviewerror',compact('courses','institute'));
  }
 
  //dd($sponsorstudentdata);
@@ -69,7 +70,7 @@ class Sponsorstudentcontroller extends Controller
      
 
     $courses = Courses::all();
-
+    $institute = DB::table('university')->get();
 
       
 
@@ -78,7 +79,7 @@ class Sponsorstudentcontroller extends Controller
     
    //  dd($stdata);
      
-        return view('front.sponsor.sponsorstudentview',compact('sponsorstudentdata','search','courses'));
+        return view('front.sponsor.sponsorstudentview',compact('sponsorstudentdata','search','courses','institute'));
     }
 
 

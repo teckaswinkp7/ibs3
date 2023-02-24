@@ -33,18 +33,9 @@
       <div class="container-fluid">
         <div class="row">
         <div class="col-md-4">
-            <p style="font-size:15px;"> Main Filter Summary </p>
+            <p style="font-size:15px;">  Filter </p>
             <div class="card">
-                <div class="card-body cardcolor" style="font-size:10px;">
-               
-                <p > Institute: </p>
-                <p> Qualification: </p>
-                <p> Date Range: </p>
-                <p> Programme:  </p>
-                <p> Study Period:  </p> 
-                <p> Level of Study: </p>
-
-                </div>
+             
 
 </div>
 </div>
@@ -100,16 +91,16 @@
     </tr>
   </thead>
   <?php $_SESSION['i'] = 0; ?>   
-  @foreach ($paymentlist as $user)
+  @foreach ($paymentlist as $userlist)
     <?php $_SESSION['i']=$_SESSION['i']+1; ?>
   <tbody>
   <form action="" method="post" enctype="multipart/form-data">
         @csrf  
       <td>{{$_SESSION['i']}}</td>
-      <td>{{ $user->name }} </td>
+      <td>{{ $userlist->name }} </td>
       <td></td>
       <td></td>
-      @if( $user->offer_accepted == 'yes')
+      @if( $userlist->offer_accepted == 'yes')
       <td> Offer Accepted </td>
       @else
       <td> Pending Acceptance </td>
@@ -126,8 +117,8 @@
 </tfoot>
    
 </table>
-<div class="ml-auto">
-
+<div id="orange" class="ml-auto">
+{!! $paymentlist->links() !!} 
 </div>
 
      
@@ -192,6 +183,7 @@ cursor: pointer;
     margin-top:60px;
    
 }
+
 
   </style>
 </html>  

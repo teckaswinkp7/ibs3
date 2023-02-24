@@ -125,6 +125,16 @@
                           </div>
                         </div>
                         <div class="col-md-12">
+                          <div class="form-group">
+                            <label>Course Price <span class="required">*</span></label>
+                            <input type="text" name="price" id="@if ($errors->has('price')) inputError @endif" class="form-control @if ($errors->has('price')) is-invalid @endif" 
+                            placeholder="Course ID">
+                            @error('price')
+                            <span class="error invalid-feedback">{{ $message }}</span>
+                             @enderror
+                          </div>
+                        </div>
+                        <div class="col-md-12">
                             <div class="form-group">
                               <label>Short Description<span class="required">*</span></label>
                               <textarea class="ckeditor form-control" name="short_description" placeholder="Short Description">
