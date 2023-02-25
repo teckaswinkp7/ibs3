@@ -30,8 +30,8 @@
                 @csrf
 
                 <div>
-        <label for="email">I am a <span style="color:red !important;font-weight:700;">*</span></label>
-        <select id="user_role" class="form-select form-select-lg mb-3" name="user_role">
+        <label for="email">I am a <span style="color:red !important;">*</span></label>
+        <select id="user_role" class="form-select" name="user_role">
           <option value="2">Student</option>
           <option value="3">Sponsor</option>
         </select>  

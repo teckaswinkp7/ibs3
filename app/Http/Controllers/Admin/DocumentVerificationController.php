@@ -28,7 +28,7 @@ class DocumentVerificationController extends Controller
         $this->middleware('auth');
         $this->middleware(function ($request, $next) {
             $this->id = Auth::user()->user_role;
-            if($this->id != 1)
+            if($this->id == 2 AND $this->id == 3)
             {
                 return redirect('unauthorized');
                 die();
@@ -38,6 +38,7 @@ class DocumentVerificationController extends Controller
             }
             
         });
+        $this->middleware('permission:application-list', ['only' => ['index']]);
     }
     //
     public function index()
@@ -151,9 +152,11 @@ class DocumentVerificationController extends Controller
        },$a));
 
  
-       $cgpa = array_sum($newarray)/$gradelength;
+       $cgpa1 = array_sum($newarray)/$gradelength;
 
-      
+       $cgpa = number_format((float)($cgpa1), 2);
+
+       //dd($cgpa);
 
        if($cgpa <= '2'){
 

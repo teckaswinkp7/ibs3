@@ -63,6 +63,7 @@ class AuthController extends Controller
                 Session::flash('alert-class', 'alert-danger');
                 return redirect("admin\login");
             }
+
             else
             {
                 Session::flash('message', 'You are not authorized!'); 

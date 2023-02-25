@@ -199,6 +199,14 @@ class EducationController extends Controller
         $board = $request->qualification;
         $percentage = 67;
 
+        $request->validate([
+
+            'id_image' => 'required|mimes:pdf,png,jpeg|max:10000',
+            'highest_qualification'=> 'required|mimes:pdf,png,jpeg|max:10000',
+            'course_syopsiy' =>'required|mimes:pdf,png,jpeg|max:10000'
+
+        ]);
+
         $id_images = $request->file('id_image');
         $id_image = str_replace(' ', '', $id_images->getClientOriginalName());
         $id_image_file = date('YmdHi').$id_image;        

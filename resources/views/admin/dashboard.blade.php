@@ -119,7 +119,7 @@
 <div class="col-md-4">
 
 <div class="text-center" > {{ $active->name}}</div>
-<div class="text-center" style="width:200px;" > @if( $active->user_role == '1') Admin @else Enrollment Officer @endif </div>
+<div class="text-center" style="width:200px;" > @if( $active->user_role == '1') Super Admin @else Enrollment Officer @endif </div>
 </div>
 
 </div>

@@ -48,7 +48,7 @@
                 {{-- <input type="email" name="email" id="email" class="form-control" placeholder="Email" data-val-required="Please fill up the details" data-val="true">
                   <span data-valmsg-for="email" class="field-validation-valid text-danger" data-valmsg-replace="true"></span>  --}}
                 <div class="upload-ps">
-                    <label>Upload your passport size ID image</label>
+                    <label>Upload your passport size ID image.(upload pdf png or jpeg format)</label>
                     <input style="display:block" type="file" id="my-file" name="id_image" data-val-required="Please fill up the details" data-val="true">
                     {{-- <button type="button" onclick="document.getElementById('my-file').click()">Upload your passport size ID image</button> --}}
                     <span data-valmsg-for="id_image" class="field-validation-valid text-danger" data-valmsg-replace="true"></span> 
