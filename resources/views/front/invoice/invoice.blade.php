@@ -75,7 +75,7 @@ font-weight:bold;
 <body>
 
   <div class="congrats-letter">
-                        <img class="float-right" src="{{asset('assets/front/images/IBS-Logo.png')}} " alt="" width="150px"></img>
+                        <img class="float-right" src="{{asset('assets/custom/profile-logo.png')}} " alt="" width="150px"></img>
                         </br>
                         </br>
                             <h4> Pro Forma Invoice : {{$invoicedata[0]->invoiceno}}</h4>
