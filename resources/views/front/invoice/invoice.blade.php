@@ -7,75 +7,18 @@
 
 <style>
 
-.edit-course {
-    display: block;
-    height: 100%;
-    padding: 12px;
-    text-decoration: none;
-    margin-bottom: 6px;
-    border-radius: 6px;
-    line-height:5px;
-    color: rgba(0, 0, 0, 0.8);
-    background-color: rgba(255, 255, 255, 0.8);
-    transition: all .3s ease;
-    border: 1px solid #d9d9d9;
-   }
+@include('front.invoice.style');
 
-   .congrats-letter{
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.6);
-    border-radius: 6px;
-   }
-
-   .congrats-letter ul{
-    list-style: number;
-   }
-   .print-download-btn{
-    margin-top: 30px;
-   }
-
-    .print-download-btn button{
-    padding: 3px 6px;
-    background-color: #cc6600;
-    color: white;
-    transition: background .4s ease;
-    border: none;
-}
-
-.print-download-btn button:hover{
-    background-color: black;
-    color: white;
-
-}
-
-.total{
-font-weight:bold;
-}
-
-.edit-btn{
-
-    position:relative;
-    bottom:60px;
-    padding: 15px 20px;
-    background-color: #cc6600;
-    color:white;
-
-}
-
-.edit-btn > a {
-    color:white;
-    text-decoration:none;
-}
 </style>
-<link type="text/css" rel="stylesheet" href="{{asset('assets/front/css/bootstrap.min.css')}}">
-<link type="text/css" rel="stylesheet" href="{{asset('assets/front/css/jquery-ui.css')}}">
+
+<link type="text/css" rel="stylesheet" media="all" href="{{asset('assets/front/css/bootstrap.min.css')}}">
+<link type="text/css" rel="stylesheet" media="all" href="{{asset('assets/front/css/jquery-ui.css')}}">
       
 </head>
 <body>
 
   <div class="congrats-letter">
-                        <img class="float-right" src="{{asset('assets/custom/profile-logo.png')}} " alt="" width="150px"></img>
+                        <img class="float-right" src="{{asset('assets/front/images/IBS-Logo.png')}}" alt="" width="150px"></img>
                         </br>
                         </br>
                             <h4> Pro Forma Invoice : {{$invoicedata[0]->invoiceno}}</h4>
@@ -173,18 +116,12 @@ $total = 0;
     </div>
 </div>
 @endforeach 
-<div class="total">
-<div  class="field total">
-    Total Amount Payable:   <span id="total" name="total"  class="float-right">
 
-             {{$total}}
-
-
-         </span>
+<div  class="field total">Total Amount Payable:<span id="total" name="total"  class="float-right" >{{$total}} K</span>
 
     
 </div>
-    </div> 
+     
     
 
 
