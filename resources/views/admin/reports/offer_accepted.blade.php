@@ -35,8 +35,8 @@
             <div class="card">
                 <div class="card-body cardcolor" style="font-size:10px;">
                
-                <p > Institute:{{$university}} </p>
-                <p> Qualification:{{$quali}} </p>
+                <p > Institute: {{$university}} </p>
+                <p> Qualification: {{$quali}} </p>
                 <p> Date Range: {{$fromdate}} to {{$todate}} </p>
                 <p> Programme: {{$category}} </p>
                 <p> Study Period:  {{$studylevel}}</p> 

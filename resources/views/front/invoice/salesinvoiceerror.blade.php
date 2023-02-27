@@ -83,6 +83,7 @@ background: #488e2b;
                </div>
             </div>
             </div>
+            <h3> Sales Invoice </h3>
             <div class="row">
             <div class="col-sm-3">
                 <nav class="profile-course">
@@ -99,11 +100,11 @@ background: #488e2b;
 </div>
 
             <div class="col-sm-8">
-            <h3> Sales Invoice </h3>
+           
             <div class="select-course">
     
 </br>
-            <h5> Please create Proforma Invoice for requesting sales invoice. </h5>
+            <p> Please create Proforma Invoice for requesting sales invoice. </p>
                     
                 </div>
 

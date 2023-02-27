@@ -121,7 +121,7 @@ background: #488e2b;
             <div class="select-course">
     
 </br>
-            <h5> Please select the course for creating Proforma Invoice </h5>
+            <p> Please select the course for creating Proforma Invoice <p>
                     
                 </div>
 
