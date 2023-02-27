@@ -228,7 +228,11 @@ $(".custom-file-input").on("change", function() {
     $('.price').each(function(){
         total += parseFloat(this.innerHTML)
     });
-    $('#total').text(total);
+    const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'PGK',
+});
+    $('#total').text(formatter.format(total));
 }
 
 getTotal();
@@ -244,7 +248,11 @@ getTotal();
          }
 
     });
-    $('#total2').text(sum);
+    const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'PGK',
+});
+    $('#total2').text(formatter.format(sum));
 });
 
 

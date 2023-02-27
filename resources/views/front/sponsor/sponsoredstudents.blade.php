@@ -197,9 +197,18 @@
       var total = 0;
       $('input:checkbox:checked').each(function(){
        total += isNaN(parseInt($(this).val())) ? 0 : parseInt($(this).val());
-      });   
+
+
+      });  
+      const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'PGK',
+});
+
+
+      
   
-      $("#total").val(total);
+      $("#total").val(formatter.format(total));
 
 });
 </script>
