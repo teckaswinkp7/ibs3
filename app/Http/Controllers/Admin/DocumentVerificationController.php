@@ -38,7 +38,7 @@ class DocumentVerificationController extends Controller
             }
             
         });
-        $this->middleware('permission:application-list', ['only' => ['index']]);
+      
     }
     //
     public function index()
