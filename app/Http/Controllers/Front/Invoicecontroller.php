@@ -193,6 +193,7 @@ class Invoicecontroller extends Controller
         $pdf = \PDF::loadView('front.invoice.invoice',compact('student_course_offer','user','exist','location','communication','invoicedata','selectedcourse','unitsData','courseData'));
         $path = public_path('pdf');
         $pdf->save($path.'/'.$name.'salesinvoice.pdf', $pdf->output());
+        $pdf->set_option('isRemoteEnabled',TRUE);
         $dbstore = payment::updateOrCreate([
 
             'stu_id'=> auth::id(),
