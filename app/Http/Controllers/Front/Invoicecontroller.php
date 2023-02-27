@@ -190,10 +190,9 @@ class Invoicecontroller extends Controller
         $communication = User::where('id',$id)->select('email','phone')->first();        
         $student_course_offer= Courseselection::select("courses.name as courses_name")->join("courses","courses.id", "=", "courseselections.studentSelCid")->where('courseselections.stu_id','=',$id)->get();
 
-        $pdf = \PDF::loadView('front.invoice.invoice',compact('student_course_offer','user','exist','location','communication','invoicedata','selectedcourse','unitsData','courseData'));
+        $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('front.invoice.invoice',compact('student_course_offer','user','exist','location','communication','invoicedata','selectedcourse','unitsData','courseData'));
         $path = public_path('pdf');
         $pdf->save($path.'/'.$name.'salesinvoice.pdf', $pdf->output());
-        $pdf->set_option('isRemoteEnabled',TRUE);
         $dbstore = payment::updateOrCreate([
 
             'stu_id'=> auth::id(),
