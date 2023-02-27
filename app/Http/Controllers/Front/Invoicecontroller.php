@@ -189,7 +189,13 @@ class Invoicecontroller extends Controller
         $location = Profile::where('stu_id',$id)->select('current_location','current_address_location')->first();
         $communication = User::where('id',$id)->select('email','phone')->first();        
         $student_course_offer= Courseselection::select("courses.name as courses_name")->join("courses","courses.id", "=", "courseselections.studentSelCid")->where('courseselections.stu_id','=',$id)->get();
-
+        $contxt = stream_context_create([ 
+            'ssl' => [
+                'verify_peer' => FALSE,
+                'verify_peer_name' => FALSE,
+                'allow_self_signed'=> TRUE
+            ]
+        ]);
         $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('front.invoice.invoice',compact('student_course_offer','user','exist','location','communication','invoicedata','selectedcourse','unitsData','courseData'));
         $path = public_path('pdf');
         $pdf->save($path.'/'.$name.'salesinvoice.pdf', $pdf->output());
