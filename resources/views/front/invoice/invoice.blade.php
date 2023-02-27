@@ -80,7 +80,7 @@ $total = 0;
    $price = json_decode('data');           
   echo $data[0]->unit_price;
   $total = $total + $data[0]->unit_price;
-@endphp    
+@endphp K   
     </div>
 </div>
 @endforeach 
@@ -96,7 +96,7 @@ $total = 0;
     $data = DB::table('sem')->select('price')->where('name',$semester)->get();           
   echo $data[0]->price;
   $total = $total + $data[0]->price;
-@endphp   
+@endphp   K
     </div>
 </div>
 @endforeach 
@@ -112,7 +112,7 @@ $total = 0;
      $price = json_decode('data');
      echo $data[0]->price;
      $total = $total + $data[0]->price;
-     @endphp
+     @endphp K
     </div>
 </div>
 @endforeach 

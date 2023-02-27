@@ -98,7 +98,7 @@
       <td>{{$user->id}}</td>
       <td>{{ $user->name }} </td>
       <td>{{$user->coursename}}</td>
-      <td>{{$user->amountdue}}</td>
+      <td>{{$user->amountdue}} K</td>
       @if($user->balance_due == '0')
       <td>Payment completed</td>
       @elseif($user->balance_due < $user->amountdue)

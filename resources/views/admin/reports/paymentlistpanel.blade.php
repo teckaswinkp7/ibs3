@@ -94,8 +94,8 @@
       <td>{{ $user->name }} </td>
       <td>{{$user->coursename}}</td>
       <td>{{$user->updated_at->format('d/m/y')}}</td>
-      <td> {{$user->amountdue}}</td>
-     <td>{{$user->balance_due}} </td>
+      <td> {{$user->amountdue}} K</td>
+     <td>{{$user->balance_due}} K </td>
      <td><input name="amountpaid" type="text" style="width:50px;"> </input> <div class="custom-file">
     <input style="width:0px;" type="file" class="custom-file-input" id="customFile">
     <label class="custom-file-label" for="customFile">Choose file</label>

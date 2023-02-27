@@ -86,6 +86,7 @@
     <span style="top:60px;"> Accumilative Invoice Total: <span>
     <div class="total-amount">
         <div class="row">
+            
         <div>
         <button type="submit" class="col-md-4 button float-right" style="margin-bottom:10px;" name="paybutton" value="online" >  Pay </button>
 </div>    
@@ -171,7 +172,7 @@
       <td>{{$st->invoiceno}}</td>
       <td></td>
       <td>-</td>
-      <td>{{$st->balance_due}}</td>
+      <td>{{$st->balance_due}} K</td>
       <tbody>
       @endforeach
         

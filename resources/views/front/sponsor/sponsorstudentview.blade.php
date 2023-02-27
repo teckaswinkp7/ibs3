@@ -146,7 +146,7 @@
       <td>{{$course}}</td>
       <td>{{$date}}</td>
       <td><a href="{{url('public/pdf')}}/{{$invoicefile}}" target="_blank">{{$invoice}}</a></td>
-      <td>{{$amountdue}}</td>
+      <td>{{$amountdue}} K</td>
       <td>{{$institute}}</td>
       <td>-</td>
     <td><button type="submit" value="yes" name="request_accepted" class="col-md-6 btn btn-success"><i class="fa-solid fa-check"></i></button><button type="submit" name="request_accepted" value="no" class="col-md-4 btn btn-danger"style="margin-left:5px;" ><i class="fa-solid fa-xmark" style="margin-right:30px;"></i></button></td>

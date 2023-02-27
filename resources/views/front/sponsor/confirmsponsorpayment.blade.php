@@ -159,7 +159,7 @@ input:before{
       <td>{{$st->invoiceno}}</td>
       <td>-</td>
       <td>{{$st->status}}</td>
-      <td class="price" name="totalamount" value="{{$st->balance_due}}">{{$st->balance_due}} </td>
+      <td class="price" name="totalamount" value="{{$st->balance_due}}">{{$st->balance_due}} K</td>
       <td><input class="price2" name="amount[]" value="" type="text">  </input></td>
 
 </tbody>
@@ -172,8 +172,8 @@ input:before{
       <td> </td>
       <td> </td>
       <td> </td>
-      <td> <strong> Total: </strong></td>
-      <td id="total"> </td>
+      <td> <strong> Total:  </strong></td>
+      <td id="total">  </td>
       <td name="amount_paid" id="total2"  class="strong"> </td>
 
 </tfoot>

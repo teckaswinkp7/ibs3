@@ -337,7 +337,7 @@ background: #488e2b;
                        $price = json_decode('data');           
                       echo $data[0]->unit_price;
                       $total = $total + $data[0]->unit_price;
-                    @endphp    
+                    @endphp K
                         </div>
                     </div>
                     @endforeach 
@@ -353,7 +353,7 @@ background: #488e2b;
                         $data = DB::table('sem')->select('price')->where('name',$semester)->get();           
                       echo $data[0]->price;
                       $total = $total + $data[0]->price;
-                    @endphp   
+                    @endphp  K
                         </div>
                     </div>
                     @endforeach 
@@ -369,7 +369,7 @@ background: #488e2b;
                          $price = json_decode('data');
                          echo $data[0]->price;
                          $total = $total + $data[0]->price;
-                         @endphp
+                         @endphp K
                         </div>
                     </div>
                  @endforeach 
@@ -378,7 +378,7 @@ background: #488e2b;
                     <div  class="field total">
                         Total Amount Payable:   <span id="total" name="total"  class="col-xs-5 float-right">
                     
-                                 {{$total}}
+                                 {{$total}} K
 
 
                              </span>

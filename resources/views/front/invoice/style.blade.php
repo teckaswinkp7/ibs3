@@ -42,7 +42,7 @@
 
 .total{
 font-weight:bold;
-margin-right:10px;
+margin-right:24px;
 }
 
 .edit-btn{
