@@ -60,7 +60,7 @@
          <select id='institute' name="institute" class="form-control" style="width:100px">
          <option value="">All</option>
          @foreach($institute as $inst)
-         <option value="ibsuniversity">{{$inst->univ_name}}</option>
+         <option value="ibsuniversity" value="{{$inst->univ_name}}">{{$inst->univ_name}}</option>
          @endforeach
          </select> </th>
 
@@ -117,7 +117,7 @@
                         $amountdue = $st->amountdue;
                         $id = $st->id;
                         $request = $st->sponsor_accepted;
-                         
+                        $institute = $st->institute;
 
                        
 @endphp
@@ -145,9 +145,9 @@
       <td>{{$name}}</td>
       <td>{{$course}}</td>
       <td>{{$date}}</td>
-      <td><a href="{{url('/pdf')}}/{{$invoicefile}}" target="_blank">{{$invoice}}</a></td>
+      <td><a href="{{url('public/pdf')}}/{{$invoicefile}}" target="_blank">{{$invoice}}</a></td>
       <td>{{$amountdue}}</td>
-      <td>-</td>
+      <td>{{$institute}}</td>
       <td>-</td>
     <td><button type="submit" value="yes" name="request_accepted" class="col-md-6 btn btn-success"><i class="fa-solid fa-check"></i></button><button type="submit" name="request_accepted" value="no" class="col-md-4 btn btn-danger"style="margin-left:5px;" ><i class="fa-solid fa-xmark" style="margin-right:30px;"></i></button></td>
     @endif

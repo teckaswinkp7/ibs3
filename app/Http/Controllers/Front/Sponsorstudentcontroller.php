@@ -37,7 +37,7 @@ class Sponsorstudentcontroller extends Controller
             ->join('courseselections','sponsorrequesteds.stu_id','=','courseselections.stu_id')
             ->join('payment','payment.stu_id','=','invoice.stu_id')
             ->join('courses','invoice.course_id','=','courses.id')
-            ->select('sponsorrequesteds.stu_id','users.name','users.id','payment.amountdue','payment.balance_due','payment.ibs_reciept','invoice.course_id','invoice.invoiceno','invoice.updated_at','courses.name as course_name','payment.sponsor_accepted','payment.invoice')
+            ->select('sponsorrequesteds.stu_id','users.name','users.id','payment.amountdue','payment.balance_due','payment.ibs_reciept','invoice.course_id','invoice.invoiceno','invoice.updated_at','courses.name as course_name','payment.sponsor_accepted','payment.invoice','courses.institute')
             ->when($request->date != null, function($q) use ($request){
 
                 return $q->whereDate('invoice.updated_at',Carbon::parse($request->date)->format('Y-m-d'));
@@ -45,6 +45,10 @@ class Sponsorstudentcontroller extends Controller
             ->when($request->courseid != null, function($q) use ($request){
 
                 return $q->where('invoice.course_id',$request->courseid);
+            })
+            ->when($request->institute != null, function($q) use ($request){
+
+                return $q->where('courses.institute',$request->institute);
             })
             ->when($request->search != null, function($q) use ($request){
 
