@@ -11,14 +11,14 @@
 
 </style>
 
-<link type="text/css" rel="stylesheet" media="all" href="{{asset('assets/front/css/bootstrap.min.css')}}">
-<link type="text/css" rel="stylesheet" media="all" href="{{asset('assets/front/css/jquery-ui.css')}}">
+<link type="text/css" rel="stylesheet" media="all" href="{{url('/assets/front/css/bootstrap.min.css')}}">
+<link type="text/css" rel="stylesheet" media="all" href="{{url('/assets/front/css/jquery-ui.css')}}">
       
 </head>
 <body>
 
   <div class="congrats-letter">
-                        <img class="float-right" src="{{asset('assets/front/images/IBS-Logo.png')}}" alt="" width="150px"></img>
+                        <img class="float-right" src="{{url('/assets/front/images/IBS-Logo.png')}}" alt="" width="150px"></img>
                         </br>
                         </br>
                             <h4> Pro Forma Invoice : {{$invoicedata[0]->invoiceno}}</h4>
