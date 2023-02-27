@@ -68,8 +68,8 @@ font-weight:bold;
     text-decoration:none;
 }
 </style>
-<link rel="stylesheet" href="{{asset('assets/front/css/bootstrap.min.css')}}">
-      <link rel="stylesheet" href="{{asset('assets/front/css/jquery-ui.css')}}">
+<link type="text/css" rel="stylesheet" href="{{asset('assets/front/css/bootstrap.min.css')}}">
+<link type="text/css" rel="stylesheet" href="{{asset('assets/front/css/jquery-ui.css')}}">
       
 </head>
 <body>
