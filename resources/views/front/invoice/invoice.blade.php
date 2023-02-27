@@ -11,8 +11,8 @@
 
 </style>
 
-<link type="text/css" rel="stylesheet" media="all" href="{{url('/assets/front/css/bootstrap.min.css')}}">
-<link type="text/css" rel="stylesheet" media="all" href="{{url('/assets/front/css/jquery-ui.css')}}">
+<link type="text/css" rel="stylesheet" media="all" href="{{url('assets/front/css/bootstrap.min.css')}}">
+<link type="text/css" rel="stylesheet" media="all" href="{{url('assets/front/css/jquery-ui.css')}}">
       
 </head>
 <body>
