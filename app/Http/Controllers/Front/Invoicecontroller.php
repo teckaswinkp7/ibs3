@@ -191,7 +191,7 @@ class Invoicecontroller extends Controller
         $student_course_offer= Courseselection::select("courses.name as courses_name")->join("courses","courses.id", "=", "courseselections.studentSelCid")->where('courseselections.stu_id','=',$id)->get();
 
         $pdf = \PDF::loadView('front.invoice.invoice',compact('student_course_offer','user','exist','location','communication','invoicedata','selectedcourse','unitsData','courseData'));
-        $path = public_path('pdf/');
+        $path = public_path('pdf');
         $pdf->save($path.'/'.$name.'salesinvoice.pdf', $pdf->output());
         $dbstore = payment::updateOrCreate([
 
