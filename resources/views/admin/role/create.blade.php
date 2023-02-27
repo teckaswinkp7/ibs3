@@ -42,7 +42,9 @@
                         </div>
                         
     </div>
-                        
+    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary btnreview">Submit</button>
+                    </div>
                             
                             <!-- /.form-group -->
                           </div>
@@ -52,9 +54,7 @@
                       </div>
                     </div>
                     <!-- /.card-body -->
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-primary btnreview">Submit</button>
-                    </div>
+                   
                 </form>
             </div>
             <!-- /.card -->
