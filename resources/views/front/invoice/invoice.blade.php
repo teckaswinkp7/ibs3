@@ -103,10 +103,10 @@ $total = 0;
     </br>
 @foreach($exist as $val)
 <div class="row item">
-    <div class="col-sm-4 desc">
-        {{$val}}
-    </div>
-    <div class="col-sm-11 amount text-right">
+              <div class="col-sm-4 desc" style="width:500px;">
+                  {{$val}}
+              </div>
+                        <div class="col-sm-8 amount text-right" style="margin-left:180px;">
     @php 
      $data = DB::table('additionalfee')->select('price')->where('title',$val)->get();
      $price = json_decode('data');

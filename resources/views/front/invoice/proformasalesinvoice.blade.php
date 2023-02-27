@@ -328,10 +328,10 @@ background: #488e2b;
               </br>
           @foreach($exist as $val)
           <div class="row item">
-              <div class="col-sm-4 desc">
+              <div class="col-sm-4 desc" style="width:500px;">
                   {{$val}}
               </div>
-              <div class="col-sm-8 amount text-right">
+              <div class="col-sm-8 amount text-right" style="width:1000px;">
               @php 
                $data = DB::table('additionalfee')->select('price')->where('title',$val)->get();
                $price = json_decode('data');
