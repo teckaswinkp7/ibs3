@@ -107,8 +107,13 @@
       
       <td>{{$user->cgpa}}</td>
       <td></td>
-      <td><button class="btnreview" id="desktop"><i class="fa-sharp fa-solid fa-desktop backgroundclass"></i></button></td>
-      
+      @if($user->offer_accepted == 'yes')
+      <td><button class="bluesharp" id="desktop"><i class="fa-sharp fa-solid fa-desktop backgroundclass"></i></button></td>
+      @elseif($user->cgpa == !null)
+      <td><button class="btnreview" id="desktop"><i  class="fa-sharp fa-solid fa-desktop backgroundclass"></i></button></td>
+      @else
+      <td> </td>
+      @endif
       @endforeach
       <?php unset($_SESSION['i']); ?>    
 </tbody>
@@ -141,7 +146,11 @@
   border:none!important;
 }
 
+.bluesharp {
 
+  background: #0066b2; 
+  border:none!important;
+}
 
 .searchbtn{
 
@@ -167,6 +176,7 @@ cursor: pointer;
  
  cursor:default;
 }
+
 
   </style>
 </html>  

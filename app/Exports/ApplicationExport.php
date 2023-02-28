@@ -18,7 +18,8 @@ class ApplicationExport implements FromCollection,WithHeadings,WithEvents
     {
         return DB::table('users')
         ->join('education','users.id','=','education.stu_id')
-        ->select('users.id','users.name','education.updated_at')
+        ->join('review','users.id','=','review.stu_id')
+        ->select('users.id','users.name','education.updated_at','review.cgpa')
         ->where('users.user_role',2)
         ->where('users.status',2)
         ->get();
@@ -30,6 +31,7 @@ class ApplicationExport implements FromCollection,WithHeadings,WithEvents
                 'ID', 
         'Name',
         'Date Reviewed',
+        'GPA'
       
             ]
         ];
@@ -41,11 +43,11 @@ class ApplicationExport implements FromCollection,WithHeadings,WithEvents
 
         return [
 
-            AfterSheet::class    => function(AfterSheet $event) {
+            AfterSheet::class => function(AfterSheet $event) {
 
    
 
-                $event->sheet->getDelegate()->getStyle('A1:C1')
+                $event->sheet->getDelegate()->getStyle('A1:D1')
 
                                 ->getFont()
 

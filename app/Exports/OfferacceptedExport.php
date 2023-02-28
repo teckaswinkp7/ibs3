@@ -1,37 +1,50 @@
 <?php
 
 namespace App\Exports;
-
-use Maatwebsite\Excel\Concerns\FromCollection;
-use DB;
 use App\Models\User;
-use Maatwebsite\Excel\Concerns\WithEvents;
-use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class ExportUser implements FromCollection,WithHeadings,WithEvents
+use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Events\AfterSheet;
+
+class OfferacceptedExport implements FromCollection, WithHeadings,WithEvents
 {
     /**
     * @return \Illuminate\Support\Collection
     */
+
+    protected $id;
+
+ function __construct($id) {
+
+    $this->id = $id;
+
+
+ }
+      
+
     public function collection()
     {
-        return DB::table('users')->select('id','name','email')
+        return  User::where('users.offer_accepted','yes')
+        ->leftjoin('courseselections','users.id','=','courseselections.stu_id')
+        ->leftjoin('courses','courseselections.studentSelCid','=','courses.id')
         ->join('payment','users.id','=','payment.stu_id')
-        ->where('user_role', 2)
-        ->where('payment.balance_due','=','0')
-        ->groupBy('users.id')      
+        ->where('courses.id',$this->id)
+        ->where('users.user_role', 2)
+        ->where('payment.balance_due','!=','0')
+        ->groupBy('users.id')  
+        ->select('users.id','users.name','courses.name as coursename') 
         ->get();
     }
-
     public function headings(): array
     {
         return [
             [
                 'ID', 
         'Name',
-        'Email ',
-      
+        'Course Name ',
+       
             ]
         ];
     }

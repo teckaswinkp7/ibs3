@@ -30,6 +30,7 @@ class PaymentlistExport implements FromCollection, WithHeadings,WithEvents
                 'ID', 
         'Name',
         'Email ',
+        'Amount due',
         'Course Name',
             ]
         ];

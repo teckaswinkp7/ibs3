@@ -30,6 +30,7 @@ class EnrolledUser implements FromCollection,WithHeadings,WithEvents
             [
                 'ID', 
         'Name',
+        'Total Amount',
         'Amount Due',
         'Course Name'
       
@@ -47,7 +48,7 @@ class EnrolledUser implements FromCollection,WithHeadings,WithEvents
 
    
 
-                $event->sheet->getDelegate()->getStyle('A1:D1')
+                $event->sheet->getDelegate()->getStyle('A1:E1')
 
                                 ->getFont()
 

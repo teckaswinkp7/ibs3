@@ -56,7 +56,7 @@ class DocumentVerificationController extends Controller
      ->join('education','users.id','=','education.stu_id')
      ->where('users.user_role',2)
      ->where('users.status',2)
-     ->select('users.name','users.updated_at','users.id','education.verification_status as verificationstatus','users.status','education.updated_at as reviewdate','education.cgpa')
+     ->select('users.name','users.updated_at','users.id','education.verification_status as verificationstatus','users.status','education.updated_at as reviewdate','education.cgpa','users.offer_accepted')
      ->get();
 
   

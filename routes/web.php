@@ -186,11 +186,11 @@ Route::post('admin/subcat', 'App\Http\Controllers\Admin\CoursesController@subCat
 Route::get('admin/courses/offer_accepted/{id}', [CoursesController::class,'offer_accepted'])->name('reports.offer_accepted');
 Route::get('admin/courseselected/offer_accepted/search', [CoursesController::class,'searchofferaccepted'])->name('reports.searchofferaccepted');
 Route::get('admin/courseselected/offer_accepted/namesearch',[CoursesController::class,'namesearchofferaccepted'])->name('reports.namesearchofferaccepted');
-Route::get('admin/courses/exportusers',[CoursesController::class,'exportUsers'])->name('exportUsers');
+Route::get('/offeraccepted-users',[CoursesController::class,'offeracceptedExport'])->name('offeraccepted.export');
 Route::get('admin/courses/enrolledusers/{id}', [CoursesController::class,'enrolledusers'])->name('reports.enrolledusers');
 Route::get('admin/courseselected/enrolledusers/search', [CoursesController::class,'searchenrolledusers'])->name('reports.searchenrolledusers');
 Route::get('admin/courseselected/enrolledusers/namesearch', [CoursesController::class,'namesearchenrolledusers'])->name('reports.namesearchenrolledusers');
-Route::get('admin/courses/exportenrolledusers',[CoursesController::class,'exportUsers'])->name('exportUsers');
+Route::get('/enrolled-users',[CoursesController::class,'enrolledusersExport'])->name('enrolledusers.export');
 
 Route::get('admin/search', [CoursesController::class, 'searchcoursedate'])->name('courses.searchcoursedate');
 Route::get('admin/searchcourse', [CoursesController::class, 'coursesearch'])->name('courses.coursesearch');

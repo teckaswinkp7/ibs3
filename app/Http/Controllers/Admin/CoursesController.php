@@ -9,6 +9,9 @@ use DB;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Exports\offeracceptedExport;
+use App\Exports\EnrolledusersExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CoursesController extends Controller
 {
@@ -446,12 +449,11 @@ class CoursesController extends Controller
 
     }
 
-
-    public function exportUsers(Request $request){
-        
-        
-        return Excel::download(new ExportUser, 'users.xlsx');
+    public function offeracceptedExport(Request $request){
+        $id = Session::get('id');
+        return Excel::download(new OfferacceptedExport($id), 'offeracceptedUsers.xlsx');
     }
+
 
     public function enrolledusers($id){
 
@@ -559,10 +561,9 @@ class CoursesController extends Controller
      }
  
  
-     public function exportenrolledUsers(Request $request){
-         
-         
-         return Excel::download(new ExportUser, 'users.xlsx');
-     }
+     public function enrolledusersExport(Request $request){
+        $id = Session::get('id');
+        return Excel::download(new EnrolledusersExport($id), 'enrolledUsers.xlsx');
+    }
 
 }
