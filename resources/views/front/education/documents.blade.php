@@ -6,6 +6,10 @@
 
 
 <!-- DATA VALIDATION -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script  type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"> </script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script> 
@@ -19,6 +23,49 @@
             <h3>Submit your documents</h3>
             <form action="{{route('education.create.step.two.post')}}" method="POST" enctype="multipart/form-data" class="document-form">
                 @csrf
+                <p>I want to apply for the following Institute ?</p>
+                <div class="radio-documents row">
+                <div class="col-sm-12">
+                    <label>IBS college of TVET</label>
+                    <input type="radio" name="university" value="IBS college of TVET">
+                   
+                </div>
+                <div class="col-sm-12">
+                     <label>IBSUniversity</label>
+                    <input type="radio" name="university" value="IBSUniversity">
+                    
+                </div>
+                <div class="col-sm-12">
+                    
+                    <label>Southern Cross University(Australia)</label>
+                    <input type="radio" name="university" value="Southern Cross University">
+                </div>
+                
+                </div>
+                <p>I would like to take: </p>
+                <div class="radio-documents row">
+                <div class="col-sm-6">
+                    <label>Accounting and Finance</label>
+                    <input type="radio" name="field" value="IBS college of TVET">
+                   
+                </div>
+                <div class="col-sm-6">
+                     <label>Economics & Development</label>
+                    <input type="radio" name="field" value="IBSUniversity">
+                    
+                </div>
+                <div class="col-sm-6">
+                    
+                    <label>Business and Management</label>
+                    <input type="radio" name="field" value="Southern Cross University">
+                </div>
+                <div class="col-sm-6">
+                    
+                    <label>Information Technology</label>
+                    <input type="radio" name="field" value="Southern Cross University">
+                </div>
+                
+                </div>
                 <p>Which is your highest qualification?</p>
                 <div class="radio-documents row">
                 <div class="col-sm-6">
@@ -35,7 +82,7 @@
                 </div>
                 <div class="col-sm-6">
                     <input type="radio" name="qualification" value="Diploma / Bachelor">
-                    <label>Certificate 3 or 4</label>
+                    <label>Diploma / Bachelor</label>
                 </div>
                 
                 <div class="col-sm-12">
@@ -47,36 +94,65 @@
 
                 {{-- <input type="email" name="email" id="email" class="form-control" placeholder="Email" data-val-required="Please fill up the details" data-val="true">
                   <span data-valmsg-for="email" class="field-validation-valid text-danger" data-valmsg-replace="true"></span>  --}}
+                <div class="card">
                 <div class="upload-ps">
-                    <label>Upload your passport size ID image.( upload only pdf, png or jpeg format)</label>
-                    <input style="display:block" type="file" id="my-file" name="id_image" data-val-required="Please fill up the details" data-val="true">
-                    {{-- <button type="button" onclick="document.getElementById('my-file').click()">Upload your passport size ID image</button> --}}
-                    <span data-valmsg-for="id_image" class="field-validation-valid text-danger" data-valmsg-replace="true"></span> 
-                </div>
+                    <div class="custom-file">
+      <input type="file" name="id_image" class="custom-file-input" id="customFileInput1" aria-describedby="customFileInput">
+      <label class="custom-file-label" id="inputGroupFile02" for="customFileInput"> Upload Your Passport Size ID image.</label>
+      <span data-valmsg-for="id_image" class="field-validation-valid text-danger" data-valmsg-replace="true"></span> 
+    </div>
+    </div>
+    </div>
+                </br>    
                 <div class="upload-ps">
-                    <label>Upload your highest qualification</label>
-                    <input style="display:block" type="file" id="my-file-hq" name="highest_qualification" data-val-required="Please fill up the details" data-val="true">
-                    {{-- <button type="button" onclick="document.getElementById('my-file-hq').click()">Upload your highest qualification</button> --}}
-                    <span data-valmsg-for="highest_qualification" class="field-validation-valid text-danger" data-valmsg-replace="true"></span> 
-                </div>
+                <div class="custom-file">
+      <input type="file" name="highest_qualification" class="custom-file-input" id="customFileInput2" aria-describedby="customFileInput">
+      <label class="custom-file-label" id="inputGroupFile03" for="customFileInput"> Upload your highest qualification.</label>
+      <span data-valmsg-for="highest_qualification" class="field-validation-valid text-danger" data-valmsg-replace="true"></span> 
+    </div>
+    </div>
+                </br>
                 <div class="upload-ps">
-                    <label>Upload Transcripts or Course Synopsis</label>
-                    <input style="display:block" type="file" id="my-file-toc" name="course_syopsiy" data-val-required="Please fill up the details" data-val="true">
-                    {{-- <button type="button" onclick="document.getElementById('my-file-toc').click()">Upload Transcripts or Course Synopsis ( for qualification higher than Grade 12)</button> --}}
-                    <span data-valmsg-for="course_syopsiy" class="field-validation-valid text-danger" data-valmsg-replace="true"></span> 
-                </div>
-                
-                    
-                
-                <div class="documents-btn">
+                <div class="custom-file">
+      <input type="file" name="course_syopsiy" class="custom-file-input" id="customFileInput3" aria-describedby="customFileInput">
+      <label class="custom-file-label" id="inputGroupFile04" for="customFileInput"> Upload Transcripts or Course Synopsis.</label>
+      <span data-valmsg-for="course_syopsiy" class="field-validation-valid text-danger" data-valmsg-replace="true"></span> 
+    </div>
+    </div>
+        
+                   <div class="documents-btn">
                     <button type="submit">Submit</button>
                 </div>
           </form>
         </div>
     </div>
-    @include('front/footer')  
+    @include('front/footer') 
+    <script>
+         $('#customFileInput1').change(function(e){
+        var fileName = e.target.files[0].name;
+        $('#inputGroupFile02').html(fileName);
+    });
+
+    
+    </script>
+<script>
+$('#customFileInput2').change(function(e){
+        var fileName = e.target.files[0].name;
+        $('#inputGroupFile03').html(fileName);
+    });
+</script>
+
+
+<script>
+    $('#customFileInput3').change(function(e){
+        var fileName = e.target.files[0].name;
+        $('#inputGroupFile04').html(fileName);
+    });
+    </script>
 
     <script>
+           
+        
         function fileValidation() {
             var fileInput =
                 document.getElementById('my-file');
@@ -111,4 +187,18 @@
             }
         }
     </script>
+    <style>
+        .custom-file-label::after{
+
+            background:#cc6600;
+            color:white;
+            
+        }
+
+        .custom-file-input:lang(en) ~ .custom-file-label::after
+        {
+            content:"Select";
+        }
+
+        </style>
     @endsection  

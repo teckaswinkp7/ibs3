@@ -21,22 +21,28 @@
                 <div class="otp-btn">
                     <button type="submit">Confirm</button>
                 </div>
-                <p>Didn't recieve the code?</p>
-                <a href="#">Resend code</a>
+              
+                
           </form>
 
-          {{-- <form class="needs-validation" action="{{route('resendOtp')}}" method="post" novalidate>
-            {!! csrf_field() !!}
-            <div class="row" style="margin-top:16px;">
-            <div class="col-md-4">
-            <input id="email" name="email" type="hidden" value="{{$email}}">
-            <button class="btn btn-success" type="submit">Resend OTP</button>
+           <form action="{{route('resendOtp')}}" method="post" novalidate>
+            @csrf
+            <div>
+            <input  name="email" type="hidden" value="{{$email}}">
+            <p >Didn't recieve the code?<button class="btn btncolor" style="margin-top:-7px;" type="submit">Resend OTP</button></p>
             </div>
-            </div>
-        </form> --}}
+        </form>
 
           
         </div>
     </div>
 @include('front/footer')  
+<style>
+
+.btncolor{
+
+    color:orange;
+}
+
+</style>
 @endsection   

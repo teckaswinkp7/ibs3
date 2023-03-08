@@ -9,7 +9,7 @@
                 <a href="#"><img src="{{asset('assets/custom/New Project (14).png') }}" alt="" width="120px"></a>
             </div>  
             <h3>Login</h3>
-            <form action="{{ route('login.post') }}" method="POST" class="register-form">
+            <form action="{{ route('forget.password.post') }}" method="POST" class="register-form">
                 @csrf
                 
                 <div>
@@ -19,21 +19,11 @@
                         <span class="text-danger">{{ $errors->first('email') }}</span>
                     @endif 
                 </div>
-                <div>
-                    <label for="">Password</label>
-                    <input type="password" placeholder="" name="password" id="password">
-                    @if ($errors->has('password'))
-                        <span class="text-danger">{{ $errors->first('password') }}</span>
-                    @endif
-                </div>
                 <div class="register-btn">
-                    <button type="submit">Login</button>
+                    <button type="submit">Reset Link</button>
                 </div>
             
           </form>
-          <p class="mb-0"> Forgot Password ?
-          <a href="{{ route('forget.password.get') }}" class="text-center">Reset Password</a>
-        </p>
         </div>
     </div>
     @include('front/footer')  

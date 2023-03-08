@@ -29,6 +29,7 @@ use App\Http\Controllers\MailController;
 use App\Http\Controllers\Front\AssignmentsubmissionController;
 use App\Http\Controllers\Front\Sponsorstudentcontroller;
 use App\Http\Controllers\Front\StudentAssignmentController;
+use App\Http\Controllers\Front\ForgotPasswordController;
 use App\Http\Controllers\Admin\ExamController;
 use App\Http\Controllers\Front\Invoicecontroller;
 use App\Http\Controllers\Front\StudentExamController;
@@ -63,6 +64,10 @@ Route::get('userprofile', [AuthControllers::class, 'user_profile'])->name('userp
 Route::post('updateprofile', [AuthControllers::class, 'update_profile'])->name('updateprofile');
 Route::get('coursestatus/{id}', [AuthControllers::class, 'studentCourseInsert'])->name('coursestatus');
 Route::get('unauthorized', [AuthControllers::class, 'error_page'])->name('unauthorized');
+Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
+Route::post('forget-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 
+Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
+Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
 
 Route::get('changeuser', [AuthControllers::class, 'change_user'])->name('changeuser');
 Route::get('changepassword', [AuthControllers::class, 'change_pass'])->name('changepassword');

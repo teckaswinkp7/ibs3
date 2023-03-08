@@ -31,6 +31,6 @@ class SendEmail extends Mailable
 
     public function build()
     {
-        return $this->from('info@supertyreguy.com')->view('emails.orders.shipped',['data'=>$this->data])->subject('VERIFICATION CODE');
+        return $this->from('sam@ibs.ac.pg')->view('emails.orders.shipped',['data'=>$this->data])->subject('VERIFICATION CODE');
     }
 }

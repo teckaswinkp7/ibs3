@@ -14,21 +14,21 @@
                 @csrf
                 <div>
                     <label for="">Full Name:</label>
-                    <input type="text" placeholder="" name="name">
+                    <input type="text" placeholder="joe joe" name="name">
                     @if ($errors->has('name'))
                         <span class="text-danger">{{ $errors->first('name') }}</span>
                     @endif
                 </div>
                 <div>
                     <label for="">Email Address:</label>
-                    <input type="email" placeholder="" name="email" >
+                    <input type="email" placeholder="joejoe@gmail.com" name="email" >
                     @if ($errors->has('email'))
                         <span class="text-danger">{{ $errors->first('email') }}</span>
                     @endif
                 </div>
                 <div>
                     <label for="">Phone:</label>
-                    <input type="text" placeholder="" name="phone" >
+                    <input type="text" placeholder="+675 71635469" name="phone" >
                     @if ($errors->has('phone'))
                         <span class="text-danger">{{ $errors->first('phone') }}</span>
                     @endif
@@ -39,6 +39,9 @@
                 </div>
             
           </form>
+          <p class="mb-0"> Already Registered ?
+          <a href="{{ route('login') }}" class="text-center">Login</a>
+        </p>
         </div>
     </div>
     @include('front/footer')  

@@ -149,6 +149,15 @@ background: #488e2b;
     display: flex;
     justify-content: space-between;
 }
+.dropdown-container {
+  display: none;
+}
+
+.dropdown-btn {
+ 
+  cursor: pointer;
+  outline: none;
+}
 
 </style>
 
@@ -227,19 +236,23 @@ background: #488e2b;
             
             <div class="row">
                 <div class="col-sm-3">
-                    <div class="profile-course">
-                        <a href="userprofile">Profile</a>
-                        <a href="useroffer">Course</a>
-                        <li><a class="bill-btn" href="#">bill
-                    <span class="fas fa-caret-down"> </span>
-                    <li class="bill-show">
-                  <li class="bill"><a href="proformainvoice">Pro-forma-invoice</a></li>
-                  <li class="bill"><a href="proformasalesinvoice">Sales Invoice</a></li>
-                  <li class="bill"><a href="confirmpayment">Payment</a></li>
-                  <li class="bill"><a href="history">History</a></li>
-</li>
-                    </a></li>
-                    </div>
+                <div class="profile-course sidenav">
+                
+                  
+                <ul>
+
+                 <li> <a href="userprofile">Profile</a></li>
+                  <li><a href="useroffer">Course</a></li>
+                  <a class="dropdown-btn"> Bill <i class="fa fa-caret-down"></i> </a>
+  
+
+<div class="dropdown-container">
+  <a href="proformainvoice">Invoice</a>
+  <a href="confirmpayment">Payment</a>
+  <a href="history">History</a>
+</div>
+             </ul>
+</div>   
                 </div>
                 <div class="col-sm-9">
                    
@@ -492,4 +505,21 @@ On admission into this institution, I hereby accept to abide by the code of cond
     window.open(url);
     };
 </script>
+<script type="text/javascript" >
+   var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var dropdownContent = this.nextElementSibling;
+    if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+    } else {
+      dropdownContent.style.display = "block";
+    }
+  });
+}
+
+ </script>  
 @endsection  

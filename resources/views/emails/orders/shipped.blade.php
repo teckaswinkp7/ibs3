@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>fdsff</title>
+    <title>Verification Code</title>
 </head>
 <body>
     <h3>Hi,</h3>

@@ -9,6 +9,15 @@
 *{
    list-style-type: none;
 }
+.dropdown-container {
+  display: none;
+}
+
+.dropdown-btn {
+ 
+  cursor: pointer;
+  outline: none;
+}
 </style>
 <body>
     <div class="background-profile" style="margin-top: 100px;"> 
@@ -19,16 +28,23 @@
             <h3>Select your Course </h3>
             <div class="row">
                 <div class="col-sm-3">
-                    <div class="profile-course">
-                        <a href="userprofile">Profile</a>
-                        <a href="useroffer">Course</a>
-                        <li ><a href="proformainvoice">Pro-forma-invoice</a></li>
-                  <li><a href="proformasalesinvoice">Sales Invoice</a></li>
-                  <li ><a href="confirmpayment">Payment</a></li>
-                  <li ><a href="history">History</a></li>
-                        {{-- <a href="#"></a>
-                        <a href="#"></a> --}}
-                    </div>
+                <div class="profile-course sidenav">
+                
+                  
+                <ul>
+
+                 <li> <a href="userprofile">Profile</a></li>
+                  <li><a href="useroffer">Course</a></li>
+                  <a class="dropdown-btn"> Bill <i class="fa fa-caret-down"></i> </a>
+  
+
+<div class="dropdown-container">
+  <a href="proformainvoice">Invoice</a>
+  <a href="confirmpayment">Payment</a>
+  <a href="history">History</a>
+</div>
+             </ul>
+</div>   
                 </div>
                 <div class="col-sm-9">
                     <p>From the documents you have submitted, you are eligible for the following courses listed below. Kindly make your choice of the course you would like to study at IBS University and receive your offer</p></p>
@@ -64,7 +80,7 @@
                       @php
                       $course_name = DB::select(DB::raw("SELECT * FROM courses WHERE id = $val"));
                       @endphp
-                     <a href="{{ route('coursestatus',$val) }}">{{ $course_name[0]->name }}</a>
+                       <a href="{{ route('coursestatus',$val) }}">{{ $course_name[0]->name }} <button style="margin-left:60px;"class="btn btn-primary btnslct"> select </button></a> 
                     
                      @endforeach
                      @endif
@@ -80,6 +96,44 @@
         </div>
     </div>
     @include('front/footer')  
+    <script>
 
+    var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var dropdownContent = this.nextElementSibling;
+    if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+    } else {
+      dropdownContent.style.display = "block";
+    }
+  });
+}
+
+
+
+
+   </script>
+<style>
+
+  .btnslct{
+
+    background-color:#cc6600;
+    border:none;
+    border-radius:0px;
+
+
+  }
+  .btnslct:hover{
+
+    background-color:black;
+    border:none;
+    border-radius:0px;
+
+  }
+  </style>
     
     @endsection   

@@ -167,6 +167,15 @@ background: #488e2b;
     justify-content: space-between;
 }
 
+.dropdown-container {
+  display: none;
+}
+
+.dropdown-btn {
+ 
+  cursor: pointer;
+  outline: none;
+}
 
 </style>
 
@@ -246,19 +255,23 @@ background: #488e2b;
             
             <div class="row">
                 <div class="col-sm-3">
-                    <div class="profile-course">
-                        <a href="userprofile">Profile</a>
-                        <a href="useroffer">Course</a>
-                        <li><a class="bill-btn" href="#">bill
-                    <span class="fas fa-caret-down"> </span>
-                    <li class="bill-show">
-                  <li class="bill"><a href="proformainvoice">Pro-forma-invoice</a></li>
-                  <li class="bill"><a href="salesinvoice">Sales Invoice</a></li>
-                  <li class="bill"><a href="payment">Payment</a></li>
-                  <li class="bill"><a href="history">History</a></li>
-</li>
-                    </a></li>
-                    </div>
+                <div class="profile-course sidenav">
+                
+                  
+                <ul>
+
+                 <li> <a href="userprofile">Profile</a></li>
+                  <li><a href="useroffer">Course</a></li>
+                  <a class="dropdown-btn"> Bill <i class="fa fa-caret-down"></i> </a>
+  
+
+<div class="dropdown-container">
+  <a href="proformainvoice">Invoice</a>
+  <a href="confirmpayment">Payment</a>
+  <a href="history">History</a>
+</div>
+             </ul>
+</div>   
                 </div>
                 <div class="col-sm-9">
                    
@@ -424,7 +437,7 @@ background: #488e2b;
 <input id="total" type="hidden" name="amountdue" value="{{$total}}" class="col-xs-5 float-right">
           
           </input>
-    <button type="submit" class="d-flex edit-btn2 float-right" >  Request Invoice </button> 
+    <button type="submit" class="d-flex edit-btn2 float-right show_confirm" >  Request Invoice </button> 
       </div>
 </form>
 
@@ -447,5 +460,44 @@ background: #488e2b;
 	
   
                  
- @include('front/footer')      
+ @include('front/footer')     
+ <script type="text/javascript" >
+   var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var dropdownContent = this.nextElementSibling;
+    if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+    } else {
+      dropdownContent.style.display = "block";
+    }
+  });
+}
+
+ </script>  
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+<script type="text/javascript">
+ 
+     $('.show_confirm').click(function(event) {
+          var form =  $(this).closest("form");
+          var name = $(this).data("name");
+          event.preventDefault();
+          swal({
+              title: 'Are you sure you want to Generate this Invoice?',
+              text: "You will neither be able to make any more changes to your final sales nor will you delete this invoice after it is generated, This invoice will be locked in for you to pay against. Are you sure, you want to raise the final invoice ?",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              form.submit();
+            }
+          });
+      });
+  
+</script> 
 @endsection  

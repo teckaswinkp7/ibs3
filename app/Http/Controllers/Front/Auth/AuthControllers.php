@@ -105,7 +105,7 @@ class AuthControllers extends Controller
         //dd($request);
         $request->validate([
             'name' => 'required',
-            'phone'=> 'required|digits:10',
+            'phone'=> 'required|digits:11',
             //'user_role'=> 'required',
             'email' => 'required|email|unique:users',
             //'password' => 'required|min:6',
@@ -133,7 +133,26 @@ class AuthControllers extends Controller
             return response(["status" => 401, 'message' => 'Invalid']);
         }
     }
+   
 
+  
+    public function resendOtp(Request $request)
+    {
+        $otp = rand(1000,9999);
+      // dd($otp);
+        // $user = User::where('email','=',$request->email)->update(['otp' => $otp]);
+        // if($user){
+        $email = Session::get('email');
+       // dd($email);
+       $resendotp = Session::put('resendotp',$otp);
+        $data = array('otp' => $otp,'email' =>$email);
+        
+        
+        Mail::to($email)->send(new SendEmail($data));
+        
+        return view('front.auth.otp')->with($data);
+      
+    }
     public function validateOtp(Request $request){
         
         $otp = $request->input('otp');
@@ -165,11 +184,17 @@ class AuthControllers extends Controller
            //return view('front.auth.set_password');
            return view('front.auth.set_passworddds');
         }
+        elseif(Session::get('resendotp') == $otp){
+
+
+            return view('front.auth.set_passworddds');
+        }
         else{
             //return view('front.auth.set_passworddds');
             return response(["status" => 401, 'message' => 'Invalid']);
         }
     }
+ 
 
     public function set_password()
     {
@@ -182,21 +207,7 @@ class AuthControllers extends Controller
     {
         return view('front.auth.set_passworddds');
     }
-    public function resendOtp(Request $request)
-    {
-        $otp = rand(1000,9999);
-        // $user = User::where('email','=',$request->email)->update(['otp' => $otp]);
-        // if($user){
-        $email = Session::get('email');
-        $data = array('otp' => $otp,'email' =>$email);
-        if(Mail::to($email)->send(new SendEmail($data)))
-        {
-        return view('front.otp')->with($data);
-        }
-        else{
-            return response(["status" => 401, 'message' => 'Invalid']);
-        }
-    }
+   
     
     public function confirm_register(Request $request)
     {

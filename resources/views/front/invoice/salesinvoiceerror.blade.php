@@ -53,6 +53,15 @@ background: #488e2b;
     display: flex;
     justify-content: space-between;
 }
+.dropdown-container {
+  display: none;
+}
+
+.dropdown-btn {
+ 
+  cursor: pointer;
+  outline: none;
+}
 </style>
   <div class="background-profile" style="margin-top: 100px;"> 
     <div class="profile-modal">
@@ -86,17 +95,23 @@ background: #488e2b;
             <h3> Sales Invoice </h3>
             <div class="row">
             <div class="col-sm-3">
-                <nav class="profile-course">
-                  <ul>
+            <div class="profile-course sidenav">
+                
+                  
+                <ul>
 
-                   <li> <a href="userprofile">Profile</a></li>
-                    <li><a href="useroffer">Course</a></li>
-                  <li ><a href="proformainvoice">Pro-forma-invoice</a></li>
-                  <li><a href="proformasalesinvoice">Sales Invoice</a></li>
-                  <li ><a href="confirmpayment">Payment</a></li>
-                  <li ><a href="history">History</a></li>
-                  </ul>
-                  </nav>   
+                 <li> <a href="userprofile">Profile</a></li>
+                  <li><a href="useroffer">Course</a></li>
+                  <a class="dropdown-btn"> Bill <i class="fa fa-caret-down"></i> </a>
+  
+
+<div class="dropdown-container">
+  <a href="proformainvoice">Invoice</a>
+  <a href="confirmpayment">Payment</a>
+  <a href="history">History</a>
+</div>
+             </ul>
+</div>   
 </div>
 
             <div class="col-sm-8">
@@ -118,6 +133,23 @@ background: #488e2b;
     
     
     @include('front/footer')  
+    <script type="text/javascript" >
+   var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var dropdownContent = this.nextElementSibling;
+    if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+    } else {
+      dropdownContent.style.display = "block";
+    }
+  });
+}
+
+ </script>  
 
     
     @endsection   

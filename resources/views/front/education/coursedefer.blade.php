@@ -16,13 +16,23 @@
             <h3>Are You sure ??</h3>
             <div class="row">
                 <div class="col-sm-3">
-                    <div class="profile-course">
-                        <a href="userprofile">Profile</a>
-                        <a href="useroffer">Course</a>
-                        <a href="useroffer">Bill</a>
-                        {{-- <a href="#"></a>
-                        <a href="#"></a> --}}
-                    </div>
+                <div class="profile-course sidenav">
+                
+                  
+                <ul>
+
+                 <li> <a href="userprofile">Profile</a></li>
+                  <li><a href="useroffer">Course</a></li>
+                  <a class="dropdown-btn"> Bill <i class="fa fa-caret-down"></i> </a>
+  
+
+<div class="dropdown-container">
+  <a href="proformainvoice">Invoice</a>
+  <a href="confirmpayment">Payment</a>
+  <a href="history">History</a>
+</div>
+             </ul>
+</div> 
                 </div>
                 <div class="col-sm-9">
                    

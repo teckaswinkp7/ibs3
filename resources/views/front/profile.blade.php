@@ -1,9 +1,9 @@
 @extends('front/header')  
 @section('content') 
 <div class="site-section">
-    <div class="container">
-        <div class="row justify-content-center"> 
-            @include('front/leftsidebar')   
+<div class="container">
+<div class="row justify-content-center"> 
+ @include('front/leftsidebar')   
             <div class="col-md-9">
                 <div class="card custom-margin">
                     <div class="card-body pt-0">
@@ -126,6 +126,23 @@
     </div>
 </div>
 @include('front/footer')  
+<script type="text/javascript" >
+   var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var dropdownContent = this.nextElementSibling;
+    if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+    } else {
+      dropdownContent.style.display = "block";
+    }
+  });
+}
+
+ </script> 
 @endsection
 </body>
 </html>   

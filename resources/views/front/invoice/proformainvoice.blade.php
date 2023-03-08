@@ -72,6 +72,26 @@ background: #488e2b;
     display: flex;
     justify-content: space-between;
 }
+
+
+.dropdown-container {
+  display: none;
+}
+
+.dropdown-btn {
+ 
+  cursor: pointer;
+  outline: none;
+}
+
+
+
+
+
+
+
+
+
 </style>
   <div class="background-profile" style="margin-top: 100px;"> 
     <div class="profile-modal">
@@ -149,17 +169,23 @@ background: #488e2b;
        <h3>  Pro Forma Invoice </h3>
         <div class="row">
             <div class="col-sm-3">
-                <nav class="profile-course">
+                <div class="profile-course sidenav">
+                
+                  
                   <ul>
 
                    <li> <a href="userprofile">Profile</a></li>
                     <li><a href="useroffer">Course</a></li>
-                  <li ><a href="proformainvoice">Pro-forma-invoice</a></li>
-                  <li><a href="proformasalesinvoice">Sales Invoice</a></li>
-                  <li ><a href="confirmpayment">Payment</a></li>
-                  <li ><a href="history">History</a></li>
-                  </ul>
-                  </nav>   
+                    <a class="dropdown-btn"> Bill <i class="fa fa-caret-down"></i> </a>
+    
+
+  <div class="dropdown-container">
+    <a href="proformainvoice">Invoice</a>
+    <a href="confirmpayment">Payment</a>
+    <a href="history">History</a>
+  </div>
+               </ul>
+</div>   
 </div>
             <div class="col-sm-9">
                 <div class="select-course">
@@ -239,7 +265,7 @@ background: #488e2b;
 </div>
 
 <div class="submission-btn">
-                    <button type="submit">  Preview </button></a>
+                    <button  type="submit">  Preview </button></a>
                 <button type="submit">Close</button>
             </div>
 
@@ -253,7 +279,11 @@ background: #488e2b;
 </div>
 <div>
 
-<script type="text/javascript">
+
+    
+    
+    @include('front/footer')  
+    <script type="text/javascript">
 function show1(){
   document.getElementById('div1').style.display ='none';
   document.getElementById('div2').style.display ='block';
@@ -264,11 +294,31 @@ function show2(){
   document.getElementById('div2').style.display ='none';
   document.getElementById('period').style.display ='none';
 }
-   </script>
 
+
+
+/* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var dropdownContent = this.nextElementSibling;
+    if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+    } else {
+      dropdownContent.style.display = "block";
+    }
+  });
+}
+
+
+
+
+   </script>
     
-    
-    @include('front/footer')  
+
 
     
     @endsection   

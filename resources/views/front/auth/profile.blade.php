@@ -41,6 +41,15 @@ nav ul li a:hover span{
 
    transform:translateY(-50%) rotate(-180deg);
 }
+.dropdown-container {
+  display: none;
+}
+
+.dropdown-btn {
+ 
+  cursor: pointer;
+  outline: none;
+}
 
    </style>
     
@@ -53,15 +62,22 @@ nav ul li a:hover span{
         <h3>Your Profile </h3>
         <div class="row">
             <div class="col-sm-3">
-                <nav class="profile-course">
-                  <ul>
+            <div class="profile-course sidenav">
+                
+                  
+                <ul>
 
-                   <li> <a href="userprofile">Profile</a></li>
-                    <li><a href="useroffer">Course</a></li>
-                    <li class="bill"><a href="proformainvoice">Pro-forma-invoice</a></li>
-                  <li class="bill"><a href="proformasalesinvoice">Sales Invoice</a></li>
-                  <li class="bill"><a href="confirmpayment">Payment</a></li>
-                  <li class="bill"><a href="history">History</a></li>
+                 <li> <a href="userprofile">Profile</a></li>
+                  <li><a href="useroffer">Course</a></li>
+                  <a class="dropdown-btn"> Bill <i class="fa fa-caret-down"></i> </a>
+  
+
+<div class="dropdown-container">
+  <a href="proformainvoice">Invoice</a>
+  <a href="confirmpayment">Payment</a>
+  <a href="history">History</a>
+</div>
+        
 
                     @php 
 
@@ -77,7 +93,7 @@ nav ul li a:hover span{
 
 
                     </ul>
-</nav>
+</div>
             </div>
             <div class="col-sm-9">
                 <h6 class="user-credentials">User credentials</h6>
@@ -264,6 +280,26 @@ $('.bill-btn').click(function(){
    $('.bill').toggleClass("show");
 
 });
+   </script>
+    <script> 
+    var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var dropdownContent = this.nextElementSibling;
+    if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+    } else {
+      dropdownContent.style.display = "block";
+    }
+  });
+}
+
+
+
+
    </script>
     
     

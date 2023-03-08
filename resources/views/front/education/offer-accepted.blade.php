@@ -11,6 +11,15 @@
 *{
    list-style-type: none;
 }
+.dropdown-container {
+  display: none;
+}
+
+.dropdown-btn {
+ 
+  cursor: pointer;
+  outline: none;
+}
 
     </style>
     <div class="background-profile" style="margin-top: 100px;"> 
@@ -21,16 +30,23 @@
             <h3>Your offer</h3>
             <div class="row">
                 <div class="col-sm-3">
-                    <div class="profile-course">
-                        <a href="userprofile">Profile</a>
-                        <a href="useroffer">Course</a>
-                        <li class="bill"><a href="proformainvoice">Pro-forma-invoice</a></li>
-                  <li class="bill"><a href="proformasalesinvoice">Sales Invoice</a></li>
-                  <li class="bill"><a href="confirmpayment">Payment</a></li>
-                  <li class="bill"><a href="history">History</a></li>
-                        {{-- <a href="#"></a>
-                        <a href="#"></a> --}}
-                    </div>
+                <div class="profile-course sidenav">
+                
+                  
+                <ul>
+
+                 <li> <a href="userprofile">Profile</a></li>
+                  <li><a href="useroffer">Course</a></li>
+                  <a class="dropdown-btn"> Bill <i class="fa fa-caret-down"></i> </a>
+  
+
+<div class="dropdown-container">
+  <a href="proformainvoice">Invoice</a>
+  <a href="confirmpayment">Payment</a>
+  <a href="history">History</a>
+</div>
+             </ul>
+</div> 
                 </div>
                 <div class="col-sm-9">
                     <p>From the documents you have submitted, you are eligible for the following courses listed below. Kindly make your choice of the course you would like to study at IBS University and receive your offer</p>
@@ -53,25 +69,57 @@
                         @csrf
                       <div class="offer-course">
                         
-                        <a href="#">{{$student_course_offer[0]->courses_name}}</a>
+                       
                         <a href="#" class="congrats">
-                          Congratulations! <br>
-                          You have a space to study the year 1 programme, Diploma in Accounting and Finance at IBSUniversity
+                          Document :  <span style="font-weight:800;"> Conditional Offer Letter  </span><br>
+                          Programme: <span>  {{$student_course_offer[0]->courses_name}} </span> <br>
+                          Due Date :                                                            <br>
+                          Status: Pending Acceptance
+                          
                         </a>
                       </div>
                       <div class="offer-btn">
-                        <button type="submit" value="yes" name="accepted" >Accept</button>
+                      <button  type="submit" value="yes" name="accepted" >Accept</button>
                         <button type="submit" value="no" name="accepted">Decline  </button>
-                        <button class=""><a style="text-decoration:none; color:#fff;" href="{{route('coursedefer')}}">Defer</a></button>
-                      </div>
+                        <button class=""><a style="text-decoration:none;  color:#fff;" href="{{route('coursedefer')}}">Defer</a></button>
+                       
                     </form>
-
+                    <button class=""><a style="text-decoration:none; margin-left:10px; color:#fff;" href="{{url('useroffer')}}">Back</a></button>
+                    </div>
                 </div>
             </div>
             
         </div>
     </div>
-    @include('front/footer')  
+    @include('front/footer') 
+    <script> 
+    var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
 
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var dropdownContent = this.nextElementSibling;
+    if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+    } else {
+      dropdownContent.style.display = "block";
+    }
+  });
+}
+
+
+
+
+   </script>
+    <style>
+    .btnslct{
+
+background-color:#cc6600;
+border:none;
+border-radius:0px;
+
+
+}
     
     @endsection  

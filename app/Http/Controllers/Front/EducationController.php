@@ -221,8 +221,13 @@ class EducationController extends Controller
         $course_syopsiy = str_replace(' ', '', $course_syopsiys->getClientOriginalName());
         $course_syopsiy_file = date('YmdHi').$course_syopsiy;
         $course_syopsiys->move(public_path('public/Image'), $course_syopsiy_file);
+
+        $university = $request->university;
+        $field = $request->field;
+
         
-        $data = array('stu_id'=>$id,'board'=>$board,'percentage'=>$percentage,'id_image'=>$id_image_file,'highest_qualification'=>$highest_qualification_file,'course_syopsiy'=>$course_syopsiy_file);
+        
+        $data = array('stu_id'=>$id,'board'=>$board,'percentage'=>$percentage,'id_image'=>$id_image_file,'highest_qualification'=>$highest_qualification_file,'course_syopsiy'=>$course_syopsiy_file,'university'=>$university,'field'=>$field);
         
         $st = Education::create($data);
         
