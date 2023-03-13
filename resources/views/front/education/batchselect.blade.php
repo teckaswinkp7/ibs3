@@ -49,44 +49,79 @@
 </div> 
                 </div>
                 <div class="col-sm-9">
-                    <p>From the documents you have submitted, you are eligible for the following courses listed below. Kindly make your choice of the course you would like to study at IBS University and receive your offer</p>
                     <div class="offer">
-                        <div>
-                            <h6>Accept Offer</h6>
-                            <p>If you accept the offer, you will receive a Conditional Letter of Acceptance into the university confirming your space for studying; </p>
-                        </div>
-                        <div>
-                            <h6>Decline Offer</h6>
-                            <p>If you decline the offer, you will be given the choice to select again a different programme offered by the university </p>
-                        </div>
-                        <div>
-                            <h6>Defer Offer</h6>
-                            <p>If you defer your offer, your offer will be post-ponded to a time you will set to accept your offer and claim your space at that time </p>
-                        </div>
-
-                    </div>
-                    <form action="{{route('semesterselect')}}" method="post">
+                    <form action="{{route('courseofferpost')}}" method="post">
                         @csrf
-                      <div class="offer-course">
+                      <div class="offer-course row">
                         
                        
-                        <a href="#" class="congrats">
-                          Document :  <span style="font-weight:800;"> Conditional Offer Letter  </span><br>
-                          Programme: <span>  {{$student_course_offer[0]->courses_name}} </span> <br>
-                          Due Date :                                                            <br>
-                          Status: Pending Acceptance
+                        <div class="row card">
+                         <p> Specify which study period you would like to begin your study:</p>
+                         
+                         <div class="row">
+
+                         <div class="form-check col-md-6">
+  <input class="form-check-input" type="radio" name="batch" id="batch" value="batch12023">
+  <label class="form-check-label" for="batch">
+  2023-Batch 1,February Intake
+  </label>
+</div>
+<div class="form-check col-md-6">
+  <input class="form-check-input" type="radio" name="batch" id="batch" value="batch12024">
+  <label class="form-check-label" for="batch">
+  2024-Batch 1,February Intake
+  </label>
+</div>
+<div class="form-check col-md-6">
+  <input class="form-check-input" type="radio" name="batch" id="batch" value="batch22023">
+  <label class="form-check-label" for="batch">
+  2023-Batch 2,March Intake
+  </label>
+</div>
+<div class="form-check col-md-6">
+  <input class="form-check-input" type="radio" name="batch" id="batch" value="batch22024">
+  <label class="form-check-label" for="batch">
+  2024-Batch 2,March Intake
+  </label>
+</div>
+<div class="form-check col-md-6">
+  <input class="form-check-input" type="radio" name="batch" id="batch" value="batch32023">
+  <label class="form-check-label" for="batch">
+  2023-Batch 3,May Intake
+  </label>
+</div>
+<div class="form-check col-md-6">
+  <input class="form-check-input" type="radio" name="batch" id="batch" value="batch32024">
+  <label class="form-check-label" for="batch">
+  2024-Batch 3,May Intake
+  </label>
+</div>
+<div class="form-check col-md-6">
+  <input class="form-check-input" type="radio" name="batch"  id="batch" value="batch42023">
+  <label class="form-check-label" for="batch">
+  2023-Batch 4,June Intake
+  </label>
+</div>
+<div class="form-check col-md-6">
+  <input class="form-check-input" type="radio" name="batch" id="batch" value="batch42024">
+  <label class="form-check-label" for="batch">
+  2024-Batch 4,June Intake
+  </label>
+</div>
                           
-                          <div class="offer-btn float-right">
-                      <button style="padding:5px 5px;"  type="submit" value="yes" name="accepted" >Accept</button>
-                      <button style="padding:5px 5px;" type="submit" value="no" name="accepted">Decline  </button>
+                          <div class="offer-btn text-right">
+                      <button style="padding:5px 5px; border-radius:5px;"  type="submit" value="yes" name="accepted" >Accept</button>
+                      <button style="padding:5px 5px; border-radius:5px;" type="submit" value="no" name="accepted">Decline  </button>
                       
 </div>
                           
-                        </a>
+</div>
+                       
+
+                    </div>
+                   
                       </div>
                       <div class="offer-btn float-right">
-                     
-                        <button class=""><a style="text-decoration:none;  color:#fff;" href="{{route('coursedefer')}}">Defer</a></button>
                        
                     </form>
                     <button class=""><a style="text-decoration:none; margin-left:10px; color:#fff;" href="{{url('useroffer')}}">Back</a></button>

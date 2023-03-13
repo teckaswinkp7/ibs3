@@ -46,23 +46,23 @@
                 <div class="radio-documents row">
                 <div class="col-sm-6">
                     <label>Accounting and Finance</label>
-                    <input type="radio" name="field" value="IBS college of TVET">
+                    <input type="radio" name="field" value="Accounting and Finance">
                    
                 </div>
                 <div class="col-sm-6">
                      <label>Economics & Development</label>
-                    <input type="radio" name="field" value="IBSUniversity">
+                    <input type="radio" name="field" value="Economics & Development">
                     
                 </div>
                 <div class="col-sm-6">
                     
                     <label>Business and Management</label>
-                    <input type="radio" name="field" value="Southern Cross University">
+                    <input type="radio" name="field" value="Business and Management">
                 </div>
                 <div class="col-sm-6">
                     
                     <label>Information Technology</label>
-                    <input type="radio" name="field" value="Southern Cross University">
+                    <input type="radio" name="field" value="Information Technology">
                 </div>
                 
                 </div>

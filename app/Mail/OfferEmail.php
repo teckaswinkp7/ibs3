@@ -17,9 +17,10 @@ class OfferEmail extends Mailable
      * @return void
      */
     private $data;
-    public function __construct($req)
+    public function __construct($req,$pdf)
     {
         $this->data=$req;
+        $this->pdf = $pdf;
         //
     }
 
@@ -32,6 +33,6 @@ class OfferEmail extends Mailable
     public function build()
     {
         //return $this->from('info@supertyreguy.com')->view('emails.offers.offeremail',['data'=>$this->data])->subject('Offer Email')->attach(public_path('uploads/attachment/'.$this->data['filename']));  
-        return $this->from('info@supertyreguy.com')->view('emails.offers.offeremail',['data'=>$this->data])->subject('Offer Email');    
+        return $this->from('info@supertyreguy.com')->view('emails.offers.offeremail',['data'=>$this->data])->subject('Offer Email')->attachData($this->pdf->output(),'offer.pdf');    
     }
 }

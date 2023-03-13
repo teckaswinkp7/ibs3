@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use Session;
 use DB;
+use PDF;
 class EducationController extends Controller
 {
 	/**
@@ -224,6 +225,8 @@ class EducationController extends Controller
 
         $university = $request->university;
         $field = $request->field;
+
+        
 
         
         
@@ -457,10 +460,10 @@ class EducationController extends Controller
         $id = Auth::id();
         $user = User::where('id',$id)->first();
         $email = $user->email;
+        
+        //dd($pdf);
         $student_course_offer= Courseselection::select("courses.name as courses_name")->join("courses","courses.id", "=", "courseselections.studentSelCid")->where('courseselections.stu_id','=',$id)->get();
-        $data = array('offer_desc'=>"",'offer'=> 'Offer Email','filename'=>'ABC.txt','uname'=>$user->name);  
-        //Mail::to('vedmanimoudgal@virtualemployee.com')->send(new OfferEmail($data));
-        Mail::to($email)->send(new OfferEmail($data));
+       
 
         return view('front.education.offer-accepted',compact('student_course_offer'));
     }
@@ -468,6 +471,9 @@ class EducationController extends Controller
     public function user_offer_congrats()
     {
         $id = Auth::id();
+        $user = User::where('id',$id)->first();
+        $email = $user->email;
+       
         $student_course_offer= Courseselection::select("courses.name as courses_name","users.name as uname")->join("courses","courses.id", "=", "courseselections.studentSelCid")->join("users","courseselections.stu_id","=", "users.id")->where('courseselections.stu_id','=',$id)->get();
         //dd($student_course_offer);
         /*$student_course_offer= Studentcourse::select(
@@ -483,6 +489,13 @@ class EducationController extends Controller
         ->join("users","users.id", "=", "studentcourses.stu_id")
         ->where('studentcourses.stu_id','=',$id)
         ->get();   */ 
+        $pdf = PDF::loadView('front.education.offer',compact('student_course_offer'));
+        $data = array('offer_desc'=>"",'offer'=> 'Offer Email','filename'=>'ABC.txt','uname'=>$user->name);  
+        //Mail::to('vedmanimoudgal@virtualemployee.com')->send(new OfferEmail($data));
+        Mail::to($email)->send(new OfferEmail($data,$pdf));
+          
+      //  dd($pdf);
+        
         return view('front.education.offer-congrats',compact('student_course_offer'));
     }
 
@@ -538,15 +551,65 @@ class EducationController extends Controller
 
 
 
+    public function semesterselect(Request $request){
+
+      //  dd($request->accepted);
+
+        if($request->accepted == 'yes') {
+   
+            return view('front.education.semesterselect');
+        
+          }
+          else{
+        
+            return redirect()->route('useroffer');
+        
+          }
+          }
+
+        
+    
+
+
+    public function semesterpost(Request $request){
+
+        $semester = $request->semester;
+
+ $semesterpost = Session::put('sem',$semester);
+
+
+
+ if($request->accepted == 'yes') {
+   
+    return view('front.education.batchselect');
+
+  }
+  else{
+
+    return redirect()->route('useroffer');
+
+  }
+
+
+
+    }
+
     public function courseofferpost(Request $request){
 
         $id = Auth::id();
+
+        $batch = $request->batch;
+        
+        $sem = Session::get('sem');
 
         $offeraccepted = User::findorfail($id);
 
         $offeraccepted->offer_accepted = $request->accepted;
 
         $offeraccepted->save();
+
+
+     
 
     $courseoffer = Payment::updateOrCreate([
   
@@ -562,6 +625,19 @@ class EducationController extends Controller
 
   ]);
 
+  //dd($sem);
+
+  $semesteroffer = Education::updateOrCreate([
+
+    'stu_id'    => $id
+            ],
+            [
+    
+                'semester' => $sem,
+                'batch'   => $batch
+    
+            ]);
+
   if($request->accepted == 'yes') {
    
     return redirect()->route('courseApproved');
@@ -572,5 +648,16 @@ class EducationController extends Controller
     return redirect()->route('useroffer');
 
   }
+  }
+
+  public function offerpdf(){
+
+    $id = Auth::id();
+    $student_course_offer= Courseselection::select("courses.name as courses_name","users.name as uname")->join("courses","courses.id", "=", "courseselections.studentSelCid")->join("users","courseselections.stu_id","=", "users.id")->where('courseselections.stu_id','=',$id)->get();
+    $name = 'offercon';
+    $pdf = PDF::loadView('front.education.offer',compact('student_course_offer'));
+    return $pdf->download('offer.pdf');
+
+    
   }
 }
