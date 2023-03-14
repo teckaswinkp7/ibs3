@@ -122,7 +122,9 @@
 
 </tfoot>
 </table>
-                
+<div class="ml-auto">
+        {!! $users->links() !!} 
+</div>  
               
               <!-- /.card-body -->
            

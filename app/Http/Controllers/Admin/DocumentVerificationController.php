@@ -57,7 +57,7 @@ class DocumentVerificationController extends Controller
      ->where('users.user_role',2)
      ->where('users.status',2)
      ->select('users.name','users.updated_at','users.id','education.verification_status as verificationstatus','users.status','education.updated_at as reviewdate','education.cgpa','users.offer_accepted')
-     ->get();
+     ->paginate(5);
 
   
      $institute = DB::table('institute')->select('title','type','description')->get();
@@ -311,9 +311,9 @@ class DocumentVerificationController extends Controller
       ->join('education','users.id','=','education.stu_id')
       ->where('users.user_role',2)
       ->where('users.status',2)
-      ->select('users.name','users.updated_at','users.id','education.verification_status as verificationstatus','users.status','education.updated_at as reviewdate','education.cgpa')
+      ->select('users.name','users.updated_at','users.id','education.verification_status as verificationstatus','users.status','education.updated_at as reviewdate','education.cgpa','users.offer_accepted')
       ->whereBetween('users.updated_at',[$fromdate,$todate])
-     ->get();
+     ->paginate(5);
 
       
      
@@ -334,11 +334,11 @@ class DocumentVerificationController extends Controller
 
       $users = DB::table('users')
       ->join('education','users.id','=','education.stu_id')
-      ->select('users.name','users.updated_at','users.id','education.verification_status as verificationstatus','users.status','education.updated_at as reviewdate','education.cgpa')
-     ->where('users.user_role',2)
-     ->where('users.status',2)
+      ->where('users.user_role',2)
+      ->where('users.status',2)
+      ->select('users.name','users.updated_at','users.id','education.verification_status as verificationstatus','users.status','education.updated_at as reviewdate','education.cgpa','users.offer_accepted')
      ->where('users.name','LIKE','%'.$search.'%')
-     ->get();
+     ->paginate(5);
      //$educat = Document::all();
      $institute = DB::table('institute')->select('title','type','description')->get();
     return view('admin.application.index',compact('users','institute','search','fromdate','todate'));
