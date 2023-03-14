@@ -13,7 +13,7 @@
                 @csrf
                 
                 <div>
-                    <label for="">Email Address</label>
+                    <label for="">Email Address </label>
                     <input type="email" placeholder="" name="email">
                     @if ($errors->has('email'))
                         <span class="text-danger">{{ $errors->first('email') }}</span>
