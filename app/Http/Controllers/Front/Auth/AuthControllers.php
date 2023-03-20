@@ -256,7 +256,7 @@ class AuthControllers extends Controller
         else
         {
             $id = Auth::id();
-            $vals = array('stu_id'=>$id,'college_id'=>'IBS-'.rand(00000,99999));
+            $vals = array('stu_id'=>$id,'college_id'=>date("Y").rand(00000,99999));
             $val = Profile::create($vals);
             return redirect("education/create-step-two");
         }
@@ -431,7 +431,49 @@ class AuthControllers extends Controller
         //dd($val['stu_id']);
         $data = Profile::where('stu_id',$val['stu_id'])->get();
         
-        //dd($lname);
+       // dd($request->all());
+
+       $files=[];
+
+       if($request->hasFile('document')){
+
+
+        foreach($request->file('document') as $doc){
+
+          
+                 $filename = time().rand(1,100).'.'.$doc->extension();
+                 $doc->move(public_path('additionaldoc'),$filename);
+                 $files[] = $filename;
+
+                 
+
+        }
+
+
+
+       }
+
+
+       $educ = Education::updateorcreate([
+
+
+        'stu_id' => $id
+
+       ],[
+
+
+        'document'=> array_merge($files)
+
+       ]);
+    
+    
+
+       // dd($id);
+       
+
+
+        
+      //  dd($val);
         $c = count($data);
         if($c != 0)
         {

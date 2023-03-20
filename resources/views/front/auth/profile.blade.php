@@ -5,6 +5,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"/>  
  
 <link rel="stylesheet" href="{{asset('assets/custom/profile.css')}}">
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"/>
 <style>
 *{
    list-style-type: none;
@@ -49,6 +54,16 @@ nav ul li a:hover span{
  
   cursor: pointer;
   outline: none;
+}
+
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
    </style>
@@ -123,7 +138,7 @@ nav ul li a:hover span{
                      </div>
                     </div>
                 </div>
-                <form action="{{route('updateprofile')}}" class="submission-form" method="post">
+                <form action="{{route('updateprofile')}}" class="submission-form" method="post" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="stu_id" value="{{Auth::id()}}">
                 <div class="profile-personal-details">
@@ -260,6 +275,47 @@ nav ul li a:hover span{
                 {{-- <input type="text" value="Verification Pending " disabled> --}}
             </div>
             </div>
+
+           @if($newval[0]->document != NUll)
+            <div class="submission row">
+            <div class="col-sm-8">
+                <p>Additional Documents</p>
+                <input type="text" value="{{$newval[0]->board}} Grade 12 Certificate" disabled>
+                {{-- <input type="text" value="Diploma in Accounting " disabled> --}}
+            </div>
+            <div class="col-sm-4">
+                <p>Status</p>
+                @if($newval[0]->verification_status == 1)
+               <input type="text" value="Verified" disabled>
+               @elseif($newval[0]->verification_status == 2) 
+               <input type="text" value="Decline" disabled>   
+               @else
+               <input type="text" value="Awaiting" disabled>
+               @endif
+                
+                {{-- <input type="text" value="Verification Pending " disabled> --}}
+            </div>
+            </div>
+            @else
+
+            @endif
+
+           <div  class="input-group xpress control-group 1st increment">
+            <input type="file" name="document[]" class="myfrm form-control">
+            <div class="input-group-btn">
+               <button class="btn btn-success" type="button"> Add </button>
+            </div>
+</div>
+<div class="clone d-none">
+      <div class="xpress control-group 1st input-group" style="margin-top:10px;">
+      <input type="file" name="document[]" class="myfrm form-control">
+      <div class="input-group-btn">
+         <button class="btn btn-danger" type="button"> Remove </button>
+</div>
+</div>
+</div>
+
+    
             <div class="submission-btn">
                 <button type="submit">Save</button>
             </div>
@@ -305,5 +361,27 @@ for (i = 0; i < dropdown.length; i++) {
     
     @include('front/footer')  
 
+    <script>
+      //increment upload
+$(document).ready(function(){
+
+$('.btn-success').click(function () {
+
+
+var htmlData = $('.clone').html();
+$('.increment').after(htmlData);
+
+});
+// Remove input
+
+$('body').on('click','.btn-danger',function () {
+
+$(this).parents('.xpress').remove();
+
+});
+
+
+}) 
+      </script>
     
     @endsection   

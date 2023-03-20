@@ -46,14 +46,19 @@ class Invoicecontroller extends Controller
             ->join('courseselections','courseselections.StudentSelCid','=','units.course_id')
             ->where('courseselections.stu_id','=',$id)
             ->get();
+            $selectedcoursefield = Courses::select('courses.name','courses.id')
+            ->Join('courseselections','courseselections.StudentSelCid','=','courses.id')
+            ->where('courseselections.stu_id',$id)->select('courses.programme')->get();
             $sem = sem::all();
             $additionalfee = Additionalfee::all();
             $unitselectionid = DB::table('unitselection')->select('unitselection.units_id')->where('unitselection.stu_id','=',$id)->get();
             $selectedid = explode(",", $unitselectionid);
             $statuscheck = DB::table('payment')->select('status')->where('stu_id',$id)->get();
             $statusis = $statuscheck[0]->status;
+
+          //  dd($selectedcoursefield[0]->field);
           
-       return view('front.invoice.proformainvoice',compact('selectedcourse','availableunits','selectedid','additionalfee','sem','statusis'));
+       return view('front.invoice.proformainvoice',compact('selectedcourse','availableunits','selectedid','additionalfee','sem','statusis','selectedcoursefield'));
 
     }
 

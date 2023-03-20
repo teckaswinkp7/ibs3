@@ -229,7 +229,7 @@ echo $dt->format('Y-m-d');
                        
                         <div>
                         <label class="required"> Enter Amount Deposited: </label></br>
-                        <input name="amount_paid" type="text " required >
+                        <input name="amount_paid" type="number" min="{{$total[0]->balance_due}}" required >
                         </div>
 </br>
                         <div >

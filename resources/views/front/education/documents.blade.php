@@ -15,6 +15,13 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script> 
 <!-- DATA VALIDATION ENDS -->
 
+<style>
+.hide {
+  display: none;
+}
+
+</style>
+
     <div class="background-documents" style="margin-top:100px;"> 
         <div class="register-modal">
             <div class="register-logo">
@@ -25,72 +32,191 @@
                 @csrf
                 <p>I want to apply for the following Institute ?</p>
                 <div class="radio-documents row">
-                <div class="col-sm-12">
-                    <label>IBS college of TVET</label>
-                    <input type="radio" name="university" value="IBS college of TVET">
-                   
-                </div>
-                <div class="col-sm-12">
-                     <label>IBSUniversity</label>
-                    <input type="radio" name="university" value="IBSUniversity">
-                    
-                </div>
-                <div class="col-sm-12">
-                    
-                    <label>Southern Cross University(Australia)</label>
-                    <input type="radio" name="university" value="Southern Cross University">
-                </div>
+    <div class="form-check">
+  <input onclick="show1();" class="form-check-input" type="radio" value="IBS college of TVET" name="university" id="flexRadioDefault1">
+  <label class="form-check-label" for="flexRadioDefault1">
+  IBS college of TVET
+  </label>
+</div>
+<div class="form-check">
+  <input onclick="show2();" class="form-check-input" type="radio" value="IBSUniversity" name="university" id="flexRadioDefault1">
+  <label class="form-check-label" for="flexRadioDefault1">
+  IBSUniversity
+  </label>
+</div>
+<div class="form-check">
+  <input onclick="show3();" class="form-check-input" type="radio" value="Southern Cross University" name="university" id="flexRadioDefault1">
+  <label class="form-check-label" for="flexRadioDefault1">
+  Southern Cross University(Australia)
+  </label>
+</div>
+</div>
                 
-                </div>
+<!---- Div 1   start    !-->
+                <div class="row hide" id="div1" style="margin-left:10px;">
                 <p>I would like to take: </p>
-                <div class="radio-documents row">
-                <div class="col-sm-6">
-                    <label>Accounting and Finance</label>
-                    <input type="radio" name="field" value="Accounting and Finance">
-                   
-                </div>
-                <div class="col-sm-6">
-                     <label>Economics & Development</label>
-                    <input type="radio" name="field" value="Economics & Development">
-                    
-                </div>
-                <div class="col-sm-6">
-                    
-                    <label>Business and Management</label>
-                    <input type="radio" name="field" value="Business and Management">
-                </div>
-                <div class="col-sm-6">
-                    
-                    <label>Information Technology</label>
-                    <input type="radio" name="field" value="Information Technology">
-                </div>
+
+                <div class="row">
+                <div class="form-check col-sm-6">
+  <input class="form-check-input" type="radio" name="field" value="Accounting and Finance" id="flexRadioDefault1">
+  <label class="form-check-label" for="flexRadioDefault1">
+  Accounting and Finance
+  </label>
+</div>
+<div class="form-check col-sm-6">
+  <input class="form-check-input" type="radio" name="field" value="Business and Management" id="flexRadioDefault2">
+  <label class="form-check-label" for="flexRadioDefault2">
+  Business and Management
+  </label>
+</div>
+</div>
+<div class="row">
+<div class="form-check col-sm-6">
+  <input class="form-check-input" type="radio" name="field" value="Economic and Development studies" id="flexRadioDefault2">
+  <label class="form-check-label" for="flexRadioDefault2">
+  Economic and Development studies
+  </label>
+</div>
+<div class="form-check col-sm-6">
+  <input class="form-check-input" type="radio" name="field" value="Information Technology" id="flexRadioDefault2">
+  <label class="form-check-label" for="flexRadioDefault2">
+  Information Technology
+  </label>
+</div>
+</div>
                 
-                </div>
+</div>
+
+<!---- Div 1   End    !-->
+
+
+<!---- Div 2   start    !-->
+
+<div class="row hide" id="div2" style="margin-left:10px;">
+<p>I would like to take: </p>
+<div class="row">
+<div class="form-check col-sm-4">
+<input class="form-check-input" type="radio" name="field" value="Accounting" id="flexRadioDefault1">
+<label class="form-check-label" for="flexRadioDefault1">
+Accounting
+</label>
+</div>
+<div class="form-check col-sm-4">
+<input class="form-check-input" type="radio" name="field" value="Business" id="flexRadioDefault2">
+<label class="form-check-label" for="flexRadioDefault2">
+Business
+</label>
+</div>
+<div class="form-check col-sm-4">
+<input class="form-check-input" type="radio" name="field" value="Economics" id="flexRadioDefault2">
+<label class="form-check-label" for="flexRadioDefault2">
+Economics
+</label>
+</div>
+</div>
+<div class="row">
+
+<div class="form-check col-sm-6">
+<input class="form-check-input" type="radio" name="field" value="Information Technology" id="flexRadioDefault2">
+<label class="form-check-label" for="flexRadioDefault2">
+Information Technology
+</label>
+</div>
+<div class="form-check col-sm-6">
+<input class="form-check-input" type="radio" name="field" value="Human Resources" id="flexRadioDefault2">
+<label class="form-check-label" for="flexRadioDefault2">
+Human</br>Resources
+</label>
+</div>
+</div>
+
+
+</div>
+
+<!---- Div 2   End     !-->
+
+<!---- Div 3   start    !-->
+
+<div class="row hide" id="div3" style="margin-left:10px;">
+<p>I would like to take: </p>
+<div class="form-check col-sm-6">
+<input class="form-check-input" type="radio" name="field" value="Accounting" id="flexRadioDefault1">
+<label class="form-check-label" for="flexRadioDefault1">
+Accounting
+</label>
+</div>
+<div class="form-check col-sm-6">
+<input class="form-check-input" type="radio" name="field" value="Management" id="flexRadioDefault2">
+<label class="form-check-label" for="flexRadioDefault2">
+Management
+</label>
+</div>
+<div class="form-check col-sm-6">
+<input class="form-check-input" type="radio" name="field" value="Information Technology" id="flexRadioDefault2">
+<label class="form-check-label" for="flexRadioDefault2">
+Information Technology
+</label>
+</div>
+</div>
+
+
+
+
+<!---- Div 3   End    !-->
+</br>
+
                 <p>Which is your highest qualification?</p>
                 <div class="radio-documents row">
-                <div class="col-sm-6">
-                    <input type="radio" name="qualification" value="Grade 10">
-                    <label>Grade 10</label>
-                </div>
-                <div class="col-sm-6">
-                    <input type="radio" name="qualification" value="Certificate 3 or 4">
-                    <label>Certificate 3 or 4</label>
-                </div>
-                <div class="col-sm-6">
-                    <input type="radio" name="qualification" value="12th">
-                    <label>Grade 12</label>
-                </div>
-                <div class="col-sm-6">
-                    <input type="radio" name="qualification" value="Diploma / Bachelor">
-                    <label>Diploma / Bachelor</label>
-                </div>
-                
-                <div class="col-sm-12">
-                    <input type="radio" name="qualification" value="Grade 12th Student">
-                    <label>I'm a Grade 12th Student</label>
-                </div>
-                </div>
-                
+
+                <div class="form-check col-sm-6">
+  <input class="form-check-input" type="radio" name="qualification" value="Grade 10" id="flexRadioDefault1">
+  <label class="form-check-label" for="flexRadioDefault1">
+  Grade 10
+  </label>
+</div>  
+<div class="form-check col-sm-6">
+  <input class="form-check-input" type="radio" name="qualification" value="Certificate 3 or 4" id="flexRadioDefault1">
+  <label class="form-check-label" for="flexRadioDefault1">
+  Certificate 3 or 4
+  </label>
+</div>  
+<div class="form-check col-sm-6">
+  <input class="form-check-input" type="radio" name="qualification" value="Grade 12" id="flexRadioDefault1">
+  <label class="form-check-label" for="flexRadioDefault1">
+  Grade 12
+  </label>
+</div>  
+<div class="form-check col-sm-6">
+  <input class="form-check-input" type="radio" name="qualification" value="Diploma / Bachelor" id="flexRadioDefault1">
+  <label class="form-check-label" for="flexRadioDefault1">
+  Diploma / Bachelor
+  </label>
+</div>  
+<div class="form-check col-sm-6">
+  <input class="form-check-input" type="radio" name="qualification" value="Grade 12th Student" id="flexRadioDefault1">
+  <label class="form-check-label" for="flexRadioDefault1">
+  I'm a Grade 12th Student
+  </label>
+</div>  
+</div>
+
+    <p> I have also upgraded my marks from FODE/DODL etc. </p>
+    <div class="row">
+<div class="form-check col-sm-6">
+  <input class="form-check-input" type="radio" name="fodl" id="flexRadioDefault1">
+  <label class="form-check-label" for="flexRadioDefault1">
+    Yes
+  </label>
+</div>
+<div class="form-check col-sm-6">
+  <input class="form-check-input" type="radio" name="fodl" id="flexRadioDefault2" checked>
+  <label class="form-check-label" for="flexRadioDefault2">
+    No
+  </label>
+</div>
+</div>
+               
+</br>             
 
                 {{-- <input type="email" name="email" id="email" class="form-control" placeholder="Email" data-val-required="Please fill up the details" data-val="true">
                   <span data-valmsg-for="email" class="field-validation-valid text-danger" data-valmsg-replace="true"></span>  --}}
@@ -121,12 +247,30 @@
     </div>
         
                    <div class="documents-btn">
-                    <button type="submit">Submit</button>
+                    <button type="submit">Screen Documents</button>
                 </div>
           </form>
         </div>
     </div>
     @include('front/footer') 
+    <script>
+    function show1(){
+  document.getElementById('div1').style.display ='none';
+  document.getElementById('div2').style.display ='block';
+  document.getElementById('div3').style.display ='none';
+}
+function show2(){
+  document.getElementById('div1').style.display = 'block';
+  document.getElementById('div2').style.display ='none';
+  document.getElementById('div3').style.display ='none';
+}
+function show3(){
+  document.getElementById('div1').style.display = 'none';
+  document.getElementById('div2').style.display ='none';
+  document.getElementById('div3').style.display ='block';
+}
+
+</script>
     <script>
          $('#customFileInput1').change(function(e){
         var fileName = e.target.files[0].name;

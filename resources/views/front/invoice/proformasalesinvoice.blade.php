@@ -480,16 +480,9 @@ Any refunds for students, it will be reimbursed directly to the original account
        
       <h4>  F. I declare that: </h4>​
 
-<input type="checkbox" value="0" name="refund[]" required  > I have read, understood and accept the terms and conditions regarding refunds outlined here.</input> ​
-                                    </br>
-<input type="checkbox" value="1" name="refund[]"required  > The information I have provided is accurate and complete. ​</input>
-                                    </br>
-<input type="checkbox"value="2" name="refund[]" required > Any discovery of falsified or incorrect information regarding this application made before, on or afterwards may result in the termination of any offer of enrolment without any refunds. </input>​
-                                    </br>
-​
-                                    </br>
-On admission into this institution, I hereby accept to abide by the code of conduct, policies and procedures.
-      </div>
+<input type="checkbox" value="0" name="refund[]" required  > I have read, understood and accept the terms and conditions regarding refunds outlined here.
+The information I have provided is accurate and complete.
+Any discovery of falsified or incorrect information regarding this application made before, on or afterwards may result in the termination of any offer of enrolment without any refunds.On admission into this institution, I hereby accept to abide by the code of conduct, policies and procedures.</input>       </div>
       <div class="modal-footer ">
        <button type="submit" id="myButton" class="btn text-center btn-primary agree-btn"> I Agree </button>
       </div>
