@@ -54,9 +54,10 @@ class DocumentVerificationController extends Controller
 
      $users = DB::table('users')
      ->join('education','users.id','=','education.stu_id')
+     ->join('review','review.stu_id','=','users.id')
      ->where('users.user_role',2)
      ->where('users.status',2)
-     ->select('users.name','users.updated_at','users.id','education.verification_status as verificationstatus','users.status','education.updated_at as reviewdate','education.cgpa','users.offer_accepted')
+     ->select('users.name','users.updated_at','users.id','education.verification_status as verificationstatus','users.status','education.updated_at as reviewdate','education.cgpa','users.offer_accepted','review.review_accept')
      ->paginate(5);
 
   
@@ -73,8 +74,18 @@ class DocumentVerificationController extends Controller
      $user = User::findOrFail($id);  
      $users = DB::table('education')
      ->where('education.stu_id', $user->id)
-     ->select('education.verification_status as verificationstatus')
+     ->join('courseselections','courseselections.stu_id','=','education.stu_id')
+     ->select('education.verification_status as verificationstatus','education.board','education.cgpa','education.university','courseselections.course_id as courseid','education.id_image','education.highest_qualification','education.course_syopsiy')
      ->get();
+     //dd($users);
+     $coursesavailable = json_decode($users[0]->courseid);
+
+    // dd($coursesavailable);
+
+    
+     
+   //  dd($coursename);
+
      //$student_edu =  Education::join('documents','documents.edu_id','education.id')->where('education.stu_id',$id)->where('documents.status',1)->get();   
      $student_edu =  Education::where('stu_id',$id)->where('verification_status',null)->get();
      //dd($student_edu);  
@@ -93,7 +104,7 @@ class DocumentVerificationController extends Controller
      $personal = Session::get('personal');
      $cgpa = Session::get('cgpa');
      $courses = Session::get('courses');
-     return view('admin.application.verify',compact('user','student_edu','cgpa','language','english','maths','economics','accounting','business','geography','history','legal','techno','practical','home','personal','courses','users'));
+     return view('admin.application.verify',compact('coursesavailable','user','student_edu','cgpa','language','english','maths','economics','accounting','business','geography','history','legal','techno','practical','home','personal','courses','users'));
     }
 
 
@@ -201,55 +212,67 @@ class DocumentVerificationController extends Controller
 
         case 'send-eligibility':
 
-        $cgpa = $request->cgpa;
-        $courseid = $request->course_id;
-        $somename = 'somename';
-        $id = $request->stu_id;
-        $student_edu =  Education::where('stu_id',$id)->get();
-        $docum = new Document;
-        $email = DB::table('users')->where('users.id',$id)->select('users.email','users.name')->get();
-        $request->validate([
+     $id = $request->sid;
+    // dd($request->sid);
+
+          $review = review::updateorCreate([
+
+           
+            'stu_id' => $id
+ 
+          ],[
+
+            'review_accept' => 1
+          ]);
+     //   $cgpa = $request->cgpa;
+   //     $courseid = $request->course_id;
+  //      $somename = 'somename';
+  //      $id = $request->stu_id;
+  //      $student_edu =  Education::where('stu_id',$id)->get();
+  //      $docum = new Document;
+  //     $email = DB::table('users')->where('users.id',$id)->select('users.email','users.name')->get();
+  //      $request->validate([
 
 
-          'course_id' => 'required'
+ //         'course_id' => 'required'
 
-        ]);
+ //       ]);
 
-        $courseselect = Courseselection::updateOrCreate([
-
-
-          'stu_id' => $request->stu_id
-
-        ],[
+ //       $courseselect = Courseselection::updateOrCreate([
 
 
-          'course_id' => json_encode($courseid),
-          'offer_generated' => 1,
+  //        'stu_id' => $request->stu_id
+
+  //      ],[
+
+
+  //        'course_id' => json_encode($courseid),
+  //        'offer_generated' => 1,
       
-        ]);
+  //      ]);
 
-        $review = review::create([
+   //     $review = review::create([
 
-           'stu_id' => $request->stu_id,
-          'cgpa' => $cgpa,
-          'offer_id' => json_encode($courseid),
+   //        'stu_id' => $request->stu_id,
+   //       'cgpa' => $cgpa,
+   //       'offer_id' => json_encode($courseid),
 
 
-        ]);
-        $course_offer=Studentcourseoffer::create([
-          'stu_id'         => $request->stu_id,
-          'offer_course_id'    => json_encode($courseid),
-      ]);
-      foreach($student_edu as $val)
-            {
-                $vals = array('stu_id'=>$val->stu_id,'edu_id'=>$val->id,'status'=> 2 );            
-                $docum->create($vals);
-                Education::where('id', $val->id)->update(array('verification_status' => 1,'cgpa' => $cgpa));            
-            }
+   //     ]);
+   //     $course_offer=Studentcourseoffer::create([
+   //       'stu_id'         => $request->stu_id,
+   //       'offer_course_id'    => json_encode($courseid),
+   //   ]);
+   //   foreach($student_edu as $val)
+   //         {
+   //             $vals = array('stu_id'=>$val->stu_id,'edu_id'=>$val->id,'status'=> 2 );            
+   //             $docum->create($vals);
+   //             Education::where('id', $val->id)->update(array('verification_status' => 1,'cgpa' => $cgpa));            
+   //         }
         //$id = 10;
         //$status = User::where('id', $id)->update(array('status' => 6));
-        $data = array('uname'=>$email[0]->name,'offer'=>$somename);  
-        Mail::to($email[0]->email)->send(new OfferEmail($data));
+    //    $data = array('uname'=>$email[0]->name,'offer'=>$somename);  
+    //    Mail::to($email[0]->email)->send(new OfferEmail($data));
         //Mail::to('vedmanimoudgal@virtualemployee.com')->send(new OfferEmail($data));
         return redirect()->route('application.index');
         //->with('success','created successfully.');

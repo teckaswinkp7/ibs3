@@ -62,6 +62,9 @@
                 </div>
                     
           </form>
+          <div class="submission-btn">
+                <button class=""><a style="color: #fff; text-decoration:none;" href="{{route('userprofiles')}}">Complete Profile</a></button>
+                </div>
         </div>
     </div>
 @include('front/footer')  

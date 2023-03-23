@@ -39,7 +39,7 @@
   </label>
 </div>
 <div class="form-check">
-  <input onclick="show2();" class="form-check-input" type="radio" value="IBSUniversity" name="university" id="flexRadioDefault1">
+  <input onclick="show2();" class="form-check-input" type="radio" value="IBS UNIVERSITY" name="university" id="flexRadioDefault1">
   <label class="form-check-label" for="flexRadioDefault1">
   IBSUniversity
   </label>

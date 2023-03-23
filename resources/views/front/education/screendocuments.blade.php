@@ -1,7 +1,7 @@
 @extends('front/header')  
 @section('content') 
  <!-- Content Wrapper. Contains page content -->
- <div class="content-wrapper" style="min-height:1500px;">
+ <div class="content-wrapper" style="min-height:2000px;">
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <div class="container-fluid">
@@ -56,28 +56,36 @@
                             
                               <div class="form-group">
                                 <label>Highest Qualification</label>
-                                <input type="text" value="{{$user->highest_qualification }}" name="phone" class="form-control"  readonly>
+                                <input type="text" value="{{$student_edu[0]->board }}" name="phone" class="form-control"  readonly>
+                              </div>
+                              <div class="form-group">
+                                <label>Institute</label>
+                                <input type="text" value="{{$student_edu[0]->university }}" name="phone" class="form-control"  readonly>
+                              </div>
+                              <div class="form-group">
+                                <label>Field</label>
+                                <input type="text" value="{{$student_edu[0]->field }}" name="phone" class="form-control"  readonly>
                               </div>
                               <div class="form-group">
                                 <label>Stream</label>
                                 <select type="text" value="" name="stream" class="form-control" > 
-                                <option> Science </option>
-                                <option> Social Science </option>
+                                <option onclick = "show1()";> Science </option>
+                                <option onclick = "show2()"; > Social Science </option>
 
                                 </select>
                               </div>
                 
                               <h6> Qualification Ranking </h6>
-<form action="{{route('application.obtain')}}" method="post">
+<form action="{{route('education.obtain')}}" method="post">
   @csrf
-<table class="table table-striped marginbtm">
+<table  class="table table-striped marginbtm ">
 <th class="text-center"> Select Subjects Taken </th>
                   </table>
-<table class="table table-bordered table-striped">
+<table id="div2" class="table table-bordered table-striped hide">
 
   <tr>
 <th> </th>
-<th> Major Subjects Taken </th>
+<th > Major Subjects Taken </th>
   <th> Grade </th>
 
                   </tr>
@@ -103,7 +111,7 @@
 
 
                   <td><input type="hidden" class="checksubject" name="checksubject"> </td>
-                  <td> General Mathemathics </td>
+                  <td> Advance Mathemathics </td>
                   <td><input type="text" style="width:40px;" value="{{$maths}}" name="maths" id="math" class="grade">  </td>
 
                   </tr>
@@ -172,6 +180,114 @@
                   </tbody>
                   </table>
 
+                 
+<table  id="div1"  class="table table-bordered table-striped ">
+
+  <tr>
+<th> </th>
+<th> Major Subjects Taken </th>
+  <th> Grade </th>
+
+                  </tr>
+
+<tbody>
+                  <tr> 
+
+
+                  <td><input type="hidden" class="grade" name="language"> </td> 
+                  <td> Language And Literature </td>
+                  <td><input type="text" style="width:40px;" value="{{$language}}"  name="language" id="lit" class="grade">  </td>
+
+                  </tr>
+                  <tr> 
+
+
+<td><input type="hidden" class="checksubject" name="checksubject"> </td>
+<td> Applied English </td>
+<td><input type="text" style="width:40px;" value="{{$english}}" name="english" id="eng" class="grade">  </td>
+
+</tr>
+<tr> 
+
+
+                  <td><input type="hidden" class="checksubject" name="checksubject"> </td>
+                  <td> Advance Mathemathics </td>
+                  <td><input type="text" style="width:40px;" value="{{$maths}}" name="maths" id="math" class="grade">  </td>
+
+                  </tr>
+<tr> 
+
+
+                  <td><input type="hidden" class="checksubject" name="checksubject"> </td>
+                  <td> Biology </td>
+                  <td><input type="text" style="width:40px;" value="{{$biology}}" name="biology" id="bio" class="grade">  </td>
+
+                  </tr>
+                  <tr> 
+
+
+                  <td><input type="hidden" class="checksubject" name="checksubject"> </td>
+                  <td> Chemistry </td>
+                  <td><input type="text" style="width:40px;" value="{{$chemistry}}" name="chemistry" id="chem" class="grade">  </td>
+
+                  </tr>
+                  <tr> 
+
+
+                  <td><input type="hidden" class="checksubject" name="checksubject"> </td>
+                  <td> Physics </td>
+                  <td><input type="text" style="width:40px;" value="{{$physics}}" name="physics" id="phy" class="grade">  </td>
+
+                  </tr>
+                  <tr> 
+
+
+                  <td><input type="hidden" class="checksubject" name="checksubject"> </td>
+                  <td> Applied Science </td>
+                  <td><input type="text" style="width:40px;" value="{{$appliedscience}}" name="appliedscience" id="appsc" class="grade">  </td>
+
+                  </tr>
+                  <tr> 
+
+
+                  <td><input type="hidden" class="checksubject" name="checksubject"> </td>
+                  <td> Geology</td>
+                  <td><input type="text" style="width:40px;" value="{{$geology}}" name="geography" id="geo" class="grade">  </td>
+
+                  </tr>
+                  <tr> 
+
+
+                  <td><input type="hidden" class="checksubject" name="checksubject"> </td>
+                  <td> ----------------------------------------------</td>
+                  <td><input type="hidden" style="width:40px;" value="" name="history" id="hist"  class="grade">  </td>
+
+                  </tr>
+                  <tr> 
+
+
+                  <td><input type="hidden" class="checksubject" name="checksubject"> </td>
+                  <td>---------------------------------------------- </td>
+                  <td><input type="hidden" style="width:40px;" value="" name="legal" id="legal" class="grade">  </td>
+
+                  </tr>
+                  <tr> 
+
+
+                  <td><input type="hidden" class="checksubject" name="checksubject"> </td>
+                  <td> ----------------------------------------------. </td>
+                  <td><input type="hidden" style="width:40px;" value="" name="techno" id="information" class="grade">  </td>
+
+                  </tr>
+                  
+
+
+
+
+
+                  </tbody>
+                  </table>
+
 <table class="table table-bordered table-striped">
 
   <tr>
@@ -218,37 +334,37 @@
 
 <div class="card">
   <div class="card-body cardcolor">
-  <form action="{{route('application.send')}}" method="POST">
+  <form action="{{route('education.send')}}" method="POST">
     @csrf
     <div id="total" > GPA - {{$cgpa}}
+    <div>Attainment Points -  </div>
+    <div>Eligibility -  </div>
+    <div>Institute - {{$inst}} </div>
 
 
      </div>
 <input type="hidden" name="cgpa" value="{{$cgpa}}"/>
      @if($courses != null)
-    @foreach($courses as $course)
-    <div>Attainment Points -  </div>
-    <div>Eligibility -  </div>
-    <div>Institute - {{$course->institute}} </div>
-    <div>Programme/Course -{{$course->name}} </div>
+   
+    
+    <div>Programme/Course : </br>  @foreach($courses as $course) -> {{$course->name}} </br>   
     <input type="hidden" name="course_id[]" value="{{$course->id}}" />
-  @endforeach
+    @endforeach</div>
+   
+
+
   @else
-  <div>Attainment Points -  </div>
-    <div>Eligibility -  </div>
-    <div>Institute - </div>
-  <div>Programme/Course -{{$courses}} </div>
+  <div>Programme/Course - {{$courses}} </div>
   @endif  
 </div>
 <input type="hidden" name="stu_id" value="{{$user->id}}">
 </div>
 
-<button value="send-eligibility" name="eligiblebutton" type="submit" class="btn btn-primary btncolor">send-eligibility </button>
-@if($users[0]->verificationstatus == NUll)
-  <button value="save-sendlater" name="eligiblebutton" type="submit" class="btn btn-primary  btncolor">save & Send-later </button>
-@else
-<div> </div>
-@endif
+<div class="btn">
+<button value="send-eligibility" name="eligiblebutton" type="submit" class="btn btn-primary btncolor">Request-eligibility </button>
+
+</div>
+
 </form>
 </div>
 
@@ -265,7 +381,7 @@
                 //  dd($docums);
                  // dd($val);
                   ?>
-              
+              @if($docums != NULL)
               @foreach($docums as $doc)
                 <iframe 
     src="{{url('additionaldoc')}}/{{ $doc}}" 
@@ -273,12 +389,9 @@
     frameborder="0">
 </iframe>
  @endforeach                
-                 
-                 <iframe 
-    src="{{url('public/Image')}}/{{ $user->id_image}}" 
-    style="width:800px; height:500px;" 
-    frameborder="0">
-</iframe>
+  @else    
+  
+  @endif
 <iframe 
     src="{{url('public/Image')}}/{{ $user->highest_qualification}}" 
     style="width:800px; height:500px;" 
@@ -300,8 +413,25 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    @include('front/footer') 
+    @include('front/footer')  
+    <script>
+
+
+function show1(){
+
+    document.getElementById('div2').style.display ='none';
+  document.getElementById('div1').style.display ='block';
+
+}
+
+function show2(){
+
+    document.getElementById('div2').style.display = "block";
+    document.getElementById('div1').style.display = "none";
+}
+        </script>
 @endsection
+
 </body>
 <style>
 
@@ -330,7 +460,11 @@ border-left: none;
 cursor: pointer;
 
 }
+.hide {
+  display: none;
+}
 
   </style>
+
 
 </html>   

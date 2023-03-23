@@ -92,10 +92,8 @@
       <td>{{$_SESSION['i']}}</td>
       <td>{{$user->name}}</td>
       <td>{{date('d-m-Y', strtotime($user->updated_at));}}</td>
-      @if($user->verificationstatus == null )
+      @if($user->review_accept == 0 )
       <td><a href="{{ route('application.verify',$user->id) }}" class="btn btn-primary btnreview" > Review </a></td>
-      @elseif($user->verificationstatus == 3)
-      <td><a href="{{ route('application.verify',$user->id) }}" class="btn btn-success" >Send-eligibility </a></td>
       @else
       <td><a id="point" class="btn btn-secondary " > Reviewed </a></td>
       @endif

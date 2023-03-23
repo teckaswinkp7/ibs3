@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Education;
 use App\Models\Document;
 use App\Models\User;
+use App\Models\review;
 use App\Models\Payment;
 use App\Mail\OfferEmail;
 use App\Models\Sponsor;
@@ -236,8 +237,291 @@ class EducationController extends Controller
         
         $status = User::where('id', $id)->update(array('status' => 2));
         //return redirect()->route('dashboard');  
-        return redirect('education/docstatus');  
+        return redirect('education/screendocuments');  
     }
+
+
+    public function screendocuments(){
+
+        $id= auth::id();
+        $user = User::findOrFail($id);  
+        $users = DB::table('education')
+        ->where('education.stu_id', $user->id)
+        ->select('education.verification_status as verificationstatus')
+        ->get();
+        //$student_edu =  Education::join('documents','documents.edu_id','education.id')->where('education.stu_id',$id)->where('documents.status',1)->get();   
+        $student_edu =  Education::where('stu_id',$id)->where('verification_status',null)->get();
+        //dd($student_edu);  
+        $language = Session::get('language');
+        $english = Session::get('english');
+        $maths = Session::get('maths');
+        $economics = Session::get('economics');
+        $accounting = Session::get('accounting');
+        $business = Session::get('business');
+        $geography = Session::get('geography');
+        $history = Session::get('history');
+        $legal = Session::get('legal');
+        $techno = Session::get('techno');
+        $biology = session::get('biology');
+        $chemistry = session::get('chemistry');
+        $physics = session::get('physics');
+        $appliedscience = session::get('appliedscience');
+        $geology = session::get('geology');
+
+
+       
+        $practical = Session::get('practical'); 
+        $home = Session::get('home');
+        $personal = Session::get('personal');
+        $cgpa = Session::get('cgpa');
+        $courses = Session::get('courses');
+        $university = DB::table('education')->where('stu_id',$id)->select('education.university','education.field')->get();
+
+        $inst = $university[0]->university;
+
+
+        return view('front.education.screendocuments',compact('user','student_edu','cgpa','appliedscience','geology','physics','language','english','biology','chemistry','maths','economics','accounting','business','geography','history','legal','techno','practical','home','personal','courses','users','inst'));
+    }
+    public function obtain(Request $request){
+
+        $id = auth::id();
+        $language = $request->language;
+        $english = $request->english;
+        $maths = $request->maths;
+        $economics = $request->economics;
+        $accounting = $request->accounting;
+        $business = $request->business;
+        $geography = $request->geography;
+        $history = $request->history;
+        $legal = $request->legal;
+        $techno = $request->techno;
+        $practical = $request->practical;
+        $home = $request->home;
+        $personal = $request->personal;
+        $biology = $request->biology;
+        $chemistry = $request->chemistry;
+        $physics = $request->physics;
+        $appliedscience = $request->appliedscience;
+        $geology = $request->geology;
+        
+
+        
+        
+       
+            
+        
+       
+
+            $array = [$language,$english,$maths,$biology,$chemistry,$physics,$appliedscience,$geology,$practical,$home,$personal];
+            $gradelength = count($array);
+            $a=$array;
+
+        
+
+  
+
+       
+       $newarray = (array_map(function($v){
+        if ($v==="A")
+        {
+        return "4";
+        }
+      elseif($v === "B"){
+
+        return "3";
+      }
+      elseif($v === "C"){
+        return "2";
+      }
+      elseif($v === "D"){
+
+        return "1";
+      }
+      elseif($v === "E"){
+
+        return "0";
+      }
+      return $v;
+
+       },$a));
+
+ 
+       $cgpa1 = array_sum($newarray)/$gradelength;
+
+       $cgpa = number_format((float)($cgpa1), 2);
+
+       $university = DB::table('education')->where('stu_id',$id)->select('education.university','education.field')->get();
+
+       $inst = $university[0]->university;
+       $field = $university[0]->field;
+
+      // dd($university[0]->university);
+       //dd($cgpa);
+       //dd($inst);
+      // dd($field);
+
+      
+
+       if($cgpa <= '2'){
+
+
+        $courses = DB::table('courses')
+        ->wherein('courses.field',['Business and Management','Information Technology'])
+        ->where('courses.field',$field)
+        ->where('courses.institute',$inst)
+        ->select('courses.name','courses.id','courses.description','courses.institute')
+        ->get();
+
+  
+       }
+       elseif($cgpa >= '2'){
+
+
+        $courses = DB::table('courses')
+        ->wherein('courses.field',['Accounting and Finance','Economic and Development studies'])
+        ->where('courses.field',$field)
+        ->where('courses.institute',$inst)
+        ->select('courses.name','courses.id','courses.description','courses.institute')
+        ->get();
+        
+
+       }
+       
+       
+       
+
+       //dd($courses);
+
+     
+      $courseoffer = Session::put('courseoffer', $courses);
+
+    
+    return redirect()->back()->with(compact('cgpa','language','english','maths','economics','accounting','business','geography','history','legal','techno','practical','home','personal','courses','inst','biology','chemistry','physics','appliedscience','geology'));
+
+
+
+
+
+    }
+    public function send(Request $request)
+    {
+
+
+      switch($request->eligiblebutton){
+
+        case 'send-eligibility':
+
+           // dd($request->stu_id);
+        $cgpa = $request->cgpa;
+        $courseid = $request->course_id;
+        $somename = 'somename';
+        $id = $request->stu_id;
+        
+        $student_edu =  Education::where('stu_id',$id)->get();
+        $docum = new Document;
+        $email = DB::table('users')->where('users.id',$id)->select('users.email','users.name')->get();
+        $request->validate([
+
+
+          'course_id' => 'required'
+
+        ]);
+
+        $courseselect = Courseselection::updateOrCreate([
+
+
+          'stu_id' => $request->stu_id
+
+        ],[
+
+
+          'course_id' => json_encode($courseid),
+          'offer_generated' => 1,
+      
+        ]);
+
+        $review = review::create([
+
+           'stu_id' => $request->stu_id,
+          'cgpa' => $cgpa,
+          'offer_id' => json_encode($courseid),
+          'review_accept' => 0,
+
+
+        ]);
+        $course_offer=Studentcourseoffer::create([
+          'stu_id'         => $request->stu_id,
+          'offer_course_id'    => json_encode($courseid),
+      ]);
+      foreach($student_edu as $val)
+            {
+                $vals = array('stu_id'=>$val->stu_id,'edu_id'=>$val->id,'status'=> 2 );            
+                $docum->create($vals);
+                Education::where('id', $val->id)->update(array('verification_status' => 1,'cgpa' => $cgpa));            
+            }
+        //$id = 10;
+        //$status = User::where('id', $id)->update(array('status' => 6));
+       // $data = array('uname'=>$email[0]->name,'offer'=>$somename);  
+
+        $data["uname"] = $email[0]->name; 
+        $data["email"] = $email[0]->email;
+        $data["title"] = "Offer Letter";
+        $pdf = PDF::loadView('emails.offers.offeremail', $data);
+        Mail::send('emails.offers.offeremail', $data, function($message)use($data, $pdf) {
+
+            $message->to($data["email"], $data["email"])
+
+                    ->subject($data["title"])
+
+                    ->attachData($pdf->output(), "offer.pdf");
+
+        });
+       // Mail::to($email[0]->email)->send(new OfferEmail($data,$pdf));
+        //Mail::to('vedmanimoudgal@virtualemployee.com')->send(new OfferEmail($data));
+        return redirect('education/docstatus');
+        //->with('success','created successfully.');
+
+          
+          break;
+          case 'save-sendlater':
+
+
+          //  dd($request->stu_id);
+            $docum = new Document;
+            $id=$request->stu_id;
+            $courseoffer = Session::get('courseoffer');
+            $courseid = $request->course_id;
+            $student_edu =  Education::where('stu_id',$id)->get();
+            
+
+             $request->validate([
+              'course_id' => 'required',
+       ]);
+            $courseselection = Courseselection::create([
+
+
+              'stu_id' => $id,
+              'course_id' => json_encode($courseid),
+
+
+            ]);
+            foreach($student_edu as $val)
+            {
+                $vals = array('stu_id'=>$val->stu_id,'edu_id'=>$val->id,'status'=> 2 );            
+                $docum->create($vals);
+                Education::where('id', $val->id)->update(array('verification_status' => 3,'cgpa' => $cgpa));            
+            }
+            // $docum->stu_id =$request->stu_id;
+            // $docum->status = $request->status;
+            // $docum->edu_id = $request->edu_id;
+            // $docum->save();
+            $status = User::where('id', $id)->update(array('status' => 2));
+            return redirect()->route('application.index')
+            ->with('success','created successfully.');
+
+       
+    }
+  }
 
     public function docstatus()
     {
@@ -450,9 +734,12 @@ class EducationController extends Controller
     }
 
     public function user_offer()
-    {           
+    {        
+        $id = auth::id();   
+        $review = DB::table('review')->where('stu_id',$id)->select('review_accept')->get();
         
-        return view('front.education.course-offer-new');
+        
+        return view('front.education.course-offer-new',compact('review'));
     }
 
     public function user_offer_accept()
@@ -490,9 +777,9 @@ class EducationController extends Controller
         ->where('studentcourses.stu_id','=',$id)
         ->get();   */ 
         $pdf = PDF::loadView('front.education.offer',compact('student_course_offer'));
-        $data = array('offer_desc'=>"",'offer'=> 'Offer Email','filename'=>'ABC.txt','uname'=>$user->name);  
+      //  $data = array('offer_desc'=>"",'offer'=> 'Offer Email','filename'=>'ABC.txt','uname'=>$user->name);  
         //Mail::to('vedmanimoudgal@virtualemployee.com')->send(new OfferEmail($data));
-        Mail::to($email)->send(new OfferEmail($data,$pdf));
+       // Mail::to($email)->send(new OfferEmail($data,$pdf));
           
       //  dd($pdf);
         
@@ -559,6 +846,11 @@ class EducationController extends Controller
    
             return view('front.education.semesterselect');
         
+          }
+          elseif($request->accepted == 'defer'){
+
+
+            return view('front.education.coursedefer');
           }
           else{
         

@@ -79,6 +79,8 @@
                           <div class="offer-btn float-right">
                       <button style="padding:5px 5px;"  type="submit" value="yes" name="accepted" >Accept</button>
                       <button style="padding:5px 5px;" type="submit" value="no" name="accepted">Decline  </button>
+                      <button style="padding:5px 5px;" type="submit" value="defer" name="accepted">Defer </button>
+                     
                       
 </div>
                           
@@ -86,7 +88,7 @@
                       </div>
                       <div class="offer-btn float-right">
                      
-                        <button class=""><a style="text-decoration:none;  color:#fff;" href="{{route('coursedefer')}}">Defer</a></button>
+                    
                        
                     </form>
                     <button class=""><a style="text-decoration:none; margin-left:10px; color:#fff;" href="{{url('useroffer')}}">Back</a></button>

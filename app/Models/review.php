@@ -10,5 +10,5 @@ class review extends Model
     use HasFactory;
 
     protected $table = 'review';
-    protected $fillable = ['cgpa','offer_id','institute','stu_id'];
+    protected $fillable = ['cgpa','offer_id','institute','stu_id','review_accept'];
 }

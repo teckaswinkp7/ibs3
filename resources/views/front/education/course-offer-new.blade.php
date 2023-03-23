@@ -65,6 +65,7 @@
                       @if($offeraccepted == 'yes')
                      <span><a class="badge badge-success">Selected Course : {{ $student_course_offer[0]->name}}</a> </span>
                      @else
+                    @if($review[0]->review_accept == '1')
                      @if(!empty($course_list))
                       @foreach($course_list as $cl)
                         @php 
@@ -80,9 +81,12 @@
                       @php
                       $course_name = DB::select(DB::raw("SELECT * FROM courses WHERE id = $val"));
                       @endphp
-                       <a href="{{ route('coursestatus',$val) }}">{{ $course_name[0]->name }} <button style="margin-left:60px;"class="btn btn-primary btnslct"> select </button></a> 
+                       <a href="{{ route('coursestatus',$val) }}">{{ $course_name[0]->name }} <button class="btn btn-primary btnslct float-right"> select </button></a> 
                     
                      @endforeach
+                     @endif
+                     @else
+                       <a> waiting for Enrollment officers approval </a>
                      @endif
                      @endif
                      {{-- <a href="#">Business and Management </a>
