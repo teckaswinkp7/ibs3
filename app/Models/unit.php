@@ -9,8 +9,10 @@ class unit extends Model
 {
     use HasFactory;
 
+    
+    protected $table = 'unit';
     protected $fillable = [
-        'id','course_id','title','slug','embed_id','short_text','full_text','position','free_lesson','published','course_name'
+        'id','title','units_price'
     ];
 
 

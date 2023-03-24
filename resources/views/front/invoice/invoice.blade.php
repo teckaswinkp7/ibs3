@@ -75,12 +75,12 @@ $total = 0;
     {{$unit}}
     </div>
     <div class="col-sm-11 amount text-right">
-    @php   
-    $data = DB::table('units')->select('unit_price')->where('title',$unit)->get(); 
+   PGK @php   
+    $data = DB::table('unit')->select('units_price')->where('title',$unit)->get(); 
    $price = json_decode('data');           
-  echo $data[0]->unit_price;
-  $total = $total + $data[0]->unit_price;
-@endphp K 
+  echo $data[0]->units_price;
+  $total = $total + $data[0]->units_price;
+@endphp  
     </div>
 </div>
 @endforeach 
@@ -92,32 +92,32 @@ $total = 0;
     {{$semester}}
     </div>
     <div class="col-sm-11 amount text-right">
-    @php   
+   PGK @php   
     $data = DB::table('sem')->select('price')->where('name',$semester)->get();           
   echo $data[0]->price;
   $total = $total + $data[0]->price;
-@endphp K
+@endphp 
     </div>
 </div>
 @endforeach 
     </br>
-@foreach($exist as $val)
+@foreach((array)$exist as $val)
 <div class="row item">
     <div class="col-sm-6 desc">
         {{$val}}
     </div>
     <div class="col-sm-11 amount text-right">
-    @php 
+   PGK @php 
      $data = DB::table('additionalfee')->select('price')->where('title',$val)->get();
      $price = json_decode('data');
      echo $data[0]->price;
      $total = $total + $data[0]->price;
-     @endphp K
+     @endphp 
     </div>
 </div>
 @endforeach 
 
-<div  class="field total">Total Amount Payable:<span id="total" name="total"  class="float-right" >{{$total}} K</span>
+<div  class="field total">Total Amount Payable:<span id="total" name="total"  class="float-right" > PGK {{$total}} </span>
 
     
 </div>

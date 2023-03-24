@@ -302,6 +302,7 @@ background: #488e2b;
 						<div class="row">
 							<div class="col-sm-6">
 								<span>invoice to: </span></br>
+                        <strong> {{$user->name}}, </strong>
 								<strong>
 									{{$location->current_location}}
 								</strong>
@@ -315,13 +316,19 @@ background: #488e2b;
 								</p>
 							</div>
 							<div class="col-sm-6 text-right">
-								<span>Issued By,</span></br>
+								<span>Issued By: </span></br>
 								<strong>
 									IBS University
 								</strong>
 								<p>
-									P.O Box 2826 Boroko <br>
-									NCD Port Moresby <br>
+                      Portion 1553, Sogeri Road,
+                      PO Box 5181, Boroko,
+                      National Capital District,
+                      Papua New Guinea
+                      National Capital District,
+                      Papua New Guinea,</br>
+                      Landline: (675) 74114100
+
 									<a href="#">
 										ask@ibs.ac.pg
 									</a>
@@ -345,12 +352,12 @@ background: #488e2b;
                         {{$unit}}
                         </div>
                         <div class="col-sm-8 amount text-right">
-                        @php   
-                        $data = DB::table('units')->select('unit_price')->where('title',$unit)->get(); 
+                      PGK  @php   
+                        $data = DB::table('unit')->select('units_price')->where('title',$unit)->get(); 
                        $price = json_decode('data');           
-                      echo $data[0]->unit_price;
-                      $total = $total + $data[0]->unit_price;
-                    @endphp K
+                      echo $data[0]->units_price;
+                      $total = $total + $data[0]->units_price;
+                    @endphp 
                         </div>
                     </div>
                     @endforeach 
@@ -362,27 +369,27 @@ background: #488e2b;
                         {{$semester}}
                         </div>
                         <div class="col-sm-8 amount text-right">
-                        @php   
+                       PGK @php   
                         $data = DB::table('sem')->select('price')->where('name',$semester)->get();           
                       echo $data[0]->price;
                       $total = $total + $data[0]->price;
-                    @endphp  K
+                    @endphp  
                         </div>
                     </div>
                     @endforeach 
                         </br>
-                    @foreach($exist as $val)
+                    @foreach((array)$exist as $val)
                     <div class="row item">
               <div class="col-sm-4 desc" style="width:500px;">
                   {{$val}}
               </div>
                         <div class="col-sm-8 amount text-right" style="margin-left:200px;">
-                        @php 
+                       PGK @php 
                          $data = DB::table('additionalfee')->select('price')->where('title',$val)->get();
                          $price = json_decode('data');
                          echo $data[0]->price;
                          $total = $total + $data[0]->price;
-                         @endphp K
+                         @endphp 
                         </div>
                     </div>
                  @endforeach 
@@ -391,7 +398,7 @@ background: #488e2b;
                     <div  class="field total">
                         Total Amount Payable:   <span id="total" name="total"  class="col-xs-5 float-right">
                     
-                                 {{$total}} K
+                               PGK  {{$total}} 
 
 
                              </span>

@@ -35,7 +35,7 @@
         <div class="col-md-4">
 
 </div>
-         
+
               <!-- /.card-header -->
               
               <table class="table col-md-8 tableheight ">
@@ -47,7 +47,18 @@
           <th > <label for="fromdate"> From Date: </label> <input style="width:120px" type='date' name="fromdate"  class="datepicker form-control" placeholder="Date" ></input></th>
 <th> <label for="fromdate"> To Date: </label> <input style="width:120px" type='date' name="todate"  class="datepicker form-control" placeholder="Date" ></input></th>   
          <th style="vertical-align:bottom;"> <button class="btn btn-primary btnreview" value="filter" type="submit" name="paybutton" style=" padding: 5px 15px; background-color: #cc6600; border-color:#cc6600; color: white; margin-top:30px; margin-left:5px; margin-right:5px;"> Apply </button> </th>
-</form>   
+</form>  
+@if (Session::has('success'))
+   <div class="alert alert-success">{{ Session::get('success') }}</div>
+@endif 
+@if (Session::has('danger'))
+    <div class="alert alert-danger">
+        <ul>
+            <li>{{ Session::get('danger') }}</li>
+        </ul>
+    </div>
+@endif
+
 <form action="{{route('paymentlistnamesearch')}}" method="GET">
         <th style="vertical-align:bottom;"><label> Search: </label> <div class="input-group">
       <input  placeholder="search here" class="form-control py-1" type="search" name="search" value="" id="example-search-input">
@@ -100,9 +111,13 @@
     <input style="width:0px;" type="file" class="custom-file-input" id="customFile">
     <label class="custom-file-label" for="customFile">Choose file</label>
   </div></td>
-      <td><a href="{{url('/pdf')}}/{{$user->invoice}}" target=_blank><button class="btn btn-primary btnreview"><i class="fa-regular fa-eye backgroundclass"> </i></a></button> </td>
-      <td><a href=""><button class="btn btn-primary btnreview" id="desktop">sync</a></button></td>
-      
+      <td><a class="acolor" href="{{url('/pdf')}}/{{$user->invoice}}" target=_blank><button class="btn btn-primary btnreview"><i class="fa-regular fa-eye backgroundclass"> </i></a></button> </td>
+     
+      @if($user->invoice_sync == null)
+      <td><a class="acolor"  href="{{route('paymentlist.xeroconnection',$user->id)}}"><button  class="btn btn-primary btnreview acolor" id="desktop">sync</a></button></td>
+      @else
+      <td><a class="acolor"><button class="btn btn-primary btnreview" id="desktop">synced</a></button></td>
+      @endif
       @endforeach
       <?php unset($_SESSION['i']); ?>    
 </tbody>
@@ -176,6 +191,16 @@ cursor: pointer;
 #desktop{
 
   border-width:10px;
+  color:white;
+}
+
+.acolor{
+
+  color:white;
+}
+.acolor:hover{
+
+color:white;
 }
 
 

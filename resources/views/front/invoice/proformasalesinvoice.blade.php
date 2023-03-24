@@ -314,10 +314,10 @@ background: #488e2b;
               </div>
               <div class="col-sm-8 amount text-right">
               @php   
-              $data = DB::table('units')->select('unit_price')->where('title',$unit)->get(); 
+              $data = DB::table('unit')->select('units_price')->where('title',$unit)->get(); 
              $price = json_decode('data');           
-            echo $data[0]->unit_price;
-            $total = $total + $data[0]->unit_price;
+            echo $data[0]->units_price;
+            $total = $total + $data[0]->units_price;
           @endphp K   
               </div>
           </div>
@@ -339,7 +339,7 @@ background: #488e2b;
           </div>
           @endforeach 
               </br>
-          @foreach($exist as $val)
+          @foreach((array)$exist as $val)
           <div class="row item">
               <div class="col-sm-4 desc" style="width:500px;">
                   {{$val}}

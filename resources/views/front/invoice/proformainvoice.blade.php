@@ -218,21 +218,18 @@ background: #488e2b;
                  
 
 </br>
+
 @if($selectedcoursefield[0]->programme == "Diploma")
 
 
-<input class="col-md-2" type="radio" value="" name="units" >2 Units</input>
+<input class="col-md-2" type="radio" value="2 Units" name="units" >2 Units</input>
 @else
-                 <input class="col-md-2" type="radio" value="" name="units" >1 Unit</input>
-                 <input class="col-md-2" type="radio" value="" name="units" >2 Units</input>
-                 <input class="col-md-2" type="radio" value="" name="units" >3 Units</input>
-                 <input class="col-md-2" type="radio" value="" name="units" >4 units</input>
-                 <input class="col-md-2" type="radio" value="" name="units" >5 Units</input>
-                 <input class="col-md-2" type="radio" value="" name="units" >6 Units</input>
-                 <input class="col-md-2" type="radio" value="" name="units" >7 units</input>
-                 <input class="col-md-2" type="radio" value="" name="units" >8 Units</input>
-                 
-    @endif            
+@foreach($availableunits as $unit)
+                 <input class="col-md-2" type="radio" value="{{$unit->title}}" name="units" >{{$unit->title}}</input>
+@endforeach
+@endif  
+
+             
               
 </div>
 

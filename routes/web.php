@@ -125,6 +125,7 @@ Route::post('recieptconfirmstore', [Recieptverificationcontroller::class, 'store
 /**Admin New  */
 
 Route::get('admin/payment', [PaymentlistController::class, 'index'])->name('paymentlist.index');
+Route::get('admin/payment/invoice/{id}', [PaymentlistController::class, 'xeroconnection'])->name('paymentlist.xeroconnection');
 Route::get('admin/payment/searchdate', [PaymentlistController::class, 'paymentlistdatesearch'])->name('paymentlistdatesearch');
 Route::get('admin/payment/searchname', [PaymentlistController::class, 'paymentlistnamesearch'])->name('paymentlistnamesearch');
 Route::get('admin/payment/exportpaymentlist', [PaymentlistController::class, 'exportpaymentlist'])->name('exportpaymentlist');
@@ -240,6 +241,9 @@ Route::post('searchSponsor',[EducationController::class, 'searchSponsor'])->name
 Route::get('education/create-step-two',  [EducationController::class, 'createStepTwo'])->name('education.create.step.two');
 Route::get('education/reupload',  [EducationController::class, 'reupload'])->name('education.reupload');
 Route::post('education/create-step-two', [EducationController::class, 'postCreateStepTwo'])->name('education.create.step.two.post');
+Route::get('education/screendocuments', [EducationController::class, 'screendocuments'])->name('education.screendocuments');
+Route::post('education/screendocuments/obtain', [EducationController::class, 'obtain'])->name('education.obtain');
+Route::post('education/screendocuments/send', [EducationController::class, 'send'])->name('education.send');
 Route::get('education/docstatus', [EducationController::class, 'docstatus'])->name('education.docstatus');
 
 
@@ -377,4 +381,6 @@ Route::get('front/studentexam/show/{id}', 'App\Http\Controllers\Front\StudentExa
 Route::get('admin/reports/documented', 'App\Http\Controllers\Admin\Reportingcontroller@index')->name('reports.documented');
 Route::get('admin/reports/offerd', 'App\Http\Controllers\Admin\Reportingcontroller@offer')->name('reports.offerd');
 Route::get('admin/reports/invoice', 'App\Http\Controllers\Admin\Reportingcontroller@sent_invoice')->name('reports.invoice');
+
+
 

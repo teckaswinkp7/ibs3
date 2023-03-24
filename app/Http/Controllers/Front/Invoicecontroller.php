@@ -42,10 +42,9 @@ class Invoicecontroller extends Controller
             return view('front.invoice.proformainvoiceerror');
 
         }
-            $availableunits = DB::table('units')->select('units.id','units.title','units.slug','units.short_text','units.unit_price','units.course_id')
-            ->join('courseselections','courseselections.StudentSelCid','=','units.course_id')
-            ->where('courseselections.stu_id','=',$id)
+            $availableunits = DB::table('unit')->select('unit.id','unit.title','unit.units_price')
             ->get();
+           // dd($availableunits);
             $selectedcoursefield = Courses::select('courses.name','courses.id')
             ->Join('courseselections','courseselections.StudentSelCid','=','courses.id')
             ->where('courseselections.stu_id',$id)->select('courses.programme')->get();
@@ -78,6 +77,7 @@ class Invoicecontroller extends Controller
         $invoicedata = invoice::where('stu_id',$id)->select('invoiceno','sem','allunits')->get();         
         $exist = invoice::where('stu_id',$id)->first();  
         $unitsData = $exist->units;
+        //dd($unitsData);
         $courseData = $invoicedata[0]->sem;
      //   $courseData = json_decode($courseData);
         $unitsData = json_decode($unitsData); 
@@ -129,14 +129,15 @@ class Invoicecontroller extends Controller
 
         */
   
+        //dd($request->units);
        $id = Auth::id();  
        $selectedcourse = DB::table('courses')
        ->select('courses.id')
        ->Join('courseselections','courseselections.StudentSelCid','=','courses.id')
        ->where('courseselections.stu_id',$id)
        ->get();
-       $unitprice = DB::table('units')
-       ->select('unit_price')->join('invoice', 'invoice.units', '=', 'units.title' )
+       $unitprice = DB::table('unit')
+       ->select('units_price')->join('invoice', 'invoice.units', '=', 'unit.title' )
        ->where('stu_id',$id)
        ->get();
        
