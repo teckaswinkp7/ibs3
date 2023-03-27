@@ -24,7 +24,7 @@ class PaymentlistController extends Controller
         ->join('courseselections','users.id','courseselections.stu_id')
         ->join('courses','courseselections.studentSelCid','courses.id')
         ->select('users.id','users.name','users.updated_at','payment.amountdue','payment.invoice_sync','payment.balance_due','payment.invoice','courses.name as coursename')
-        ->paginate(5);
+        ->paginate(4);
         $paymentcount = User::where('users.offer_accepted','yes')
         ->join('payment','users.id','payment.stu_id')
         ->join('courseselections','users.id','courseselections.stu_id')
@@ -53,7 +53,7 @@ class PaymentlistController extends Controller
         ->join('courses','courseselections.studentSelCid','courses.id')
         ->select('users.id','users.name','users.updated_at','payment.amountdue','payment.invoice_sync','payment.balance_due','payment.invoice','courses.name as coursename')
         ->whereBetween('users.updated_at',[$fromdate,$todate])
-        ->paginate(5);
+        ->paginate(4);
         $paymentcount = User::where('users.offer_accepted','yes')
         ->join('payment','users.id','payment.stu_id')
         ->join('courseselections','users.id','courseselections.stu_id')
@@ -83,7 +83,7 @@ class PaymentlistController extends Controller
         ->select('users.id','users.name','users.updated_at','payment.amountdue','payment.invoice_sync','payment.balance_due','payment.invoice','courses.name as coursename')
         ->where('users.name','LIKE','%'.$search.'%')
         ->orWhere('courses.name','LIKE','%'.$search.'%')
-        ->paginate(5);
+        ->paginate(4);
         $paymentcount = User::where('users.offer_accepted','yes')
         ->join('payment','users.id','payment.stu_id')
         ->join('courseselections','users.id','courseselections.stu_id')
