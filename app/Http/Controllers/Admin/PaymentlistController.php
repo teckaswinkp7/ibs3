@@ -167,7 +167,7 @@ $headers[] = 'Content-Type: application/x-www-form-urlencoded';
 curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 $result = curl_exec($ch);
 */
-    
+ /*   
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
@@ -179,7 +179,7 @@ curl_setopt_array($curl, array(
   CURLOPT_FOLLOWLOCATION => true,
   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
   CURLOPT_CUSTOMREQUEST => 'POST',
-  CURLOPT_POSTFIELDS => 'grant_type=refresh_token&Scope=offline_access&refresh_token=Hoi49rj15QFmpcSo8hlzIK6-Ac6JkA3iXFiWsv2M-0g',
+  CURLOPT_POSTFIELDS => 'grant_type=refresh_token&Scope=offline_access&refresh_token=nhJp5pUOE88QZUuldHgxLbvjQnFElQsC3lLpYiCcVg8',
   CURLOPT_HTTPHEADER => array(
     'Authorization: Basic NEI1RTJBM0U5MjY1NDU1QzkxQTY3NkUzMkFCMEFCQzE6TW0wSlVTVWd5SUlxYzh6b0tYb2VfZUM3bXBpbDh0RGtPSkNKd3dqbkpkcVBTd3ll',
     'Content-Type: application/x-www-form-urlencoded',
@@ -194,8 +194,8 @@ curl_close($curl);
 $tok = json_decode($response);
 
 //dd($tok);
-      
-$access = $tok->access_token;
+   */   
+$access = 'eyJhbGciOiJSUzI1NiIsImtpZCI6IjFDQUY4RTY2NzcyRDZEQzAyOEQ2NzI2RkQwMjYxNTgxNTcwRUZDMTkiLCJ0eXAiOiJKV1QiLCJ4NXQiOiJISy1PWm5jdGJjQW8xbkp2MENZVmdWY09fQmsifQ.eyJuYmYiOjE2Nzk5MjI0MTgsImV4cCI6MTY3OTkyNDIxOCwiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS54ZXJvLmNvbSIsImF1ZCI6Imh0dHBzOi8vaWRlbnRpdHkueGVyby5jb20vcmVzb3VyY2VzIiwiY2xpZW50X2lkIjoiNEI1RTJBM0U5MjY1NDU1QzkxQTY3NkUzMkFCMEFCQzEiLCJzdWIiOiI2YjZjOGJlMWMwMTg1NTdiYmQ1NWVhNmUwZjZlZGIzYiIsImF1dGhfdGltZSI6MTY3OTkyMjM5OCwieGVyb191c2VyaWQiOiI3Y2M5ZDRjZS1hODJmLTQxMzktODAxYi0yNjZiMzBlZTFiZjAiLCJnbG9iYWxfc2Vzc2lvbl9pZCI6ImU0ZTI0NWE4MjIxYzQ5NTg5YmFlYTIyZjc2ZjYwZmNmIiwic2lkIjoiZTRlMjQ1YTgyMjFjNDk1ODliYWVhMjJmNzZmNjBmY2YiLCJqdGkiOiJCMTY1RTU3MEY2MjY4REFEQkZFOUVEODk5NDJCQUI0MSIsImF1dGhlbnRpY2F0aW9uX2V2ZW50X2lkIjoiYTQ1MTgyZTEtMDA3Yi00MzIyLTg4OWYtMzFmM2RkZWMwNDM1Iiwic2NvcGUiOlsiZW1haWwiLCJwcm9maWxlIiwib3BlbmlkIiwiYWNjb3VudGluZy5zZXR0aW5ncyIsImFjY291bnRpbmcudHJhbnNhY3Rpb25zIiwiYWNjb3VudGluZy5jb250YWN0cyIsIm9mZmxpbmVfYWNjZXNzIl0sImFtciI6WyJwd2QiXX0.gmAjFIQgpSunXQk1-tAiSuKxW_m-l2CVq9BqyJdGYs8LjoDEPf0UjX1EDdTwo_Szg_S4RA0v17pnKUlj_KxwbBIUisCu3OVI1gmvnW0WXxlUSi0FPqb-p2A37j6ynKpzyhsBjFCF8k1ejdyBeY5ZxASCEwGs9O5Ipz9CxDR8HhY2giC-Q_xRlI6eDINXzkWWt2dnQd5704UpfPEQcOVJ5wGwVevKKB_exWVmLfAAUPLtCpXvLHYEUzTwjTSuFsQ94tBqyXSPEghKkNFk_vNopcf08qvrrfCxlDN_rzgRFbgxPpV6nFdIEb32T3CtOPu3J_rliLxYAP9GSdFYF096oA';
        
 
 
