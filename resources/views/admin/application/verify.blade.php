@@ -88,17 +88,17 @@
 
 <div class="col-md-4">
 <iframe 
-    src="{{url('public/Image')}}/{{ $users[0]->id_image}}" 
+    src="{{url('public/public/Image')}}/{{ $users[0]->id_image}}" 
     style="width:750px; height:500px;" 
     frameborder="0">
 </iframe>
 <iframe 
-    src="{{url('public/Image')}}/{{ $users[0]->highest_qualification}}" 
+    src="{{url('public/public/Image')}}/{{ $users[0]->highest_qualification}}" 
     style="width:750px; height:500px;" 
     frameborder="0">
 </iframe>
 <iframe 
-    src="{{url('public/Image')}}/{{ $users[0]->course_syopsiy}}" 
+    src="{{url('public/public/Image')}}/{{ $users[0]->course_syopsiy}}" 
     style="width:750px; height:500px;" 
     frameborder="0">
 </iframe>

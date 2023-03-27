@@ -384,7 +384,7 @@
               @if($docums != NULL)
               @foreach($docums as $doc)
                 <iframe 
-    src="{{url('additionaldoc')}}/{{ $doc}}" 
+    src="{{url('public/additionaldoc')}}/{{ $doc}}" 
     style="width:800px; height:500px;" 
     frameborder="0">
 </iframe>
@@ -393,12 +393,12 @@
   
   @endif
 <iframe 
-    src="{{url('public/Image')}}/{{ $user->highest_qualification}}" 
+    src="{{url('public/public/Image')}}/{{ $user->highest_qualification}}" 
     style="width:800px; height:500px;" 
     frameborder="0">
 </iframe>
 <iframe 
-    src="{{url('public/Image')}}/{{ $user->course_syopsiy}}" 
+    src="{{url('public/public/Image')}}/{{ $user->course_syopsiy}}" 
     style="width:800px; height:500px;" 
     frameborder="0">
 </iframe>

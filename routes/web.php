@@ -11,7 +11,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Front\EducationController;
 use App\Http\Controllers\Admin\ScreeningController;
-use App\Http\Controllers\Admin\RefundController;
+use App\Http\Controllers\Admin\Refundcontroller;
 use App\Http\Controllers\Admin\DocumentVerificationController;
 use App\Http\Controllers\Admin\StudentcourseController;
 use App\Http\Controllers\Admin\BankController;
