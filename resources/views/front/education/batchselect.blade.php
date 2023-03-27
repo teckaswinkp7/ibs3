@@ -131,6 +131,7 @@
             
         </div>
     </div>
+</div>
     @include('front/footer') 
     <script> 
     var dropdown = document.getElementsByClassName("dropdown-btn");
@@ -161,5 +162,6 @@ border-radius:0px;
 
 
 }
+</style>
     
     @endsection  
