@@ -3,7 +3,7 @@
 <html>
 <body>
     
-    {!! $data['offer'] !!}
+  
 
     <div class="congrats-course">
         {{-- <a href="#">
@@ -15,7 +15,7 @@
             <p>
                 <?php echo date("l jS \of F Y"); ?>
                  <br> <br>
-                Dear {!! $data['uname'] !!}, <br> <br>
+                Dear {{ $uname }}, <br> <br>
                 ID number 213221, <br> <br>
                 Subject: CONDITIONAL LETTER OF OFFER <br> <br>
                 Congratulations! IBSUniversity is very pleased to inform you that your Application into the University for IBSUDAF Diploma in Accounting and Finance programme was successful. <br>

@@ -108,7 +108,7 @@
             
         </div>
     </div>
-    @include('front/footer') 
+    @include('front/footer')
     <script> 
     var dropdown = document.getElementsByClassName("dropdown-btn");
 var i;
@@ -124,11 +124,7 @@ for (i = 0; i < dropdown.length; i++) {
     }
   });
 }
-
-
-
-
-   </script>
+</script>
     <style>
     .btnslct{
 
@@ -138,5 +134,5 @@ border-radius:0px;
 
 
 }
-    
-    @endsection  
+</style>
+@endsection  

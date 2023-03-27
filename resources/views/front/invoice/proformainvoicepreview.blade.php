@@ -293,6 +293,7 @@ background: #488e2b;
                         </br>
                         </br>
                             <h4> Pro Forma Invoice : {{$invoicedata[0]->invoiceno}}</h4>
+                           
                             <p>  <?php echo date("M d Y"); ?></p>
                            
 

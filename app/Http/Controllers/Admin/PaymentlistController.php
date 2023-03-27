@@ -179,7 +179,7 @@ curl_setopt_array($curl, array(
   CURLOPT_FOLLOWLOCATION => true,
   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
   CURLOPT_CUSTOMREQUEST => 'POST',
-  CURLOPT_POSTFIELDS => 'grant_type=refresh_token&Scope=offline_access&refresh_token=RFfK68h3N2m4PiaFS91rWHNo5Sim_evoj2X2j5gvHRo',
+  CURLOPT_POSTFIELDS => 'grant_type=refresh_token&Scope=offline_access&refresh_token=Hoi49rj15QFmpcSo8hlzIK6-Ac6JkA3iXFiWsv2M-0g',
   CURLOPT_HTTPHEADER => array(
     'Authorization: Basic NEI1RTJBM0U5MjY1NDU1QzkxQTY3NkUzMkFCMEFCQzE6TW0wSlVTVWd5SUlxYzh6b0tYb2VfZUM3bXBpbDh0RGtPSkNKd3dqbkpkcVBTd3ll',
     'Content-Type: application/x-www-form-urlencoded',
@@ -234,6 +234,7 @@ $access = $tok->access_token;
    
        if($res->Status == "OK"){
    
+        
    
            $update = payment::updateOrCreate([
    
@@ -245,6 +246,8 @@ $access = $tok->access_token;
                'invoice_sync' => '1'
    
            ]);
+
+
    
    
    

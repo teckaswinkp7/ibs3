@@ -207,6 +207,9 @@
                <a href="{{route('paymentlist.index')}}" class="dropdown-item">
           <p>Payment</p>
                </a>
+               <a href="{{route('refund.index')}}" class="dropdown-item">
+          <p> Refund </p>
+               </a>
                <a href="" class="dropdown-item">
           <p>Reciept</p>
                </a>

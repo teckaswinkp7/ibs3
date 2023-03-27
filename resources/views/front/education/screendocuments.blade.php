@@ -1,7 +1,7 @@
 @extends('front/header')  
 @section('content') 
  <!-- Content Wrapper. Contains page content -->
- <div class="content-wrapper" style="min-height:2000px;">
+ <div class="content-wrapper" style="min-height:2100px;">
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <div class="container-fluid">

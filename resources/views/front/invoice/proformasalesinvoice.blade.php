@@ -262,6 +262,7 @@ background: #488e2b;
                         </br>
                         </br>
                             <h4> Sales Invoice : {{$invoicedata[0]->invoiceno}}</h4>
+                            <h6 > Coursename : {{$student_course_offer[0]->courses_name}} </h6>
                             <p>  <?php echo date("M d Y"); ?></p>
                            
                             <div class="invoice-wrapper">

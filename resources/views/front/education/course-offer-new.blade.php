@@ -82,7 +82,7 @@
                       $course_name = DB::select(DB::raw("SELECT * FROM courses WHERE id = $val"));
                       @endphp
                        <a href="{{ route('coursestatus',$val) }}">{{ $course_name[0]->name }} <button class="btn btn-primary btnslct float-right"> select </button></a> 
-                    
+                       
                      @endforeach
                      @endif
                      @else

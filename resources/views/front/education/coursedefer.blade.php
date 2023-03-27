@@ -3,20 +3,82 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 <link rel="stylesheet" href="{{asset('assets/custom/common.css')}}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"/>  
+<style>
+*{
+   list-style-type: none;
+}
 
+nav ul li a:hover{
+   color:#51be78;
+}
+
+ .bill {
+   position:static;
+   display:block;
+}
+.bill.show{
+   display:block;
+}
+
+
+
+.bill-show{
+
+   display:none;
+}
+
+nav ul li a span{
+   position:absolute;
+   top:50%;
+   right:20px;
+   transform:translateY(-50%);
+   transition:transform 0.4s;
+}
+
+nav ul li a:hover span{
+
+   transform:translateY(-50%) rotate(-180deg);
+}
+.dropdown-container {
+  display: none;
+}
+
+.dropdown-btn {
+ 
+  cursor: pointer;
+  outline: none;
+}
+
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.submission-btn{
+
+    background-color:#cc6600;
+    color:white;
+}
+
+   </style>
 
 
  
 <link rel="stylesheet" href="{{asset('assets/custom/profile.css')}}">
-    <div class="background-profile" style="margin-top: 100px;"> 
-        <div class="profile-modal">
-            <div class="profile-logo">
-                <a href="#"><img src="{{asset('assets/custom/profile-logo.png')}}" alt="" width="100px"></a>
-            </div>  
-            <h3>Are You sure ??</h3>
-            <div class="row">
-                <div class="col-sm-3">
-                <div class="profile-course sidenav">
+<div class="background-profile" style="margin-top: 100px;"> 
+    <div class="profile-modal">
+        <div class="profile-logo">
+            <a href="#"><img src="{{asset('assets/custom/profile-logo.png')}}" alt="" width="100px"></a>
+        </div>  
+        <h3>Your Profile </h3>
+        <div class="row">
+            <div class="col-sm-3">
+            <div class="profile-course sidenav">
                 
                   
                 <ul>
@@ -31,9 +93,24 @@
   <a href="confirmpayment">Payment</a>
   <a href="history">History</a>
 </div>
-             </ul>
-</div> 
-                </div>
+        
+
+                    @php 
+
+                    $id = auth::id();
+                    $offeraccepted = DB::table('courseselections')->select('offer_accepted')->where('stu_id',$id)->get();
+                    @endphp 
+
+                    @if($offeraccepted == '1')
+                    <li><a href="history">History</a></li>
+                    @endif
+                    
+                   
+
+
+                    </ul>
+</div>
+            </div>
                 <div class="col-sm-9">
                    
                     <div class="offer">
@@ -53,7 +130,7 @@
                 <input type="radio" name="defer_course" value="no">
                 <label for="no"> No </label> 
                 </div>
-                <button class="submission-btn" type="submit">Submit </button>
+                <button class="submission-btn btn btn-warning" type="submit">Submit </button>
             </form>
 
                 </div>
@@ -62,6 +139,28 @@
         </div>
     </div>
     @include('front/footer')  
+    <script>
+      //increment upload
+$(document).ready(function(){
+
+$('.btn-success').click(function () {
+
+
+var htmlData = $('.clone').html();
+$('.increment').after(htmlData);
+
+});
+// Remove input
+
+$('body').on('click','.btn-danger',function () {
+
+$(this).parents('.xpress').remove();
+
+});
+
+
+}) 
+      </script>
 
     
     @endsection  

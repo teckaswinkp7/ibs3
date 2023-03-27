@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Front\EducationController;
 use App\Http\Controllers\Admin\ScreeningController;
+use App\Http\Controllers\Admin\RefundController;
 use App\Http\Controllers\Admin\DocumentVerificationController;
 use App\Http\Controllers\Admin\StudentcourseController;
 use App\Http\Controllers\Admin\BankController;
@@ -105,13 +106,19 @@ Route::get('confirmpayment', [Invoicecontroller::class, 'payment'])->name('confi
 Route::get('sponsorlist', [Invoicecontroller::class, 'sponsorlist'])->name('sponsorlist');
 Route::post('sponsorrequest', [Invoicecontroller::class, 'sponsorrequest'])->name('sponsorrequest');
 Route::post('refundpolicypost', [Invoicecontroller::class, 'refund'])->name('refundpolicypost');
+Route::get('refundrequest', [Invoicecontroller::class, 'refundrequest'])->name('refundrequest');
+Route::post('refundrequestpost', [Invoicecontroller::class, 'refundrequestpost'])->name('refundrequestpost');
 Route::post('totalpost', [Invoicecontroller::class, 'total'])->name('totalpost');
 Route::get('attachreciept', [Invoicecontroller::class, 'recieptsubmit'])->name('recieptsubmit');
 Route::get('submitsuccess', [Invoicecontroller::class, 'success'])->name('submitsuccess');
 Route::post('recieptpost', [Invoicecontroller::class, 'reciept'])->name('recieptpost');
 Route::get('history', [Invoicecontroller::class, 'history'])->name('history');
-
 Route::get('/invoice',[Invoicecontroller::class, 'viewpdf'])->name('invoice');
+
+
+Route::get('refund', [Refundcontroller::class, 'index'])->name('refund.index');
+
+
 
 Route::get('generate-invoice/{id}', [PDFController::class, 'generateInvoicePDF'])->name('generate.invoice');
 });

@@ -67,22 +67,24 @@
     @csrf
     <div id="total" > GPA - {{$users[0]->cgpa}} </div>
     <div>Institute - {{$users[0]->university}} </div>
-    <div>Programme/Course - 
+    
     @foreach($coursesavailable as $key => $course)
     
     @php 
     $coursename = DB::table('courses')->where('courses.id',$course)->get();
     @endphp
-   -> {{$coursename[0]->name}} </div>
+    <div>Programme/Course - {{$coursename[0]->name}} </div>
     @endforeach
     <input type="hidden" value="{{$user->id}}" name="sid" class="form-control" >
-  
+</div>
+</div>
 <button value="send-eligibility" name="eligiblebutton" type="submit" class="btn btn-primary btncolor">send-eligibility </button>
 <button value="send-eligibility" name="save-sendlater" type="submit" class="btn btn-primary btncolor">save-eligibility </button>
-</div>
+
 
 
 </form>
+</div>
 
 <div class="col-md-4">
 <iframe 

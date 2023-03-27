@@ -249,7 +249,23 @@ background: #488e2b;
             </div>
             
          </div>
-            <h3> Payment</h3>
+            <h3> Refund Request: </h3>
+            @php 
+
+$id = auth::id();
+$amountpaid = DB::table('payment')->where('stu_id',$id)->select('amount_paid','amountdue','refundrequest')->get();
+
+@endphp
+
+            @if (Session::has('success'))
+   <div class="alert alert-success">{{ Session::get('success') }}</div>
+
+
+@elseif($amountpaid[0]->refundrequest == 'yes')
+
+<div class="alert alert-info"> Refund has been requested </div>
+@endif
+
             
             <div class="row">
                 <div class="col-sm-3">
@@ -274,40 +290,29 @@ background: #488e2b;
                 </div>
             
                 <div class="col-sm-9">
-                <p> You have outstanding  on the following invoices: </p>
-                    <form action="">
-                    @php 
+                <p> You have paid the total amount of :  </p>
+                    <form action="{{route('refundrequestpost')}}" method="POST">
+                        @csrf
+                   
+
                       
-                      $id= auth::id();
-                      $statuscheck = DB::table('payment')->select('status')->where('stu_id',$id)->get();
-                      $statusis = $statuscheck[0]->status;
-
-                  
-
-                      @endphp
-
-                      @if($statusis != 'Fully Paid' )
                       <div class="edit-course">
-                        <p > invoice Number : {{$invoicedata->invoiceno}} </p>
-                        <p> Amount Due: ${{$total[0]->balance_due}} </p>
-                        <p> Due Date: {{$total[0]->duedate}}  </p>
-                        <p > Status: 
-                            @if($statusis == 'Partially paid')
-                            <span class= "badge badge-warning " >{{$total[0]->status}} </span> 
-                            @else
-                            <span class= "badge badge-danger " >{{$total[0]->status}} </span> 
-                           @endif
-                    
-                        </p>
-                      <button class="d-flex edit-btn float-right" > <a href="attachreciept"> Confirm Payment </button> </a>
-                      <button class="d-flex edit-btn float-right" > <a href="refundrequest"> Request Refund </button> </a>
-                        </div>
-@else
+                      <p> Amount Due: {{$amountpaid[0]->amountdue}} </p>
+                        <p> Amount paid: {{$amountpaid[0]->amount_paid}} </p>
+                        <p> Paid Date:  </p>
+                        <label> Refund Reason:  </label>
+                        <input type="text" name="refundreason" >   </input> 
+    
+                        <div>
+                      <button class="d-flex edit-btn float-right" type="submit" > Initiate Refund </button> </a>
+</div>   
+</form>
+                    </div>
 
-<p> nothing found ! </p>
 
-@endif
-               
+
+
+     
                                     </div>
                                     </div>
                                     </div>

@@ -309,6 +309,7 @@ class Invoicecontroller extends Controller
             'stu_id' => auth::id(),
             'refundpolicy' =>implode(',',$request->refund),
             'duedate' => $dueDate,
+            'refundtime' =>  Carbon::now()->toDateTimeString()
 
         ]);
 
@@ -500,6 +501,50 @@ $sponsorrequested = sponsorrequested::create([
 );
 
 return redirect()->route('sponsorlist');
+
+}
+
+
+public function refundrequest(){
+
+    $id = auth::id();
+
+    $statuscheck = DB::table('payment')->select('status')->where('stu_id',$id)->get();
+    $statusis = $statuscheck[0]->status;
+
+
+    return view('front.invoice.refundrequest',compact('statusis'));
+
+
+
+}
+
+
+public function refundrequestpost(Request $request){
+
+
+    $id = auth::id();
+
+   
+
+    $refundpost = payment::updateOrCreate([
+
+
+        'stu_id' => $id
+
+
+    ],[
+
+
+        'refundrequest'  => 'yes',
+        'refundreason' => $request->refundreason
+
+
+    ]);
+
+
+
+    return redirect()->back()->with('success','Refund has been requested!!');
 
 }
 

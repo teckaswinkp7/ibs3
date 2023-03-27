@@ -346,7 +346,7 @@ class EducationController extends Controller
        },$a));
 
  
-       $cgpa1 = array_sum($newarray)/$gradelength;
+       $cgpa1 = array_sum($newarray)/5;
 
        $cgpa = number_format((float)($cgpa1), 2);
 
