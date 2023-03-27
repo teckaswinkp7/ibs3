@@ -111,7 +111,7 @@
     <input style="width:0px;" type="file" class="custom-file-input" id="customFile">
     <label class="custom-file-label" for="customFile">Choose file</label>
   </div></td>
-      <td><a class="acolor" href="{{url('/pdf')}}/{{$user->invoice}}" target=_blank><button class="btn btn-primary btnreview"><i class="fa-regular fa-eye backgroundclass"> </i></a></button> </td>
+      <td><a class="acolor" href="{{url('public/pdf')}}/{{$user->invoice}}" target=_blank><button class="btn btn-primary btnreview"><i class="fa-regular fa-eye backgroundclass"> </i></a></button> </td>
      
       @if($user->invoice_sync == null)
       <td><a class="acolor"  href="{{route('paymentlist.xeroconnection',$user->id)}}"><button  class="btn btn-primary btnreview acolor" id="desktop">sync</a></button></td>
