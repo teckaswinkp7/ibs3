@@ -14,6 +14,7 @@ class Refundcontroller extends Controller
 
     public function index(){
 
+        
         $fromdate = "NULL";
         $todate = "NULL";
         $paymentlist = User::where('users.offer_accepted','yes')
