@@ -18,6 +18,24 @@
   cursor: pointer;
   outline: none;
 }
+
+.atag{
+
+
+  background-color: #cc6600;
+  border:none;
+
+}
+.atag:hover{
+
+
+background-color: #cc6600;
+border:none;
+
+}
+
+
+
 </style>
 <body>
     <div class="background-profile" style="margin-top: 100px;"> 
@@ -58,12 +76,16 @@
                         
                       @endphp
                      @php
-                      $id = auth::id();
+                      $id = Auth::id();
                     $offer = DB::table('users')->select('offer_accepted')->where('id',$id)->get();
                     $offeraccepted = $offer[0]->offer_accepted;
                      @endphp
                       @if($offeraccepted == 'yes')
                      <span><a class="badge badge-success">Selected Course : {{ $student_course_offer[0]->name}}</a> </span>
+</br>
+                    <span class="row tag">
+                     <p> If you would like to change to another course <form action="{{url('education/create-step-two')}}"> <button class="btn btn-primary atag" type="submit"> Click Here </button> </form> </p>
+</span>
                      @else
                     @if($review[0]->review_accept == '1')
                      @if(!empty($course_list))
@@ -139,5 +161,23 @@ for (i = 0; i < dropdown.length; i++) {
 
   }
   </style>
+  <script>
+
+$(.atag).click(function(){
+
+window.location.href = '{{url('/userdefer')}}';
+
+
+});
+
+
+
+
+
+
+
+
+
+</script>
     
     @endsection   
