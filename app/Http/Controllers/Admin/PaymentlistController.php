@@ -327,23 +327,15 @@ $access = 'eyJhbGciOiJSUzI1NiIsImtpZCI6IjFDQUY4RTY2NzcyRDZEQzAyOEQ2NzI2RkQwMjYxN
        
        $res = json_decode($response);
        
-       //dd($res->Status);
+      // dd($res->Status);
    
        if($res->Status == "OK"){
    
         
    
-           $update = payment::updateOrCreate([
+           $update = payment::where('stu_id',$id)->update(['invoice_sync' => '1']);
 
-
-            'stu_id' => $id
-
-           ],[
-   
-               'invoice_sync' => '1'
-   
-           ]);
-
+    //   User::where('email', $userEmail) ->update([ 'member_type' => $plan ]);
 
        // dd($update);
    
