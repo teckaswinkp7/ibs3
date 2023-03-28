@@ -51,7 +51,7 @@ class Officercontroller extends Controller
         $urole = Role::all();
         $courses = Courses::all();
         //return view('categories.create', compact('categories'));
-        return view('admin.officers.create',compact('urole','courses'));
+        return view('admin.Officers.create',compact('urole','courses'));
     }
     /**
     * Store a newly created resource in storage.
