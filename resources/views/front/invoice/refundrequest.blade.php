@@ -252,7 +252,7 @@ background: #488e2b;
             <h3> Refund Request: </h3>
             @php 
 
-$id = auth::id();
+$id = Auth::id();
 $amountpaid = DB::table('payment')->where('stu_id',$id)->select('amount_paid','amountdue','refundrequest')->get();
 
 @endphp
