@@ -27,6 +27,7 @@ use App\Http\Controllers\Admin\AssignmentController;
 use App\Http\Controllers\Admin\Reportingcontroller;
 use App\Http\Controllers\Admin\Recieptverificationcontroller;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\Paymentgatewaycontroller;
 use App\Http\Controllers\Front\AssignmentsubmissionController;
 use App\Http\Controllers\Front\Sponsorstudentcontroller;
 use App\Http\Controllers\Front\StudentAssignmentController;
@@ -391,3 +392,9 @@ Route::get('admin/reports/invoice', 'App\Http\Controllers\Admin\Reportingcontrol
 
 
 
+/** Payment Gateway url  */
+
+Route::get('bsp-portal/success', [Paymentgatewaycontroller::class, 'success'])->name('bspportal.success');
+Route::get('bsp-portal/fail', [Paymentgatewaycontroller::class, 'fail'])->name('bspportal.fail');
+Route::get('bsp-portal/cancel', [Paymentgatewaycontroller::class, 'cancel'])->name('bspportal.cancel');
+Route::get('bsp-portal/notify', [Paymentgatewaycontroller::class, 'notify'])->name('bspportal.notify');

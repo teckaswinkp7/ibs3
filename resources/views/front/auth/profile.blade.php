@@ -96,7 +96,7 @@ nav ul li a:hover span{
 
                     @php 
 
-                    $id = auth::id();
+                    $id = Auth::id();
                     $offeraccepted = DB::table('courseselections')->select('offer_accepted')->where('stu_id',$id)->get();
                     @endphp 
 
