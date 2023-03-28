@@ -68,7 +68,7 @@ border:none;
                     <p>From the documents you have submitted, you are eligible for the following courses listed below. Kindly make your choice of the course you would like to study at IBS University and receive your offer</p></p>
                     <div class="select-course">
                         @php 
-                        $id = auth::id();
+                        $id = Auth::id();
                         $student_course_offer= DB::table('courseselections')->select("courses.name")->join("courses","courses.id", "=", "courseselections.studentSelCid")->where('courseselections.stu_id','=',$id)->get();
                         @endphp 
                       @php
