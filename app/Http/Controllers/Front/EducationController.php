@@ -12,6 +12,7 @@ use App\Models\review;
 use App\Models\Payment;
 use App\Mail\OfferEmail;
 use App\Models\Sponsor;
+use App\Models\obtain;
 use App\Models\Studentcourseoffer;
 use App\Models\Bankdetails;
 use App\Models\Studentcourse;
@@ -306,7 +307,37 @@ class EducationController extends Controller
         
 
         
-        
+        $obt = obtain::updateOrCreate([
+
+
+            'stu_id'   => $id
+            
+
+        ],[
+    
+         'language' => $request->language,
+         'english'  => $request->english,
+         'maths'    => $request->maths,
+         'economics' => $request->economics,
+         'accounting' => $request->accounting,
+         'business' => $request->business,
+         'geography' => $request->geography,
+         'history' => $request->history,
+         'legal' => $request->legal,
+         'techno' => $request->techno,
+         'practical' => $request->practical,
+         'home' => $request->home,
+         'personal' => $request->personal,
+         'biology' => $request->biology,
+         'chemistry' => $request->chemistry,
+         'physics' => $request->physics,
+         'appliedscience' => $request->appliedscience,
+         'geology' => $request->geology
+
+          
+
+
+        ]);
        
             
         

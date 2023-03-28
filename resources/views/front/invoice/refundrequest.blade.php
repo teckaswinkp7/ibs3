@@ -300,7 +300,7 @@ $amountpaid = DB::table('payment')->where('stu_id',$id)->select('amount_paid','a
                       <p> Amount Due: {{$amountpaid[0]->amountdue}} </p>
                         <p> Amount paid: {{$amountpaid[0]->amount_paid}} </p>
                         <p> Paid Date:  </p>
-                        <label> Refund Reason:  </label>
+                        <label> Refund Remarks:  </label>
                         <input type="text" name="refundreason" >   </input> 
     
                         <div>

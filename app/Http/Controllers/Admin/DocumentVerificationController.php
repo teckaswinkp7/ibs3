@@ -9,6 +9,7 @@ use Session;
 use App\Models\User;
 use App\Models\Courses;
 use App\Models\Role;
+use App\Models\obtain;
 use App\Models\Education;
 use App\Models\Courseselection;
 use App\Models\review;
@@ -80,6 +81,8 @@ class DocumentVerificationController extends Controller
      //dd($users);
      $coursesavailable = json_decode($users[0]->courseid);
 
+     $obt = obtain::select('*')->where('stu_id',$id)->get();
+
     // dd($coursesavailable);
 
     
@@ -104,7 +107,12 @@ class DocumentVerificationController extends Controller
      $personal = Session::get('personal');
      $cgpa = Session::get('cgpa');
      $courses = Session::get('courses');
-     return view('admin.application.verify',compact('coursesavailable','user','student_edu','cgpa','language','english','maths','economics','accounting','business','geography','history','legal','techno','practical','home','personal','courses','users'));
+     $biology = session::get('biology');
+     $chemistry = session::get('chemistry');
+     $physics = session::get('physics');
+     $appliedscience = session::get('appliedscience');
+     $geology = session::get('geology');
+     return view('admin.application.verify',compact('obt','biology','chemistry','physics','physics','appliedscience','geology','coursesavailable','user','student_edu','cgpa','language','english','maths','economics','accounting','business','geography','history','legal','techno','practical','home','personal','courses','users'));
     }
 
 
@@ -125,6 +133,9 @@ class DocumentVerificationController extends Controller
         $home = $request->home;
         $personal = $request->personal;
         
+
+
+       
 
         
         
