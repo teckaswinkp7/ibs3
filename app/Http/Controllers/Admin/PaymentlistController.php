@@ -195,7 +195,104 @@ $tok = json_decode($response);
 
 //dd($tok);
    */   
-$access = 'eyJhbGciOiJSUzI1NiIsImtpZCI6IjFDQUY4RTY2NzcyRDZEQzAyOEQ2NzI2RkQwMjYxNTgxNTcwRUZDMTkiLCJ0eXAiOiJKV1QiLCJ4NXQiOiJISy1PWm5jdGJjQW8xbkp2MENZVmdWY09fQmsifQ.eyJuYmYiOjE2Nzk5MjI0MTgsImV4cCI6MTY3OTkyNDIxOCwiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS54ZXJvLmNvbSIsImF1ZCI6Imh0dHBzOi8vaWRlbnRpdHkueGVyby5jb20vcmVzb3VyY2VzIiwiY2xpZW50X2lkIjoiNEI1RTJBM0U5MjY1NDU1QzkxQTY3NkUzMkFCMEFCQzEiLCJzdWIiOiI2YjZjOGJlMWMwMTg1NTdiYmQ1NWVhNmUwZjZlZGIzYiIsImF1dGhfdGltZSI6MTY3OTkyMjM5OCwieGVyb191c2VyaWQiOiI3Y2M5ZDRjZS1hODJmLTQxMzktODAxYi0yNjZiMzBlZTFiZjAiLCJnbG9iYWxfc2Vzc2lvbl9pZCI6ImU0ZTI0NWE4MjIxYzQ5NTg5YmFlYTIyZjc2ZjYwZmNmIiwic2lkIjoiZTRlMjQ1YTgyMjFjNDk1ODliYWVhMjJmNzZmNjBmY2YiLCJqdGkiOiJCMTY1RTU3MEY2MjY4REFEQkZFOUVEODk5NDJCQUI0MSIsImF1dGhlbnRpY2F0aW9uX2V2ZW50X2lkIjoiYTQ1MTgyZTEtMDA3Yi00MzIyLTg4OWYtMzFmM2RkZWMwNDM1Iiwic2NvcGUiOlsiZW1haWwiLCJwcm9maWxlIiwib3BlbmlkIiwiYWNjb3VudGluZy5zZXR0aW5ncyIsImFjY291bnRpbmcudHJhbnNhY3Rpb25zIiwiYWNjb3VudGluZy5jb250YWN0cyIsIm9mZmxpbmVfYWNjZXNzIl0sImFtciI6WyJwd2QiXX0.gmAjFIQgpSunXQk1-tAiSuKxW_m-l2CVq9BqyJdGYs8LjoDEPf0UjX1EDdTwo_Szg_S4RA0v17pnKUlj_KxwbBIUisCu3OVI1gmvnW0WXxlUSi0FPqb-p2A37j6ynKpzyhsBjFCF8k1ejdyBeY5ZxASCEwGs9O5Ipz9CxDR8HhY2giC-Q_xRlI6eDINXzkWWt2dnQd5704UpfPEQcOVJ5wGwVevKKB_exWVmLfAAUPLtCpXvLHYEUzTwjTSuFsQ94tBqyXSPEghKkNFk_vNopcf08qvrrfCxlDN_rzgRFbgxPpV6nFdIEb32T3CtOPu3J_rliLxYAP9GSdFYF096oA';
+/*
+   session_start();
+
+   $clientId = '4B5E2A3E9265455C91A676E32AB0ABC1';
+   $clientSecret = 'Mm0JUSUgyIIqc8zoKXoe_eC7mpil8tDkOJCJwwjnJdqPSwye';
+   $redirectUri = 'https://localhost/ibs/public/admin/payment';
+   
+   $provider = new \League\OAuth2\Client\Provider\GenericProvider([
+       'clientId'                => $clientId,   
+       'clientSecret'            => $clientSecret,
+       'redirectUri'             => $redirectUri,
+       'urlAuthorize'            => 'https://login.xero.com/identity/connect/authorize',
+       'urlAccessToken'          => 'https://identity.xero.com/connect/token',
+       'urlResourceOwnerDetails' => 'https://api.xero.com/api.xro/2.0/Invoices'
+   ]);
+   
+   // If we don't have an authorization code then get one
+   if (!isset($_GET['code'])) {
+   
+       $options = [
+           'scope' => ['openid email profile offline_access accounting.transactions accounting.settings']
+       ];
+   
+       // Fetch the authorization URL from the provider; this returns the
+       // urlAuthorize option and generates and applies any necessary parameters (e.g. state).
+       $authorizationUrl = $provider->getAuthorizationUrl($options);
+   
+       // Get the state generated for you and store it to the session.
+       $_SESSION['oauth2state'] = $provider->getState();
+   
+       // Redirect the user to the authorization URL.
+       header('Location: ' . $authorizationUrl);
+       exit();
+   
+   // Check given state against previously stored one to mitigate CSRF attack
+   } elseif (empty($_GET['state']) || ($_GET['state'] !== $_SESSION['oauth2state'])) {
+       unset($_SESSION['oauth2state']);
+       exit('Invalid state');
+   
+   // Redirect back from Xero with code in query string param
+   } else {
+   
+       try {
+           // Try to get an access token using the authorization code grant.
+           $accessToken = $provider->getAccessToken('authorization_code', [
+               'code' => $_GET['code']
+           ]);
+   
+           // We have an access token, which we may use in authenticated requests 
+           // Retrieve the array of connected orgs and their tenant ids.      
+           $options['headers']['Accept'] = 'application/json';
+           $connectionsResponse = $provider->getAuthenticatedRequest(
+               'GET',
+               'https://api.xero.com/Connections',
+               $accessToken->getToken(),
+               $options
+           );
+   
+           $xeroTenantIdArray = $provider->getParsedResponse($connectionsResponse);
+           
+           echo "<h1>Congrats</h1>";
+           echo "access token: " . $accessToken->getToken() . "<hr>";
+           echo "refresh token: " . $accessToken->getRefreshToken() . "<hr>";
+           echo "xero tenant id: " . $xeroTenantIdArray[0]['tenantId'] . "<hr>";
+   
+           // The provider provides a way to get an authenticated API request for
+           // the service, using the access token; 
+           // the xero-tentant-id header is required
+           // the accept header can be either 'application/json' or 'application/xml'
+           $options['headers']['xero-tenant-id'] = $xeroTenantIdArray[0]['tenantId'];
+       $options['headers']['Accept'] = 'application/json';        
+           
+           $request = $provider->getAuthenticatedRequest(
+               'GET',
+               'https://api.xero.com/api.xro/2.0/Organisation',
+               $accessToken,
+               $options
+           );
+           
+       echo 'Organisation details:<br><textarea width: "300px"  height: 150px; row="50" cols="40">';
+           var_export($provider->getParsedResponse($request));
+           echo '</textarea>';
+       } catch (\League\OAuth2\Client\Provider\Exception\IdentityProviderException $e) {
+           // Failed to get the access token or user details.
+           exit($e->getMessage());
+       }
+    }
+    */
+   
+   // dd($authorizationUrl);
+   //die();
+
+
+
+
+
+
+$access = 'eyJhbGciOiJSUzI1NiIsImtpZCI6IjFDQUY4RTY2NzcyRDZEQzAyOEQ2NzI2RkQwMjYxNTgxNTcwRUZDMTkiLCJ0eXAiOiJKV1QiLCJ4NXQiOiJISy1PWm5jdGJjQW8xbkp2MENZVmdWY09fQmsifQ.eyJuYmYiOjE2Nzk5OTY3NTEsImV4cCI6MTY3OTk5ODU1MSwiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS54ZXJvLmNvbSIsImF1ZCI6Imh0dHBzOi8vaWRlbnRpdHkueGVyby5jb20vcmVzb3VyY2VzIiwiY2xpZW50X2lkIjoiNEI1RTJBM0U5MjY1NDU1QzkxQTY3NkUzMkFCMEFCQzEiLCJzdWIiOiI2YjZjOGJlMWMwMTg1NTdiYmQ1NWVhNmUwZjZlZGIzYiIsImF1dGhfdGltZSI6MTY3OTk5Njc0MCwieGVyb191c2VyaWQiOiI3Y2M5ZDRjZS1hODJmLTQxMzktODAxYi0yNjZiMzBlZTFiZjAiLCJnbG9iYWxfc2Vzc2lvbl9pZCI6ImJmZDhlZTQyZjBjZDQ2OTJiYTBmODU2OWNmYTcxNjE1Iiwic2lkIjoiYmZkOGVlNDJmMGNkNDY5MmJhMGY4NTY5Y2ZhNzE2MTUiLCJqdGkiOiIwRDFFQ0IwNUUyODAxQ0RDNzY5QjQ3MUIwRjk1OTFCMyIsImF1dGhlbnRpY2F0aW9uX2V2ZW50X2lkIjoiMTdkM2E4NWUtYTliMC00MzYzLWFhMzItOWZlM2RjZGZiZWViIiwic2NvcGUiOlsiZW1haWwiLCJwcm9maWxlIiwib3BlbmlkIiwiYWNjb3VudGluZy5zZXR0aW5ncyIsImFjY291bnRpbmcudHJhbnNhY3Rpb25zIiwiYWNjb3VudGluZy5jb250YWN0cyIsIm9mZmxpbmVfYWNjZXNzIl0sImFtciI6WyJzc28iXX0.uDhAP3-SncmlvVx1NBEQRNIaGN9Zv---4IYMaO9r9p08YeNPUKPU6Q5BM43ZTuVh0ka6QAKq9nvMz7zxSMBkEdJA-ILThwHtPvKOEgHGqWzp_lzj0WTrbc_IiMDgs-dd4RufEXCUTw-JMI1hbuuYxjw4p8WHkrkVdtE5vhZNzbeQC1ZeBJphVUNKkVmHg37qO-HrHwOs8BkrXiycqaa5KYrEftI32I6QIiERg8yV84ohm3u1Whrk7qgyOogFaQr50_aLt5YhAzKj72nugdyN5UT7fkWEi_D1VBPAmMPk57QOZLGzFMwrOEg3gYp1kK6fAUwl0mDm75h9eEM5WpeOWw';
        
 
 
