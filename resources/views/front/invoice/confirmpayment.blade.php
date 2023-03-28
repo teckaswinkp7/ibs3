@@ -278,7 +278,7 @@ background: #488e2b;
                     <form action="">
                     @php 
                       
-                      $id= auth::id();
+                      $id= Auth::id();
                       $statuscheck = DB::table('payment')->select('status')->where('stu_id',$id)->get();
                       $statusis = $statuscheck[0]->status;
 
