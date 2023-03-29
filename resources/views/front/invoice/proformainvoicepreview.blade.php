@@ -178,6 +178,7 @@ background: #488e2b;
 }
 
 </style>
+<link href="/css/print.css" rel="stylesheet" media="print" type="text/css">
 
 
     <div class="background-profile" style="margin-top: 100px;"> 
@@ -429,7 +430,7 @@ background: #488e2b;
                       <div class="print-download-btn">
                       <a href="{{route('proformainvoice')}}"><button class="down"><img src="{{asset('assets/custom/edit-icon.png')}}" alt="" width="15px"> Edit  </a></button>
                       <a href="{{route('invoice')}}"><button class="down"><img src="{{asset('assets/custom/download-icon.png')}}" alt="" width="15px"> Download </a></button>
-                        <button class="print"> Print <img src="{{asset('assets/custom/print-icon.png')}}" alt="" width="15px"></button>    
+                        <button class="print print-window"> Print <img src="{{asset('assets/custom/print-icon.png')}}" alt="" width="15px"></button>    
                     </div>
                     </form>
 </br>
@@ -508,4 +509,12 @@ for (i = 0; i < dropdown.length; i++) {
       });
   
 </script> 
+<script>
+
+
+$('.print-window').click(function() {
+    window.print();
+});
+
+</script>
 @endsection  

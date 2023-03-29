@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="{{asset('assets/custom/common.css')}}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"/>  
 <link rel="stylesheet" href="{{asset('assets/custom/profile.css')}}">
+<link href="/css/print.css" rel="stylesheet" media="print" type="text/css">
 <style>
 
 .profile-modal{
@@ -388,7 +389,7 @@ background: #488e2b;
             
             <div class="print-download-btn">
             <a href="{{route('invoice')}}"><button class="down"><img src="{{asset('assets/custom/download-icon.png')}}" alt="" width="15px"> Download </a></button>
-              <button class="print"> Print <img src="{{asset('assets/custom/print-icon.png')}}" alt="" width="15px"></button>    
+              <button class="print print-window"> Print <img src="{{asset('assets/custom/print-icon.png')}}" alt="" width="15px"></button>    
           </div>
           </form>
 </br>
@@ -516,4 +517,12 @@ for (i = 0; i < dropdown.length; i++) {
 }
 
  </script>  
+ <script>
+
+
+$('.print-window').click(function() {
+    window.print();
+});
+
+</script>
 @endsection  
