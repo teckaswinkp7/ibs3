@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"/>  
  
 <link rel="stylesheet" href="{{asset('assets/custom/profile.css')}}">
-<link href="/css/print.css" rel="stylesheet" media="print" type="text/css">
+
 
 <style>
 *{
@@ -324,14 +324,7 @@ for (i = 0; i < dropdown.length; i++) {
 
 
    </script>
-   <script>
-
-
-$('.print-window').click(function() {
-    window.print();
-});
-
-</script>
+  
     
 
 

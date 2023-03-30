@@ -60,8 +60,8 @@
                               <div class="form-group">
                                 <label>Stream</label>
                                 <select type="text" value="" name="stream" class="form-control" > 
-                                <option> Science </option>
-                                <option> Social Science </option>
+                                <option onclick = "show1()";> Science </option>
+                                <option onclick = "show2()"; > Social Science </option>
 
                                 </select>
                               </div>
@@ -162,12 +162,6 @@
                   <td><input type="text" style="width:40px;" value="{{$obt[0]->techno}}" name="techno" id="information" class="grade" disabled>  </td>
 
                   </tr>
-                  
-
-
-
-
-
                   </tbody>
                   </table>
 
@@ -344,7 +338,7 @@
   </div>
 </div>
 <button value="send-eligibility" name="eligiblebutton" type="submit" class="btn btn-primary btncolor">send-eligibility </button>
-<button value="send-eligibility" name="save-sendlater" type="submit" class="btn btn-primary btncolor">save-eligibility </button>
+<button value="not-eligible" name="not-eligible" type="submit" class="btn btn-primary btncolor">not-eligible </button>
 </div>
 </form>
 <div class="col-md-4">
@@ -416,7 +410,26 @@ border-left: none;
 cursor: pointer;
 
 }
+.hide {
+  display: none;
+}
 
   </style>
+   <script>
+
+
+function show1(){
+
+    document.getElementById('div2').style.display ='none';
+  document.getElementById('div1').style.display ='block';
+
+}
+
+function show2(){
+
+    document.getElementById('div2').style.display = "block";
+    document.getElementById('div1').style.display = "none";
+}
+        </script>
 
 </html>   

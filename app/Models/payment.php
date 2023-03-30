@@ -10,7 +10,7 @@ class Payment extends Model
     use HasFactory;
 
     protected $table = 'payment';
-     protected $fillable =  ['refundpolicy','amountdue','duedate','status','payreciept','stu_id','amount_paid','balance_due','ibs_reciept','issue_date','offer_accepted','sponsor_accepted','invoice','invoice_sync','refundtime','refundrequest','refundreason'];
+     protected $fillable =  ['refundpolicy','amountdue','duedate','status','payreciept','stu_id','amount_paid','balance_due','ibs_reciept','issue_date','offer_accepted','sponsor_accepted','invoice','invoice_sync','refundtime','refundrequest','refundreason','refresh_token'];
 }
 
 // nothing  //

@@ -110,6 +110,12 @@ nav ul li a:hover span{
                     </ul>
 </div>
             </div>
+            @php 
+
+            $image = DB::table('education')->select('id_image')->where('stu_id',$id)->get();
+
+            
+            @endphp
             <div class="col-sm-9">
                 <h6 class="user-credentials">User credentials</h6>
                 @if(Session::has('message'))
@@ -117,7 +123,7 @@ nav ul li a:hover span{
                     @endif  
                 <div class="profile-box">
                     <div class="profile-photo">
-                       <img src="{{asset('assets/custom/profile-photo.jpg')}}" alt="" width="100px">
+                       <img style="height:100px;" src="{{url('public/Image')}}/{{$image[0]->id_image}}" alt="" width="100px">
                        <img src="{{asset('assets/custom/edit-icon.jpg')}}" alt="" width="18px" height="auto">
                     </div>
                     
