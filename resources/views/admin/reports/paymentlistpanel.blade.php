@@ -91,6 +91,7 @@
       <th >Amount due</th>
       <th>Amount </th>
       <th>Invoice </th>
+      <th>Payment Reciept </th>
       <th >Sync Invoice</th>
       
     </tr>
@@ -111,14 +112,20 @@
     <input style="width:0px;" type="file" class="custom-file-input" id="customFile">
     <label class="custom-file-label" for="customFile">Choose file</label>
   </div></td>
+  
       <td><a class="acolor" href="{{url('public/pdf')}}/{{$user->invoice}}" target=_blank><button class="btn btn-primary btnreview"><i class="fa-regular fa-eye backgroundclass"> </i></a></button> </td>
-     
+      @if($user->payreciept != NULL)
+      <td><a class="acolor" href="{{url('payreciept')}}/{{$user->payreciept}}" target=_blank><button class="btn btn-primary btnreview"><i class="fa-regular fa-eye backgroundclass"> </i></a></button> </td>
+      @else
+      <td> No reciepts found ! </td>
+      @endif
       @if($user->invoice_sync == null)
       <td><a class="acolor"  href="{{route('paymentlist.xeroconnection',$user->id)}}"><button  class="btn btn-primary btnreview acolor" id="desktop">sync</a></button></td>
       @else
       <td><a class="acolor"><button class="btn btn-primary btnreview" id="desktop">synced</a></button></td>
       @endif
       @endforeach
+    
       <?php unset($_SESSION['i']); ?>    
 </tbody>
 

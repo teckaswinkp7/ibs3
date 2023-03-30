@@ -409,6 +409,7 @@ return view('front.sponsor.confirmsponsorpayment',compact('studentpayment'))->wi
                                             'amount_paid' =>$zip[1] + $amountpaid[0]->amount_paid,
                                             'balance_due' =>   $amountdue[0]->balance_due - $zip[1],
                                             'status'   => 'waiting Reconcillation',
+                                            'payreciept' => $fileName
                             
                                     ]);
 

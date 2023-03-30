@@ -24,13 +24,13 @@ class PaymentlistController extends Controller
         ->join('payment','users.id','payment.stu_id')
         ->join('courseselections','users.id','courseselections.stu_id')
         ->join('courses','courseselections.studentSelCid','courses.id')
-        ->select('users.id','users.name','users.updated_at','payment.amountdue','payment.invoice_sync','payment.balance_due','payment.invoice','courses.name as coursename')
+        ->select('users.id','users.name','users.updated_at','payment.amountdue','payment.invoice_sync','payment.balance_due','payment.invoice','courses.name as coursename','payment.payreciept')
         ->paginate(4);
         $paymentcount = User::where('users.offer_accepted','yes')
         ->join('payment','users.id','payment.stu_id')
         ->join('courseselections','users.id','courseselections.stu_id')
         ->join('courses','courseselections.studentSelCid','courses.id')
-        ->select('users.id','users.name','users.updated_at','payment.amountdue','payment.invoice_sync','payment.balance_due','payment.invoice','courses.name as coursename')
+        ->select('users.id','users.name','users.updated_at','payment.amountdue','payment.invoice_sync','payment.balance_due','payment.invoice','courses.name as coursename','payment.payreciept')
         ->count();
 
 
@@ -52,14 +52,14 @@ class PaymentlistController extends Controller
         ->join('payment','users.id','payment.stu_id')
         ->join('courseselections','users.id','courseselections.stu_id')
         ->join('courses','courseselections.studentSelCid','courses.id')
-        ->select('users.id','users.name','users.updated_at','payment.amountdue','payment.invoice_sync','payment.balance_due','payment.invoice','courses.name as coursename')
+        ->select('users.id','users.name','users.updated_at','payment.amountdue','payment.invoice_sync','payment.balance_due','payment.invoice','courses.name as coursename','payment.payreciept')
         ->whereBetween('users.updated_at',[$fromdate,$todate])
         ->paginate(4);
         $paymentcount = User::where('users.offer_accepted','yes')
         ->join('payment','users.id','payment.stu_id')
         ->join('courseselections','users.id','courseselections.stu_id')
         ->join('courses','courseselections.studentSelCid','courses.id')
-        ->select('users.id','users.name','users.updated_at','payment.amountdue','payment.balance_due','payment.invoice','courses.name as coursename')
+        ->select('users.id','users.name','users.updated_at','payment.amountdue','payment.balance_due','payment.invoice','courses.name as coursename','payment.payreciept')
         ->count();
 
 
@@ -81,7 +81,7 @@ class PaymentlistController extends Controller
         ->join('payment','users.id','payment.stu_id')
         ->join('courseselections','users.id','courseselections.stu_id')
         ->join('courses','courseselections.studentSelCid','courses.id')
-        ->select('users.id','users.name','users.updated_at','payment.amountdue','payment.invoice_sync','payment.balance_due','payment.invoice','courses.name as coursename')
+        ->select('users.id','users.name','users.updated_at','payment.amountdue','payment.invoice_sync','payment.balance_due','payment.invoice','courses.name as coursename','payment.payreciept')
         ->where('users.name','LIKE','%'.$search.'%')
         ->orWhere('courses.name','LIKE','%'.$search.'%')
         ->paginate(4);
@@ -89,7 +89,7 @@ class PaymentlistController extends Controller
         ->join('payment','users.id','payment.stu_id')
         ->join('courseselections','users.id','courseselections.stu_id')
         ->join('courses','courseselections.studentSelCid','courses.id')
-        ->select('users.id','users.name','users.updated_at','payment.amountdue','payment.balance_due','payment.invoice','courses.name as coursename')
+        ->select('users.id','users.name','users.updated_at','payment.amountdue','payment.balance_due','payment.invoice','courses.name as coursename','payment.payreciept')
         ->count();
 
 
@@ -118,7 +118,7 @@ class PaymentlistController extends Controller
         ->join('payment','users.id','payment.stu_id')
         ->join('courseselections','users.id','courseselections.stu_id')
         ->join('courses','courseselections.studentSelCid','courses.id')
-        ->select('users.id','users.name','users.updated_at','payment.amountdue','payment.balance_due','payment.invoice','courses.name as coursename')
+        ->select('users.id','users.name','users.updated_at','payment.amountdue','payment.balance_due','payment.invoice','courses.name as coursename','payment.payreciept')
         ->get();
 
         $coursename = $paymentdata[0]->coursename;

@@ -379,7 +379,9 @@ class Invoicecontroller extends Controller
         $date = invoice::select('updated_at')->where('stu_id',$id)->get();
         $date = $date->add(4);
         $student_course_offer= Courseselection::select("courses.name as courses_name")->join("courses","courses.id", "=", "courseselections.studentSelCid")->where('courseselections.stu_id','=',$id)->get();
-
+     
+     
+       // dd($date);
 
         return view('front.invoice.recieptsubmit',compact('invoicedata','total','amountdue','amountpaid','student_course_offer'));
     }
